@@ -12,13 +12,21 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chalk = require("chalk");
 const program = require("commander");
 const figlet = require("figlet");
+const fs = require("fs");
 const inquirer = require("inquirer");
-const project = process.argv.slice(3)[0].split('=')[1];
+let projectPath;
+try {
+    projectPath = JSON.parse(String(fs.readFileSync('./package.json'))).cli.projectType;
+}
+catch (_a) {
+    console.error('Please specify cli.projectType in package.json');
+    process.exit(1);
+}
 const text = {
     moleculer: 'microservice-cli'
 };
 console.clear();
-console.log(chalk.default(figlet.textSync(text[project])));
+console.log(chalk.default(figlet.textSync(text[projectPath])));
 const questions = {
     moleculer: [
         {
@@ -31,8 +39,8 @@ const questions = {
 };
 program
     .action(() => __awaiter(this, void 0, void 0, function* () {
-    const answers = yield inquirer.prompt(questions[project]);
-    const questionsHelper = require(`./Scripts/${project}/index`);
+    const answers = yield inquirer.prompt(questions[projectPath]);
+    const questionsHelper = require(`./Scripts/${projectPath}/index`);
     questionsHelper.default.showQuestions(answers.fileType.toLowerCase());
 }));
 program.parse(process.argv);
