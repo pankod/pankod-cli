@@ -15,19 +15,25 @@ const figlet = require("figlet");
 const inquirer = require("inquirer");
 const Entity_1 = require("./helper_scripts/Definitions/Entity");
 const Service_1 = require("./helper_scripts/Definitions/Service");
+const project = process.argv.slice(3)[0].split('=')[1];
+const text = {
+    moleculer: 'microservice-cli'
+};
 console.clear();
-console.log(chalk.default(figlet.textSync('microservice-cli')));
-const questions = [
-    {
-        choices: ['Entity', 'Service'],
-        message: 'What would you like to add?',
-        name: 'fileType',
-        type: 'list'
-    }
-];
+console.log(chalk.default(figlet.textSync(text[project])));
+const questions = {
+    moleculer: [
+        {
+            choices: ['Entity', 'Service'],
+            message: 'What would you like to add?',
+            name: 'fileType',
+            type: 'list'
+        }
+    ]
+};
 program
     .action(() => __awaiter(this, void 0, void 0, function* () {
-    const answers = yield inquirer.prompt(questions);
+    const answers = yield inquirer.prompt(questions[project]);
     switch (answers.fileType) {
         case 'Entity':
             yield Entity_1.modelQuestion.showQuestions();
