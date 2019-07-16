@@ -13,7 +13,8 @@ const inquirer = require("inquirer");
 //#region Global Imports
 //#region Local Imports
 const config_1 = require("../../config");
-const Helper_1 = require("./Helper");
+const Common_1 = require("../Common");
+const helper_1 = require("./helper");
 //#endregion Local Imports
 const questions = {
     entity: [
@@ -23,7 +24,7 @@ const questions = {
             type: 'input',
             validate(val) {
                 if (val.length) {
-                    if (Helper_1.Helper.isAlreadyExist(config_1.Config.repositoriesDir, val, true)) {
+                    if (Common_1.CommonHelper.isAlreadyExist(config_1.Config.repositoriesDir, val, true)) {
                         return 'Already added use new entity name';
                     }
                     return true;
@@ -39,7 +40,7 @@ const questions = {
             type: 'input',
             validate(val) {
                 if (val.length) {
-                    if (Helper_1.Helper.isServiceAlreadyExist(config_1.Config.servicesDir, val)) {
+                    if (helper_1.Helper.isServiceAlreadyExist(config_1.Config.servicesDir, val)) {
                         return 'Already added use new service name';
                     }
                     return true;
@@ -62,8 +63,12 @@ const questions = {
     ]
 };
 const actions = {
-    entity: (answers) => { Helper_1.Helper.createRepository(answers); },
-    service: (answers) => { Helper_1.Helper.createService(answers); }
+    entity: answers => {
+        helper_1.Helper.createRepository(answers);
+    },
+    service: answers => {
+        helper_1.Helper.createService(answers);
+    }
 };
 exports.default = {
     showQuestions: (type) => __awaiter(this, void 0, void 0, function* () {
@@ -73,4 +78,4 @@ exports.default = {
         actions[type](answers);
     })
 };
-//# sourceMappingURL=moleculer.js.map
+//# sourceMappingURL=index.js.map

@@ -32,7 +32,7 @@ const questions = {
 program
     .action(() => __awaiter(this, void 0, void 0, function* () {
     const answers = yield inquirer.prompt(questions[project]);
-    const questionsHelper = require(`./helper_scripts/Definitions/${project}`);
+    const questionsHelper = require(`./Scripts/${project}/index`);
     questionsHelper.default.showQuestions(answers.fileType.toLowerCase());
 }));
 program.parse(process.argv);

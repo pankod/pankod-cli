@@ -34,9 +34,9 @@ program
 	.action(async () => {
 		const answers: { fileType: string } = await inquirer.prompt(questions[project]);
 
-		const questionsHelper = require(`./helper_scripts/Definitions/${project}`);
+		const questionsHelper = require(`./Scripts/${project}/index`);
 
-		questionsHelper.default.showQuestions(answers.fileType.toLowerCase())
+		questionsHelper.default.showQuestions(answers.fileType.toLowerCase());
 	});
 
 program.parse(process.argv);

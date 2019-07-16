@@ -4,8 +4,9 @@ import * as inquirer from 'inquirer';
 
 //#region Local Imports
 import { Config } from '../../config';
-import { DefinitionsModel } from './Definition';
-import { Helper } from './Helper';
+import { CommonHelper } from '../Common';
+import { ICommon } from '../ICommon';
+import { Helper } from './helper';
 //#endregion Local Imports
 
 const questions = {
@@ -17,7 +18,7 @@ const questions = {
 			validate(val: string): string | boolean {
 				if (val.length) {
 					if (
-						Helper.isAlreadyExist(
+						CommonHelper.isAlreadyExist(
 							Config.repositoriesDir,
 							val,
 							true
@@ -68,20 +69,24 @@ const questions = {
 			type: 'confirm'
 		}
 	]
-}
+};
 
 const actions = {
-	entity: (answers) => { Helper.createRepository(answers); },
-	service: (answers) => { Helper.createService(answers); }
-}
+	entity: answers => {
+		Helper.createRepository(answers);
+	},
+	service: answers => {
+		Helper.createService(answers);
+	}
+};
 
 export default {
 	showQuestions: async (type): Promise<void> => {
-		const answers: DefinitionsModel.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[type]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[type]);
 
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 
 		actions[type](answers);
 	}
-}
+};

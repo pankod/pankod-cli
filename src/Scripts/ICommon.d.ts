@@ -1,6 +1,5 @@
 
-export declare module DefinitionsModel {
-
+export declare module ICommon {
 	export interface ITemplateProps {
 		fileName?: string;
 		upperFileName?: string;
@@ -41,5 +40,4 @@ export declare module DefinitionsModel {
 		message: string;
 		getFileContent(): string;
 	}
-	
 }
