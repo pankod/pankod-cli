@@ -1,16 +1,31 @@
 {
-  "name": "microservices-cli",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "name": "@pankod/pankod-cli",
+  "version": "0.1.0",
+  "description": "CLI for Pankod open source projects.",
+  "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate": "node ./dist/index.js a",
     "watch": "tsc -w"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Pankod <info@pankod.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pankod/pankod-cli"
+  },
+  "bugs": {
+    "type": "git",
+    "url": "https://github.com/pankod/pankod-cli/issues"
+  },
+  "homepage": "https://github.com/pankod/pankod-cli",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "pankod", "cli", "typescript", "moleculer", "nextjs", "react-native"
+  ],
   "dependencies": {
     "chalk": "^2.4.2",
     "commander": "^2.20.0",
