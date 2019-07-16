@@ -13,8 +13,6 @@ const chalk = require("chalk");
 const program = require("commander");
 const figlet = require("figlet");
 const inquirer = require("inquirer");
-const Entity_1 = require("./helper_scripts/Definitions/Entity");
-const Service_1 = require("./helper_scripts/Definitions/Service");
 const project = process.argv.slice(3)[0].split('=')[1];
 const text = {
     moleculer: 'microservice-cli'
@@ -34,16 +32,8 @@ const questions = {
 program
     .action(() => __awaiter(this, void 0, void 0, function* () {
     const answers = yield inquirer.prompt(questions[project]);
-    switch (answers.fileType) {
-        case 'Entity':
-            yield Entity_1.modelQuestion.showQuestions();
-            break;
-        case 'Service':
-            yield Service_1.serviceQuestion.showQuestions();
-            break;
-        default:
-            break;
-    }
+    const questionsHelper = require(`./helper_scripts/Definitions/${project}`);
+    questionsHelper.default.showQuestions(answers.fileType.toLowerCase());
 }));
 program.parse(process.argv);
 //# sourceMappingURL=index.js.map
