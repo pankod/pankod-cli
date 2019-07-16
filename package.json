@@ -24,7 +24,12 @@
     "dist"
   ],
   "keywords": [
-    "pankod", "cli", "typescript", "moleculer", "nextjs", "react-native"
+    "pankod",
+    "cli",
+    "typescript",
+    "moleculer",
+    "nextjs",
+    "react-native"
   ],
   "dependencies": {
     "chalk": "^2.4.2",

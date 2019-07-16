@@ -5,12 +5,11 @@
 		"outDir": "./dist",
 		"sourceMap": true,
 		"allowJs": true,
-		"rootDir": ".",
+		"rootDir": "./src",
 		"baseUrl": "."
 	},
 	"exclude": [
 		"node_modules",
 		"dist"
 	],
-	
 }
