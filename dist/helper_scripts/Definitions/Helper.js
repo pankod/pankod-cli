@@ -20,7 +20,9 @@ exports.Helper = {
         const _path = `${startPath}/${val}.service.ts`;
         return fs.existsSync(path.resolve('', _path));
     },
-    getTemplate: (templatePath, templateProps) => (mustache.render(fs.readFileSync(path.resolve('project-cli', templatePath), 'utf8'), templateProps)),
+    getTemplate: (templatePath, templateProps) => (
+    // __dirname + ../../ path is root of the dist folder.
+    mustache.render(fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'), templateProps)),
     createFile: (dirPath) => {
         fs.mkdirSync(path.resolve('', dirPath));
     },

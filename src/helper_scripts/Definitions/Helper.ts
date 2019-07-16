@@ -30,8 +30,9 @@ export const Helper = {
 
 	getTemplate: (templatePath: string, templateProps: DefinitionsModel.ITemplateProps): string => (
 
+		// __dirname + ../../ path is root of the dist folder.
 		mustache.render(
-			fs.readFileSync(path.resolve('project-cli', templatePath), 'utf8'),
+			fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'),
 			templateProps
 		)
 	),
