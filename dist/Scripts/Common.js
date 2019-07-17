@@ -20,7 +20,7 @@ exports.CommonHelper = {
     getTemplate: (templatePath, templateProps) => (
     // __dirname + ../../ path is root of the dist folder.
     mustache.render(fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'), templateProps)),
-    isAlreadyExist: (startPath, val, isFile, fileType) => {
+    isAlreadyExist: (startPath, val = '', isFile = false, fileType) => {
         let _path;
         switch (fileType) {
             case 'page':

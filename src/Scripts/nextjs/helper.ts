@@ -11,7 +11,7 @@ import { ICommon } from '../ICommon';
 
 export const Helper = {
 	addRoute: (answers: ICommon.IAnswers) => {
-		const { isHavePath, routePath, fileName } = answers;
+		const { isHavePath = false, routePath, fileName } = answers;
 
 		const templateProps = {
 			fileName: fileName.replace(/\b\w/g, foo => foo.toLowerCase()),
@@ -30,7 +30,7 @@ export const Helper = {
 		CommonHelper.replaceContent(replaceContentParams);
 	},
 	createInterface: (answers: ICommon.IAnswers, isClass: boolean) => {
-		const { fileName, lowerFileName, isPage, isConnectStore, upperFileName} = answers;
+		const { fileName, lowerFileName, isPage = false, isConnectStore = false, upperFileName } = answers;
 		const templatePath = './dist/Templates/nextjs/Interfaces/Component.mustache';
 		const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
 		const pageDirPath = `${Config.nextjs.pageInterfaceDir}/${fileName}.d.ts`;
@@ -87,13 +87,15 @@ export const Helper = {
 	},
 
 	createStyle: (answers: ICommon.IAnswers): void => {
+		const { fileName, isPage = false } = answers;
+
 		const templatePath = './dist/Templates/nextjs/Styles.mustache';
-		const templateProps = { fileName: answers.fileName };
+		const templateProps = { fileName };
 		const pageDirPath = `${Config.nextjs.pagesDir}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
 		const compDirPath = `${Config.nextjs.componentsDir}/${answers.fileName}/style.scss`;
 
 		const writeFileProps = {
-			dirPath: answers.isPage ? pageDirPath : compDirPath,
+			dirPath: isPage ? pageDirPath : compDirPath,
 			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
 			message: 'Added new style file'
 		};
@@ -149,7 +151,7 @@ export const Helper = {
 	},
 
 	addReducer: (answers: ICommon.IAnswers): void => {
-		const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
+		const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
 
 		const reducerFileDir = `${Config.nextjs.reducerDir}/${lowerFileName}.ts`;
 		const reducerTemplate = './dist/Templates/nextjs/Reducers/Reducer.mustache';
@@ -180,9 +182,9 @@ export const Helper = {
 
 	createClassComponent: (answers: ICommon.IAnswers): void => {
 
-		const { lowerFileName, isConnectStore } = answers;
+		const { lowerFileName, isConnectStore = false, isPage = false } = answers;
 		const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
-		const classDir = answers.isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
+		const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
 		const templatePath = './dist/Templates/nextjs/Components/Class.mustache';
 		const templateProps = {
 			fileName: answers.fileName,
@@ -214,7 +216,7 @@ export const Helper = {
 			Helper.addAction(templateProps);
 		}
 
-		if (!answers.isPage) {
+		if (!isPage) {
 			CommonHelper.addToIndex(addIndexParams);
 		}
 	},

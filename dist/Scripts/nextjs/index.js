@@ -52,7 +52,7 @@ const commonQuestions = {
         message: 'Do you want to create a new reducer or use your own?',
         name: 'isHaveReducer',
         type: 'list',
-        when: ({ isConnectStore }) => isConnectStore || false
+        when: ({ isConnectStore = false }) => isConnectStore
     }
 };
 const questions = {
@@ -95,7 +95,7 @@ const questions = {
             message: 'Enter route name',
             name: 'routePath',
             type: 'input',
-            when: ({ isHavePath }) => isHavePath || false
+            when: ({ isHavePath = false }) => isHavePath
         },
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
@@ -104,28 +104,31 @@ const questions = {
 };
 const actions = {
     class: (answers) => __awaiter(this, void 0, void 0, function* () {
+        const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createClassComponent(answers);
-        if (answers.isHaveStyle) {
+        if (isHaveStyle) {
             helper_1.Helper.createStyle(answers);
         }
     }),
     functional: (answers) => __awaiter(this, void 0, void 0, function* () {
+        const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createFuncComponent(answers);
-        if (answers.isHaveStyle) {
+        if (isHaveStyle) {
             helper_1.Helper.createStyle(answers);
         }
     }),
     page: (answers) => __awaiter(this, void 0, void 0, function* () {
+        const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         answers.isPage = true;
         helper_1.Helper.createClassComponent(answers);
         helper_1.Helper.addRoute(answers);
-        if (answers.isHaveStyle) {
+        if (isHaveStyle) {
             helper_1.Helper.createStyle(answers);
         }
     })
