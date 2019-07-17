@@ -67,7 +67,7 @@ exports.Helper = {
                     regexKey: /\s[}] from '@Interfaces';/g
                 };
                 Common_1.CommonHelper.replaceContent(replaceStoreImportParams);
-            }, 2000);
+            }, 1500);
         }
     },
     createStyle: (answers) => {
@@ -92,16 +92,17 @@ exports.Helper = {
         };
         Common_1.CommonHelper.replaceContent(replaceContentParams);
     },
-    addReducerCombine: (templateProps) => {
-        const replaceContentParams = {
-            fileDir: `${config_1.Config.nextjs.reducerDir}/index.ts`,
-            filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.reducerDir}/index.ts`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/Store.mustache', templateProps),
-            message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
-            regexKey: /export default combineReducers[(][{]/g
-        };
-        Common_1.CommonHelper.replaceContent(replaceContentParams);
-    },
+    /* 	addReducerCombine: (templateProps: ICommon.ITemplateProps): void => {
+            const replaceContentParams: ICommon.IReplaceContent = {
+                fileDir: `${Config.nextjs.reducerDir}/index.ts`,
+                filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'),
+                getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/Store.mustache', templateProps),
+                message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
+                regexKey: /export default combineReducers[(][{]/g
+            };
+    
+            CommonHelper.replaceContent(replaceContentParams);
+        }, */
     addAction: (answers) => {
         const { fileName } = answers;
         const actionFileDir = `${config_1.Config.nextjs.actionDir}/${fileName}Actions.ts`;
@@ -138,9 +139,17 @@ exports.Helper = {
             getFileContent: () => Common_1.CommonHelper.getTemplate(reducerTemplate, templateProps),
             message: 'Added new reducer file'
         };
+        const replaceReducerContentParams = {
+            fileDir: `${config_1.Config.nextjs.reducerDir}/index.ts`,
+            filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.reducerDir}/index.ts`), 'utf8'),
+            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/Store.mustache', templateProps),
+            message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
+            regexKey: /export default combineReducers[(][{]/g
+        };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.replaceContent(replaceContentParams);
-        exports.Helper.addReducerCombine(templateProps);
+        setTimeout(() => Common_1.CommonHelper.replaceContent(replaceReducerContentParams), 1500);
+        /* Helper.addReducerCombine(templateProps); */
         if (isConnectStore) {
             exports.Helper.addActionConstIndex(templateProps);
         }
