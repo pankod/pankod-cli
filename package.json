@@ -4,10 +4,11 @@
   "description": "CLI for Pankod open source projects.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "tsc && cp -r ./src/Templates ./dist",
+    "build": "tsc && npm run sync-templates",
     "test": "echo \"Error: no test specified\" && exit 1",
     "generate": "node ./dist/index.js a",
-    "watch": "tsc -w"
+    "watch": "tsc -w",
+    "sync-templates": "rm -rf ./dist/Templates && cp -r ./src/Templates ./dist"
   },
   "author": "Pankod <info@pankod.com>",
   "license": "MIT",
