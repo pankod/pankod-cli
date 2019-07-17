@@ -31,8 +31,7 @@ export const CommonHelper = {
 			templateProps
 		)
 	),
-	isAlreadyExist: (startPath: string, val: string, isFile?: boolean, fileType?: string): boolean => {
-
+	isAlreadyExist: (startPath: string, val: string = '', isFile: boolean = false, fileType?: string): boolean => {
 		let _path: string;
 
 		switch (fileType) {

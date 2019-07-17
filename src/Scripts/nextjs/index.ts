@@ -46,7 +46,7 @@ const commonQuestions: INextjsCommonQuestions = {
 		message: 'Do you want to create a new reducer or use your own?',
 		name: 'isHaveReducer',
 		type: 'list',
-		when: ({ isConnectStore }: { isConnectStore?: boolean }): boolean => isConnectStore || false
+		when: ({ isConnectStore = false }: { isConnectStore?: boolean }): boolean => isConnectStore
 	}
 };
 
@@ -90,7 +90,7 @@ const questions: INextjsQuestions = {
 			message: 'Enter route name',
 			name: 'routePath',
 			type: 'input',
-			when: ({ isHavePath }: { isHavePath?: boolean }): boolean => isHavePath || false
+			when: ({ isHavePath = false }: { isHavePath?: boolean }): boolean => isHavePath
 		},
 
 		commonQuestions.connectStore,
@@ -101,33 +101,36 @@ const questions: INextjsQuestions = {
 
 const actions: INextjsActions = {
 	class: async (answers: ICommon.IAnswers): Promise<void> => {
+		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
 		Helper.createClassComponent(answers);
 
-		if (answers.isHaveStyle) {
+		if (isHaveStyle) {
 			Helper.createStyle(answers);
 		}
 	},
 	functional: async (answers: ICommon.IAnswers): Promise<void> => {
+		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
 		Helper.createFuncComponent(answers);
 
-		if (answers.isHaveStyle) {
+		if (isHaveStyle) {
 			Helper.createStyle(answers);
 		}
 	},
 	page: async (answers: ICommon.IAnswers): Promise<void> => {
+		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 		answers.isPage = true;
 		Helper.createClassComponent(answers);
 		Helper.addRoute(answers);
 
-		if (answers.isHaveStyle) {
+		if (isHaveStyle) {
 			Helper.createStyle(answers);
 		}
 	}
