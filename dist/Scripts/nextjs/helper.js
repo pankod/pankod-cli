@@ -19,7 +19,7 @@ exports.Helper = {
         const replaceContentParams = {
             fileDir: `${config_1.Config.nextjs.routesDir}/routes.js`,
             filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.routesDir}/routes.js`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/routes.mustache', templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Routes.mustache', templateProps),
             message: `Route added to routes.js as ${isHavePath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
             regexKey: /^(?:[\t ]*(?:\r?\n|\r))+module.exports = routes;/gm
         };
@@ -27,14 +27,14 @@ exports.Helper = {
     },
     createInterface: (answers, isClass) => {
         const { fileName, lowerFileName, isPage, isConnectStore } = answers;
-        const templatePath = './dist/Templates/nextjs/Interfaces/component.d.mustache';
+        const templatePath = './dist/Templates/nextjs/Interfaces/Component.mustache';
         const templateProps = { fileName, isClass, lowerFileName, isConnectStore };
         const pageDirPath = `${config_1.Config.nextjs.pageInterfaceDir}/${fileName}.d.ts`;
         const compDirPath = `${config_1.Config.nextjs.compInterfaceDir}/${fileName}.d.ts`;
-        const pageInterfaceIndex = './dist/Templates/nextjs/Interfaces/page-index.d.mustache';
-        const compIntefaceIndex = './dist/Templates/nextjs/Interfaces/component-index.d.mustache';
-        const storeInterface = './dist/Templates/nextjs/Interfaces/redux-store.d.mustache';
-        const storeImportInterface = './dist/Templates/nextjs/Interfaces/redux-import.d.mustache';
+        const pageInterfaceIndex = './dist/Templates/nextjs/Interfaces/PageIndex.mustache';
+        const compIntefaceIndex = './dist/Templates/nextjs/Interfaces/ComponentIndex.mustache';
+        const storeInterface = './dist/Templates/nextjs/Interfaces/ReduxStore.mustache';
+        const storeImportInterface = './dist/Templates/nextjs/Interfaces/ReduxImport.mustache';
         const writeFileProps = {
             dirPath: isPage ? pageDirPath : compDirPath,
             getFileContent: () => Common_1.CommonHelper.getTemplate(templatePath, templateProps),
@@ -71,7 +71,7 @@ exports.Helper = {
         }
     },
     createStyle: (answers) => {
-        const templatePath = './dist/Templates/nextjs/styles.mustache';
+        const templatePath = './dist/Templates/nextjs/Styles.mustache';
         const templateProps = { fileName: answers.fileName };
         const pageDirPath = `${config_1.Config.nextjs.pagesDir}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
         const compDirPath = `${config_1.Config.nextjs.componentsDir}/${answers.fileName}/style.scss`;
@@ -86,7 +86,7 @@ exports.Helper = {
         const replaceContentParams = {
             fileDir: `${config_1.Config.nextjs.definitionsDir}/ActionConsts.ts`,
             filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.definitionsDir}/ActionConsts.ts`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/action-const.mustache', templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/ActionConst.mustache', templateProps),
             message: 'Action constants added to Definitions/ActionConsts.ts',
             regexKey: /export const ActionConsts\s[=]\s[{]/g
         };
@@ -96,7 +96,7 @@ exports.Helper = {
         const replaceContentParams = {
             fileDir: `${config_1.Config.nextjs.reducerDir}/index.ts`,
             filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.reducerDir}/index.ts`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/store.mustache', templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/Store.mustache', templateProps),
             message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
             regexKey: /export default combineReducers[(][{]/g
         };
@@ -105,8 +105,8 @@ exports.Helper = {
     addAction: (answers) => {
         const { fileName } = answers;
         const actionFileDir = `${config_1.Config.nextjs.actionDir}/${fileName}Actions.ts`;
-        const actionTemplate = './dist/Templates/nextjs/Reducers/action.mustache';
-        const indexTemplate = './dist/Templates/nextjs/Reducers/action-index.mustache';
+        const actionTemplate = './dist/Templates/nextjs/Reducers/Action.mustache';
+        const indexTemplate = './dist/Templates/nextjs/Reducers/ActionIndex.mustache';
         const templateProps = { fileName };
         const writeFileProps = {
             dirPath: actionFileDir,
@@ -124,7 +124,7 @@ exports.Helper = {
     addReducer: (answers) => {
         const { fileName, lowerFileName, isConnectStore } = answers;
         const reducerFileDir = `${config_1.Config.nextjs.reducerDir}/${lowerFileName}.ts`;
-        const reducerTemplate = './dist/Templates/nextjs/Reducers/reducer.mustache';
+        const reducerTemplate = './dist/Templates/nextjs/Reducers/Reducer.mustache';
         const templateProps = { fileName, lowerFileName };
         const replaceContentParams = {
             fileDir: `${config_1.Config.nextjs.reducerDir}/index.ts`,
@@ -149,7 +149,7 @@ exports.Helper = {
         const { lowerFileName, isConnectStore } = answers;
         const pagesDir = `${config_1.Config.nextjs.pagesDir}/${lowerFileName}`;
         const classDir = answers.isPage ? pagesDir : `${config_1.Config.nextjs.componentsDir}/${answers.fileName}`;
-        const templatePath = './dist/Templates/nextjs/Components/class.mustache';
+        const templatePath = './dist/Templates/nextjs/Components/Class.mustache';
         const templateProps = {
             fileName: answers.fileName,
             interfaceName: `I${answers.fileName}`,
@@ -182,7 +182,7 @@ exports.Helper = {
     createFuncComponent: (answers) => {
         const { lowerFileName, fileName, isHaveStyle } = answers;
         const funcDir = `${config_1.Config.nextjs.componentsDir}/${answers.fileName}`;
-        const templatePath = './dist/Templates/nextjs/Components/functional.mustache';
+        const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
         const templateProps = {
             fileName,
             lowerFileName,
