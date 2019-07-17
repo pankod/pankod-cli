@@ -6,10 +6,11 @@ import * as inquirer from 'inquirer';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
+import { INextjsActions, INextjsCommonQuestions, INextjsQuestions } from './INextjsTypes';
 import { Helper } from './helper';
 //#endregion Local Imports
 
-const commonQuestions = {
+const commonQuestions: INextjsCommonQuestions = {
 	addStyle: {
 		default: true,
 		message: 'Do you want to add style file?',
@@ -45,11 +46,11 @@ const commonQuestions = {
 		message: 'Do you want to create a new reducer or use your own?',
 		name: 'isHaveReducer',
 		type: 'list',
-		when: ({ isConnectStore }) => isConnectStore
+		when: ({ isConnectStore }: { isConnectStore?: boolean }): boolean => isConnectStore || false
 	}
-}
+};
 
-const questions = {
+const questions: INextjsQuestions = {
 	class: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
@@ -89,16 +90,16 @@ const questions = {
 			message: 'Enter route name',
 			name: 'routePath',
 			type: 'input',
-			when: ({ isHavePath }) => isHavePath
+			when: ({ isHavePath }: { isHavePath?: boolean }): boolean => isHavePath || false
 		},
 
 		commonQuestions.connectStore,
 		commonQuestions.isHaveReducer,
 		commonQuestions.addStyle
 	]
-}
+};
 
-const actions = {
+const actions: INextjsActions = {
 	class: async (answers: ICommon.IAnswers): Promise<void> => {
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -130,15 +131,14 @@ const actions = {
 			Helper.createStyle(answers);
 		}
 	}
-}
-
+};
 
 export default {
-	showQuestions: async (type): Promise<void> => {
+	showQuestions: async (type: string): Promise<void> => {
 		const componentType = type.split(' ')[0].toLowerCase();
 
-		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[componentType]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[componentType]);
 
 		actions[componentType](answers);
 	}
-}
+};

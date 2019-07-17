@@ -16,9 +16,11 @@ const fs = require("fs");
 const inquirer = require("inquirer");
 let projectPath;
 try {
-    projectPath = JSON.parse(String(fs.readFileSync('./package.json'))).cli.projectType;
+    const parsed = JSON.parse(String(fs.readFileSync('./package.json')));
+    projectPath = parsed.cli.projectType;
 }
 catch (_a) {
+    projectPath = '';
     console.error('Please specify cli.projectType in package.json');
     process.exit(1);
 }

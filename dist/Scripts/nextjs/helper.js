@@ -185,9 +185,9 @@ exports.Helper = {
         const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
         const templateProps = {
             fileName,
-            lowerFileName,
             interfaceName: `I${fileName}`,
-            isHaveStyle
+            isHaveStyle,
+            lowerFileName
         };
         const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
         const addIndexParams = {

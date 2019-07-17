@@ -8,6 +8,7 @@ export declare module ICommon {
 
 	export interface IAnswers {
 		fileName: string;
+		fileType?: string;
 		upperFileName?: string;
 		isPrivate?: boolean;
 		hasDatabase?: boolean;

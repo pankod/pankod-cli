@@ -6,17 +6,22 @@ import * as figlet from 'figlet';
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
+import { IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { ICommon } from './Scripts/ICommon';
+
 let projectPath: string;
 
 try {
-	projectPath = JSON.parse(String(fs.readFileSync('./package.json'))).cli.projectType;
+	const parsed: IProjectType = JSON.parse(String(fs.readFileSync('./package.json'))) as IProjectType;
+	projectPath = parsed.cli.projectType;
 } catch {
+	projectPath = '';
 	console.error('Please specify cli.projectType in package.json');
 
 	process.exit(1);
 }
 
-const text = {
+const text: IText = {
 	moleculer: 'microservice-cli',
 	nextjs: 'Pankod NextJS CLI'
 };
@@ -29,7 +34,7 @@ console.log(
 	)
 );
 
-const questions = {
+const questions: IQuestions = {
 	moleculer: {
 		choices: ['Entity', 'Service'],
 		message: 'What would you like to add?',
@@ -46,9 +51,9 @@ const questions = {
 
 program
 	.action(async () => {
-		const answers: { fileType: string } = await inquirer.prompt(questions[projectPath]);
+		const answers: ICommon.IAnswers = await inquirer.prompt(questions[projectPath]);
 
-		const questionsHelper = require(`./Scripts/${projectPath}/index`);
+		const questionsHelper: IQuestionsHelper = require(`./Scripts/${projectPath}/index`) as IQuestionsHelper;
 
 		questionsHelper.default.showQuestions(answers.fileType);
 	});
