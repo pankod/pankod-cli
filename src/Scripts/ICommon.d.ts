@@ -8,9 +8,15 @@ export declare module ICommon {
 
 	export interface IAnswers {
 		fileName: string;
-		upperFileName: string;
+		upperFileName?: string;
 		isPrivate?: boolean;
 		hasDatabase?: boolean;
+		isHavePath?: boolean;
+		routePath?: string;
+		lowerFileName?: string;
+		isPage?: boolean;
+		isConnectStore?: boolean;
+		isHaveStyle?: boolean;
 	}
 
 	export interface IAddIndex {

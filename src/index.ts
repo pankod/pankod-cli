@@ -17,7 +17,8 @@ try {
 }
 
 const text = {
-	moleculer: 'microservice-cli'
+	moleculer: 'microservice-cli',
+	nextjs: 'Pankod NextJS CLI'
 };
 
 console.clear();
@@ -29,14 +30,18 @@ console.log(
 );
 
 const questions = {
-	moleculer: [
-		{
-			choices: ['Entity', 'Service'],
-			message: 'What would you like to add?',
-			name: 'fileType',
-			type: 'list'
-		}
-	]
+	moleculer: {
+		choices: ['Entity', 'Service'],
+		message: 'What would you like to add?',
+		name: 'fileType',
+		type: 'list'
+	},
+	nextjs: {
+		choices: ['Page', 'Functional Component', 'Class Component'],
+		message: 'What do you want to add?',
+		name: 'fileType',
+		type: 'list'
+	}
 };
 
 program
@@ -45,7 +50,7 @@ program
 
 		const questionsHelper = require(`./Scripts/${projectPath}/index`);
 
-		questionsHelper.default.showQuestions(answers.fileType.toLowerCase());
+		questionsHelper.default.showQuestions(answers.fileType);
 	});
 
 program.parse(process.argv);

@@ -23,25 +23,30 @@ catch (_a) {
     process.exit(1);
 }
 const text = {
-    moleculer: 'microservice-cli'
+    moleculer: 'microservice-cli',
+    nextjs: 'Pankod NextJS CLI'
 };
 console.clear();
 console.log(chalk.default(figlet.textSync(text[projectPath])));
 const questions = {
-    moleculer: [
-        {
-            choices: ['Entity', 'Service'],
-            message: 'What would you like to add?',
-            name: 'fileType',
-            type: 'list'
-        }
-    ]
+    moleculer: {
+        choices: ['Entity', 'Service'],
+        message: 'What would you like to add?',
+        name: 'fileType',
+        type: 'list'
+    },
+    nextjs: {
+        choices: ['Page', 'Functional Component', 'Class Component'],
+        message: 'What do you want to add?',
+        name: 'fileType',
+        type: 'list'
+    }
 };
 program
     .action(() => __awaiter(this, void 0, void 0, function* () {
     const answers = yield inquirer.prompt(questions[projectPath]);
     const questionsHelper = require(`./Scripts/${projectPath}/index`);
-    questionsHelper.default.showQuestions(answers.fileType.toLowerCase());
+    questionsHelper.default.showQuestions(answers.fileType);
 }));
 program.parse(process.argv);
 //# sourceMappingURL=index.js.map

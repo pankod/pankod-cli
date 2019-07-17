@@ -19,7 +19,7 @@ const questions = {
 				if (val.length) {
 					if (
 						CommonHelper.isAlreadyExist(
-							Config.repositoriesDir,
+							Config.moleculer.repositoriesDir,
 							val,
 							true
 						)
@@ -43,7 +43,7 @@ const questions = {
 				if (val.length) {
 					if (
 						Helper.isServiceAlreadyExist(
-							Config.servicesDir,
+							Config.moleculer.servicesDir,
 							val
 						)
 					) {
@@ -72,21 +72,22 @@ const questions = {
 };
 
 const actions = {
-	entity: answers => {
+	entity: (answers: ICommon.IAnswers) => {
 		Helper.createRepository(answers);
 	},
-	service: answers => {
+	service: (answers: ICommon.IAnswers) => {
 		Helper.createService(answers);
 	}
 };
 
 export default {
 	showQuestions: async (type): Promise<void> => {
-		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[type]);
+		const lowerCaseType = type.toLowerCase()
+		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[lowerCaseType]);
 
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 
-		actions[type](answers);
+		actions[lowerCaseType](answers);
 	}
 };

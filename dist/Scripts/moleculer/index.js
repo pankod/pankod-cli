@@ -24,7 +24,7 @@ const questions = {
             type: 'input',
             validate(val) {
                 if (val.length) {
-                    if (Common_1.CommonHelper.isAlreadyExist(config_1.Config.repositoriesDir, val, true)) {
+                    if (Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.repositoriesDir, val, true)) {
                         return 'Already added use new entity name';
                     }
                     return true;
@@ -40,7 +40,7 @@ const questions = {
             type: 'input',
             validate(val) {
                 if (val.length) {
-                    if (helper_1.Helper.isServiceAlreadyExist(config_1.Config.servicesDir, val)) {
+                    if (helper_1.Helper.isServiceAlreadyExist(config_1.Config.moleculer.servicesDir, val)) {
                         return 'Already added use new service name';
                     }
                     return true;
@@ -63,19 +63,20 @@ const questions = {
     ]
 };
 const actions = {
-    entity: answers => {
+    entity: (answers) => {
         helper_1.Helper.createRepository(answers);
     },
-    service: answers => {
+    service: (answers) => {
         helper_1.Helper.createService(answers);
     }
 };
 exports.default = {
     showQuestions: (type) => __awaiter(this, void 0, void 0, function* () {
-        const answers = yield inquirer.prompt(questions[type]);
+        const lowerCaseType = type.toLowerCase();
+        const answers = yield inquirer.prompt(questions[lowerCaseType]);
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
-        actions[type](answers);
+        actions[lowerCaseType](answers);
     })
 };
 //# sourceMappingURL=index.js.map
