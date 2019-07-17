@@ -82,7 +82,7 @@ const actions = {
 
 export default {
 	showQuestions: async (type): Promise<void> => {
-		const lowerCaseType = type.toLowerCase()
+		const lowerCaseType = type.toLowerCase();
 		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[lowerCaseType]);
 
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());

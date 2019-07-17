@@ -41,6 +41,10 @@
     "mustache": "^3.0.1"
   },
   "devDependencies": {
+    "@types/chalk": "^2.2.0",
+    "@types/figlet": "^1.2.0",
+    "@types/inquirer": "^6.0.3",
+    "@types/mustache": "^0.8.32",
     "@types/node": "^11.13.6",
     "tslint": "^5.16.0",
     "typescript": "^3.4.3"

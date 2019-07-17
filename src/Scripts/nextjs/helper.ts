@@ -69,16 +69,19 @@ export const Helper = {
 
 			CommonHelper.replaceContent(replaceStoreParams);
 
-			setTimeout(() => {
-				const replaceStoreImportParams: ICommon.IReplaceContent = {
-					fileDir: `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
-					filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`), 'utf8'),
-					getFileContent: () => CommonHelper.getTemplate(storeImportInterface, templateProps),
-					message: 'Interface file added to import section in Interfaces/Redux/Store.d.ts\n',
-					regexKey: /\s[}] from '@Interfaces';/g
-				};
-				CommonHelper.replaceContent(replaceStoreImportParams);
-			}, 2000);
+			setTimeout(
+				() => {
+					const replaceStoreImportParams: ICommon.IReplaceContent = {
+						fileDir: `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
+						filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`), 'utf8'),
+						getFileContent: () => CommonHelper.getTemplate(storeImportInterface, templateProps),
+						message: 'Interface file added to import section in Interfaces/Redux/Store.d.ts\n',
+						regexKey: /\s[}] from '@Interfaces';/g
+					};
+					CommonHelper.replaceContent(replaceStoreImportParams);
+				},
+				2000
+			);
 
 		}
 	},
@@ -222,9 +225,9 @@ export const Helper = {
 		const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
 		const templateProps = {
 			fileName,
-			lowerFileName,
 			interfaceName: `I${fileName}`,
-			isHaveStyle
+			isHaveStyle,
+			lowerFileName
 		};
 		const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
 

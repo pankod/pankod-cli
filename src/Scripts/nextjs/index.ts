@@ -62,9 +62,9 @@ const commonQuestions = {
 		message: 'Do you want to create a new reducer or use your own?',
 		name: 'isHaveReducer',
 		type: 'list',
-		when: ({ isConnectStore }) => isConnectStore
+		when: ({ isConnectStore }: { isConnectStore: boolean }): boolean => isConnectStore
 	}
-}
+};
 
 const questions = {
 	class: [
@@ -106,14 +106,14 @@ const questions = {
 			message: 'Enter route name',
 			name: 'routePath',
 			type: 'input',
-			when: ({ isHavePath }) => isHavePath
+			when: ({ isHavePath }: { isHavePath: boolean }): boolean => isHavePath
 		},
 
 		commonQuestions.connectStore,
 		commonQuestions.isHaveReducer,
 		commonQuestions.addStyle
 	]
-}
+};
 
 const actions = {
 	class: async (answers: ICommon.IAnswers): Promise<void> => {
@@ -147,8 +147,7 @@ const actions = {
 			Helper.createStyle(answers);
 		}
 	}
-}
-
+};
 
 export default {
 	showQuestions: async (type): Promise<void> => {
@@ -158,4 +157,4 @@ export default {
 
 		actions[componentType](answers);
 	}
-}
+};
