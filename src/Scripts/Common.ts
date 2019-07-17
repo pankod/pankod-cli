@@ -31,10 +31,24 @@ export const CommonHelper = {
 			templateProps
 		)
 	),
-	isAlreadyExist: (startPath: string, val: string, isFile?: boolean): boolean => {
-		val = val.replace(/\b\w/g, foo => foo.toUpperCase());
+	isAlreadyExist: (startPath: string, val: string, isFile?: boolean, fileType?: string): boolean => {
 
-		const _path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+		let _path: string;
+
+		switch (fileType) {
+			case 'page':
+				val = val.replace(/\b\w/g, foo => foo.toLowerCase());
+				_path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+				break;
+			case 'service':
+				val = val.replace(/\b\w/g, foo => foo.toLowerCase());
+				_path = `${startPath}/${val}.service.ts`;
+				break;
+			default:
+				val = val.replace(/\b\w/g, foo => foo.toUpperCase());
+				_path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+				break;
+		}
 
 		return fs.existsSync(path.resolve('', _path));
 	},
@@ -58,5 +72,25 @@ export const CommonHelper = {
 				console.log(logSymbols.success, params.message);
 			}
 		);
+	},
+
+	validate: (val: string, dirPath: string, isFile: boolean, fileType: string): string | boolean => {
+
+		if (val.length) {
+			if (
+				CommonHelper.isAlreadyExist(
+					dirPath,
+					val,
+					isFile,
+					fileType
+				)
+			) {
+				return `This ${fileType} name already used before, enter new name.`;
+			}
+
+			return true;
+		}
+
+		return 'Can not be empty';
 	}
 };

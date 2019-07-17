@@ -16,15 +16,6 @@ const config_1 = require("../../config");
 const Common_1 = require("../Common");
 const helper_1 = require("./helper");
 //#endregion Local Imports
-const validate = (val, path) => {
-    if (val.length) {
-        if (Common_1.CommonHelper.isAlreadyExist(path, val)) {
-            return 'This component name already used before, enter new name.';
-        }
-        return true;
-    }
-    return 'Can not be empty';
-};
 const commonQuestions = {
     addStyle: {
         default: true,
@@ -43,7 +34,7 @@ const commonQuestions = {
         name: 'fileName',
         type: 'input',
         validate(val) {
-            return validate(val, config_1.Config.nextjs.componentsDir);
+            return Common_1.CommonHelper.validate(val, config_1.Config.nextjs.componentsDir, false, 'component');
         }
     },
     isHaveReducer: {
@@ -81,7 +72,7 @@ const questions = {
             name: 'fileName',
             type: 'input',
             validate(val) {
-                return validate(val, config_1.Config.nextjs.pagesDir);
+                return Common_1.CommonHelper.validate(val, config_1.Config.nextjs.pagesDir, false, 'page');
             }
         },
         {

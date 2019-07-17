@@ -20,9 +20,22 @@ exports.CommonHelper = {
     getTemplate: (templatePath, templateProps) => (
     // __dirname + ../../ path is root of the dist folder.
     mustache.render(fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'), templateProps)),
-    isAlreadyExist: (startPath, val, isFile) => {
-        val = val.replace(/\b\w/g, foo => foo.toUpperCase());
-        const _path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+    isAlreadyExist: (startPath, val, isFile, fileType) => {
+        let _path;
+        switch (fileType) {
+            case 'page':
+                val = val.replace(/\b\w/g, foo => foo.toLowerCase());
+                _path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+                break;
+            case 'service':
+                val = val.replace(/\b\w/g, foo => foo.toLowerCase());
+                _path = `${startPath}/${val}.service.ts`;
+                break;
+            default:
+                val = val.replace(/\b\w/g, foo => foo.toUpperCase());
+                _path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+                break;
+        }
         return fs.existsSync(path.resolve('', _path));
     },
     replaceContent: (params) => {
@@ -40,6 +53,15 @@ exports.CommonHelper = {
                 throw err;
             console.log(logSymbols.success, params.message);
         });
+    },
+    validate: (val, dirPath, isFile, fileType) => {
+        if (val.length) {
+            if (exports.CommonHelper.isAlreadyExist(dirPath, val, isFile, fileType)) {
+                return `This ${fileType} name already used before, enter new name.`;
+            }
+            return true;
+        }
+        return 'Can not be empty';
     }
 };
 //# sourceMappingURL=Common.js.map

@@ -26,9 +26,9 @@ exports.Helper = {
         Common_1.CommonHelper.replaceContent(replaceContentParams);
     },
     createInterface: (answers, isClass) => {
-        const { fileName, lowerFileName, isPage, isConnectStore } = answers;
+        const { fileName, lowerFileName, isPage, isConnectStore, upperFileName } = answers;
         const templatePath = './dist/Templates/nextjs/Interfaces/Component.mustache';
-        const templateProps = { fileName, isClass, lowerFileName, isConnectStore };
+        const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
         const pageDirPath = `${config_1.Config.nextjs.pageInterfaceDir}/${fileName}.d.ts`;
         const compDirPath = `${config_1.Config.nextjs.compInterfaceDir}/${fileName}.d.ts`;
         const pageInterfaceIndex = './dist/Templates/nextjs/Interfaces/PageIndex.mustache';
@@ -122,10 +122,10 @@ exports.Helper = {
         Common_1.CommonHelper.writeFile(writeFileProps);
     },
     addReducer: (answers) => {
-        const { fileName, lowerFileName, isConnectStore } = answers;
+        const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
         const reducerFileDir = `${config_1.Config.nextjs.reducerDir}/${lowerFileName}.ts`;
         const reducerTemplate = './dist/Templates/nextjs/Reducers/Reducer.mustache';
-        const templateProps = { fileName, lowerFileName };
+        const templateProps = { fileName, lowerFileName, upperFileName };
         const replaceContentParams = {
             fileDir: `${config_1.Config.nextjs.reducerDir}/index.ts`,
             filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.reducerDir}/index.ts`), 'utf8'),

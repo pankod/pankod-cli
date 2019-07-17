@@ -16,21 +16,8 @@ const questions = {
 			name: 'fileName',
 			type: 'input',
 			validate(val: string): string | boolean {
-				if (val.length) {
-					if (
-						CommonHelper.isAlreadyExist(
-							Config.moleculer.repositoriesDir,
-							val,
-							true
-						)
-					) {
-						return 'Already added use new entity name';
-					}
+				return CommonHelper.validate(val, Config.moleculer.repositoriesDir, true, 'entity');
 
-					return true;
-				}
-
-				return 'Cannot be empty';
 			}
 		}
 	],
@@ -40,20 +27,7 @@ const questions = {
 			name: 'fileName',
 			type: 'input',
 			validate(val: string): string | boolean {
-				if (val.length) {
-					if (
-						Helper.isServiceAlreadyExist(
-							Config.moleculer.servicesDir,
-							val
-						)
-					) {
-						return 'Already added use new service name';
-					}
-
-					return true;
-				}
-
-				return 'Cannot be empty';
+				return CommonHelper.validate(val, Config.moleculer.servicesDir, true, 'service');
 			}
 		},
 		{
@@ -82,10 +56,11 @@ const actions = {
 
 export default {
 	showQuestions: async (type): Promise<void> => {
-		const lowerCaseType = type.toLowerCase()
+		const lowerCaseType = type.toLowerCase();
 		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[lowerCaseType]);
 
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
+		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 
 		actions[lowerCaseType](answers);

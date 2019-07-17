@@ -30,9 +30,9 @@ export const Helper = {
 		CommonHelper.replaceContent(replaceContentParams);
 	},
 	createInterface: (answers: ICommon.IAnswers, isClass: boolean) => {
-		const { fileName, lowerFileName, isPage, isConnectStore } = answers;
+		const { fileName, lowerFileName, isPage, isConnectStore, upperFileName} = answers;
 		const templatePath = './dist/Templates/nextjs/Interfaces/Component.mustache';
-		const templateProps = { fileName, isClass, lowerFileName, isConnectStore };
+		const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
 		const pageDirPath = `${Config.nextjs.pageInterfaceDir}/${fileName}.d.ts`;
 		const compDirPath = `${Config.nextjs.compInterfaceDir}/${fileName}.d.ts`;
 		const pageInterfaceIndex = './dist/Templates/nextjs/Interfaces/PageIndex.mustache';
@@ -146,11 +146,11 @@ export const Helper = {
 	},
 
 	addReducer: (answers: ICommon.IAnswers): void => {
-		const { fileName, lowerFileName, isConnectStore } = answers;
+		const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
 
 		const reducerFileDir = `${Config.nextjs.reducerDir}/${lowerFileName}.ts`;
 		const reducerTemplate = './dist/Templates/nextjs/Reducers/Reducer.mustache';
-		const templateProps = { fileName, lowerFileName };
+		const templateProps = { fileName, lowerFileName, upperFileName };
 
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.reducerDir}/index.ts`,

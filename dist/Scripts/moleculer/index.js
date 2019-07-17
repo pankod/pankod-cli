@@ -23,13 +23,7 @@ const questions = {
             name: 'fileName',
             type: 'input',
             validate(val) {
-                if (val.length) {
-                    if (Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.repositoriesDir, val, true)) {
-                        return 'Already added use new entity name';
-                    }
-                    return true;
-                }
-                return 'Cannot be empty';
+                return Common_1.CommonHelper.validate(val, config_1.Config.moleculer.repositoriesDir, true, 'entity');
             }
         }
     ],
@@ -39,13 +33,7 @@ const questions = {
             name: 'fileName',
             type: 'input',
             validate(val) {
-                if (val.length) {
-                    if (helper_1.Helper.isServiceAlreadyExist(config_1.Config.moleculer.servicesDir, val)) {
-                        return 'Already added use new service name';
-                    }
-                    return true;
-                }
-                return 'Cannot be empty';
+                return Common_1.CommonHelper.validate(val, config_1.Config.moleculer.servicesDir, true, 'service');
             }
         },
         {
@@ -75,6 +63,7 @@ exports.default = {
         const lowerCaseType = type.toLowerCase();
         const answers = yield inquirer.prompt(questions[lowerCaseType]);
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
+        answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         actions[lowerCaseType](answers);
     })

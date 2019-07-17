@@ -16,7 +16,7 @@ import { } from '@Interfaces';
 
 export class {{upperFileName}}Service extends BaseSchema {
 
-	public name: string = '{{fileName}}';
+	public name: string = '{{lowerFileName}}';
 {{#hasDatabase}}
 	public started: Function = async () => await connectionInstance();
 {{/hasDatabase}}
@@ -25,7 +25,7 @@ export class {{upperFileName}}Service extends BaseSchema {
 	/**
 	* @swagger
 	*
-	*  /{{fileName}}/<methodName>:
+	*  /{{lowerFileName}}/<methodName>:
 	//Example usage of swagger https://swagger.io/docs/specification/2-0/basic-structure/ }}//
 	*      responses:
 	*        200:

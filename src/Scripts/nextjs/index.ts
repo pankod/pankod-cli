@@ -9,23 +9,6 @@ import { ICommon } from '../ICommon';
 import { Helper } from './helper';
 //#endregion Local Imports
 
-const validate = (val: string, path: string): string | boolean => {
-	if (val.length) {
-		if (
-			CommonHelper.isAlreadyExist(
-				path,
-				val
-			)
-		) {
-			return 'This component name already used before, enter new name.';
-		}
-
-		return true;
-	}
-
-	return 'Can not be empty';
-};
-
 const commonQuestions = {
 	addStyle: {
 		default: true,
@@ -44,7 +27,7 @@ const commonQuestions = {
 		name: 'fileName',
 		type: 'input',
 		validate(val: string): string | boolean {
-			return validate(val, Config.nextjs.componentsDir);
+			return CommonHelper.validate(val, Config.nextjs.componentsDir, false, 'component');
 		}
 	},
 	isHaveReducer: {
@@ -83,7 +66,7 @@ const questions = {
 			name: 'fileName',
 			type: 'input',
 			validate(val: string): string | boolean {
-				return validate(val, Config.nextjs.pagesDir);
+				return CommonHelper.validate(val, Config.nextjs.pagesDir, false, 'page');
 			}
 		},
 		{

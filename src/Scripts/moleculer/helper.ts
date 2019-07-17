@@ -15,7 +15,7 @@ export const Helper = {
 		const brokerHelperCreate = './dist/Templates/moleculer/Tests/BrokerHelperCreate.mustache';
 
 		const templateProps = {
-			fileName: answers.fileName,
+			lowerFileName: answers.lowerFileName,
 			upperFileName: answers.upperFileName
 		};
 
@@ -67,7 +67,6 @@ export const Helper = {
 		const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
 
 		const templateProps = {
-			fileName: answers.fileName,
 			upperFileName: answers.upperFileName
 		};
 
@@ -80,20 +79,20 @@ export const Helper = {
 		};
 
 		const writeFileProps: ICommon.IWriteFile = {
-			dirPath: `${Config.moleculer.repositoriesDir}/${answers.fileName}.ts`,
+			dirPath: `${Config.moleculer.repositoriesDir}/${answers.upperFileName}.ts`,
 			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
 			message: 'Added new Repository.'
 		};
 
 		const repositoryTestParams = {
 			answers,
-			dirPath: `${Config.moleculer.repositoriesTestDir}/${answers.fileName}.spec.ts`,
+			dirPath: `${Config.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
 			successMessage: 'Added new Repository test.',
 			templatePath: './dist/Templates/moleculer/Tests/Repository.mustache',
 			templateProps
 		};
 
-		if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.fileName)) {
+		if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.upperFileName)) {
 			Helper.createInterface(answers, 'Repositories');
 		}
 
@@ -108,6 +107,7 @@ export const Helper = {
 			fileName: answers.fileName,
 			hasDatabase: answers.hasDatabase,
 			isPrivate: answers.isPrivate,
+			lowerFileName: answers.lowerFileName,
 			upperFileName: answers.upperFileName
 		};
 
@@ -120,14 +120,14 @@ export const Helper = {
 		};
 
 		const writeFileProps: ICommon.IWriteFile = {
-			dirPath: `${Config.moleculer.servicesDir}/${answers.fileName}.service.ts`,
+			dirPath: `${Config.moleculer.servicesDir}/${answers.lowerFileName}.service.ts`,
 			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
 			message: 'Added new Service.'
 		};
 
 		const serviceTestParams = {
 			answers,
-			dirPath: `${Config.moleculer.servicesTestDir}/${answers.fileName}.spec.ts`,
+			dirPath: `${Config.moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
 			successMessage: 'Added new Microservice test.',
 			templatePath: './dist/Templates/moleculer/Tests/Service.mustache',
 			templateProps
@@ -135,13 +135,13 @@ export const Helper = {
 
 		const integrationTestParams = {
 			answers,
-			dirPath: `${Config.moleculer.integrationTestDir}/${answers.fileName}.spec.ts`,
+			dirPath: `${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
 			successMessage: 'Added new Integration test.',
 			templatePath: './dist/Templates/moleculer/Tests/IntegrationTest.mustache',
 			templateProps
 		};
 
-		if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.fileName)) {
+		if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.upperFileName)) {
 			Helper.createInterface(answers, 'Services', 'Service');
 		}
 
@@ -157,7 +157,7 @@ export const Helper = {
 		const indexTemplate = './dist/Templates/moleculer/Services/HelperIndex.mustache';
 
 		const templateProps = {
-			fileName: answers.fileName,
+			lowerFileName: answers.lowerFileName,
 			upperFileName: answers.upperFileName
 		};
 
@@ -237,12 +237,5 @@ export const Helper = {
 
 		CommonHelper.writeFile(writeFileProps);
 
-	},
-	isServiceAlreadyExist: (startPath: string, val: string): boolean => {
-		val = val.replace(/\b\w/g, foo => foo.toLowerCase());
-
-		const _path = `${startPath}/${val}.service.ts`;
-
-		return fs.existsSync(path.resolve('', _path));
 	}
 };

@@ -1,12 +1,12 @@
-import { {{fileName}}Repository } from '../../../src/Repositories/{{fileName}}';
+import { {{upperFileName}}Repository } from '../../../src/Repositories/{{upperFileName}}';
 
-describe('Test {{fileName}}Repository constructor', () => {
+describe('Test {{upperFileName}}Repository constructor', () => {
 	it('should create an empty options', () => {
-		expect({{fileName}}Repository).toBeDefined();
+		expect({{upperFileName}}Repository).toBeDefined();
 	});
 
 	it('should work (method name)', async () => {
-		const result = await {{fileName}}Repository.methodName(1);
+		const result = await {{upperFileName}}Repository.methodName(1);
 		expect(result).toBeDefined();
 	});
 });

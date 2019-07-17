@@ -31,7 +31,7 @@ describe("Test {{fileName}} service requests", () => {
         }
 
         return request(server)
-            .post("/{{fileName}}/<methodName>")
+            .post("/{{lowerFileName}}/<methodName>")
             .query({ ...params })
             .then(res => {
                 expect(res.statusCode).toBe(200);
