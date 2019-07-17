@@ -6,7 +6,7 @@ import * as figlet from 'figlet';
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
-import { IAnswers, IProjectType, IQuestion, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { IAnswers, IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
 
 let projectPath: string;
 
@@ -14,6 +14,7 @@ try {
 	const parsed: IProjectType = JSON.parse(String(fs.readFileSync('./package.json'))) as IProjectType;
 	projectPath = parsed.cli.projectType;
 } catch {
+	projectPath = '';
 	console.error('Please specify cli.projectType in package.json');
 
 	process.exit(1);
@@ -28,7 +29,7 @@ console.clear();
 
 console.log(
 	chalk.default(
-		figlet.textSync(text[projectPath] as string)
+		figlet.textSync(text[projectPath])
 	)
 );
 
@@ -49,7 +50,7 @@ const questions: IQuestions = {
 
 program
 	.action(async () => {
-		const answers: IAnswers = await inquirer.prompt(questions[projectPath] as IQuestion);
+		const answers: IAnswers = await inquirer.prompt(questions[projectPath]);
 
 		const questionsHelper: IQuestionsHelper = require(`./Scripts/${projectPath}/index`) as IQuestionsHelper;
 

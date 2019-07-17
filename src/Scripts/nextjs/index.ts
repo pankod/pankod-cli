@@ -7,6 +7,8 @@ import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import { Helper } from './helper';
+import { INextjsQuestions, INextjsCommonQuestions, INextjsActions } from './INextjsTypes';
+import { IAnswers } from 'src/ITypes';
 //#endregion Local Imports
 
 const validate = (val: string, path: string): string | boolean => {
@@ -26,7 +28,7 @@ const validate = (val: string, path: string): string | boolean => {
 	return 'Can not be empty';
 };
 
-const commonQuestions = {
+const commonQuestions: INextjsCommonQuestions = {
 	addStyle: {
 		default: true,
 		message: 'Do you want to add style file?',
@@ -66,7 +68,7 @@ const commonQuestions = {
 	}
 };
 
-const questions = {
+const questions: INextjsQuestions = {
 	class: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
@@ -115,7 +117,7 @@ const questions = {
 	]
 };
 
-const actions = {
+const actions: INextjsActions = {
 	class: async (answers: ICommon.IAnswers): Promise<void> => {
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -150,10 +152,10 @@ const actions = {
 };
 
 export default {
-	showQuestions: async (type): Promise<void> => {
+	showQuestions: async (type: string): Promise<void> => {
 		const componentType = type.split(' ')[0].toLowerCase();
 
-		const answers: ICommon.IAnswers = await inquirer.prompt<{ fileName: string }>(questions[componentType]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<IAnswers>(questions[componentType]);
 
 		actions[componentType](answers);
 	}

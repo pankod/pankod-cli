@@ -6,7 +6,10 @@
 		"sourceMap": true,
 		"allowJs": true,
 		"rootDir": "./src",
-		"baseUrl": "."
+		"baseUrl": ".",
+		"strict": true,
+		"noImplicitAny": true,
+		"strictNullChecks": true
 	},
 	"exclude": [
 		"node_modules",
