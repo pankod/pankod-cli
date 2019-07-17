@@ -12,13 +12,6 @@ export interface IText {
 	[key: string]: string;
 }
 
-export interface IQuestion {
-	choices: string[];
-	message: string;
-	name: string;
-	type: 'list' | 'confirm';
-}
-
 export interface IQuestions {
 	moleculer: ListQuestion<IAnswers>;
 	nextjs: ListQuestion<IAnswers>;
