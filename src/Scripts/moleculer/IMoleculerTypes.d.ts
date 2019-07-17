@@ -1,10 +1,10 @@
 import { InputQuestion, Answers, Question } from "inquirer";
-import { IAnswers } from "../../ITypes";
+import { ICommon } from "../ICommon";
 
 export interface IMoleculerQuestions {
-	entity: Question<IAnswers>[];
-	service: Question<IAnswers>[];
-	[key: string]: Question<IAnswers> | Question<IAnswers>[];
+	entity: Question<ICommon.IAnswers>[];
+	service: Question<ICommon.IAnswers>[];
+	[key: string]: Question<ICommon.IAnswers> | Question<ICommon.IAnswers>[];
 }
 
 export interface IMoleculerActions {

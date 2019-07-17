@@ -155,7 +155,8 @@ exports.Helper = {
             interfaceName: `I${answers.fileName}`,
             isConnectStore: answers.isConnectStore,
             isHaveStyle: answers.isHaveStyle,
-            lowerFileName: answers.lowerFileName
+            lowerFileName: answers.lowerFileName,
+            isHavePath: false
         };
         const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
         const addIndexParams = {

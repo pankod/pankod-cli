@@ -6,7 +6,8 @@ import * as figlet from 'figlet';
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
-import { IAnswers, IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { ICommon } from './Scripts/ICommon';
 
 let projectPath: string;
 
@@ -50,7 +51,7 @@ const questions: IQuestions = {
 
 program
 	.action(async () => {
-		const answers: IAnswers = await inquirer.prompt(questions[projectPath]);
+		const answers: ICommon.IAnswers = await inquirer.prompt(questions[projectPath]);
 
 		const questionsHelper: IQuestionsHelper = require(`./Scripts/${projectPath}/index`) as IQuestionsHelper;
 

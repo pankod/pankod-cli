@@ -1,4 +1,5 @@
 import { ConfirmQuestion, ListQuestion } from "inquirer";
+import { ICommon } from "./Scripts/ICommon";
 
 export interface IProjectType {
 	cli: {
@@ -13,16 +14,9 @@ export interface IText {
 }
 
 export interface IQuestions {
-	moleculer: ListQuestion<IAnswers>;
-	nextjs: ListQuestion<IAnswers>;
-	[key: string]: ListQuestion<IAnswers>;
-}
-
-export interface IAnswers {
-	fileType: string;
-	fileName: string;
-	isHavePath: boolean;
-	isConnectStore: boolean;
+	moleculer: ListQuestion<ICommon.IAnswers>;
+	nextjs: ListQuestion<ICommon.IAnswers>;
+	[key: string]: ListQuestion<ICommon.IAnswers>;
 }
 
 export interface IQuestionsHelper {

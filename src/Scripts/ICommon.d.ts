@@ -8,14 +8,15 @@ export declare module ICommon {
 
 	export interface IAnswers {
 		fileName: string;
+		fileType?: string;
 		upperFileName?: string;
 		isPrivate?: boolean;
 		hasDatabase?: boolean;
-		isHavePath?: boolean;
+		isHavePath: boolean;
 		routePath?: string;
 		lowerFileName?: string;
 		isPage?: boolean;
-		isConnectStore?: boolean;
+		isConnectStore: boolean;
 		isHaveStyle?: boolean;
 	}
 

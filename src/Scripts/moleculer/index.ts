@@ -6,9 +6,8 @@ import * as inquirer from 'inquirer';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
-import { IMoleculerQuestions, IMoleculerActions } from './IMoleculerTypes';
+import { IMoleculerActions, IMoleculerQuestions } from './IMoleculerTypes';
 import { Helper } from './helper';
-import { IAnswers } from 'src/ITypes';
 //#endregion Local Imports
 
 const questions: IMoleculerQuestions = {
@@ -85,7 +84,7 @@ const actions: IMoleculerActions = {
 export default {
 	showQuestions: async (type: string): Promise<void> => {
 		const lowerCaseType = type.toLowerCase();
-		const answers: ICommon.IAnswers = await inquirer.prompt<IAnswers>(questions[lowerCaseType]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[lowerCaseType]);
 
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());

@@ -6,9 +6,8 @@ import * as inquirer from 'inquirer';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
+import { INextjsActions, INextjsCommonQuestions, INextjsQuestions } from './INextjsTypes';
 import { Helper } from './helper';
-import { INextjsQuestions, INextjsCommonQuestions, INextjsActions } from './INextjsTypes';
-import { IAnswers } from 'src/ITypes';
 //#endregion Local Imports
 
 const validate = (val: string, path: string): string | boolean => {
@@ -155,7 +154,7 @@ export default {
 	showQuestions: async (type: string): Promise<void> => {
 		const componentType = type.split(' ')[0].toLowerCase();
 
-		const answers: ICommon.IAnswers = await inquirer.prompt<IAnswers>(questions[componentType]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[componentType]);
 
 		actions[componentType](answers);
 	}
