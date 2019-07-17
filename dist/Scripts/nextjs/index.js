@@ -61,7 +61,7 @@ const commonQuestions = {
         message: 'Do you want to create a new reducer or use your own?',
         name: 'isHaveReducer',
         type: 'list',
-        when: ({ isConnectStore }) => isConnectStore
+        when: ({ isConnectStore }) => isConnectStore || false
     }
 };
 const questions = {
@@ -104,7 +104,7 @@ const questions = {
             message: 'Enter route name',
             name: 'routePath',
             type: 'input',
-            when: ({ isHavePath }) => isHavePath
+            when: ({ isHavePath }) => isHavePath || false
         },
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,

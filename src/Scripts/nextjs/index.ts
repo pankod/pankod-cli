@@ -63,7 +63,7 @@ const commonQuestions: INextjsCommonQuestions = {
 		message: 'Do you want to create a new reducer or use your own?',
 		name: 'isHaveReducer',
 		type: 'list',
-		when: ({ isConnectStore }: { isConnectStore: boolean }): boolean => isConnectStore
+		when: ({ isConnectStore }: { isConnectStore?: boolean }): boolean => isConnectStore || false
 	}
 };
 
@@ -107,7 +107,7 @@ const questions: INextjsQuestions = {
 			message: 'Enter route name',
 			name: 'routePath',
 			type: 'input',
-			when: ({ isHavePath }: { isHavePath: boolean }): boolean => isHavePath
+			when: ({ isHavePath }: { isHavePath?: boolean }): boolean => isHavePath || false
 		},
 
 		commonQuestions.connectStore,
