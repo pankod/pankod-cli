@@ -106,6 +106,7 @@ const actions = {
     class: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
+        answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createClassComponent(answers);
         if (isHaveStyle) {
@@ -124,6 +125,7 @@ const actions = {
     page: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
+        answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         answers.isPage = true;
         helper_1.Helper.createClassComponent(answers);

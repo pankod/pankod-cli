@@ -103,8 +103,9 @@ const actions: INextjsActions = {
 	class: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
+		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
-
+		
 		Helper.createClassComponent(answers);
 
 		if (isHaveStyle) {
@@ -125,6 +126,7 @@ const actions: INextjsActions = {
 	page: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
+		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 		answers.isPage = true;
 		Helper.createClassComponent(answers);
