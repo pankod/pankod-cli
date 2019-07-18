@@ -2,8 +2,9 @@ import { ConfirmQuestion, ListQuestion } from "inquirer";
 import { ICommon } from "./Scripts/ICommon";
 
 export interface IProjectType {
-	cli: {
+	pankod: {
 		projectType: string
+		plugins: Array<string>
 	}
 }
 
@@ -22,5 +23,11 @@ export interface IQuestions {
 export interface IQuestionsHelper {
 	default: {
 		showQuestions: Function
+	}
+}
+
+export interface IPluginsHelper {
+	default: {
+		addPlugin: Function
 	}
 }

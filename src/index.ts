@@ -6,17 +6,20 @@ import * as figlet from 'figlet';
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
-import { IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { IPluginsHelper, IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
 import { ICommon } from './Scripts/ICommon';
 
 let projectPath: string;
+let plugins: Array<string>;
 
 try {
 	const parsed: IProjectType = JSON.parse(String(fs.readFileSync('./package.json'))) as IProjectType;
-	projectPath = parsed.cli.projectType;
+	projectPath = parsed.pankod.projectType;
+	plugins = parsed.pankod.plugins;
 } catch {
 	projectPath = '';
-	console.error('Please specify cli.projectType in package.json');
+	plugins = [''];
+	console.error('Please specify pankod.projectType in package.json');
 
 	process.exit(1);
 }
@@ -48,6 +51,12 @@ const questions: IQuestions = {
 		type: 'list'
 	}
 };
+
+program.command('add:plugin <name>').action((name: string) => {
+	const pluginsHelper: IPluginsHelper = require(`./Plugins/${projectPath}/index`) as IPluginsHelper;
+
+	pluginsHelper.default.addPlugin(name);
+});
 
 program
 	.action(async () => {

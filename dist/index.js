@@ -15,13 +15,16 @@ const figlet = require("figlet");
 const fs = require("fs");
 const inquirer = require("inquirer");
 let projectPath;
+let plugins;
 try {
     const parsed = JSON.parse(String(fs.readFileSync('./package.json')));
-    projectPath = parsed.cli.projectType;
+    projectPath = parsed.pankod.projectType;
+    plugins = parsed.pankod.plugins;
 }
 catch (_a) {
     projectPath = '';
-    console.error('Please specify cli.projectType in package.json');
+    plugins = [''];
+    console.error('Please specify pankod.projectType in package.json');
     process.exit(1);
 }
 const text = {
@@ -44,6 +47,10 @@ const questions = {
         type: 'list'
     }
 };
+program.command('add:plugin <name>').action((name) => {
+    const pluginsHelper = require(`./Plugins/${projectPath}/index`);
+    pluginsHelper.default.addPlugin(name);
+});
 program
     .action(() => __awaiter(this, void 0, void 0, function* () {
     const answers = yield inquirer.prompt(questions[projectPath]);
