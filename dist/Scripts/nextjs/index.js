@@ -56,17 +56,17 @@ const commonQuestions = {
     }
 };
 const questions = {
-    class: [
+    ClassComponent: [
         commonQuestions.enterComponentName,
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
         commonQuestions.addStyle
     ],
-    functional: [
+    FunctionalComponent: [
         commonQuestions.enterComponentName,
         commonQuestions.addStyle
     ],
-    page: [
+    Page: [
         {
             message: 'Enter page name',
             name: 'fileName',
@@ -103,7 +103,7 @@ const questions = {
     ]
 };
 const actions = {
-    class: (answers) => __awaiter(this, void 0, void 0, function* () {
+    ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -113,7 +113,7 @@ const actions = {
             helper_1.Helper.createStyle(answers);
         }
     }),
-    functional: (answers) => __awaiter(this, void 0, void 0, function* () {
+    FunctionalComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -122,7 +122,7 @@ const actions = {
             helper_1.Helper.createStyle(answers);
         }
     }),
-    page: (answers) => __awaiter(this, void 0, void 0, function* () {
+    Page: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -137,7 +137,7 @@ const actions = {
 };
 exports.default = {
     showQuestions: (type) => __awaiter(this, void 0, void 0, function* () {
-        const componentType = type.split(' ')[0].toLowerCase();
+        const componentType = type.replace(' ', '');
         const answers = yield inquirer.prompt(questions[componentType]);
         actions[componentType](answers);
     })

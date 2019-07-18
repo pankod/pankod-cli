@@ -41,7 +41,7 @@ const questions = {
         type: 'list'
     },
     nextjs: {
-        choices: ['Page', 'Functional Component', 'Class Component'],
+        choices: ['Page', 'Functional Component', 'Class Component', 'Add Plugin'],
         message: 'What do you want to add?',
         name: 'fileType',
         type: 'list'

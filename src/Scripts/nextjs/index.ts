@@ -51,17 +51,17 @@ const commonQuestions: INextjsCommonQuestions = {
 };
 
 const questions: INextjsQuestions = {
-	class: [
+	ClassComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
 		commonQuestions.isHaveReducer,
 		commonQuestions.addStyle
 	],
-	functional: [
+	FunctionalComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.addStyle
 	],
-	page: [
+	Page: [
 		{
 			message: 'Enter page name',
 			name: 'fileName',
@@ -100,19 +100,19 @@ const questions: INextjsQuestions = {
 };
 
 const actions: INextjsActions = {
-	class: async (answers: ICommon.IAnswers): Promise<void> => {
+	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
-		
+
 		Helper.createClassComponent(answers);
 
 		if (isHaveStyle) {
 			Helper.createStyle(answers);
 		}
 	},
-	functional: async (answers: ICommon.IAnswers): Promise<void> => {
+	FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -123,7 +123,7 @@ const actions: INextjsActions = {
 			Helper.createStyle(answers);
 		}
 	},
-	page: async (answers: ICommon.IAnswers): Promise<void> => {
+	Page: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -140,7 +140,7 @@ const actions: INextjsActions = {
 
 export default {
 	showQuestions: async (type: string): Promise<void> => {
-		const componentType = type.split(' ')[0].toLowerCase();
+		const componentType = type.replace(' ', '');
 
 		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[componentType]);
 
