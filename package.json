@@ -12,6 +12,9 @@
   },
   "author": "Pankod <info@pankod.com>",
   "license": "MIT",
+  "bin": {
+    "pankod": "dist/index.js"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/pankod/pankod-cli"
