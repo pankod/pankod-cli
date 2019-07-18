@@ -16,6 +16,7 @@ const helpers_1 = require("../../Plugins/nextjs/helpers");
 const config_1 = require("../../config");
 const Common_1 = require("../Common");
 const helper_1 = require("./helper");
+const pluginsEnum_1 = require("./pluginsEnum");
 //#endregion Local Imports
 const commonQuestions = {
     addStyle: {
@@ -63,11 +64,11 @@ const questions = {
                 new inquirer.Separator(),
                 {
                     name: 'Styled Components',
-                    value: 'styled'
+                    value: pluginsEnum_1.Plugins.styled
                 },
                 {
                     name: 'Sass',
-                    value: 'sass'
+                    value: pluginsEnum_1.Plugins.sass
                 }
             ],
             message: 'What plugin do you want to add?',

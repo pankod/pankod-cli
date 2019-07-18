@@ -9,6 +9,7 @@ import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import { INextjsActions, INextjsCommonQuestions, INextjsQuestions } from './INextjsTypes';
 import { Helper } from './helper';
+import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
 
 const commonQuestions: INextjsCommonQuestions = {
@@ -58,11 +59,11 @@ const questions: INextjsQuestions = {
 				new inquirer.Separator(),
 				{
 					name: 'Styled Components',
-					value: 'styled'
+					value: Plugins.styled
 				},
 				{
 					name: 'Sass',
-					value: 'sass'
+					value: Plugins.sass
 				}
 			],
 			message: 'What plugin do you want to add?',
