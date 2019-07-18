@@ -3,6 +3,7 @@ import * as inquirer from 'inquirer';
 //#region Global Imports
 
 //#region Local Imports
+import { PluginHelper } from '../../Plugins/nextjs/helpers';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
@@ -51,6 +52,24 @@ const commonQuestions: INextjsCommonQuestions = {
 };
 
 const questions: INextjsQuestions = {
+	AddPlugin: [
+		{
+			choices: [
+				new inquirer.Separator(),
+				{
+					name: 'Styled Components',
+					value: 'styled'
+				},
+				{
+					name: 'Sass',
+					value: 'sass'
+				}
+			],
+			message: 'What plugin do you want to add?',
+			name: 'pluginType',
+			type: 'list'
+		}
+	],
 	ClassComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
@@ -100,6 +119,11 @@ const questions: INextjsQuestions = {
 };
 
 const actions: INextjsActions = {
+	AddPlugin: async (answers: ICommon.IAnswers): Promise<void> => {
+		const { pluginType = 'styled' } = answers;
+
+		PluginHelper[pluginType]();
+	},
 	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());

@@ -19,5 +19,6 @@ export interface INextjsActions {
 	ClassComponent: Function;
 	FunctionalComponent: Function;
 	Page: Function;
+	AddPlugin: Function;
 	[key: string]: Function;
 }

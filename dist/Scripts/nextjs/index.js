@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer = require("inquirer");
 //#region Global Imports
 //#region Local Imports
+const helpers_1 = require("../../Plugins/nextjs/helpers");
 const config_1 = require("../../config");
 const Common_1 = require("../Common");
 const helper_1 = require("./helper");
@@ -56,6 +57,24 @@ const commonQuestions = {
     }
 };
 const questions = {
+    AddPlugin: [
+        {
+            choices: [
+                new inquirer.Separator(),
+                {
+                    name: 'Styled Components',
+                    value: 'styled'
+                },
+                {
+                    name: 'Sass',
+                    value: 'sass'
+                }
+            ],
+            message: 'What plugin do you want to add?',
+            name: 'pluginType',
+            type: 'list'
+        }
+    ],
     ClassComponent: [
         commonQuestions.enterComponentName,
         commonQuestions.connectStore,
@@ -103,6 +122,11 @@ const questions = {
     ]
 };
 const actions = {
+    AddPlugin: (answers) => __awaiter(this, void 0, void 0, function* () {
+        console.log('Adding plugin...', answers);
+        const { pluginType = 'styled' } = answers;
+        helpers_1.PluginHelper[pluginType]();
+    }),
     ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
