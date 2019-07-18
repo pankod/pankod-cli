@@ -9,6 +9,7 @@ import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import { INextjsActions, INextjsCommonQuestions, INextjsQuestions } from './INextjsTypes';
 import { Helper } from './helper';
+import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
 
 const commonQuestions: INextjsCommonQuestions = {
@@ -52,24 +53,7 @@ const commonQuestions: INextjsCommonQuestions = {
 };
 
 const questions: INextjsQuestions = {
-	AddPlugin: [
-		{
-			choices: [
-				new inquirer.Separator(),
-				{
-					name: 'Styled Components',
-					value: 'styled'
-				},
-				{
-					name: 'Sass',
-					value: 'sass'
-				}
-			],
-			message: 'What plugin do you want to add?',
-			name: 'pluginType',
-			type: 'list'
-		}
-	],
+
 	ClassComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
@@ -115,15 +99,28 @@ const questions: INextjsQuestions = {
 		commonQuestions.connectStore,
 		commonQuestions.isHaveReducer,
 		commonQuestions.addStyle
+	],
+	Plugin: [
+		{
+			choices: [
+				new inquirer.Separator(),
+				{
+					name: 'Styled Components',
+					value: Plugins.styled
+				},
+				{
+					name: 'Sass',
+					value: Plugins.sass
+				}
+			],
+			message: 'What plugin do you want to add?',
+			name: 'pluginType',
+			type: 'list'
+		}
 	]
 };
 
 const actions: INextjsActions = {
-	AddPlugin: async (answers: ICommon.IAnswers): Promise<void> => {
-		const { pluginType = 'styled' } = answers;
-
-		PluginHelper[pluginType]();
-	},
 	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -159,6 +156,11 @@ const actions: INextjsActions = {
 		if (isHaveStyle) {
 			Helper.createStyle(answers);
 		}
+	},
+	Plugin: async (answers: ICommon.IAnswers): Promise<void> => {
+		const { pluginType = Plugins.styled } = answers;
+
+		PluginHelper[pluginType]();
 	}
 };
 

@@ -67,7 +67,7 @@ program.command('add').alias('a')
 		.action(async (): Promise<void> => askGenerateQuestions());
 
 program.command('add:plugin <name>')
-		.description('Adds new plugin. Styled or Sass.')		
+		.description('Adds new plugin. Styled or Sass.')
 		.action((name: string): void => {
 			const pluginsHelper: IPluginsHelper = require(`./Plugins/${projectPath}/index`) as IPluginsHelper;
 
@@ -75,7 +75,7 @@ program.command('add:plugin <name>')
 		});
 
 if (process.argv.length === 2) {
-	askGenerateQuestions()
+	askGenerateQuestions();
 }
 
 program.parse(process.argv);

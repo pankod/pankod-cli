@@ -52,7 +52,7 @@ const askGenerateQuestions = () => __awaiter(this, void 0, void 0, function* () 
     const questionsHelper = require(`./Scripts/${projectPath}/index`);
     questionsHelper.default.showQuestions(answers.fileType);
 });
-program.version('0.1.3');
+program.version('0.2.0');
 program.command('add').alias('a')
     .description('Adds new component, page or plugin')
     .action(() => __awaiter(this, void 0, void 0, function* () { return askGenerateQuestions(); }));

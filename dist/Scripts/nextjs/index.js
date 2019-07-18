@@ -16,6 +16,7 @@ const helpers_1 = require("../../Plugins/nextjs/helpers");
 const config_1 = require("../../config");
 const Common_1 = require("../Common");
 const helper_1 = require("./helper");
+const pluginsEnum_1 = require("./pluginsEnum");
 //#endregion Local Imports
 const commonQuestions = {
     addStyle: {
@@ -57,24 +58,6 @@ const commonQuestions = {
     }
 };
 const questions = {
-    AddPlugin: [
-        {
-            choices: [
-                new inquirer.Separator(),
-                {
-                    name: 'Styled Components',
-                    value: 'styled'
-                },
-                {
-                    name: 'Sass',
-                    value: 'sass'
-                }
-            ],
-            message: 'What plugin do you want to add?',
-            name: 'pluginType',
-            type: 'list'
-        }
-    ],
     ClassComponent: [
         commonQuestions.enterComponentName,
         commonQuestions.connectStore,
@@ -119,13 +102,27 @@ const questions = {
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
         commonQuestions.addStyle
+    ],
+    Plugin: [
+        {
+            choices: [
+                new inquirer.Separator(),
+                {
+                    name: 'Styled Components',
+                    value: pluginsEnum_1.Plugins.styled
+                },
+                {
+                    name: 'Sass',
+                    value: pluginsEnum_1.Plugins.sass
+                }
+            ],
+            message: 'What plugin do you want to add?',
+            name: 'pluginType',
+            type: 'list'
+        }
     ]
 };
 const actions = {
-    AddPlugin: (answers) => __awaiter(this, void 0, void 0, function* () {
-        const { pluginType = 'styled' } = answers;
-        helpers_1.PluginHelper[pluginType]();
-    }),
     ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -156,6 +153,10 @@ const actions = {
         if (isHaveStyle) {
             helper_1.Helper.createStyle(answers);
         }
+    }),
+    Plugin: (answers) => __awaiter(this, void 0, void 0, function* () {
+        const { pluginType = pluginsEnum_1.Plugins.styled } = answers;
+        helpers_1.PluginHelper[pluginType]();
     })
 };
 exports.default = {
