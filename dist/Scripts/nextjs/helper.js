@@ -154,7 +154,7 @@ exports.Helper = {
             fileName: answers.fileName,
             interfaceName: `I${answers.fileName}`,
             isConnectStore: answers.isConnectStore,
-            isHaveStyle: answers.isHaveStyle,
+            hasStyle: answers.hasStyle,
             lowerFileName: answers.lowerFileName,
             upperFileName: answers.upperFileName
         };
@@ -181,13 +181,13 @@ exports.Helper = {
         }
     },
     createFuncComponent: (answers) => {
-        const { lowerFileName, fileName, isHaveStyle } = answers;
+        const { lowerFileName, fileName, hasStyle } = answers;
         const funcDir = `${config_1.Config.nextjs.componentsDir}/${answers.fileName}`;
         const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
         const templateProps = {
             fileName,
             interfaceName: `I${fileName}`,
-            isHaveStyle,
+            hasStyle,
             lowerFileName
         };
         const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';

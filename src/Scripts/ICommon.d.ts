@@ -17,7 +17,7 @@ export declare module ICommon {
 		lowerFileName?: string;
 		isPage?: boolean;
 		isConnectStore?: boolean;
-		isHaveStyle?: boolean;
+		hasStyle?: boolean;
 		pluginType?: string;
 	}
 

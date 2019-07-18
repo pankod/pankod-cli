@@ -16,7 +16,7 @@ const commonQuestions: INextjsCommonQuestions = {
 	addStyle: {
 		default: true,
 		message: 'Do you want to add style file?',
-		name: 'isHaveStyle',
+		name: 'hasStyle',
 		type: 'confirm'
 	},
 	connectStore: {
@@ -122,30 +122,30 @@ const questions: INextjsQuestions = {
 
 const actions: INextjsActions = {
 	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-		const { isHaveStyle = false } = answers;
+		const { hasStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
 		Helper.createClassComponent(answers);
 
-		if (isHaveStyle) {
+		if (hasStyle) {
 			Helper.createStyle(answers);
 		}
 	},
 	FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-		const { isHaveStyle = false } = answers;
+		const { hasStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
 		Helper.createFuncComponent(answers);
 
-		if (isHaveStyle) {
+		if (hasStyle) {
 			Helper.createStyle(answers);
 		}
 	},
 	Page: async (answers: ICommon.IAnswers): Promise<void> => {
-		const { isHaveStyle = false } = answers;
+		const { hasStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -153,7 +153,7 @@ const actions: INextjsActions = {
 		Helper.createClassComponent(answers);
 		Helper.addRoute(answers);
 
-		if (isHaveStyle) {
+		if (hasStyle) {
 			Helper.createStyle(answers);
 		}
 	},
