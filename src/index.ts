@@ -60,7 +60,7 @@ const askGenerateQuestions = async (): Promise<void> => {
 	questionsHelper.default.showQuestions(answers.fileType);
 };
 
-program.version('0.1.3');
+program.version('0.2.0');
 
 program.command('add').alias('a')
 		.description('Adds new component, page or plugin')
