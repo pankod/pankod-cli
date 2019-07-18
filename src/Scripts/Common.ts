@@ -7,6 +7,7 @@ import * as path from 'path';
 
 //#region Local Imports
 import { ICommon } from './ICommon';
+import { Plugins } from './nextjs/pluginsEnum';
 //#endregion Local Imports
 
 export const CommonHelper = {
@@ -91,5 +92,11 @@ export const CommonHelper = {
 		}
 
 		return 'Can not be empty';
+	},
+
+	hasPlugin: (pluginName: Plugins): boolean => {
+		console.log('has plugin?', pluginName);
+
+		return false;
 	}
 };

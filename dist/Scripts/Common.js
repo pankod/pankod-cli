@@ -62,6 +62,10 @@ exports.CommonHelper = {
             return true;
         }
         return 'Can not be empty';
+    },
+    hasPlugin: (pluginName) => {
+        console.log('has plugin?', pluginName);
+        return false;
     }
 };
 //# sourceMappingURL=Common.js.map
