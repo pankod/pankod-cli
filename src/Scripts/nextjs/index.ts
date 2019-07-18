@@ -86,14 +86,14 @@ const questions: INextjsQuestions = {
 				}
 			],
 			message: 'Do you want to add custom route or use default route name?',
-			name: 'isHavePath',
+			name: 'hasPath',
 			type: 'list'
 		},
 		{
 			message: 'Enter route name',
 			name: 'routePath',
 			type: 'input',
-			when: ({ isHavePath = false }: { isHavePath?: boolean }): boolean => isHavePath
+			when: ({ hasPath = false }: { hasPath?: boolean }): boolean => hasPath
 		},
 
 		commonQuestions.connectStore,

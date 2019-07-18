@@ -11,11 +11,11 @@ import { ICommon } from '../ICommon';
 
 export const Helper = {
 	addRoute: (answers: ICommon.IAnswers) => {
-		const { isHavePath = false, routePath, fileName } = answers;
+		const { hasPath = false, routePath, fileName } = answers;
 
 		const templateProps = {
 			fileName: fileName.replace(/\b\w/g, foo => foo.toLowerCase()),
-			isHavePath,
+			hasPath,
 			routePath
 		};
 
@@ -23,7 +23,7 @@ export const Helper = {
 			fileDir: `${Config.nextjs.routesDir}/routes.js`,
 			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.routesDir}/routes.js`), 'utf8'),
 			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Routes.mustache', templateProps),
-			message: `Route added to routes.js as ${isHavePath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
+			message: `Route added to routes.js as ${hasPath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
 			regexKey: /^(?:[\t ]*(?:\r?\n|\r))+module.exports = routes;/gm
 		};
 
