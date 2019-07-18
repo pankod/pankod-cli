@@ -9,6 +9,7 @@ export interface INextjsCommonQuestions {
 }
 
 export interface INextjsQuestions {
+	Plugin: Question<ICommon.IAnswers>[];
 	ClassComponent: Question<ICommon.IAnswers>[];
 	FunctionalComponent: Question<ICommon.IAnswers>[];
 	Page: Question<ICommon.IAnswers>[];
@@ -19,6 +20,6 @@ export interface INextjsActions {
 	ClassComponent: Function;
 	FunctionalComponent: Function;
 	Page: Function;
-	AddPlugin: Function;
+	Plugin: Function;
 	[key: string]: Function;
 }
