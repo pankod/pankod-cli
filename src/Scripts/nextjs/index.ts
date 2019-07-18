@@ -121,7 +121,7 @@ const questions: INextjsQuestions = {
 
 const actions: INextjsActions = {
 	AddPlugin: async (answers: ICommon.IAnswers): Promise<void> => {
-		const { pluginType = 'styled' } = answers;
+		const { pluginType = Plugins.styled } = answers;
 
 		PluginHelper[pluginType]();
 	},

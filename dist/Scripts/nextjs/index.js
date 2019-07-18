@@ -124,7 +124,7 @@ const questions = {
 };
 const actions = {
     AddPlugin: (answers) => __awaiter(this, void 0, void 0, function* () {
-        const { pluginType = 'styled' } = answers;
+        const { pluginType = pluginsEnum_1.Plugins.styled } = answers;
         helpers_1.PluginHelper[pluginType]();
     }),
     ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
