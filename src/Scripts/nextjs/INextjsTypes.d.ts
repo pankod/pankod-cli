@@ -9,15 +9,16 @@ export interface INextjsCommonQuestions {
 }
 
 export interface INextjsQuestions {
-	class: Question<ICommon.IAnswers>[];
-	functional: Question<ICommon.IAnswers>[];
-	page: Question<ICommon.IAnswers>[];
+	ClassComponent: Question<ICommon.IAnswers>[];
+	FunctionalComponent: Question<ICommon.IAnswers>[];
+	Page: Question<ICommon.IAnswers>[];
 	[key: string]: Question<ICommon.IAnswers> | Question<ICommon.IAnswers>[];
 }
 
 export interface INextjsActions {
-	class: Function;
-	functional: Function;
-	page: Function;
+	ClassComponent: Function;
+	FunctionalComponent: Function;
+	Page: Function;
+	AddPlugin: Function;
 	[key: string]: Function;
 }

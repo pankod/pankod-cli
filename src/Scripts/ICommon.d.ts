@@ -18,6 +18,7 @@ export declare module ICommon {
 		isPage?: boolean;
 		isConnectStore?: boolean;
 		isHaveStyle?: boolean;
+		pluginType?: string;
 	}
 
 	export interface IAddIndex {

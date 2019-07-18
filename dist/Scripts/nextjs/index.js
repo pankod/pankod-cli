@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const inquirer = require("inquirer");
 //#region Global Imports
 //#region Local Imports
+const helpers_1 = require("../../Plugins/nextjs/helpers");
 const config_1 = require("../../config");
 const Common_1 = require("../Common");
 const helper_1 = require("./helper");
@@ -56,17 +57,35 @@ const commonQuestions = {
     }
 };
 const questions = {
-    class: [
+    AddPlugin: [
+        {
+            choices: [
+                new inquirer.Separator(),
+                {
+                    name: 'Styled Components',
+                    value: 'styled'
+                },
+                {
+                    name: 'Sass',
+                    value: 'sass'
+                }
+            ],
+            message: 'What plugin do you want to add?',
+            name: 'pluginType',
+            type: 'list'
+        }
+    ],
+    ClassComponent: [
         commonQuestions.enterComponentName,
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
         commonQuestions.addStyle
     ],
-    functional: [
+    FunctionalComponent: [
         commonQuestions.enterComponentName,
         commonQuestions.addStyle
     ],
-    page: [
+    Page: [
         {
             message: 'Enter page name',
             name: 'fileName',
@@ -103,7 +122,11 @@ const questions = {
     ]
 };
 const actions = {
-    class: (answers) => __awaiter(this, void 0, void 0, function* () {
+    AddPlugin: (answers) => __awaiter(this, void 0, void 0, function* () {
+        const { pluginType = 'styled' } = answers;
+        helpers_1.PluginHelper[pluginType]();
+    }),
+    ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -113,7 +136,7 @@ const actions = {
             helper_1.Helper.createStyle(answers);
         }
     }),
-    functional: (answers) => __awaiter(this, void 0, void 0, function* () {
+    FunctionalComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -122,7 +145,7 @@ const actions = {
             helper_1.Helper.createStyle(answers);
         }
     }),
-    page: (answers) => __awaiter(this, void 0, void 0, function* () {
+    Page: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { isHaveStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -137,7 +160,7 @@ const actions = {
 };
 exports.default = {
     showQuestions: (type) => __awaiter(this, void 0, void 0, function* () {
-        const componentType = type.split(' ')[0].toLowerCase();
+        const componentType = type.replace(' ', '');
         const answers = yield inquirer.prompt(questions[componentType]);
         actions[componentType](answers);
     })

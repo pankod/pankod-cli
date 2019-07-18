@@ -41,21 +41,29 @@ const questions = {
         type: 'list'
     },
     nextjs: {
-        choices: ['Page', 'Functional Component', 'Class Component'],
+        choices: ['Page', 'Functional Component', 'Class Component', 'Plugin'],
         message: 'What do you want to add?',
         name: 'fileType',
         type: 'list'
     }
 };
-program.command('add:plugin <name>').action((name) => {
-    const pluginsHelper = require(`./Plugins/${projectPath}/index`);
-    pluginsHelper.default.addPlugin(name);
-});
-program
-    .action(() => __awaiter(this, void 0, void 0, function* () {
+const askGenerateQuestions = () => __awaiter(this, void 0, void 0, function* () {
     const answers = yield inquirer.prompt(questions[projectPath]);
     const questionsHelper = require(`./Scripts/${projectPath}/index`);
     questionsHelper.default.showQuestions(answers.fileType);
-}));
+});
+program.version('0.1.3');
+program.command('add').alias('a')
+    .description('Adds new component, page or plugin')
+    .action(() => __awaiter(this, void 0, void 0, function* () { return askGenerateQuestions(); }));
+program.command('add:plugin <name>')
+    .description('Adds new plugin. Styled or Sass.')
+    .action((name) => {
+    const pluginsHelper = require(`./Plugins/${projectPath}/index`);
+    pluginsHelper.default.addPlugin(name);
+});
+if (process.argv.length === 2) {
+    askGenerateQuestions();
+}
 program.parse(process.argv);
 //# sourceMappingURL=index.js.map

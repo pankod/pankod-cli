@@ -45,26 +45,37 @@ const questions: IQuestions = {
 		type: 'list'
 	},
 	nextjs: {
-		choices: ['Page', 'Functional Component', 'Class Component'],
+		choices: ['Page', 'Functional Component', 'Class Component', 'Plugin'],
 		message: 'What do you want to add?',
 		name: 'fileType',
 		type: 'list'
 	}
 };
 
-program.command('add:plugin <name>').action((name: string) => {
-	const pluginsHelper: IPluginsHelper = require(`./Plugins/${projectPath}/index`) as IPluginsHelper;
+const askGenerateQuestions = async (): Promise<void> => {
+	const answers: ICommon.IAnswers = await inquirer.prompt(questions[projectPath]);
 
-	pluginsHelper.default.addPlugin(name);
-});
+	const questionsHelper: IQuestionsHelper = require(`./Scripts/${projectPath}/index`) as IQuestionsHelper;
 
-program
-	.action(async () => {
-		const answers: ICommon.IAnswers = await inquirer.prompt(questions[projectPath]);
+	questionsHelper.default.showQuestions(answers.fileType);
+};
 
-		const questionsHelper: IQuestionsHelper = require(`./Scripts/${projectPath}/index`) as IQuestionsHelper;
+program.version('0.1.3');
 
-		questionsHelper.default.showQuestions(answers.fileType);
-	});
+program.command('add').alias('a')
+		.description('Adds new component, page or plugin')
+		.action(async (): Promise<void> => askGenerateQuestions());
+
+program.command('add:plugin <name>')
+		.description('Adds new plugin. Styled or Sass.')		
+		.action((name: string): void => {
+			const pluginsHelper: IPluginsHelper = require(`./Plugins/${projectPath}/index`) as IPluginsHelper;
+
+			pluginsHelper.default.addPlugin(name);
+		});
+
+if (process.argv.length === 2) {
+	askGenerateQuestions()
+}
 
 program.parse(process.argv);

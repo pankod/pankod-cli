@@ -6,4 +6,8 @@ exports.addStyled = () => {
 exports.addSass = () => {
     console.log('adding sass...');
 };
+exports.PluginHelper = {
+    sass: exports.addSass,
+    styled: exports.addStyled
+};
 //# sourceMappingURL=helpers.js.map

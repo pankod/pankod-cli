@@ -3,6 +3,7 @@ import * as inquirer from 'inquirer';
 //#region Global Imports
 
 //#region Local Imports
+import { PluginHelper } from '../../Plugins/nextjs/helpers';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
@@ -51,17 +52,35 @@ const commonQuestions: INextjsCommonQuestions = {
 };
 
 const questions: INextjsQuestions = {
-	class: [
+	AddPlugin: [
+		{
+			choices: [
+				new inquirer.Separator(),
+				{
+					name: 'Styled Components',
+					value: 'styled'
+				},
+				{
+					name: 'Sass',
+					value: 'sass'
+				}
+			],
+			message: 'What plugin do you want to add?',
+			name: 'pluginType',
+			type: 'list'
+		}
+	],
+	ClassComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
 		commonQuestions.isHaveReducer,
 		commonQuestions.addStyle
 	],
-	functional: [
+	FunctionalComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.addStyle
 	],
-	page: [
+	Page: [
 		{
 			message: 'Enter page name',
 			name: 'fileName',
@@ -100,19 +119,24 @@ const questions: INextjsQuestions = {
 };
 
 const actions: INextjsActions = {
-	class: async (answers: ICommon.IAnswers): Promise<void> => {
+	AddPlugin: async (answers: ICommon.IAnswers): Promise<void> => {
+		const { pluginType = 'styled' } = answers;
+
+		PluginHelper[pluginType]();
+	},
+	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
-		
+
 		Helper.createClassComponent(answers);
 
 		if (isHaveStyle) {
 			Helper.createStyle(answers);
 		}
 	},
-	functional: async (answers: ICommon.IAnswers): Promise<void> => {
+	FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -123,7 +147,7 @@ const actions: INextjsActions = {
 			Helper.createStyle(answers);
 		}
 	},
-	page: async (answers: ICommon.IAnswers): Promise<void> => {
+	Page: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { isHaveStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -140,7 +164,7 @@ const actions: INextjsActions = {
 
 export default {
 	showQuestions: async (type: string): Promise<void> => {
-		const componentType = type.split(' ')[0].toLowerCase();
+		const componentType = type.replace(' ', '');
 
 		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[componentType]);
 
