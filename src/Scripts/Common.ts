@@ -13,14 +13,17 @@ import { Plugins } from './nextjs/pluginsEnum';
 
 export const CommonHelper = {
 	addToIndex: (params: ICommon.IAddIndex): void => {
-		fs.appendFile(
-			path.resolve('', params.dirPath),
-			`${params.getFileContent()}\n`,
-			err => {
-				if (err) throw err;
-				console.log(logSymbols.success, params.message);
-			}
-		);
+		try {
+			fs.appendFileSync(
+				path.resolve('', params.dirPath),
+				`${params.getFileContent()}\n`
+			);
+
+			console.log(logSymbols.success, params.message);
+		} catch (error) {
+			console.error(error);
+			process.exit(1);
+		}
 	},
 	createFile: (dirPath: string): void => {
 		fs.mkdirSync(path.resolve('', dirPath));
