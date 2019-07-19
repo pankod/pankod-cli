@@ -25,6 +25,11 @@ export const CommonHelper = {
 	createFile: (dirPath: string): void => {
 		fs.mkdirSync(path.resolve('', dirPath));
 	},
+	getPankodConfig: (): IPankodConfig => {
+		const config = JSON.parse(String(fs.readFileSync('./package.json'))) as { pankod: IPankodConfig };
+
+		return config.pankod;
+	},
 	getTemplate: (templatePath: string, templateProps: ICommon.ITemplateProps): string => (
 
 		// __dirname + ../../ path is root of the dist folder.
@@ -33,6 +38,11 @@ export const CommonHelper = {
 			templateProps
 		)
 	),
+	hasPlugin: (pluginName: Plugins): boolean => {
+		const plugins: Array<string> = CommonHelper.getPankodConfig().plugins;
+
+		return plugins.includes(pluginName);
+	},
 	isAlreadyExist: (startPath: string, val: string = '', isFile: boolean = false, fileType?: string): boolean => {
 		let _path: string;
 
@@ -64,17 +74,6 @@ export const CommonHelper = {
 
 		CommonHelper.writeFile(writeFileProps);
 	},
-	writeFile: (params: ICommon.IWriteFile) => {
-		fs.writeFile(
-			path.resolve('', params.dirPath),
-			params.getFileContent(),
-			err => {
-				if (err) throw err;
-				console.log(logSymbols.success, params.message);
-			}
-		);
-	},
-
 	validate: (val: string, dirPath: string, isFile: boolean, fileType: string): string | boolean => {
 
 		if (val.length) {
@@ -94,16 +93,14 @@ export const CommonHelper = {
 
 		return 'Can not be empty';
 	},
-
-	getPankodConfig: (): IPankodConfig => {
-		const config = JSON.parse(String(fs.readFileSync('./package.json'))) as { pankod: IPankodConfig };
-
-		return config.pankod;
-	},
-
-	hasPlugin: (pluginName: Plugins): boolean => {
-		const plugins: Array<string> = CommonHelper.getPankodConfig().plugins;
-
-		return plugins.includes(pluginName);
+	writeFile: (params: ICommon.IWriteFile) => {
+		fs.writeFile(
+			path.resolve('', params.dirPath),
+			params.getFileContent(),
+			err => {
+				if (err) throw err;
+				console.log(logSymbols.success, params.message);
+			}
+		);
 	}
 };

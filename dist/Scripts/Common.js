@@ -17,9 +17,17 @@ exports.CommonHelper = {
     createFile: (dirPath) => {
         fs.mkdirSync(path.resolve('', dirPath));
     },
+    getPankodConfig: () => {
+        const config = JSON.parse(String(fs.readFileSync('./package.json')));
+        return config.pankod;
+    },
     getTemplate: (templatePath, templateProps) => (
     // __dirname + ../../ path is root of the dist folder.
     mustache.render(fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'), templateProps)),
+    hasPlugin: (pluginName) => {
+        const plugins = exports.CommonHelper.getPankodConfig().plugins;
+        return plugins.includes(pluginName);
+    },
     isAlreadyExist: (startPath, val = '', isFile = false, fileType) => {
         let _path;
         switch (fileType) {
@@ -47,13 +55,6 @@ exports.CommonHelper = {
         };
         exports.CommonHelper.writeFile(writeFileProps);
     },
-    writeFile: (params) => {
-        fs.writeFile(path.resolve('', params.dirPath), params.getFileContent(), err => {
-            if (err)
-                throw err;
-            console.log(logSymbols.success, params.message);
-        });
-    },
     validate: (val, dirPath, isFile, fileType) => {
         if (val.length) {
             if (exports.CommonHelper.isAlreadyExist(dirPath, val, isFile, fileType)) {
@@ -63,13 +64,12 @@ exports.CommonHelper = {
         }
         return 'Can not be empty';
     },
-    getPankodConfig: () => {
-        const config = JSON.parse(String(fs.readFileSync('./package.json')));
-        return config.pankod;
-    },
-    hasPlugin: (pluginName) => {
-        const plugins = exports.CommonHelper.getPankodConfig().plugins;
-        return plugins.includes(pluginName);
+    writeFile: (params) => {
+        fs.writeFile(path.resolve('', params.dirPath), params.getFileContent(), err => {
+            if (err)
+                throw err;
+            console.log(logSymbols.success, params.message);
+        });
     }
 };
 //# sourceMappingURL=Common.js.map
