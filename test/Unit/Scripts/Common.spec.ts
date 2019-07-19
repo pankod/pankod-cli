@@ -29,8 +29,10 @@ describe('Common Helper', () => {
 	});
 
 	describe('getPankodConfig', () => {
-		const config = CommonHelper.getPankodConfig();
+		it('should get config', () => {
+			const config = CommonHelper.getPankodConfig();
 
-		expect(config).toEqual({ projectType: 'test', plugins: ['test'] } );
+			expect(config).toEqual({ projectType: 'test', plugins: ['test'] });
+		});
 	});
 });
