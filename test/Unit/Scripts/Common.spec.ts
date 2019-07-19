@@ -174,4 +174,24 @@ describe('Common Helper', () => {
 			});
 		})
 	});
+
+	describe('replaceContent', () => {
+		it('should replace content of the file', async () => {
+			const filePath: string = '/app/pages/test/index.tsx';
+
+			const replaceContentParams: ICommon.IReplaceContent = {
+				fileDir: filePath,
+				filetoUpdate: String(fs.readFileSync(filePath, 'utf8')),
+				getFileContent: () => 'replaced for test',
+				message: 'Test content replaced',
+				regexKey: /nextjs test page/gm
+			};
+
+			CommonHelper.replaceContent(replaceContentParams)
+
+			const replacedContent = String(fs.readFileSync(filePath));
+
+			expect(replacedContent).toEqual('replaced for test');
+		});
+	});
 });
