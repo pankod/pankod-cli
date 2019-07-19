@@ -19,4 +19,12 @@ describe('Common Helper', () => {
 			expect(String(addedIndex)).toEqual(`${fileContent}\n`);
 		});
 	});
+
+	describe('createFile', () => {
+		it('should create file', () => {
+			CommonHelper.createFile('/src/test.ts');
+
+			expect(fs.existsSync('/src/test.ts')).toEqual(true);
+		});
+	});
 });
