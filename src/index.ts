@@ -6,16 +6,18 @@ import * as figlet from 'figlet';
 import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
-import { IPluginsHelper, IProjectType, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { IPankodConfig, IPluginsHelper, IQuestions, IQuestionsHelper, IText } from './ITypes';
+import { CommonHelper } from './Scripts/Common';
 import { ICommon } from './Scripts/ICommon';
 
 let projectPath: string;
 let plugins: Array<string>;
 
 try {
-	const parsed: IProjectType = JSON.parse(String(fs.readFileSync('./package.json'))) as IProjectType;
-	projectPath = parsed.pankod.projectType;
-	plugins = parsed.pankod.plugins;
+	const pankodConfig: IPankodConfig = CommonHelper.getPankodConfig();
+
+	projectPath = pankodConfig.projectType;
+	plugins = pankodConfig.plugins;
 } catch {
 	projectPath = '';
 	plugins = [''];
@@ -63,16 +65,16 @@ const askGenerateQuestions = async (): Promise<void> => {
 program.version('0.2.0');
 
 program.command('add').alias('a')
-		.description('Adds new component, page or plugin')
-		.action(async (): Promise<void> => askGenerateQuestions());
+	.description('Adds new component, page or plugin')
+	.action(async (): Promise<void> => askGenerateQuestions());
 
 program.command('add:plugin <name>')
-		.description('Adds new plugin. Styled or Sass.')
-		.action((name: string): void => {
-			const pluginsHelper: IPluginsHelper = require(`./Plugins/${projectPath}/index`) as IPluginsHelper;
+	.description('Adds new plugin. Styled or Sass.')
+	.action((name: string): void => {
+		const pluginsHelper: IPluginsHelper = require(`./Plugins/${projectPath}/index`) as IPluginsHelper;
 
-			pluginsHelper.default.addPlugin(name);
-		});
+		pluginsHelper.default.addPlugin(name);
+	});
 
 if (process.argv.length === 2) {
 	askGenerateQuestions();

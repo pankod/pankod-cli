@@ -152,9 +152,9 @@ exports.Helper = {
         const templatePath = './dist/Templates/nextjs/Components/Class.mustache';
         const templateProps = {
             fileName: answers.fileName,
+            hasStyle: answers.hasStyle,
             interfaceName: `I${answers.fileName}`,
             isConnectStore: answers.isConnectStore,
-            hasStyle: answers.hasStyle,
             lowerFileName: answers.lowerFileName,
             upperFileName: answers.upperFileName
         };
@@ -186,8 +186,8 @@ exports.Helper = {
         const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
         const templateProps = {
             fileName,
-            interfaceName: `I${fileName}`,
             hasStyle,
+            interfaceName: `I${fileName}`,
             lowerFileName
         };
         const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';

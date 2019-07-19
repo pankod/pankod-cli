@@ -63,6 +63,10 @@ exports.CommonHelper = {
         }
         return 'Can not be empty';
     },
+    getPankodConfig: () => {
+        const config = JSON.parse(String(fs.readFileSync('./package.json')));
+        return config.pankod;
+    },
     hasPlugin: (pluginName) => {
         console.log('has plugin?', pluginName);
         return false;

@@ -6,6 +6,7 @@ import * as path from 'path';
 //#endregion Global Imports
 
 //#region Local Imports
+import { IPankodConfig } from 'src/ITypes';
 import { ICommon } from './ICommon';
 import { Plugins } from './nextjs/pluginsEnum';
 //#endregion Local Imports
@@ -92,6 +93,12 @@ export const CommonHelper = {
 		}
 
 		return 'Can not be empty';
+	},
+
+	getPankodConfig: (): IPankodConfig => {
+		const config = JSON.parse(String(fs.readFileSync('./package.json'))) as { pankod: IPankodConfig };
+
+		return config.pankod;
 	},
 
 	hasPlugin: (pluginName: Plugins): boolean => {
