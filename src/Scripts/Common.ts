@@ -92,13 +92,15 @@ export const CommonHelper = {
 		return 'Can not be empty';
 	},
 	writeFile: (params: ICommon.IWriteFile) => {
-		fs.writeFile(
-			path.resolve('', params.dirPath),
-			params.getFileContent(),
-			err => {
-				if (err) throw err;
-				console.log(logSymbols.success, params.message);
-			}
-		);
+		try {
+			fs.writeFileSync(
+				path.resolve('', params.dirPath),
+				params.getFileContent()
+			);
+		} catch (error) {
+			console.error(error);
+
+			process.exit(1);
+		}
 	}
 };
