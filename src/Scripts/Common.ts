@@ -13,17 +13,12 @@ import { Plugins } from './nextjs/pluginsEnum';
 
 export const CommonHelper = {
 	addToIndex: (params: ICommon.IAddIndex): void => {
-		try {
-			fs.appendFileSync(
-				path.resolve('', params.dirPath),
-				`${params.getFileContent()}\n`
-			);
+		fs.appendFileSync(
+			path.resolve('', params.dirPath),
+			`${params.getFileContent()}\n`
+		);
 
-			console.log(logSymbols.success, params.message);
-		} catch (error) {
-			console.error(error);
-			process.exit(1);
-		}
+		console.log(logSymbols.success, params.message);
 	},
 	createFile: (dirPath: string): void => {
 		fs.mkdirSync(path.resolve('', dirPath));
@@ -52,7 +47,7 @@ export const CommonHelper = {
 		switch (fileType) {
 			case 'page':
 				val = val.replace(/\b\w/g, foo => foo.toLowerCase());
-				_path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+				_path = `${startPath}/${val}`;
 				break;
 			case 'service':
 				val = val.replace(/\b\w/g, foo => foo.toLowerCase());
