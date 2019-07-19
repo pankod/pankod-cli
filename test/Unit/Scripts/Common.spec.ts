@@ -27,4 +27,10 @@ describe('Common Helper', () => {
 			expect(fs.existsSync('/src/test.ts')).toEqual(true);
 		});
 	});
+
+	describe('getPankodConfig', () => {
+		const config = CommonHelper.getPankodConfig();
+
+		expect(config).toEqual({ projectType: 'test', plugins: ['test'] } );
+	});
 });
