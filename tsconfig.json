@@ -5,14 +5,15 @@
 		"outDir": "./dist",
 		"sourceMap": true,
 		"allowJs": true,
-		"rootDir": "./src",
 		"baseUrl": ".",
 		"strict": true,
 		"noImplicitAny": true,
 		"strictNullChecks": true
 	},
+	"include": ["src"],
 	"exclude": [
 		"node_modules",
-		"dist"
+		"dist",
+		"coverage"
 	],
 }
