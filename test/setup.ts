@@ -14,6 +14,6 @@ fs.writeFileSync('/src/Templates/moleculer/moleculer.mustache', 'Test template m
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
 
 // Create Package.json
-fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["test"] } }`);
+fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["styled"] } }`);
 
 jest.mock('fs', () => require('memfs'));
