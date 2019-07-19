@@ -68,8 +68,8 @@ exports.CommonHelper = {
         return config.pankod;
     },
     hasPlugin: (pluginName) => {
-        console.log('has plugin?', pluginName);
-        return false;
+        const plugins = exports.CommonHelper.getPankodConfig().plugins;
+        return plugins.includes(pluginName);
     }
 };
 //# sourceMappingURL=Common.js.map

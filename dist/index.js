@@ -15,15 +15,12 @@ const figlet = require("figlet");
 const inquirer = require("inquirer");
 const Common_1 = require("./Scripts/Common");
 let projectPath;
-let plugins;
 try {
     const pankodConfig = Common_1.CommonHelper.getPankodConfig();
     projectPath = pankodConfig.projectType;
-    plugins = pankodConfig.plugins;
 }
 catch (_a) {
     projectPath = '';
-    plugins = [''];
     console.error('Please specify pankod.projectType in package.json');
     process.exit(1);
 }

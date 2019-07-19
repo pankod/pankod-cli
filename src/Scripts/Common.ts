@@ -102,8 +102,8 @@ export const CommonHelper = {
 	},
 
 	hasPlugin: (pluginName: Plugins): boolean => {
-		console.log('has plugin?', pluginName);
+		const plugins: Array<string> = CommonHelper.getPankodConfig().plugins;
 
-		return false;
+		return plugins.includes(pluginName);
 	}
 };

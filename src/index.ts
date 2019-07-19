@@ -9,18 +9,16 @@ import * as inquirer from 'inquirer';
 import { IPankodConfig, IPluginsHelper, IQuestions, IQuestionsHelper, IText } from './ITypes';
 import { CommonHelper } from './Scripts/Common';
 import { ICommon } from './Scripts/ICommon';
+import { Plugins } from './Scripts/nextjs/pluginsEnum';
 
 let projectPath: string;
-let plugins: Array<string>;
 
 try {
 	const pankodConfig: IPankodConfig = CommonHelper.getPankodConfig();
 
 	projectPath = pankodConfig.projectType;
-	plugins = pankodConfig.plugins;
 } catch {
 	projectPath = '';
-	plugins = [''];
 	console.error('Please specify pankod.projectType in package.json');
 
 	process.exit(1);
