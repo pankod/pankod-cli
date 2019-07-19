@@ -22,7 +22,7 @@ const commonQuestions = {
     addStyle: {
         default: true,
         message: 'Do you want to add style file?',
-        name: 'isHaveStyle',
+        name: 'hasStyle',
         type: 'confirm'
     },
     connectStore: {
@@ -90,14 +90,14 @@ const questions = {
                 }
             ],
             message: 'Do you want to add custom route or use default route name?',
-            name: 'isHavePath',
+            name: 'hasPath',
             type: 'list'
         },
         {
             message: 'Enter route name',
             name: 'routePath',
             type: 'input',
-            when: ({ isHavePath = false }) => isHavePath
+            when: ({ hasPath = false }) => hasPath
         },
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
@@ -124,33 +124,33 @@ const questions = {
 };
 const actions = {
     ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
-        const { isHaveStyle = false } = answers;
+        const { hasStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createClassComponent(answers);
-        if (isHaveStyle) {
+        if (hasStyle) {
             helper_1.Helper.createStyle(answers);
         }
     }),
     FunctionalComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
-        const { isHaveStyle = false } = answers;
+        const { hasStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createFuncComponent(answers);
-        if (isHaveStyle) {
+        if (hasStyle) {
             helper_1.Helper.createStyle(answers);
         }
     }),
     Page: (answers) => __awaiter(this, void 0, void 0, function* () {
-        const { isHaveStyle = false } = answers;
+        const { hasStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         answers.isPage = true;
         helper_1.Helper.createClassComponent(answers);
         helper_1.Helper.addRoute(answers);
-        if (isHaveStyle) {
+        if (hasStyle) {
             helper_1.Helper.createStyle(answers);
         }
     }),

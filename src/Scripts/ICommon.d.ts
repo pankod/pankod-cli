@@ -12,12 +12,12 @@ export declare module ICommon {
 		upperFileName?: string;
 		isPrivate?: boolean;
 		hasDatabase?: boolean;
-		isHavePath?: boolean;
+		hasPath?: boolean;
 		routePath?: string;
 		lowerFileName?: string;
 		isPage?: boolean;
 		isConnectStore?: boolean;
-		isHaveStyle?: boolean;
+		hasStyle?: boolean;
 		pluginType?: string;
 	}
 

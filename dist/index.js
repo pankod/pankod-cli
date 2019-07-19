@@ -12,18 +12,15 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const chalk = require("chalk");
 const program = require("commander");
 const figlet = require("figlet");
-const fs = require("fs");
 const inquirer = require("inquirer");
+const Common_1 = require("./Scripts/Common");
 let projectPath;
-let plugins;
 try {
-    const parsed = JSON.parse(String(fs.readFileSync('./package.json')));
-    projectPath = parsed.pankod.projectType;
-    plugins = parsed.pankod.plugins;
+    const pankodConfig = Common_1.CommonHelper.getPankodConfig();
+    projectPath = pankodConfig.projectType;
 }
 catch (_a) {
     projectPath = '';
-    plugins = [''];
     console.error('Please specify pankod.projectType in package.json');
     process.exit(1);
 }

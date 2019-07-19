@@ -1,11 +1,9 @@
 import { ConfirmQuestion, ListQuestion } from "inquirer";
 import { ICommon } from "./Scripts/ICommon";
 
-export interface IProjectType {
-	pankod: {
-		projectType: string
-		plugins: Array<string>
-	}
+export interface IPankodConfig {
+	projectType: string
+	plugins: Array<string>
 }
 
 export interface IText {
