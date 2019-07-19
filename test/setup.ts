@@ -11,7 +11,7 @@ fs.mkdirSync('/src/Templates/nextjs');
 // Create Templates
 fs.writeFileSync('/src/Templates/index.ts', '');
 fs.writeFileSync('/src/Templates/moleculer/moleculer.mustache', 'Test template moleculer.mustache');
-fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache');
+fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
 
 // Create Package.json
 fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["test"] } }`);

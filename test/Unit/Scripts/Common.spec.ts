@@ -35,4 +35,15 @@ describe('Common Helper', () => {
 			expect(config).toEqual({ projectType: 'test', plugins: ['test'] });
 		});
 	});
+
+	describe('getTemplate', () => {
+		it('should get template', () => {
+			const template = CommonHelper.getTemplate(
+				'/src/Templates/nextjs/nextjs.mustache',
+				{ fileName: 'test' }
+			);
+
+			expect(template).toEqual('Test template nextjs.mustache test');
+		});
+	});
 });
