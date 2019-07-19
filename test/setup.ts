@@ -9,6 +9,7 @@ fs.mkdirSync('/src/Templates/moleculer');
 fs.mkdirSync('/src/Templates/nextjs');
 
 // Create Templates
+fs.writeFileSync('/src/Templates/index.ts', '');
 fs.writeFileSync('/src/Templates/moleculer/moleculer.mustache', 'Test template moleculer.mustache');
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache');
 
