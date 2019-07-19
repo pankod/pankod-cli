@@ -65,4 +65,113 @@ describe('Common Helper', () => {
 			});
 		});
 	});
+
+	describe('isAlreadyExist', () => {
+		describe('page', () => {
+			describe('when page exist', () => {
+				it('should return true', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app/pages',
+						'test',
+						false,
+						'page'
+					);
+
+					expect(isAlreadyExist).toEqual(true);
+				});
+			});
+
+			describe('when page doesnt exist', () => {
+				it('should return false', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app/pages',
+						'non-existent-page',
+						false,
+						'page'
+					);
+
+					expect(isAlreadyExist).toEqual(false);
+				});
+			});
+		});
+
+		describe('service', () => {
+			describe('when service exist', () => {
+				it('should return true', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app/services',
+						'test',
+						false,
+						'service'
+					);
+
+					expect(isAlreadyExist).toEqual(true);
+				});
+			});
+
+			describe('when service doesnt exist', () => {
+				it('should return false', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app/services',
+						'non-existent-service',
+						false,
+						'service'
+					);
+
+					expect(isAlreadyExist).toEqual(false);
+				});
+			});
+		});
+
+		describe('helper', () => {
+			describe('when helper exist', () => {
+				it('should return true', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app/helpers',
+						'test',
+						true,
+						'helper'
+					);
+
+					expect(isAlreadyExist).toEqual(true);
+				});
+			});
+
+			describe('when helper doesnt exist', () => {
+				it('should return false', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app/helpers',
+						'non-existent-helper',
+						true,
+						'helper'
+					);
+
+					expect(isAlreadyExist).toEqual(false);
+				});
+			});
+		})
+
+		describe('folder', () => {
+			describe('when folder exist', () => {
+				it('should return true', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app',
+						'test'
+					);
+
+					expect(isAlreadyExist).toEqual(true);
+				});
+			});
+
+			describe('when folder doesnt exist', () => {
+				it('should return false', () => {
+					const isAlreadyExist = CommonHelper.isAlreadyExist(
+						'/app2'
+					);
+
+					expect(isAlreadyExist).toEqual(false);
+				});
+			});
+		})
+	});
 });
