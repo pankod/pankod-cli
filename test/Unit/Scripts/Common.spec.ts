@@ -149,7 +149,7 @@ describe('Common Helper', () => {
 					expect(isAlreadyExist).toEqual(false);
 				});
 			});
-		})
+		});
 
 		describe('folder', () => {
 			describe('when folder exist', () => {
@@ -172,7 +172,7 @@ describe('Common Helper', () => {
 					expect(isAlreadyExist).toEqual(false);
 				});
 			});
-		})
+		});
 	});
 
 	describe('replaceContent', () => {
@@ -187,7 +187,7 @@ describe('Common Helper', () => {
 				regexKey: /nextjs test page/gm
 			};
 
-			CommonHelper.replaceContent(replaceContentParams)
+			CommonHelper.replaceContent(replaceContentParams);
 
 			const replacedContent = String(fs.readFileSync(filePath));
 
@@ -216,8 +216,19 @@ describe('Common Helper', () => {
 			it('should return an error message', () => {
 				const msg = CommonHelper.validate('index.tsx', '/app/pages/test', true, 'page');
 
+				expect(msg).toEqual('This page name already used before, enter new name.');
+			});
+		});
+	});
 
-				expect(msg).toEqual('This page name already used before, enter new name.')
+	describe('writeFile', () => {
+		describe('error', () => {
+			it('should exit process', () => {
+				const mockExit = jest.spyOn(process, 'exit').mockImplementation();
+
+				CommonHelper.writeFile({ dirPath: 'non-existent-path/123', getFileContent: () => 'test', message: 'Test' });
+
+				expect(mockExit).toHaveBeenCalled();
 			});
 		});
 	});

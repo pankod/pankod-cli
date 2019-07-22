@@ -101,6 +101,8 @@ export const CommonHelper = {
 			console.error(error);
 
 			process.exit(1);
+
+			return error;
 		}
 	}
 };
