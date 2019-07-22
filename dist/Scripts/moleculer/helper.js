@@ -21,7 +21,7 @@ exports.Helper = {
             filetoUpdate: fs.readFileSync(path.resolve('', config_1.Config.moleculer.brokerHelper), 'utf8'),
             getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperImport, templateProps),
             message: 'Service added to BrokerHelper Import',
-            regexKey: /\/\/\#endregion Local Imports/g
+            regexKey: /\/\/#endregion Local Imports/g
         };
         setTimeout(() => {
             const replaceBrokerCreateParams = {
