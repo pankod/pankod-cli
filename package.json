@@ -8,7 +8,9 @@
     "test": "jest --coverage",
     "generate": "node ./dist/index.js a",
     "watch": "tsc -w",
-    "sync-templates": "rm -rf ./dist/Templates && cp -r ./src/Templates ./dist"
+    "sync-templates": "rm -rf ./dist/Templates && cp -r ./src/Templates ./dist",
+    "lint": "eslint -c .eslintrc.js --ext .ts {src,test}",
+    "format": "eslint -c .eslintrc.js --ext .ts --fix {src,test}"
   },
   "author": "Pankod <info@pankod.com>",
   "license": "MIT",
@@ -50,9 +52,15 @@
     "@types/jest": "^24.0.15",
     "@types/mustache": "^0.8.32",
     "@types/node": "^11.13.6",
+    "@typescript-eslint/eslint-plugin": "^1.13.0",
+    "@typescript-eslint/parser": "^1.13.0",
+    "eslint": "^6.1.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-prettier": "^3.1.0",
     "jest": "^24.8.0",
     "jest-cli": "^24.8.0",
     "memfs": "^2.15.5",
+    "prettier": "^1.18.2",
     "ts-jest": "^24.0.2",
     "typescript": "^3.4.3"
   },
