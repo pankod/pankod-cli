@@ -8,11 +8,14 @@ const path = require("path");
 //#endregion Local Imports
 exports.CommonHelper = {
     addToIndex: (params) => {
-        fs.appendFile(path.resolve('', params.dirPath), `${params.getFileContent()}\n`, err => {
-            if (err)
-                throw err;
+        try {
+            fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}\n`);
             console.log(logSymbols.success, params.message);
-        });
+        }
+        catch (error) {
+            console.error(error);
+            process.exit(1);
+        }
     },
     createFile: (dirPath) => {
         fs.mkdirSync(path.resolve('', dirPath));

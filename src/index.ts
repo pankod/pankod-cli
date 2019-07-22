@@ -9,7 +9,6 @@ import * as inquirer from 'inquirer';
 import { IPankodConfig, IPluginsHelper, IQuestions, IQuestionsHelper, IText } from './ITypes';
 import { CommonHelper } from './Scripts/Common';
 import { ICommon } from './Scripts/ICommon';
-import { Plugins } from './Scripts/nextjs/pluginsEnum';
 
 let projectPath: string;
 

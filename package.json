@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && npm run sync-templates",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --coverage",
     "generate": "node ./dist/index.js a",
     "watch": "tsc -w",
     "sync-templates": "rm -rf ./dist/Templates && cp -r ./src/Templates ./dist"
@@ -47,9 +47,38 @@
     "@types/chalk": "^2.2.0",
     "@types/figlet": "^1.2.0",
     "@types/inquirer": "^6.0.3",
+    "@types/jest": "^24.0.15",
     "@types/mustache": "^0.8.32",
     "@types/node": "^11.13.6",
+    "jest": "^24.8.0",
+    "jest-cli": "^24.8.0",
+    "memfs": "^2.15.5",
+    "ts-jest": "^24.0.2",
     "tslint": "^5.16.0",
     "typescript": "^3.4.3"
-  }
+  },
+  "jest": {
+    "coverageDirectory": "<rootDir>/coverage",
+    "testEnvironment": "node",
+    "moduleFileExtensions": [
+     "ts", "js"
+    ],
+    "transform": {
+     "^.+\\.(ts)$": "ts-jest"
+    },
+    "testPathIgnorePatterns": [
+      "dist"
+    ],
+    "testMatch": [
+     "**/*.spec.(ts)"
+    ],
+    "setupFiles": [
+     "<rootDir>/test/setup.ts"
+    ],
+    "globals": {
+     "ts-jest": {
+      "tsConfig": "tsconfig.json"
+     }
+    }
+   }
 }
