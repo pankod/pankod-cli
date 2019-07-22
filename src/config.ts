@@ -9,7 +9,11 @@ export const Config = {
 		serviceHelperTestDir: './test/Unit/ServiceHelpers',
 		servicesDir: './services',
 		servicesHelperDir: './src/ServiceHelpers',
-		servicesTestDir: './test/Unit/MicroServices'
+		servicesTestDir: './test/Unit/MicroServices',
+		templates: {
+			brokerHelperCreate: './dist/Templates/moleculer/Tests/BrokerHelperCreate.mustache',
+			brokerHelperImport: './dist/Templates/moleculer/Tests/BrokerHelperImport.mustache'
+		}
 	},
 	nextjs: {
 		actionDir: './src/Actions',

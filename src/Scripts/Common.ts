@@ -62,6 +62,7 @@ export const CommonHelper = {
 		return fs.existsSync(path.resolve('', _path));
 	},
 	replaceContent: (params: ICommon.IReplaceContent): void => {
+
 		const replaceFile = params.filetoUpdate.replace(params.regexKey, params.getFileContent());
 
 		const writeFileProps: ICommon.IWriteFile = {

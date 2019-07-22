@@ -9,25 +9,23 @@ const config_1 = require("../../config");
 const Common_1 = require("../Common");
 //#endregion Local Imports
 exports.Helper = {
-    addBrokerHelper: (answers) => {
-        const brokerHelperImport = './dist/Templates/moleculer/Tests/BrokerHelperImport.mustache';
-        const brokerHelperCreate = './dist/Templates/moleculer/Tests/BrokerHelperCreate.mustache';
+    addBrokerHelper: (answers, brokerHelperTemplatesParams) => {
         const templateProps = {
             lowerFileName: answers.lowerFileName,
             upperFileName: answers.upperFileName
         };
         const replaceBrokerImportParams = {
-            fileDir: config_1.Config.moleculer.brokerHelper,
-            filetoUpdate: fs.readFileSync(path.resolve('', config_1.Config.moleculer.brokerHelper), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperImport, templateProps),
+            fileDir: brokerHelperTemplatesParams.replaceFileDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperTemplatesParams.brokerHelperImport, templateProps),
             message: 'Service added to BrokerHelper Import',
             regexKey: /\/\/\#endregion Local Imports/g
         };
         setTimeout(() => {
             const replaceBrokerCreateParams = {
-                fileDir: config_1.Config.moleculer.brokerHelper,
-                filetoUpdate: fs.readFileSync(path.resolve('', config_1.Config.moleculer.brokerHelper), 'utf8'),
-                getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperCreate, templateProps),
+                fileDir: brokerHelperTemplatesParams.replaceFileDir,
+                filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
+                getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
                 message: 'Service added to BrokerHelper setupBroker.\n',
                 regexKey: /^\s*return broker;/gm
             };
@@ -120,12 +118,17 @@ exports.Helper = {
         if (!Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.interfaceDir, answers.upperFileName)) {
             exports.Helper.createInterface(answers, 'Services', 'Service');
         }
+        const brokerHelperTemplatesParams = {
+            brokerHelperCreate: config_1.Config.moleculer.templates.brokerHelperCreate,
+            brokerHelperImport: config_1.Config.moleculer.templates.brokerHelperImport,
+            replaceFileDir: config_1.Config.moleculer.brokerHelper
+        };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
         exports.Helper.createServiceHelper(answers);
         exports.Helper.createTest(serviceTestParams);
         exports.Helper.createIntegrationTest(integrationTestParams);
-        exports.Helper.addBrokerHelper(answers);
+        exports.Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
     },
     createServiceHelper: (answers) => {
         const templatePath = './dist/Templates/moleculer/Services/Helper.mustache';

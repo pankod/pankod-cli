@@ -8,14 +8,8 @@ const path = require("path");
 //#endregion Local Imports
 exports.CommonHelper = {
     addToIndex: (params) => {
-        try {
-            fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}\n`);
-            console.log(logSymbols.success, params.message);
-        }
-        catch (error) {
-            console.error(error);
-            process.exit(1);
-        }
+        fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}\n`);
+        console.log(logSymbols.success, params.message);
     },
     createFile: (dirPath) => {
         fs.mkdirSync(path.resolve('', dirPath));
@@ -36,7 +30,7 @@ exports.CommonHelper = {
         switch (fileType) {
             case 'page':
                 val = val.replace(/\b\w/g, foo => foo.toLowerCase());
-                _path = isFile ? `${startPath}/${val}.ts` : `${startPath}/${val}`;
+                _path = `${startPath}/${val}`;
                 break;
             case 'service':
                 val = val.replace(/\b\w/g, foo => foo.toLowerCase());
@@ -68,11 +62,13 @@ exports.CommonHelper = {
         return 'Can not be empty';
     },
     writeFile: (params) => {
-        fs.writeFile(path.resolve('', params.dirPath), params.getFileContent(), err => {
-            if (err)
-                throw err;
-            console.log(logSymbols.success, params.message);
-        });
+        try {
+            fs.writeFileSync(path.resolve('', params.dirPath), params.getFileContent());
+        }
+        catch (error) {
+            console.error(error);
+            process.exit(1);
+        }
     }
 };
 //# sourceMappingURL=Common.js.map
