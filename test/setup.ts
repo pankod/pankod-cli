@@ -27,4 +27,4 @@ fs.writeFileSync('/app/helpers/Test.ts', 'moleculer/nextjs helper');
 // Create Package.json
 fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["styled"] } }`);
 
-jest.mock('fs', () => require('memfs'));
+jest.mock('fs', async () => require('memfs'));

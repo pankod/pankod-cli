@@ -24,22 +24,22 @@ export const Helper = {
 			filetoUpdate: fs.readFileSync(path.resolve('', Config.moleculer.brokerHelper), 'utf8'),
 			getFileContent: () => CommonHelper.getTemplate(brokerHelperImport, templateProps),
 			message: 'Service added to BrokerHelper Import',
-			regexKey: /\/\/\#endregion Local Imports/g
+			regexKey: /\/\/#endregion Local Imports/g
 		};
 
-		setTimeout(
-			() => {
-				const replaceBrokerCreateParams: ICommon.IReplaceContent = {
-					fileDir: Config.moleculer.brokerHelper,
-					filetoUpdate: fs.readFileSync(path.resolve('', Config.moleculer.brokerHelper), 'utf8'),
-					getFileContent: () => CommonHelper.getTemplate(brokerHelperCreate, templateProps),
-					message: 'Service added to BrokerHelper setupBroker.\n',
-					regexKey: /^\s*return broker;/gm
-				};
-				CommonHelper.replaceContent(replaceBrokerCreateParams);
-			},
-			1500
-		);
+		setTimeout(() => {
+			const replaceBrokerCreateParams: ICommon.IReplaceContent = {
+				fileDir: Config.moleculer.brokerHelper,
+				filetoUpdate: fs.readFileSync(
+					path.resolve('', Config.moleculer.brokerHelper),
+					'utf8'
+				),
+				getFileContent: () => CommonHelper.getTemplate(brokerHelperCreate, templateProps),
+				message: 'Service added to BrokerHelper setupBroker.\n',
+				regexKey: /^\s*return broker;/gm
+			};
+			CommonHelper.replaceContent(replaceBrokerCreateParams);
+		}, 1500);
 
 		CommonHelper.replaceContent(replaceBrokerImportParams);
 	},
@@ -187,10 +187,10 @@ export const Helper = {
 	},
 
 	createIntegrationTest: (options: ICommon.ICreateTest): void => {
-
 		const integrationProps: ICommon.IWriteFile = {
 			dirPath: options.dirPath,
-			getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+			getFileContent: () =>
+				CommonHelper.getTemplate(options.templatePath, options.templateProps),
 			message: options.successMessage
 		};
 
@@ -231,11 +231,11 @@ export const Helper = {
 	createTest: (options: ICommon.ICreateTest): void => {
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: options.dirPath,
-			getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+			getFileContent: () =>
+				CommonHelper.getTemplate(options.templatePath, options.templateProps),
 			message: options.successMessage
 		};
 
 		CommonHelper.writeFile(writeFileProps);
-
 	}
 };

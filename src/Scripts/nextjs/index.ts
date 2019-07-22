@@ -53,17 +53,13 @@ const commonQuestions: INextjsCommonQuestions = {
 };
 
 const questions: INextjsQuestions = {
-
 	ClassComponent: [
 		commonQuestions.enterComponentName,
 		commonQuestions.connectStore,
 		commonQuestions.isHaveReducer,
 		commonQuestions.addStyle
 	],
-	FunctionalComponent: [
-		commonQuestions.enterComponentName,
-		commonQuestions.addStyle
-	],
+	FunctionalComponent: [commonQuestions.enterComponentName, commonQuestions.addStyle],
 	Page: [
 		{
 			message: 'Enter page name',
@@ -168,7 +164,9 @@ export default {
 	showQuestions: async (type: string): Promise<void> => {
 		const componentType = type.replace(' ', '');
 
-		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[componentType]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(
+			questions[componentType]
+		);
 
 		actions[componentType](answers);
 	}

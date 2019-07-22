@@ -18,7 +18,6 @@ const questions: IMoleculerQuestions = {
 			type: 'input',
 			validate(val: string): string | boolean {
 				return CommonHelper.validate(val, Config.moleculer.repositoriesDir, true, 'entity');
-
 			}
 		}
 	],
@@ -58,7 +57,9 @@ const actions: IMoleculerActions = {
 export default {
 	showQuestions: async (type: string): Promise<void> => {
 		const lowerCaseType = type.toLowerCase();
-		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(questions[lowerCaseType]);
+		const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(
+			questions[lowerCaseType]
+		);
 
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());

@@ -9,7 +9,7 @@ module.exports = {
 	],
 	plugins: ['@typescript-eslint'],
 	parserOptions: {
-		project: './tsconfig.json',
+		project: 'tsconfig.json',
 	},
 	rules: {
 		// Disabled Rules
@@ -50,7 +50,7 @@ module.exports = {
 		'@typescript-eslint/semi': 'error',
 		'@typescript-eslint/type-annotation-spacing': 'error',
 		'@typescript-eslint/unified-signatures': 'error',
-		complexity: ['error', { max: 3 }],
+		complexity: ['error', { max: 4 }],
 		'max-depth': ['error', { max: 4 }],
 		'prefer-const': [
 			'error',
