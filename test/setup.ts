@@ -19,6 +19,7 @@ fs.mkdirSync('/app/Test');
 fs.writeFileSync('/src/Templates/index.ts', '');
 fs.writeFileSync('/src/Templates/moleculer/moleculer.mustache', 'Test template moleculer.mustache');
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
+
 fs.writeFileSync('/app/pages/test/index.tsx', 'nextjs test page');
 fs.writeFileSync('/app/services/test.service.ts', 'moleculer test service');
 fs.writeFileSync('/app/helpers/Test.ts', 'moleculer/nextjs helper');

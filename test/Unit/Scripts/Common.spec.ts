@@ -194,4 +194,31 @@ describe('Common Helper', () => {
 			expect(replacedContent).toEqual('replaced for test');
 		});
 	});
+
+	describe('validate', () => {
+		describe('empty val', () => {
+			it('should return an error message', () => {
+				const msg = CommonHelper.validate('', '', true, '');
+
+				expect(msg).toEqual('Can not be empty');
+			});
+		});
+
+		describe('non-existent file', () => {
+			it('should return true', () => {
+				const msg = CommonHelper.validate('non-existent-file.ts', '/src', true, '');
+
+				expect(msg).toEqual(true);
+			});
+		});
+
+		describe('existing file', () => {
+			it('should return an error message', () => {
+				const msg = CommonHelper.validate('index.tsx', '/app/pages/test', true, 'page');
+
+
+				expect(msg).toEqual('This page name already used before, enter new name.')
+			});
+		});
+	});
 });
