@@ -61,24 +61,25 @@
     "coverageDirectory": "<rootDir>/coverage",
     "testEnvironment": "node",
     "moduleFileExtensions": [
-     "ts", "js"
+      "ts",
+      "js"
     ],
     "transform": {
-     "^.+\\.(ts)$": "ts-jest"
+      "^.+\\.(ts)$": "ts-jest"
     },
     "testPathIgnorePatterns": [
       "dist"
     ],
     "testMatch": [
-     "**/*.spec.(ts)"
+      "**/*.spec.(ts)"
     ],
     "setupFiles": [
-     "<rootDir>/test/setup.ts"
+      "<rootDir>/test/setup.ts"
     ],
     "globals": {
-     "ts-jest": {
-      "tsConfig": "tsconfig.json"
-     }
+      "ts-jest": {
+        "tsConfig": "tsconfig.json"
+      }
     }
-   }
+  }
 }
