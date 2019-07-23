@@ -1,3 +1,4 @@
+import { IMoleculerHelper } from './../../../../src/Scripts/moleculer/IMoleculerTypes.d';
 import { fs } from 'memfs';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Helper } from '../../../../src/Scripts/moleculer/helper';
@@ -5,7 +6,7 @@ import { Config } from '../../../../src/config';
 
 describe('Helper tests', () => {
 	it('should addBrokerHelper', () => {
-		const brokerHelperTemplatesParams = {
+		const brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams = {
 			brokerHelperCreate: '/Templates/moleculer/Tests/BrokerHelperCreate.mustache',
 			brokerHelperImport: '/Templates/moleculer/Tests/BrokerHelperImport.mustache',
 			replaceFileDir: '/test/Utils/BrokerHelper.ts'
@@ -15,7 +16,7 @@ describe('Helper tests', () => {
 			lowerFileName: 'tests',
 			upperFileName: 'Tests'
 		};
-		// tslint:disable-next-line: max-line-length
+		// tslint:disable-next-line
 		const fileContent = `const ${answers.upperFileName}Service = require('../../services/${answers.lowerFileName}.service');\n//#endregion Local Imports`;
 		Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
 		const addedBrokerHelper = fs.readFileSync('/test/Utils/BrokerHelper.ts');
