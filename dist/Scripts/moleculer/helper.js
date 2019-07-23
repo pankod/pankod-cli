@@ -33,18 +33,16 @@ exports.Helper = {
         }, 1500);
         Common_1.CommonHelper.replaceContent(replaceBrokerImportParams);
     },
-    createEntityInstance: (answers) => {
-        const templatePath = './dist/Templates/moleculer/Repositories/Entity.mustache';
+    createEntityInstance: (answers, createEntityHelperParams) => {
         const templateProps = { fileName: answers.fileName };
-        const indexTemplate = './dist/Templates/moleculer/Repositories/EntityIndex.mustache';
         const writeFileProps = {
             dirPath: `${config_1.Config.moleculer.entityDir}/${answers.fileName}.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createEntityHelperParams.templatePath, templateProps),
             message: 'Added new Entity Instance.'
         };
         const addIndexParams = {
             dirPath: `${config_1.Config.moleculer.entityDir}/index.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(indexTemplate, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createEntityHelperParams.indexTemplate, templateProps),
             message: 'Entity added to index.ts.'
         };
         Common_1.CommonHelper.writeFile(writeFileProps);
@@ -76,9 +74,13 @@ exports.Helper = {
         if (!Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.interfaceDir, answers.upperFileName)) {
             exports.Helper.createInterface(answers, 'Repositories');
         }
+        const createEntityTemplatesParams = {
+            indexTemplate: './dist/Templates/moleculer/Repositories/EntityIndex.mustache',
+            templatePath: './dist/Templates/moleculer/Repositories/Entity.mustache'
+        };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
-        exports.Helper.createEntityInstance(answers);
+        exports.Helper.createEntityInstance(answers, createEntityTemplatesParams);
         exports.Helper.createTest(repositoryTestParams);
     },
     createService: (answers) => {

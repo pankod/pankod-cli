@@ -12,7 +12,9 @@ export const Config = {
 		servicesTestDir: './test/Unit/MicroServices',
 		templates: {
 			brokerHelperCreate: './dist/Templates/moleculer/Tests/BrokerHelperCreate.mustache',
-			brokerHelperImport: './dist/Templates/moleculer/Tests/BrokerHelperImport.mustache'
+			brokerHelperImport: './dist/Templates/moleculer/Tests/BrokerHelperImport.mustache',
+			createEntityIndexTemplate: './dist/Templates/moleculer/Repositories/EntityIndex.mustache',
+			createEntityTemplatePath: './dist/Templates/moleculer/Repositories/Entity.mustache'
 		}
 	},
 	nextjs: {

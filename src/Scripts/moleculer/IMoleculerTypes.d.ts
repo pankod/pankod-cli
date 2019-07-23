@@ -20,4 +20,9 @@ export declare module IMoleculerHelper {
 		brokerHelperImport: string;
 		brokerHelperCreate: string;
 	}
+
+	export interface ICreateEntityHelperParams {
+		templatePath: string;
+		indexTemplate: string;
+	}
 }

@@ -41,20 +41,18 @@ export const Helper = {
 
 		CommonHelper.replaceContent(replaceBrokerImportParams);
 	},
-	createEntityInstance: (answers: ICommon.IAnswers) => {
-		const templatePath = './dist/Templates/moleculer/Repositories/Entity.mustache';
+	createEntityInstance: (answers: ICommon.IAnswers, createEntityHelperParams: IMoleculerHelper.ICreateEntityHelperParams) => {
 		const templateProps = { fileName: answers.fileName };
-		const indexTemplate = './dist/Templates/moleculer/Repositories/EntityIndex.mustache';
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: `${Config.moleculer.entityDir}/${answers.fileName}.ts`,
-			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createEntityHelperParams.templatePath, templateProps),
 			message: 'Added new Entity Instance.'
 		};
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.entityDir}/index.ts`,
-			getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createEntityHelperParams.indexTemplate, templateProps),
 			message: 'Entity added to index.ts.'
 		};
 
@@ -94,9 +92,15 @@ export const Helper = {
 			Helper.createInterface(answers, 'Repositories');
 		}
 
+		const createEntityTemplatesParams = {
+			indexTemplate: './dist/Templates/moleculer/Repositories/EntityIndex.mustache',
+			templatePath: './dist/Templates/moleculer/Repositories/Entity.mustache'
+
+		};
+
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
-		Helper.createEntityInstance(answers);
+		Helper.createEntityInstance(answers, createEntityTemplatesParams);
 		Helper.createTest(repositoryTestParams);
 	},
 	createService: (answers: ICommon.IAnswers): void => {
