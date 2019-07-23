@@ -90,9 +90,8 @@ export const Helper = {
 		}
 
 		const createEntityTemplatesParams = {
-			indexTemplate: './dist/Templates/moleculer/Repositories/EntityIndex.mustache',
-			templatePath: './dist/Templates/moleculer/Repositories/Entity.mustache'
-
+			indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
+			templatePath: Config.moleculer.templates.createEntityTemplatePath
 		};
 
 		CommonHelper.writeFile(writeFileProps);

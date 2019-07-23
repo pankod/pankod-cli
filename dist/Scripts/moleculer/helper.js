@@ -72,8 +72,8 @@ exports.Helper = {
             exports.Helper.createInterface(answers, 'Repositories');
         }
         const createEntityTemplatesParams = {
-            indexTemplate: './dist/Templates/moleculer/Repositories/EntityIndex.mustache',
-            templatePath: './dist/Templates/moleculer/Repositories/Entity.mustache'
+            indexTemplate: config_1.Config.moleculer.templates.createEntityIndexTemplate,
+            templatePath: config_1.Config.moleculer.templates.createEntityTemplatePath
         };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
