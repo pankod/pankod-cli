@@ -12,34 +12,14 @@ import { IMoleculerHelper } from './IMoleculerTypes';
 
 export const Helper = {
 	addBrokerHelper: (answers: ICommon.IAnswers, brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams): void => {
-		const templateProps = {
-			lowerFileName: answers.lowerFileName,
-			upperFileName: answers.upperFileName
-		};
-
-		const replaceBrokerImportParams: ICommon.IReplaceContent = {
-			fileDir: brokerHelperTemplatesParams.replaceFileDir,
-			filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate(brokerHelperTemplatesParams.brokerHelperImport, templateProps),
-			message: 'Service added to BrokerHelper Import',
-			regexKey: /\/\/\#endregion Local Imports/g
-		};
-
 		setTimeout(
 			() => {
-				const replaceBrokerCreateParams: ICommon.IReplaceContent = {
-					fileDir: brokerHelperTemplatesParams.replaceFileDir,
-					filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
-					getFileContent: () => CommonHelper.getTemplate(brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
-					message: 'Service added to BrokerHelper setupBroker.\n',
-					regexKey: /^\s*return broker;/gm
-				};
-				CommonHelper.replaceContent(replaceBrokerCreateParams);
+				CommonHelper.replaceContent(Helper.createParamsForAddBrokerHelper('create', brokerHelperTemplatesParams, answers));
 			},
 			1500
 		);
 
-		CommonHelper.replaceContent(replaceBrokerImportParams);
+		CommonHelper.replaceContent(Helper.createParamsForAddBrokerHelper('import', brokerHelperTemplatesParams, answers));
 	},
 	createEntityInstance: (answers: ICommon.IAnswers, createEntityHelperParams: IMoleculerHelper.ICreateEntityHelperParams) => {
 		const templateProps = { fileName: answers.fileName };
@@ -58,6 +38,23 @@ export const Helper = {
 
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
+	},
+	// tslint:disable-next-line: max-line-length
+	createParamsForAddBrokerHelper: (type: string, brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams, answers: ICommon.IAnswers): ICommon.IReplaceContent => {
+		const templateProps = {
+			lowerFileName: answers.lowerFileName,
+			upperFileName: answers.upperFileName
+		};
+		const replaceBrokerParams: ICommon.IReplaceContent = {
+			fileDir: brokerHelperTemplatesParams.replaceFileDir,
+			filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
+			getFileContent: () => CommonHelper.getTemplate(type === 'import' ? brokerHelperTemplatesParams.brokerHelperImport : brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
+			message: type === 'import' ? 'Service added to BrokerHelper Import' : 'Service added to BrokerHelper setupBroker.\n',
+			regexKey: type === 'import' ? /\/\/\#endregion Local Imports/g : /^\s*return broker;/gm
+		};
+
+		return replaceBrokerParams;
+
 	},
 	createRepository: (answers: ICommon.IAnswers): void => {
 		const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';

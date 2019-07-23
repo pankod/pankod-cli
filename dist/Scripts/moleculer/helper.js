@@ -10,28 +10,10 @@ const Common_1 = require("../Common");
 //#endregion Local Imports
 exports.Helper = {
     addBrokerHelper: (answers, brokerHelperTemplatesParams) => {
-        const templateProps = {
-            lowerFileName: answers.lowerFileName,
-            upperFileName: answers.upperFileName
-        };
-        const replaceBrokerImportParams = {
-            fileDir: brokerHelperTemplatesParams.replaceFileDir,
-            filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperTemplatesParams.brokerHelperImport, templateProps),
-            message: 'Service added to BrokerHelper Import',
-            regexKey: /\/\/\#endregion Local Imports/g
-        };
         setTimeout(() => {
-            const replaceBrokerCreateParams = {
-                fileDir: brokerHelperTemplatesParams.replaceFileDir,
-                filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
-                getFileContent: () => Common_1.CommonHelper.getTemplate(brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
-                message: 'Service added to BrokerHelper setupBroker.\n',
-                regexKey: /^\s*return broker;/gm
-            };
-            Common_1.CommonHelper.replaceContent(replaceBrokerCreateParams);
+            Common_1.CommonHelper.replaceContent(exports.Helper.createParamsForAddBrokerHelper('create', brokerHelperTemplatesParams, answers));
         }, 1500);
-        Common_1.CommonHelper.replaceContent(replaceBrokerImportParams);
+        Common_1.CommonHelper.replaceContent(exports.Helper.createParamsForAddBrokerHelper('import', brokerHelperTemplatesParams, answers));
     },
     createEntityInstance: (answers, createEntityHelperParams) => {
         const templateProps = { fileName: answers.fileName };
@@ -47,6 +29,21 @@ exports.Helper = {
         };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
+    },
+    // tslint:disable-next-line: max-line-length
+    createParamsForAddBrokerHelper: (type, brokerHelperTemplatesParams, answers) => {
+        const templateProps = {
+            lowerFileName: answers.lowerFileName,
+            upperFileName: answers.upperFileName
+        };
+        const replaceBrokerParams = {
+            fileDir: brokerHelperTemplatesParams.replaceFileDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(type === 'import' ? brokerHelperTemplatesParams.brokerHelperImport : brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
+            message: type === 'import' ? 'Service added to BrokerHelper Import' : 'Service added to BrokerHelper setupBroker.\n',
+            regexKey: type === 'import' ? /\/\/\#endregion Local Imports/g : /^\s*return broker;/gm
+        };
+        return replaceBrokerParams;
     },
     createRepository: (answers) => {
         const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
