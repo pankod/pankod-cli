@@ -56,9 +56,13 @@ export class {{fileName}} {
 `);
 
 fs.writeFileSync('/Templates/moleculer/Repositories/EntityIndex.mustache', `export { {{fileName}} } from './{{fileName}}';`);
-//nextjs addRoute 
+
+// NEXTJS
+
+// AddRoute 
 fs.writeFileSync('/Templates/nextjs/Routes.mustache', `\t  .add('/{{#hasPath}}{{{routePath}}}{{/hasPath}}{{^hasPath}}{{fileName}}{{/hasPath}}', '/{{fileName}}/index')\n\nmodule.exports = routes;`);
 fs.writeFileSync('/app/routes.js', `\n\nmodule.exports = routes;`);
+
 
 // Create Package.json
 fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["styled"] } }`);

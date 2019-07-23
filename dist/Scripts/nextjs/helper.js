@@ -8,6 +8,17 @@ const path = require("path");
 const config_1 = require("../../config");
 const Common_1 = require("../Common");
 //#endregion Local Imports
+const createInterfaceParams = {
+    templatePath: config_1.Config.nextjs.templates.createInterfaceTempPath,
+    pageInterfaceIndex: config_1.Config.nextjs.templates.pageInterfaceIndex,
+    storeImportInterface: config_1.Config.nextjs.templates.storeImportInterface,
+    compInterfaceIndex: config_1.Config.nextjs.templates.compInterfaceIndex,
+    storeInterface: config_1.Config.nextjs.templates.storeInterface,
+    interfaceDir: config_1.Config.nextjs.interfaceDir,
+    reduxInterfaceDir: config_1.Config.nextjs.reduxInterfaceDir,
+    pageInterfaceDir: config_1.Config.nextjs.pageInterfaceDir,
+    compInterfaceDir: config_1.Config.nextjs.compInterfaceDir
+};
 exports.Helper = {
     addRoute: (answers, IAddRoutesReplaceParams) => {
         const { hasPath = false, routePath, fileName } = answers;
@@ -25,32 +36,27 @@ exports.Helper = {
         };
         Common_1.CommonHelper.replaceContent(replaceContentParams);
     },
-    createInterface: (answers, isClass) => {
+    createInterface: (answers, isClass, createInterfaceParams) => {
         const { fileName, lowerFileName, isPage = false, isConnectStore = false, upperFileName } = answers;
-        const templatePath = './dist/Templates/nextjs/Interfaces/Component.mustache';
         const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
-        const pageDirPath = `${config_1.Config.nextjs.pageInterfaceDir}/${fileName}.d.ts`;
-        const compDirPath = `${config_1.Config.nextjs.compInterfaceDir}/${fileName}.d.ts`;
-        const pageInterfaceIndex = './dist/Templates/nextjs/Interfaces/PageIndex.mustache';
-        const compIntefaceIndex = './dist/Templates/nextjs/Interfaces/ComponentIndex.mustache';
-        const storeInterface = './dist/Templates/nextjs/Interfaces/ReduxStore.mustache';
-        const storeImportInterface = './dist/Templates/nextjs/Interfaces/ReduxImport.mustache';
+        const pageDirPath = `${createInterfaceParams.pageInterfaceDir}/${fileName}.d.ts`;
+        const compDirPath = `${createInterfaceParams.compInterfaceDir}/${fileName}.d.ts`;
         const writeFileProps = {
             dirPath: isPage ? pageDirPath : compDirPath,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createInterfaceParams.templatePath, templateProps),
             message: 'Added new interface file'
         };
         const replaceContentParams = {
-            fileDir: `${config_1.Config.nextjs.interfaceDir}/index.ts`,
-            filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.interfaceDir}/index.ts`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate(isPage ? pageInterfaceIndex : compIntefaceIndex, templateProps),
+            fileDir: createInterfaceParams.interfaceDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', createInterfaceParams.interfaceDir), 'utf8'),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(isPage ? createInterfaceParams.pageInterfaceIndex : createInterfaceParams.compInterfaceIndex, templateProps),
             message: 'Interface file added to Interfaces/index.ts',
             regexKey: isPage ? /...PAGE INTERFACES/g : /...COMPONENT INTERFACES/g
         };
         const replaceStoreParams = {
-            fileDir: `${config_1.Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
-            filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.reduxInterfaceDir}/Store.d.ts`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate(storeInterface, templateProps),
+            fileDir: createInterfaceParams.reduxInterfaceDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', createInterfaceParams.reduxInterfaceDir), 'utf8'),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createInterfaceParams.storeInterface, templateProps),
             message: 'Interface file added to Interfaces/Redux/Store.d.ts',
             regexKey: /export interface IStore\s[{]/g
         };
@@ -60,9 +66,9 @@ exports.Helper = {
             Common_1.CommonHelper.replaceContent(replaceStoreParams);
             setTimeout(() => {
                 const replaceStoreImportParams = {
-                    fileDir: `${config_1.Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
-                    filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.reduxInterfaceDir}/Store.d.ts`), 'utf8'),
-                    getFileContent: () => Common_1.CommonHelper.getTemplate(storeImportInterface, templateProps),
+                    fileDir: createInterfaceParams.reduxInterfaceDir,
+                    filetoUpdate: fs.readFileSync(path.resolve('', createInterfaceParams.reduxInterfaceDir), 'utf8'),
+                    getFileContent: () => Common_1.CommonHelper.getTemplate(createInterfaceParams.storeImportInterface, templateProps),
                     message: 'Interface file added to import section in Interfaces/Redux/Store.d.ts',
                     regexKey: /\s[}] from '@Interfaces';/g
                 };
@@ -171,7 +177,7 @@ exports.Helper = {
         };
         Common_1.CommonHelper.createFile(classDir);
         Common_1.CommonHelper.writeFile(writeFileProps);
-        exports.Helper.createInterface(answers, true);
+        exports.Helper.createInterface(answers, true, createInterfaceParams);
         if (isConnectStore) {
             exports.Helper.addReducer(templateProps);
             exports.Helper.addAction(templateProps);
@@ -204,7 +210,7 @@ exports.Helper = {
         Common_1.CommonHelper.createFile(funcDir);
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
-        exports.Helper.createInterface(answers, false);
+        exports.Helper.createInterface(answers, false, createInterfaceParams);
     }
 };
 //# sourceMappingURL=helper.js.map

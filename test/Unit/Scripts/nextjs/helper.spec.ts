@@ -21,4 +21,23 @@ describe('Helper tests', () => {
 		const addedRoute = fs.readFileSync('/app/routes.js');
 	 	expect(String(addedRoute)).toEqual(`${fileContent}`);
 	});
+
+	it('Should run createInterface method correctly', () => {
+		const addRouteParams = {
+			routesDir: '/app/routes.js',
+			routesTemplate: '/Templates/nextjs/Routes.mustache'
+		};
+		const answers = {
+			fileName: 'test',
+			hasPath: true,
+			routePath: 'test-route'
+		};
+		// tslint:disable-next-line: max-line-length
+		const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Routes.mustache', answers);
+
+		Helper.addRoute(answers, addRouteParams);
+
+		const addedRoute = fs.readFileSync('/app/routes.js');
+	 	expect(String(addedRoute)).toEqual(`${fileContent}`);
+	});
 });

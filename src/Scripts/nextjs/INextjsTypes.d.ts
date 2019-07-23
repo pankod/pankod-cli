@@ -27,6 +27,18 @@ export interface INextjsActions {
 export declare module INextjsHelper {
 	export interface IAddRoutesReplaceParams {
 		routesDir: string;
-		routesTemplate:string;
+		routesTemplate: string;
+	}
+
+	export interface ICreateInterfaceParams {
+		templatePath: string;
+		pageInterfaceDir: string;
+		compInterfaceDir: string;
+		pageInterfaceIndex: string;
+		compInterfaceIndex: string;
+		storeInterface: string;
+		storeImportInterface: string;
+		interfaceDir: string;
+		reduxInterfaceDir: string;
 	}
 }

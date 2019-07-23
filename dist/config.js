@@ -25,18 +25,23 @@ exports.Config = {
         componentsDir: './src/Components',
         definitionsDir: './src/Definitions',
         filesDir: './files',
-        interfaceDir: './src/Interfaces',
+        interfaceDir: './src/Interfaces/index.ts',
         mockDir: '/dir',
         mockPagesDir: '/pages',
         mockSrcDir: '/src',
         pageInterfaceDir: './src/Interfaces/Pages',
         pagesDir: './pages',
         reducerDir: './src/Redux/Reducers',
-        reduxInterfaceDir: './src/Interfaces/Redux',
+        reduxInterfaceDir: './src/Interfaces/Redux/Store.d.ts',
         routesDir: './app/routes.js',
         storeDir: './src',
         templates: {
-            addRouteTemplate: './dist/Templates/nextjs/Routes.mustache'
+            addRouteTemplate: './dist/Templates/nextjs/Routes.mustache',
+            compInterfaceIndex: './dist/Templates/nextjs/Interfaces/ComponentIndex.mustache',
+            createInterfaceTempPath: './dist/Templates/nextjs/Interfaces/Component.mustache',
+            pageInterfaceIndex: './dist/Templates/nextjs/Interfaces/PageIndex.mustache',
+            storeImportInterface: './dist/Templates/nextjs/Interfaces/ReduxImport.mustache',
+            storeInterface: './dist/Templates/nextjs/Interfaces/ReduxStore.mustache'
         }
     }
 };
