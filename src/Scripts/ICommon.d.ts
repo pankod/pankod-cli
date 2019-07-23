@@ -1,5 +1,5 @@
 
-export declare module ICommon {
+export declare namespace ICommon {
 	export interface ITemplateProps {
 		fileName?: string;
 		upperFileName?: string;

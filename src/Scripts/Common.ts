@@ -13,10 +13,7 @@ import { Plugins } from './nextjs/pluginsEnum';
 
 export const CommonHelper = {
 	addToIndex: (params: ICommon.IAddIndex): void => {
-		fs.appendFileSync(
-			path.resolve('', params.dirPath),
-			`${params.getFileContent()}\n`
-		);
+		fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}\n`);
 
 		console.log(logSymbols.success, params.message);
 	},
@@ -24,24 +21,29 @@ export const CommonHelper = {
 		fs.mkdirSync(path.resolve('', dirPath));
 	},
 	getPankodConfig: (): IPankodConfig => {
-		const config = JSON.parse(String(fs.readFileSync('./package.json'))) as { pankod: IPankodConfig };
+		const config = JSON.parse(String(fs.readFileSync('./package.json'))) as {
+			pankod: IPankodConfig;
+		};
 
 		return config.pankod;
 	},
-	getTemplate: (templatePath: string, templateProps: ICommon.ITemplateProps): string => (
-
+	getTemplate: (templatePath: string, templateProps: ICommon.ITemplateProps): string =>
 		// __dirname + ../../ path is root of the dist folder.
 		mustache.render(
 			fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'),
 			templateProps
-		)
-	),
+		),
 	hasPlugin: (pluginName: Plugins): boolean => {
-		const plugins: Array<string> = CommonHelper.getPankodConfig().plugins;
+		const plugins: string[] = CommonHelper.getPankodConfig().plugins;
 
 		return plugins.includes(pluginName);
 	},
-	isAlreadyExist: (startPath: string, val: string = '', isFile: boolean = false, fileType?: string): boolean => {
+	isAlreadyExist: (
+		startPath: string,
+		val: string = '',
+		isFile: boolean = false,
+		fileType?: string
+	): boolean => {
 		let _path: string;
 
 		switch (fileType) {
@@ -72,17 +74,14 @@ export const CommonHelper = {
 
 		CommonHelper.writeFile(writeFileProps);
 	},
-	validate: (val: string, dirPath: string, isFile: boolean, fileType: string): string | boolean => {
-
+	validate: (
+		val: string,
+		dirPath: string,
+		isFile: boolean,
+		fileType: string
+	): string | boolean => {
 		if (val.length) {
-			if (
-				CommonHelper.isAlreadyExist(
-					dirPath,
-					val,
-					isFile,
-					fileType
-				)
-			) {
+			if (CommonHelper.isAlreadyExist(dirPath, val, isFile, fileType)) {
 				return `This ${fileType} name already used before, enter new name.`;
 			}
 
@@ -93,16 +92,11 @@ export const CommonHelper = {
 	},
 	writeFile: (params: ICommon.IWriteFile) => {
 		try {
-			fs.writeFileSync(
-				path.resolve('', params.dirPath),
-				params.getFileContent()
-			);
+			fs.writeFileSync(path.resolve('', params.dirPath), params.getFileContent());
 		} catch (error) {
 			console.error(error);
 
 			process.exit(1);
-
-			return error;
 		}
 	}
 };

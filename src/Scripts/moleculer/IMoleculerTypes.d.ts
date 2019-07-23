@@ -1,4 +1,4 @@
-import { InputQuestion, Answers, Question } from "inquirer";
+import { Question } from "inquirer";
 import { ICommon } from "../ICommon";
 
 export interface IMoleculerQuestions {

@@ -21,16 +21,28 @@ export const Helper = {
 
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.routesDir}/routes.js`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.routesDir}/routes.js`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Routes.mustache', templateProps),
-			message: `Route added to routes.js as ${hasPath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
+			filetoUpdate: fs.readFileSync(
+				path.resolve('', `${Config.nextjs.routesDir}/routes.js`),
+				'utf8'
+			),
+			getFileContent: () =>
+				CommonHelper.getTemplate('./dist/Templates/nextjs/Routes.mustache', templateProps),
+			message: `Route added to routes.js as ${
+				hasPath ? `'/${routePath}'` : `'/${fileName}/index'`
+			}`,
 			regexKey: /^(?:[\t ]*(?:\r?\n|\r))+module.exports = routes;/gm
 		};
 
 		CommonHelper.replaceContent(replaceContentParams);
 	},
 	createInterface: (answers: ICommon.IAnswers, isClass: boolean) => {
-		const { fileName, lowerFileName, isPage = false, isConnectStore = false, upperFileName } = answers;
+		const {
+			fileName,
+			lowerFileName,
+			isPage = false,
+			isConnectStore = false,
+			upperFileName
+		} = answers;
 		const templatePath = './dist/Templates/nextjs/Interfaces/Component.mustache';
 		const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
 		const pageDirPath = `${Config.nextjs.pageInterfaceDir}/${fileName}.d.ts`;
@@ -48,15 +60,25 @@ export const Helper = {
 
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.interfaceDir}/index.ts`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.interfaceDir}/index.ts`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate(isPage ? pageInterfaceIndex : compIntefaceIndex, templateProps),
+			filetoUpdate: fs.readFileSync(
+				path.resolve('', `${Config.nextjs.interfaceDir}/index.ts`),
+				'utf8'
+			),
+			getFileContent: () =>
+				CommonHelper.getTemplate(
+					isPage ? pageInterfaceIndex : compIntefaceIndex,
+					templateProps
+				),
 			message: 'Interface file added to Interfaces/index.ts',
 			regexKey: isPage ? /...PAGE INTERFACES/g : /...COMPONENT INTERFACES/g
 		};
 
 		const replaceStoreParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`), 'utf8'),
+			filetoUpdate: fs.readFileSync(
+				path.resolve('', `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`),
+				'utf8'
+			),
 			getFileContent: () => CommonHelper.getTemplate(storeInterface, templateProps),
 			message: 'Interface file added to Interfaces/Redux/Store.d.ts',
 			regexKey: /export interface IStore\s[{]/g
@@ -68,29 +90,32 @@ export const Helper = {
 		if (isConnectStore) {
 			CommonHelper.replaceContent(replaceStoreParams);
 
-			setTimeout(
-				() => {
-					const replaceStoreImportParams: ICommon.IReplaceContent = {
-						fileDir: `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
-						filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`), 'utf8'),
-						getFileContent: () => CommonHelper.getTemplate(storeImportInterface, templateProps),
-						message: 'Interface file added to import section in Interfaces/Redux/Store.d.ts',
-						regexKey: /\s[}] from '@Interfaces';/g
-					};
-					CommonHelper.replaceContent(replaceStoreImportParams);
-				},
-				1500
-			);
-
+			setTimeout(() => {
+				const replaceStoreImportParams: ICommon.IReplaceContent = {
+					fileDir: `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`,
+					filetoUpdate: fs.readFileSync(
+						path.resolve('', `${Config.nextjs.reduxInterfaceDir}/Store.d.ts`),
+						'utf8'
+					),
+					getFileContent: () =>
+						CommonHelper.getTemplate(storeImportInterface, templateProps),
+					message:
+						'Interface file added to import section in Interfaces/Redux/Store.d.ts',
+					regexKey: /\s[}] from '@Interfaces';/g
+				};
+				CommonHelper.replaceContent(replaceStoreImportParams);
+			}, 1500);
 		}
 	},
 
 	createStyle: (answers: ICommon.IAnswers): void => {
-		const { fileName, isPage = false , lowerFileName} = answers;
+		const { fileName, isPage = false, lowerFileName } = answers;
 
 		const templatePath = './dist/Templates/nextjs/Styles.mustache';
 		const templateProps = { fileName, lowerFileName };
-		const pageDirPath = `${Config.nextjs.pagesDir}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
+		const pageDirPath = `${Config.nextjs.pagesDir}/${answers.fileName.replace(/\b\w/g, foo =>
+			foo.toLowerCase()
+		)}/style.scss`;
 		const compDirPath = `${Config.nextjs.componentsDir}/${answers.fileName}/style.scss`;
 
 		const writeFileProps = {
@@ -105,8 +130,15 @@ export const Helper = {
 	addActionConstIndex: (templateProps: ICommon.ITemplateProps): void => {
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.definitionsDir}/ActionConsts.ts`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.definitionsDir}/ActionConsts.ts`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/ActionConst.mustache', templateProps),
+			filetoUpdate: fs.readFileSync(
+				path.resolve('', `${Config.nextjs.definitionsDir}/ActionConsts.ts`),
+				'utf8'
+			),
+			getFileContent: () =>
+				CommonHelper.getTemplate(
+					'./dist/Templates/nextjs/Reducers/ActionConst.mustache',
+					templateProps
+				),
 			message: 'Action constants added to Definitions/ActionConsts.ts',
 			regexKey: /export const ActionConsts\s[=]\s[{]/g
 		};
@@ -145,8 +177,15 @@ export const Helper = {
 		const templateProps = { fileName, lowerFileName, upperFileName };
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.reducerDir}/index.ts`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/index.mustache', templateProps),
+			filetoUpdate: fs.readFileSync(
+				path.resolve('', `${Config.nextjs.reducerDir}/index.ts`),
+				'utf8'
+			),
+			getFileContent: () =>
+				CommonHelper.getTemplate(
+					'./dist/Templates/nextjs/Reducers/index.mustache',
+					templateProps
+				),
 			message: 'Reducer added to Redux/Reducers/index.ts',
 			regexKey: /import { combineReducers } from 'redux';/g
 		};
@@ -160,19 +199,23 @@ export const Helper = {
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.replaceContent(replaceContentParams);
 
-		setTimeout(
-			() => {
-				const replaceReducerContentParams: ICommon.IReplaceContent = {
-					fileDir: `${Config.nextjs.reducerDir}/index.ts`,
-					filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'),
-					getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/Store.mustache', templateProps),
-					message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
-					regexKey: /export default combineReducers[(][{]/g
-				};
-				CommonHelper.replaceContent(replaceReducerContentParams);
-			},
-			1500
-		);
+		setTimeout(() => {
+			const replaceReducerContentParams: ICommon.IReplaceContent = {
+				fileDir: `${Config.nextjs.reducerDir}/index.ts`,
+				filetoUpdate: fs.readFileSync(
+					path.resolve('', `${Config.nextjs.reducerDir}/index.ts`),
+					'utf8'
+				),
+				getFileContent: () =>
+					CommonHelper.getTemplate(
+						'./dist/Templates/nextjs/Reducers/Store.mustache',
+						templateProps
+					),
+				message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
+				regexKey: /export default combineReducers[(][{]/g
+			};
+			CommonHelper.replaceContent(replaceReducerContentParams);
+		}, 1500);
 
 		if (isConnectStore) {
 			Helper.addActionConstIndex(templateProps);

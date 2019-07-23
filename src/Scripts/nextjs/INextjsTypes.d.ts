@@ -1,4 +1,4 @@
-import { InputQuestion, Answers, Question, ConfirmQuestion, ListQuestion } from "inquirer";
+import { InputQuestion, Question, ConfirmQuestion, ListQuestion } from "inquirer";
 import { ICommon } from "../ICommon";
 
 export interface INextjsCommonQuestions {

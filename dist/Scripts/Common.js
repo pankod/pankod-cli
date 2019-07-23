@@ -18,9 +18,9 @@ exports.CommonHelper = {
         const config = JSON.parse(String(fs.readFileSync('./package.json')));
         return config.pankod;
     },
-    getTemplate: (templatePath, templateProps) => (
+    getTemplate: (templatePath, templateProps) => 
     // __dirname + ../../ path is root of the dist folder.
-    mustache.render(fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'), templateProps)),
+    mustache.render(fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'), templateProps),
     hasPlugin: (pluginName) => {
         const plugins = exports.CommonHelper.getPankodConfig().plugins;
         return plugins.includes(pluginName);
@@ -68,7 +68,6 @@ exports.CommonHelper = {
         catch (error) {
             console.error(error);
             process.exit(1);
-            return error;
         }
     }
 };

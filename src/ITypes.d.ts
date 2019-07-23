@@ -1,9 +1,9 @@
-import { ConfirmQuestion, ListQuestion } from "inquirer";
-import { ICommon } from "./Scripts/ICommon";
+import { ListQuestion } from 'inquirer';
+import { ICommon } from './Scripts/ICommon';
 
 export interface IPankodConfig {
-	projectType: string
-	plugins: Array<string>
+	projectType: string;
+	plugins: string[];
 }
 
 export interface IText {
@@ -20,12 +20,12 @@ export interface IQuestions {
 
 export interface IQuestionsHelper {
 	default: {
-		showQuestions: Function
-	}
+		showQuestions: Function;
+	};
 }
 
 export interface IPluginsHelper {
 	default: {
-		addPlugin: Function
-	}
+		addPlugin: Function;
+	};
 }

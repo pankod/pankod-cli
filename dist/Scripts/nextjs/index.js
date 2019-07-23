@@ -64,10 +64,7 @@ const questions = {
         commonQuestions.isHaveReducer,
         commonQuestions.addStyle
     ],
-    FunctionalComponent: [
-        commonQuestions.enterComponentName,
-        commonQuestions.addStyle
-    ],
+    FunctionalComponent: [commonQuestions.enterComponentName, commonQuestions.addStyle],
     Page: [
         {
             message: 'Enter page name',

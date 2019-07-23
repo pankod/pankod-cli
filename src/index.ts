@@ -3,7 +3,6 @@
 import * as chalk from 'chalk';
 import * as program from 'commander';
 import * as figlet from 'figlet';
-import * as fs from 'fs';
 import * as inquirer from 'inquirer';
 
 import { IPankodConfig, IPluginsHelper, IQuestions, IQuestionsHelper, IText } from './ITypes';
