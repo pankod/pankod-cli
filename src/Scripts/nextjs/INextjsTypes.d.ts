@@ -23,3 +23,10 @@ export interface INextjsActions {
 	Plugin: Function;
 	[key: string]: Function;
 }
+
+export declare module INextjsHelper {
+	export interface IAddRoutesReplaceParams {
+		routesDir: string;
+		routesTemplate:string;
+	}
+}

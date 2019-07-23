@@ -9,7 +9,7 @@ const config_1 = require("../../config");
 const Common_1 = require("../Common");
 //#endregion Local Imports
 exports.Helper = {
-    addRoute: (answers) => {
+    addRoute: (answers, IAddRoutesReplaceParams) => {
         const { hasPath = false, routePath, fileName } = answers;
         const templateProps = {
             fileName: fileName.replace(/\b\w/g, foo => foo.toLowerCase()),
@@ -17,9 +17,9 @@ exports.Helper = {
             routePath
         };
         const replaceContentParams = {
-            fileDir: `${config_1.Config.nextjs.routesDir}/routes.js`,
-            filetoUpdate: fs.readFileSync(path.resolve('', `${config_1.Config.nextjs.routesDir}/routes.js`), 'utf8'),
-            getFileContent: () => Common_1.CommonHelper.getTemplate('./dist/Templates/nextjs/Routes.mustache', templateProps),
+            fileDir: IAddRoutesReplaceParams.routesDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', IAddRoutesReplaceParams.routesDir), 'utf8'),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
             message: `Route added to routes.js as ${hasPath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
             regexKey: /^(?:[\t ]*(?:\r?\n|\r))+module.exports = routes;/gm
         };

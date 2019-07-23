@@ -7,10 +7,11 @@ import * as path from 'path';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
+import { INextjsHelper } from './INextjsTypes';
 //#endregion Local Imports
 
 export const Helper = {
-	addRoute: (answers: ICommon.IAnswers) => {
+	addRoute: (answers: ICommon.IAnswers, IAddRoutesReplaceParams: INextjsHelper.IAddRoutesReplaceParams) => {
 		const { hasPath = false, routePath, fileName } = answers;
 
 		const templateProps = {
@@ -20,9 +21,9 @@ export const Helper = {
 		};
 
 		const replaceContentParams: ICommon.IReplaceContent = {
-			fileDir: `${Config.nextjs.routesDir}/routes.js`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.routesDir}/routes.js`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Routes.mustache', templateProps),
+			fileDir: IAddRoutesReplaceParams.routesDir,
+			filetoUpdate: fs.readFileSync(path.resolve('', IAddRoutesReplaceParams.routesDir), 'utf8'),
+			getFileContent: () => CommonHelper.getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
 			message: `Route added to routes.js as ${hasPath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
 			regexKey: /^(?:[\t ]*(?:\r?\n|\r))+module.exports = routes;/gm
 		};

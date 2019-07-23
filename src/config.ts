@@ -31,7 +31,10 @@ export const Config = {
 		pagesDir: './pages',
 		reducerDir: './src/Redux/Reducers',
 		reduxInterfaceDir: './src/Interfaces/Redux',
-		routesDir: './app',
-		storeDir: './src'
+		routesDir: './app/routes.js',
+		storeDir: './src',
+		templates: {
+			addRouteTemplate: './dist/Templates/nextjs/Routes.mustache'
+		}
 	}
 };

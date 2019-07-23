@@ -148,8 +148,12 @@ const actions = {
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         answers.isPage = true;
+        const addRouteParams = {
+            routesDir: config_1.Config.nextjs.routesDir,
+            routesTemplate: config_1.Config.nextjs.templates.addRouteTemplate
+        };
         helper_1.Helper.createClassComponent(answers);
-        helper_1.Helper.addRoute(answers);
+        helper_1.Helper.addRoute(answers, addRouteParams);
         if (hasStyle) {
             helper_1.Helper.createStyle(answers);
         }

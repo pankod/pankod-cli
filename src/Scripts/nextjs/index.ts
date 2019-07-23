@@ -150,8 +150,14 @@ const actions: INextjsActions = {
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 		answers.isPage = true;
+		
+		const addRouteParams = {
+			routesDir: Config.nextjs.routesDir,
+			routesTemplate: Config.nextjs.templates.addRouteTemplate
+		};
+
 		Helper.createClassComponent(answers);
-		Helper.addRoute(answers);
+		Helper.addRoute(answers, addRouteParams);
 
 		if (hasStyle) {
 			Helper.createStyle(answers);
