@@ -28,15 +28,17 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`pankod add Page`](#pankod-add-page)
+* [`pankod add Entity`](#pankod-add-entity)
 * [`pankod help [COMMAND]`](#pankod-help-command)
 
-## `pankod add Page`
+## `pankod add Entity`
 
 Add services, components and more...
 
 ```
 USAGE
+  $ pankod add Entity
+  $ pankod add Service
   $ pankod add Page
   $ pankod add FunctionalComponent
   $ pankod add ClassComponent
