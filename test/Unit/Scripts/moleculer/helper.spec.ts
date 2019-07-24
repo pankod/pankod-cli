@@ -155,5 +155,26 @@ describe('Helper tests', () => {
 
 	});
 
+	it('should createServiceHelper', () => {
+		const answers: ICommon.IAnswers = {
+			fileName: 'service',
+			lowerFileName: 'service',
+			upperFileName: 'Service'
+		};
+
+		const createServiceHelperParams: IMoleculerHelper.ICreateServiceHelperParams = {
+			indexTemplate: '/Templates/moleculer/Services/HelperIndex.mustache',
+			templatePath: '/Templates/moleculer/Services/Helper.mustache',
+			testTemplatePath: '/Templates/moleculer/Tests/ServiceHelper.mustache'
+		};
+
+		Helper.createServiceHelper(answers, createServiceHelperParams);
+
+		const fileContentPath = `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`;
+		const fileContent = String(fs.readFileSync(fileContentPath));
+
+		expect(fileContent).toBe(CommonHelper.getTemplate(createServiceHelperParams.templatePath, answers));
+	});
+
 
 });

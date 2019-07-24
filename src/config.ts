@@ -14,7 +14,10 @@ export const Config = {
 			brokerHelperCreate: './dist/Templates/moleculer/Tests/BrokerHelperCreate.mustache',
 			brokerHelperImport: './dist/Templates/moleculer/Tests/BrokerHelperImport.mustache',
 			createEntityIndexTemplate: './dist/Templates/moleculer/Repositories/EntityIndex.mustache',
-			createEntityTemplatePath: './dist/Templates/moleculer/Repositories/Entity.mustache'
+			createEntityTemplatePath: './dist/Templates/moleculer/Repositories/Entity.mustache',
+			createServiceHelperIndexTemplate: './dist/Templates/moleculer/Services/HelperIndex.mustache',
+			createServiceHelperTemplatePath: './dist/Templates/moleculer/Services/Helper.mustache',
+			createServiceHelperTestTemplatePath: './dist/Templates/moleculer/Tests/ServiceHelper.mustache',
 		}
 	},
 	nextjs: {

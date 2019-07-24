@@ -122,35 +122,38 @@ exports.Helper = {
             brokerHelperImport: config_1.Config.moleculer.templates.brokerHelperImport,
             replaceFileDir: config_1.Config.moleculer.brokerHelper
         };
+        const createServiceHelperParams = {
+            indexTemplate: config_1.Config.moleculer.templates.createServiceHelperIndexTemplate,
+            templatePath: config_1.Config.moleculer.templates.createServiceHelperTemplatePath,
+            testTemplatePath: config_1.Config.moleculer.templates.createServiceHelperTestTemplatePath
+        };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
-        exports.Helper.createServiceHelper(answers);
+        exports.Helper.createServiceHelper(answers, createServiceHelperParams);
         exports.Helper.createTest(serviceTestParams);
         exports.Helper.createIntegrationTest(integrationTestParams);
         exports.Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
     },
-    createServiceHelper: (answers) => {
-        const templatePath = './dist/Templates/moleculer/Services/Helper.mustache';
-        const indexTemplate = './dist/Templates/moleculer/Services/HelperIndex.mustache';
+    createServiceHelper: (answers, createServiceHelperParams) => {
         const templateProps = {
             lowerFileName: answers.lowerFileName,
             upperFileName: answers.upperFileName
         };
         const writeFileProps = {
             dirPath: `${config_1.Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createServiceHelperParams.templatePath, templateProps),
             message: 'Added new Service Helper'
         };
         const addIndexParams = {
             dirPath: `${config_1.Config.moleculer.servicesHelperDir}/index.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(indexTemplate, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createServiceHelperParams.indexTemplate, templateProps),
             message: 'Service Helper added to index.ts.'
         };
         const serviceHelperTestParams = {
             answers,
             dirPath: `${config_1.Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`,
             successMessage: 'Added new Micro Service Helper test.',
-            templatePath: './dist/Templates/moleculer/Tests/ServiceHelper.mustache',
+            templatePath: createServiceHelperParams.testTemplatePath,
             templateProps
         };
         Common_1.CommonHelper.writeFile(writeFileProps);

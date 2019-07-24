@@ -8,6 +8,7 @@ fs.mkdirSync('/src/Templates/moleculer');
 fs.mkdirSync('/src/Templates/nextjs');
 
 fs.mkdirSync('/src/Entities');
+fs.mkdirSync('/src/ServiceHelpers');
 
 fs.mkdirSync('/src/Interfaces');
 fs.mkdirSync('/src/Interfaces/Repositories');
@@ -30,6 +31,7 @@ fs.mkdirSync('/test/Integration');
 fs.mkdirSync('/Templates');
 fs.mkdirSync('/Templates/moleculer');
 fs.mkdirSync('/Templates/moleculer/Tests');
+fs.mkdirSync('/Templates/moleculer/Services');
 fs.mkdirSync('/Templates/moleculer/Repositories');
 
 // Create Templates
@@ -94,6 +96,7 @@ export namespace {{upperFileName}}Repository {
 }
 `);
 
+fs.writeFileSync('/src/ServiceHelpers/ServiceHelper.ts', '');
 fs.writeFileSync('/test/Unit/ServiceHelper.spec.ts', '');
 fs.writeFileSync('/Templates/moleculer/Tests/ServiceHelper.mustache', `//#region Local Imports
 import { {{upperFileName}}Helper } from '@ServiceHelpers';
@@ -120,6 +123,26 @@ describe('{{upperFileName}} service helpers', () => {
 	});
 });
 `);
+
+fs.writeFileSync('/Templates/moleculer/Services/Helper.mustache', `//#region Global Imports
+import { Context } from 'moleculer';
+//#endregion Global Imports
+
+//#region Interface Imports
+import { } from '@Interfaces';
+//#endregion Interface Imports
+
+export module {{upperFileName}}Helper {
+
+	const prefix: string = '{{lowerFileName}}';
+
+	export const methodName = async (ctx: Context, params: ): Promise<> => await ctx.call(\`\${prefix}.methodName\`, params);
+
+}
+
+`);
+
+fs.writeFileSync('/Templates/moleculer/Services/HelperIndex.mustache', `export { {{upperFileName}}Helper } from '@ServiceHelpers/{{upperFileName}}Helper';`);
 
 fs.writeFileSync('/test/Integration/Integration.spec.ts', '');
 fs.writeFileSync('/Templates/moleculer/Tests/IntegrationTest.mustache', `import ApiGateway = require('moleculer-web');

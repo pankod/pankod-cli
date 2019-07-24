@@ -25,4 +25,9 @@ export declare module IMoleculerHelper {
 		templatePath: string;
 		indexTemplate: string;
 	}
+	export interface ICreateServiceHelperParams {
+		templatePath: string;
+		indexTemplate: string;
+		testTemplatePath: string;
+	}
 }
