@@ -123,4 +123,37 @@ describe('Helper tests', () => {
 
 	});
 
+	it('should createIntegrationTest', () => {
+		const answers: ICommon.IAnswers = {
+			fileName: 'integration',
+			hasDatabase: true,
+			isPrivate: true,
+			lowerFileName: 'integration',
+			upperFileName: 'Integration'
+		};
+		const templateProps = {
+			fileName: answers.fileName,
+			hasDatabase: answers.hasDatabase,
+			isPrivate: answers.isPrivate,
+			lowerFileName: answers.lowerFileName,
+			upperFileName: answers.upperFileName
+		};
+		const options: ICommon.ICreateTest = {
+			answers,
+			dirPath: `${Config.moleculer.integrationTestDir}/${answers.upperFileName}.spec.ts`,
+			successMessage: 'Added new Integration test.',
+			templatePath: '/Templates/moleculer/Tests/IntegrationTest.mustache',
+			templateProps
+		};
+
+		Helper.createTest(options);
+
+		const fileContentPath = `${Config.moleculer.integrationTestDir}/${answers.upperFileName}.spec.ts`;
+		const fileContent = String(fs.readFileSync(fileContentPath));
+
+		expect(fileContent).toBe(CommonHelper.getTemplate(options.templatePath, answers));
+
+	});
+
+
 });
