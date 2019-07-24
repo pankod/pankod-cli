@@ -12,12 +12,12 @@ interface IAddArgs {
 	}
 }
 
-const supportedProjects: string[] = ['nextjs', 'moleculer']
+const supportedProjects: string[] = ['nextjs', 'moleculer'];
 
 const supportedCommands: ISupportedCommands = {
 	moleculer: ['Entity', 'Service'],
 	nextjs: ['Page', 'FunctionalComponent', 'ClassComponent', 'Plugin']
-}
+};
 
 export default class Add extends Command {
 	static description = 'Add services, components and more...';
@@ -39,11 +39,11 @@ export default class Add extends Command {
 		let answers: ICommon.IAnswers = { fileName: '', fileType: '' };
 
 		if (!supportedProjects.includes(projectType)) {
-			this.error(`The project ${projectType} isn't supported.`)
+			this.error(`The project ${projectType} isn't supported.`);
 		}
 
 		if (entityType && !supportedCommands[projectType].includes(entityType)) {
-			this.error(`Command "${entityType}" isn't supported by ${projectType} project.`)
+			this.error(`Command "${entityType}" isn't supported by ${projectType} project.`);
 		}
 
 		if (!entityType) {

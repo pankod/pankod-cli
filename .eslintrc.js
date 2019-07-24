@@ -28,6 +28,7 @@ module.exports = {
 		'@typescript-eslint/no-require-imports': 'off',
 		'@typescript-eslint/no-object-literal-type-assertion': 'off',
 		'@typescript-eslint/prefer-interface': 'off',
+		'no-console': 'off',
 		// Enabled rules
 		'@typescript-eslint/adjacent-overload-signatures': 'error',
 		'@typescript-eslint/array-type': 'error',
