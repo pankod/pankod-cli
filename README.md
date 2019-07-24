@@ -1,8 +1,14 @@
 @pankod/pankod-cli
 ==================
 
+<p align="center">
+  <img src="./cover.gif" />
+</p>
+
 Save a lot of time by generating services, components, tests for Pankod Boilerplate projects
 
+[![Maintainability](https://api.codeclimate.com/v1/badges/2c2209c30b0d428bab96/maintainability)](https://codeclimate.com/github/pankod/pankod-cli/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/2c2209c30b0d428bab96/test_coverage)](https://codeclimate.com/github/pankod/pankod-cli/test_coverage)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@pankod/pankod-cli.svg)](https://npmjs.org/package/@pankod/pankod-cli)
 [![Downloads/week](https://img.shields.io/npm/dw/@pankod/pankod-cli.svg)](https://npmjs.org/package/@pankod/pankod-cli)
