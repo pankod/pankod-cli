@@ -9,6 +9,7 @@ export interface IPankodConfig {
 export interface IText {
 	moleculer: string;
 	nextjs: string;
+	pankodCli: string;
 	[key: string]: string;
 }
 
@@ -28,4 +29,10 @@ export interface IPluginsHelper {
 	default: {
 		addPlugin: Function;
 	};
+}
+
+export interface ISupportedCommands {
+	moleculer: string[];
+	nextjs: string[];
+	[key: string]: string[];
 }

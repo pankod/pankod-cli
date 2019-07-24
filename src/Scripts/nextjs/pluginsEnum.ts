@@ -1,4 +1,4 @@
 export enum Plugins {
-	sass = 'sass',
-	styled = 'styled'
+    sass = 'sass',
+    styled = 'styled'
 }

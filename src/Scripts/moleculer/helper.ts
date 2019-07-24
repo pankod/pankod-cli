@@ -11,8 +11,8 @@ import { ICommon } from '../ICommon';
 
 export const Helper = {
 	addBrokerHelper: (answers: ICommon.IAnswers): void => {
-		const brokerHelperImport = './dist/Templates/moleculer/Tests/BrokerHelperImport.mustache';
-		const brokerHelperCreate = './dist/Templates/moleculer/Tests/BrokerHelperCreate.mustache';
+		const brokerHelperImport = './src/Templates/moleculer/Tests/BrokerHelperImport.mustache';
+		const brokerHelperCreate = './src/Templates/moleculer/Tests/BrokerHelperCreate.mustache';
 
 		const templateProps = {
 			lowerFileName: answers.lowerFileName,
@@ -44,9 +44,9 @@ export const Helper = {
 		CommonHelper.replaceContent(replaceBrokerImportParams);
 	},
 	createEntityInstance: (answers: ICommon.IAnswers) => {
-		const templatePath = './dist/Templates/moleculer/Repositories/Entity.mustache';
+		const templatePath = './src/Templates/moleculer/Repositories/Entity.mustache';
 		const templateProps = { fileName: answers.fileName };
-		const indexTemplate = './dist/Templates/moleculer/Repositories/EntityIndex.mustache';
+		const indexTemplate = './src/Templates/moleculer/Repositories/EntityIndex.mustache';
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: `${Config.moleculer.entityDir}/${answers.fileName}.ts`,
@@ -64,13 +64,13 @@ export const Helper = {
 		CommonHelper.addToIndex(addIndexParams);
 	},
 	createRepository: (answers: ICommon.IAnswers): void => {
-		const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
+		const templatePath = './src/Templates/moleculer/Repositories/Repository.mustache';
 
 		const templateProps = {
 			upperFileName: answers.upperFileName
 		};
 
-		const indexTemplate = './dist/Templates/moleculer/Repositories/RepoIndex.mustache';
+		const indexTemplate = './src/Templates/moleculer/Repositories/RepoIndex.mustache';
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.repositoriesDir}/index.ts`,
@@ -88,7 +88,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
 			successMessage: 'Added new Repository test.',
-			templatePath: './dist/Templates/moleculer/Tests/Repository.mustache',
+			templatePath: './src/Templates/moleculer/Tests/Repository.mustache',
 			templateProps
 		};
 
@@ -102,7 +102,7 @@ export const Helper = {
 		Helper.createTest(repositoryTestParams);
 	},
 	createService: (answers: ICommon.IAnswers): void => {
-		const templatePath = './dist/Templates/moleculer/Services/Service.mustache';
+		const templatePath = './src/Templates/moleculer/Services/Service.mustache';
 		const templateProps = {
 			fileName: answers.fileName,
 			hasDatabase: answers.hasDatabase,
@@ -111,7 +111,7 @@ export const Helper = {
 			upperFileName: answers.upperFileName
 		};
 
-		const indexTemplate = './dist/Templates/moleculer/Services/index.mustache';
+		const indexTemplate = './src/Templates/moleculer/Services/index.mustache';
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.servicesDir}/index.ts`,
@@ -129,7 +129,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
 			successMessage: 'Added new Microservice test.',
-			templatePath: './dist/Templates/moleculer/Tests/Service.mustache',
+			templatePath: './src/Templates/moleculer/Tests/Service.mustache',
 			templateProps
 		};
 
@@ -137,7 +137,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
 			successMessage: 'Added new Integration test.',
-			templatePath: './dist/Templates/moleculer/Tests/IntegrationTest.mustache',
+			templatePath: './src/Templates/moleculer/Tests/IntegrationTest.mustache',
 			templateProps
 		};
 
@@ -153,8 +153,8 @@ export const Helper = {
 		Helper.addBrokerHelper(answers);
 	},
 	createServiceHelper: (answers: ICommon.IAnswers): void => {
-		const templatePath = './dist/Templates/moleculer/Services/Helper.mustache';
-		const indexTemplate = './dist/Templates/moleculer/Services/HelperIndex.mustache';
+		const templatePath = './src/Templates/moleculer/Services/Helper.mustache';
+		const indexTemplate = './src/Templates/moleculer/Services/HelperIndex.mustache';
 
 		const templateProps = {
 			lowerFileName: answers.lowerFileName,
@@ -177,7 +177,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`,
 			successMessage: 'Added new Micro Service Helper test.',
-			templatePath: './dist/Templates/moleculer/Tests/ServiceHelper.mustache',
+			templatePath: './src/Templates/moleculer/Tests/ServiceHelper.mustache',
 			templateProps
 		};
 
@@ -197,9 +197,9 @@ export const Helper = {
 		CommonHelper.writeFile(integrationProps);
 	},
 	createInterface: (answers: ICommon.IAnswers, dirType: string, prefix: string = '') => {
-		const templatePath = `./dist/Templates/moleculer/Interfaces/${prefix}Interface.mustache`;
-		const indexInterfaceTemplate = './dist/Templates/moleculer/Interfaces/index.mustache';
-		const folderIndexTemplate = './dist/Templates/moleculer/Interfaces/FolderIndex.mustache';
+		const templatePath = `./src/Templates/moleculer/Interfaces/${prefix}Interface.mustache`;
+		const indexInterfaceTemplate = './src/Templates/moleculer/Interfaces/index.mustache';
+		const folderIndexTemplate = './src/Templates/moleculer/Interfaces/FolderIndex.mustache';
 
 		const templateProps = { upperFileName: answers.upperFileName, dirType };
 		const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
