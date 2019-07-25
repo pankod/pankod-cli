@@ -15,6 +15,8 @@ fs.mkdirSync('/Templates/nextjs/Reducers');
 fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');
+fs.mkdirSync('/src/Components');
+fs.mkdirSync('/src/Components/Test');
 
 fs.mkdirSync('/src/Components')
 
@@ -91,3 +93,6 @@ fs.writeFileSync('/src/Definitions/ActionConsts.ts', `export const ActionConsts 
 		SetReducer: 'Home_SetReducer',
 	},
 };`)
+// CreateStyle
+
+fs.writeFileSync('/Templates/nextjs/Styles.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Styles.mustache')));
