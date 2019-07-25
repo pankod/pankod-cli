@@ -73,7 +73,7 @@ exports.Helper = {
                     regexKey: /\s[}] from '@Interfaces';/g
                 };
                 Common_1.CommonHelper.replaceContent(replaceStoreImportParams);
-            }, 1500);
+            }, 500);
         }
     },
     createStyle: (answers) => {

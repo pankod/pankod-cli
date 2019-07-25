@@ -90,7 +90,7 @@ export const Helper = {
 					};
 					CommonHelper.replaceContent(replaceStoreImportParams);
 				},
-				1500
+				500
 			);
 
 		}
