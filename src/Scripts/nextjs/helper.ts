@@ -246,9 +246,11 @@ export const Helper = {
 			message: 'Add new functional component.'
 		};
 
+		// const createInterfaceParams = {}
+
 		CommonHelper.createFile(funcDir);
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
-		Helper.createInterface(answers, false, createInterfaceParams);
+		// Helper.createInterface(answers, false, createInterfaceParams);
 	}
 };

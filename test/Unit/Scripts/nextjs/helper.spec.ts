@@ -138,10 +138,7 @@ describe('Helper tests', () => {
 				lowerFileName: 'test'
 			};
 
-			const createFuncCompParams = {
-				templatePath:
-
-			}
+			const createFuncCompParams = {}
 
 	/* 		const createStyleParams = {
 				compDirPath: '/src/Components',
