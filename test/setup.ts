@@ -69,6 +69,10 @@ fs.writeFileSync('/Templates/moleculer/Repositories/EntityIndex.mustache', `expo
 fs.writeFileSync('/Templates/nextjs/Routes.mustache', `\t  .add('/{{#hasPath}}{{{routePath}}}{{/hasPath}}{{^hasPath}}{{fileName}}{{/hasPath}}', '/{{fileName}}/index')\n\nmodule.exports = routes;`);
 fs.writeFileSync('/app/routes.js', `\n\nmodule.exports = routes;`);
 
+
+// CreateStyle
+
+
 // CreateInterface
 fs.writeFileSync('/Templates/nextjs/Interfaces/ComponentIndex.mustache',`// COMPONENT INTERFACES\nexport { I{{fileName}} } from '@Interfaces/Components/{{fileName}}.d.ts';`)
 fs.writeFileSync('/Templates/nextjs/Interfaces/Component.mustache', `

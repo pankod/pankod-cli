@@ -4,23 +4,26 @@ import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Config } from '../../../../src/config';
 
 describe('Helper tests', () => {
-	it('Should run addRoute method correctly', () => {
-		const addRouteParams = {
-			routesDir: '/app/routes.js',
-			routesTemplate: '/Templates/nextjs/Routes.mustache'
-		};
-		const answers = {
-			fileName: 'test',
-			hasPath: true,
-			routePath: 'test-route'
-		};
-		// tslint:disable-next-line: max-line-length
-		const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Routes.mustache', answers);
+	describe('Test addRoute method', () => {
+		it('Should add page route', () => {
 
-		Helper.addRoute(answers, addRouteParams);
+			const addRouteParams = {
+				routesDir: '/app/routes.js',
+				routesTemplate: '/Templates/nextjs/Routes.mustache'
+			};
+			const answers = {
+				fileName: 'test',
+				hasPath: true,
+				routePath: 'test-route'
+			};
+			// tslint:disable-next-line: max-line-length
+			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Routes.mustache', answers);
 
-		const addedRoute = fs.readFileSync('/app/routes.js');
-		expect(String(addedRoute)).toEqual(`${fileContent}`);
+			Helper.addRoute(answers, addRouteParams);
+
+			const addedRoute = fs.readFileSync('/app/routes.js');
+			expect(String(addedRoute)).toEqual(`${fileContent}`);
+		});
 	});
 
 	const createInterfaceParams = {
@@ -71,7 +74,7 @@ describe('Helper tests', () => {
 			expect(createdInterface).toMatch(reduxStoreContent);
 		});
 
-		it('Should add @Interface import to Redux/Store.d.ts', (done) => {
+		it('Should add @Interface import to Redux/Store.d.ts', done => {
 			fs.writeFileSync('/src/Interfaces/Redux/Store.d.ts', `//#region Interface Imports
 			import { IHomePage } from '@Interfaces';
 			//#endregion Interface Imports
@@ -92,24 +95,33 @@ describe('Helper tests', () => {
 
 		});
 
-		describe('Test interface export links in index.ts', () => {
-			it('Should add component interface export', () => {
-				Helper.createInterface(answers, true, createInterfaceParams);
-				const fileIndexContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/ComponentIndex.mustache', answers);
-				const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
 
-				expect(createdInterface).toMatch(fileIndexContent);
-			});
+		it('Should add component interface export', () => {
+			Helper.createInterface(answers, true, createInterfaceParams);
 
-			it('Should add page interface export', () => {
-				answers.isPage = true;
-				Helper.createInterface(answers, true, createInterfaceParams);
+			const fileIndexContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/ComponentIndex.mustache', answers);
+			const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
 
-				const pageIndexContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/PageIndex.mustache', answers);
-				const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
+			expect(createdInterface).toMatch(fileIndexContent);
+		});
 
-				expect(createdInterface).toMatch(pageIndexContent);
-			});
+		it('Should add page interface export', () => {
+			answers.isPage = true;
+			Helper.createInterface(answers, true, createInterfaceParams);
+
+			const pageIndexContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/PageIndex.mustache', answers);
+			const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
+
+			expect(createdInterface).toMatch(pageIndexContent);
+		});
+
+	});
+
+	describe('Test createStyle method', () => {
+		it('Should create style file', () => {
+
+		
 		});
 	});
+
 });
