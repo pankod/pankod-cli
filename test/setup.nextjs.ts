@@ -69,6 +69,11 @@ fs.writeFileSync(
 )
 
 fs.writeFileSync(
+	'/Templates/nextjs/Reducers/Store.mustache',
+	realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Reducers/Store.mustache'))
+)
+
+fs.writeFileSync(
 	'/src/Actions/index.ts',
 	`export { HomeActions } from './HomeActions';`
 )

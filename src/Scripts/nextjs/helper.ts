@@ -136,7 +136,7 @@ export const Helper = {
 	},
 
 	addReducer: (answers: ICommon.IAnswers, params: INextjsHelper.IAddReducerParams): void => {
-		const { reducerIndexTemplatePath, reducerTemplatePath, addActionConstIndexParams } = params
+		const { reducerIndexTemplatePath, reducerTemplatePath, addActionConstIndexParams, reducerStoreTemplatePath } = params
 		const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
 
 		const reducerFileDir = `${Config.nextjs.reducerDir}/${lowerFileName}.ts`;
@@ -163,13 +163,13 @@ export const Helper = {
 				const replaceReducerContentParams: ICommon.IReplaceContent = {
 					fileDir: `${Config.nextjs.reducerDir}/index.ts`,
 					filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'),
-					getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/Store.mustache', templateProps),
+					getFileContent: () => CommonHelper.getTemplate(reducerStoreTemplatePath, templateProps),
 					message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
 					regexKey: /export default combineReducers[(][{]/g
 				};
 				CommonHelper.replaceContent(replaceReducerContentParams);
 			},
-			1500
+			100
 		);
 
 

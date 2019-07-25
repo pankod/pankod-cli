@@ -51,7 +51,8 @@ export const Config = {
 			reducerTemplatePath: './dist/Templates/nextjs/Reducers/Reducer.mustache',
 			actionConstTemplatePath: './dist/Templates/nextjs/Reducers/ActionConst.mustache',
 			actionTemplatePath: './dist/Templates/nextjs/Reducers/Action.mustache',
-			actionIndexTemplatePath: './dist/Templates/nextjs/Reducers/ActionIndex.mustache'
+			actionIndexTemplatePath: './dist/Templates/nextjs/Reducers/ActionIndex.mustache',
+			reducerStoreTemplatePath: './dist/Templates/nextjs/Reducers/Store.mustache'
 		}
 	}
 };

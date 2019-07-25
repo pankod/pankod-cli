@@ -63,6 +63,7 @@ export declare module INextjsHelper {
 	export interface IAddReducerParams {
 		reducerIndexTemplatePath: string;
 		reducerTemplatePath: string;
+		reducerStoreTemplatePath: string;
 		addActionConstIndexParams: IAddActionConstIndexParams;
 	}
 

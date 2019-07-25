@@ -28,6 +28,7 @@ const addActionParams: INextjsHelper.IAddActionParams = {
 const addReducerParams: INextjsHelper.IAddReducerParams = {
 	addActionConstIndexParams,
 	reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
+	reducerStoreTemplatePath: '/Templates/nextjs/Reducers/Store.mustache',
 	reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
 }
 
