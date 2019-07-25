@@ -3,8 +3,31 @@ import { Helper } from '../../../../src/Scripts/nextjs/helper';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Config } from '../../../../src/config';
 
+const createInterfaceParams = {
+	templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
+	pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
+	storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
+	compInterfaceIndex: '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
+	storeInterface: '/Templates/nextjs/Interfaces/ReduxStore.mustache',
+	interfaceDir: '/src/Interfaces/index.ts',
+	reduxInterfaceDir: '/src/Interfaces/Redux/Store.d.ts',
+	pageInterfaceDir: '/src/Interfaces/Pages',
+	compInterfaceDir: '/src/Interfaces/Components'
+};
+
+const addActionConstIndexParams = {
+	actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
+}
+
+const addReducerParams = {
+	addActionConstIndexParams,
+	reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
+	reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
+}
+
+
 describe('Helper tests', () => {
-	describe('Test addRoute method', () => {
+	xdescribe('Test addRoute method', () => {
 		it('Should add page route', () => {
 
 			const addRouteParams = {
@@ -26,18 +49,8 @@ describe('Helper tests', () => {
 		});
 	});
 
-	describe('Test createInterface methods', () => {
-		const createInterfaceParams = {
-			templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
-			pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
-			storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
-			compInterfaceIndex: '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
-			storeInterface: '/Templates/nextjs/Interfaces/ReduxStore.mustache',
-			interfaceDir: '/src/Interfaces/index.ts',
-			reduxInterfaceDir: '/src/Interfaces/Redux/Store.d.ts',
-			pageInterfaceDir: '/src/Interfaces/Pages',
-			compInterfaceDir: '/src/Interfaces/Components'
-		};
+	xdescribe('Test createInterface methods', () => {
+
 
 		const answers = {
 			fileName: 'Test',
@@ -117,7 +130,7 @@ describe('Helper tests', () => {
 
 	});
 
-	describe('Test createStyle method', () => {
+	xdescribe('Test createStyle method', () => {
 		it('Should create style file', () => {
 			const answers = {
 				fileName: 'Test',
@@ -129,7 +142,7 @@ describe('Helper tests', () => {
 			};
 
 
-		/* 	Helper.createStyle(answers, true, createInterfaceParams); */
+			/* 	Helper.createStyle(answers, true, createInterfaceParams); */
 
 
 
@@ -163,6 +176,24 @@ describe('Helper tests', () => {
 	})
 
 	describe('createClassComponent', () => {
+		const answers = {
+			fileName: 'Test',
+			lowerFileName: 'test',
+			upperFileName: 'Test',
+			isConnectStore: true,
+			isPage: false,
+			hasStyle: true
+		}
+
+		const params = {
+			templatePath: '/Templates/nextjs/Components/Class.mustache',
+			indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
+			createInterfaceParams,
+			addReducerParams
+		}
+
+		Helper.createClassComponent(answers, params)
+
 		it('should create class component file', () => {
 
 		})

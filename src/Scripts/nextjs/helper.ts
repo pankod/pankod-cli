@@ -10,19 +10,6 @@ import { ICommon } from '../ICommon';
 import { INextjsHelper } from './INextjsTypes';
 //#endregion Local Imports
 
-
-const createInterfaceParams = {
-	templatePath: Config.nextjs.templates.createInterfaceTempPath,
-	pageInterfaceIndex: Config.nextjs.templates.pageInterfaceIndex,
-	storeImportInterface: Config.nextjs.templates.storeImportInterface,
-	compInterfaceIndex: Config.nextjs.templates.compInterfaceIndex,
-	storeInterface: Config.nextjs.templates.storeInterface,
-	interfaceDir: Config.nextjs.interfaceDir,
-	reduxInterfaceDir: Config.nextjs.reduxInterfaceDir,
-	pageInterfaceDir: Config.nextjs.pageInterfaceDir,
-	compInterfaceDir: Config.nextjs.compInterfaceDir
-};
-
 export const Helper = {
 
 	addRoute: (answers: ICommon.IAnswers, IAddRoutesReplaceParams: INextjsHelper.IAddRoutesReplaceParams) => {
@@ -98,7 +85,7 @@ export const Helper = {
 
 	createStyle: (answers: ICommon.IAnswers, createStyleParams: INextjsHelper.ICreateStyle): void => {
 		const { fileName, isPage = false, lowerFileName } = answers;
- 
+
 		const templateProps = { fileName, lowerFileName };
 		const pageDirPath = `${createStyleParams.pageDirPath}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
 		const compDirPath = `${createStyleParams.compDirPath}/${answers.fileName}/style.scss`;
@@ -112,11 +99,13 @@ export const Helper = {
 		CommonHelper.writeFile(writeFileProps);
 	},
 
-	addActionConstIndex: (templateProps: ICommon.ITemplateProps): void => {
+	addActionConstIndex: (templateProps: ICommon.ITemplateProps, params: INextjsHelper.IAddActionConstIndexParams): void => {
+		const { actionConstTemplatePath } = params
+
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.definitionsDir}/ActionConsts.ts`,
 			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.definitionsDir}/ActionConsts.ts`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/ActionConst.mustache', templateProps),
+			getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),
 			message: 'Action constants added to Definitions/ActionConsts.ts',
 			regexKey: /export const ActionConsts\s[=]\s[{]/g
 		};
@@ -147,23 +136,23 @@ export const Helper = {
 		CommonHelper.writeFile(writeFileProps);
 	},
 
-	addReducer: (answers: ICommon.IAnswers): void => {
+	addReducer: (answers: ICommon.IAnswers, params: INextjsHelper.IAddReducerParams): void => {
+		const { reducerIndexTemplatePath, reducerTemplatePath, addActionConstIndexParams } = params
 		const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
 
 		const reducerFileDir = `${Config.nextjs.reducerDir}/${lowerFileName}.ts`;
-		const reducerTemplate = './dist/Templates/nextjs/Reducers/Reducer.mustache';
 		const templateProps = { fileName, lowerFileName, upperFileName };
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.reducerDir}/index.ts`,
 			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate('./dist/Templates/nextjs/Reducers/index.mustache', templateProps),
+			getFileContent: () => CommonHelper.getTemplate(reducerIndexTemplatePath, templateProps),
 			message: 'Reducer added to Redux/Reducers/index.ts',
 			regexKey: /import { combineReducers } from 'redux';/g
 		};
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: reducerFileDir,
-			getFileContent: () => CommonHelper.getTemplate(reducerTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(reducerTemplatePath, templateProps),
 			message: 'Added new reducer file'
 		};
 
@@ -184,13 +173,15 @@ export const Helper = {
 			1500
 		);
 
+		
+
 		if (isConnectStore) {
-			Helper.addActionConstIndex(templateProps);
+			Helper.addActionConstIndex(templateProps, addActionConstIndexParams);
 		}
 	},
 
 	createClassComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateClassComponentParams): void => {
-		const { templatePath, indexTemplatePath } = params
+		const { templatePath, indexTemplatePath, createInterfaceParams, addReducerParams } = params
 		const { lowerFileName, isConnectStore = false, isPage = false } = answers;
 		const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
 		const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
@@ -217,13 +208,12 @@ export const Helper = {
 			message: 'Added new class component'
 		};
 
-
 		CommonHelper.createFile(classDir);
 		CommonHelper.writeFile(writeFileProps);
 		Helper.createInterface(answers, true, createInterfaceParams);
 
 		if (isConnectStore) {
-			Helper.addReducer(templateProps);
+			Helper.addReducer(templateProps, addReducerParams);
 			Helper.addAction(templateProps);
 		}
 
@@ -232,7 +222,8 @@ export const Helper = {
 		}
 	},
 
-	createFuncComponent: (answers: ICommon.IAnswers): void => {
+	createFuncComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateFuncComponentParams): void => {
+		const { createInterfaceParams } = params
 		const { lowerFileName, fileName, hasStyle } = answers;
 		const funcDir = `${Config.nextjs.componentsDir}/${answers.fileName}`;
 		const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
