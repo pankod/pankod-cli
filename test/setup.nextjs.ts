@@ -4,7 +4,6 @@ process.chdir('/');
 // Nextjs Directories
 fs.mkdirSync('/Templates/nextjs');
 fs.mkdirSync('/Templates/nextjs/Interfaces');
-fs.mkdirSync('/src/Interfaces');
 fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');
