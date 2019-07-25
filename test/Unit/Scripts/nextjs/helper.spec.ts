@@ -130,7 +130,7 @@ describe('Helper tests', () => {
 
 	});
 
-	xdescribe('Test createStyle method', () => {
+	describe('Test createStyle method', () => {
 		it('Should create style file', () => {
 			const answers = {
 				fileName: 'Test',
@@ -138,19 +138,18 @@ describe('Helper tests', () => {
 				lowerFileName: 'test'
 			};
 
-			const createFuncCompParams = {}
-
-	/* 		const createStyleParams = {
+		const createStyleParams = {
 				compDirPath: '/src/Components',
 				pageDirPath: '/pages',
 				templatePath: '/Templates/nextjs/Styles.mustache'
 			};
 
+			Helper.createStyle(answers, createStyleParams);
 
 			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Styles.mustache', answers);
-			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss')); */
-
-
+			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss'));
+			
+			expect(createdStyle).toBe(fileContent);
 		});
 	});
 
@@ -197,7 +196,7 @@ describe('Helper tests', () => {
 			addReducerParams
 		}
 
-		Helper.createClassComponent(answers, params)
+/* 		Helper.createClassComponent(answers, params) */
 
 		it('should create class component file', () => {
 
