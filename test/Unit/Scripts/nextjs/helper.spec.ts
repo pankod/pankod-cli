@@ -34,7 +34,7 @@ const addReducerParams: INextjsHelper.IAddReducerParams = {
 
 
 describe('Helper tests', () => {
-	xdescribe('Test addRoute method', () => {
+	describe('Test addRoute method', () => {
 		it('Should add page route', () => {
 
 			const addRouteParams = {
@@ -56,7 +56,7 @@ describe('Helper tests', () => {
 		});
 	});
 
-	xdescribe('Test createInterface methods', () => {
+	describe('Test createInterface methods', () => {
 
 
 		const answers = {
@@ -112,7 +112,7 @@ describe('Helper tests', () => {
 				const createdInterface = String(fs.readFileSync(Config.nextjs.reduxInterfaceDir));
 				expect(createdInterface).toMatch(reduxImportContent);
 				done();
-			}, 500);
+			}, 100);
 
 		});
 
@@ -137,7 +137,7 @@ describe('Helper tests', () => {
 
 	});
 
-	xdescribe('Test createStyle method', () => {
+	describe('Test createStyle method', () => {
 		it('Should create style file', () => {
 			const answers = {
 				fileName: 'Test',

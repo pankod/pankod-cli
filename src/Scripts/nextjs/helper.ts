@@ -77,7 +77,7 @@ export const Helper = {
 					};
 					CommonHelper.replaceContent(replaceStoreImportParams);
 				},
-				500
+				100
 			);
 
 		}
