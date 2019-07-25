@@ -12,6 +12,28 @@ import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
 
+const createInterfaceParams = {
+	templatePath: Config.nextjs.templates.createInterfaceTempPath,
+	pageInterfaceIndex: Config.nextjs.templates.pageInterfaceIndex,
+	storeImportInterface: Config.nextjs.templates.storeImportInterface,
+	compInterfaceIndex: Config.nextjs.templates.compInterfaceIndex,
+	storeInterface: Config.nextjs.templates.storeInterface,
+	interfaceDir: Config.nextjs.interfaceDir,
+	reduxInterfaceDir: Config.nextjs.reduxInterfaceDir,
+	pageInterfaceDir: Config.nextjs.pageInterfaceDir,
+	compInterfaceDir: Config.nextjs.compInterfaceDir
+};
+
+const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
+	actionConstTemplatePath: Config.nextjs.templates.actionConstTemplatePath
+}
+
+const addReducerParams: INextjsHelper.IAddReducerParams = {
+	addActionConstIndexParams,
+	reducerIndexTemplatePath: Config.nextjs.templates.reducerIndexTemplatePath,
+	reducerTemplatePath: Config.nextjs.templates.reducerTemplatePath
+};
+
 const commonQuestions: INextjsCommonQuestions = {
 	addStyle: {
 		default: true,
@@ -122,7 +144,9 @@ const questions: INextjsQuestions = {
 
 const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
 	templatePath: Config.nextjs.templates.classComponentTemplatePath,
-	indexTemplatePath: Config.nextjs.templates.classComponentIndexTemplatePath
+	indexTemplatePath: Config.nextjs.templates.classComponentIndexTemplatePath,
+	createInterfaceParams,
+	addReducerParams
 }
 
 const createStyleParams: INextjsHelper.ICreateStyle = {

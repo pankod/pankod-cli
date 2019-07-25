@@ -46,7 +46,10 @@ export const Config = {
 			classComponentTemplatePath: './dist/Templates/nextjs/Components/Class.mustache',
 			classComponentIndexTemplatePath: './dist/Templates/nextjs/Components/index.mustache',
 			stylePageTemplate: './dist/Templates/nextjs/Styles.mustache',
-			funcCompTemplate: './dist/Templates/nextjs/Components/Functional.mustache'
+			funcCompTemplate: './dist/Templates/nextjs/Components/Functional.mustache',
+			reducerIndexTemplatePath: './dist/Templates/nextjs/Reducers/index.mustache',
+			reducerTemplatePath: './dist/Templates/nextjs/Reducers/Reducer.mustache',
+			actionConstTemplatePath: './dist/Templates/nextjs/Reducers/ActionConst.mustache'
 		}
 	}
 };

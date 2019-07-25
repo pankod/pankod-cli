@@ -94,14 +94,15 @@ export const CommonHelper = {
 	},
 	writeFile: (params: ICommon.IWriteFile) => {
 		try {
-		 	fs.writeFileSync(
+			console.log(params.dirPath)
+			fs.writeFileSync(
 				path.resolve('', params.dirPath),
 				params.getFileContent()
 			);
 		} catch (error) {
 			console.error(error);
 
-			process.exit(1);
+			// process.exit(1);
 		}
 	}
 };
