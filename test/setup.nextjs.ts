@@ -11,6 +11,8 @@ fs.mkdirSync('/Templates/nextjs/Interfaces');
 fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');
+fs.mkdirSync('/src/Components');
+fs.mkdirSync('/src/Components/Test');
 
 // Create Templates
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
@@ -20,8 +22,6 @@ fs.writeFileSync('/app/pages/test/index.tsx', 'nextjs test page');
 // AddRoute 
 fs.writeFileSync('/Templates/nextjs/Routes.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Routes.mustache')));
 fs.writeFileSync('/app/routes.js', `\n\nmodule.exports = routes;`);
-
-// CreateStyle
 
 // CreateInterface
 fs.writeFileSync('/Templates/nextjs/Interfaces/ComponentIndex.mustache',realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/ComponentIndex.mustache')))
@@ -40,3 +40,8 @@ export interface IStore {
 	home: IHomePage.IStateProps;
 }
 `);
+
+// CreateStyle
+
+fs.writeFileSync('/Templates/nextjs/Styles.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Styles.mustache')));
+

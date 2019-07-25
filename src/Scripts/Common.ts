@@ -94,7 +94,7 @@ export const CommonHelper = {
 	},
 	writeFile: (params: ICommon.IWriteFile) => {
 		try {
-			fs.writeFileSync(
+		 	fs.writeFileSync(
 				path.resolve('', params.dirPath),
 				params.getFileContent()
 			);

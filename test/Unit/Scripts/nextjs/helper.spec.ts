@@ -121,80 +121,24 @@ describe('Helper tests', () => {
 		it('Should create style file', () => {
 			const answers = {
 				fileName: 'Test',
-				lowerFileName: 'test',
-				upperFileName: 'Test',
 				isPage: false,
-				isConnectStore: true,
-				isClass: true
+				lowerFileName: 'test'
 			};
 
+			const createStyleParams = {
+				compDirPath: '/src/Components',
+				pageDirPath: '/pages',
+				templatePath: '/Templates/nextjs/Styles.mustache'
+			};
 
-		/* 	Helper.createStyle(answers, true, createInterfaceParams); */
+			Helper.createStyle(answers, createStyleParams);
 
+			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Styles.mustache', answers);
+			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss'));
 
+			expect(createdStyle).toBe(fileContent);
 
 		});
 	});
 
-	describe('addActionConstIndex', () => {
-		it('should add action constants to index', () => {
-
-		})
-	})
-
-	describe('addAction', () => {
-		it('should add new action file', () => {
-
-		})
-
-		it('should add to action index file', () => {
-
-		})
-	})
-
-	describe('addReducer', () => {
-		it('should add to reducers/index', () => {
-
-		})
-
-		it('should add new reducer', () => {
-
-		})
-	})
-
-	describe('createClassComponent', () => {
-		it('should create class component file', () => {
-
-		})
-
-		it('should add component to index.ts', () => {
-
-		})
-
-		it('should create interface', () => {
-
-		})
-
-		it('should add reducer', () => {
-
-		})
-
-		it('should add action', () => {
-
-		})
-	})
-
-	describe('createFunctionalComponent', () => {
-		it('should create functional component dir and file', () => {
-
-		})
-
-		it('should add to index', () => {
-
-		})
-
-		it('should create interface', () => {
-
-		})
-	})
 });
