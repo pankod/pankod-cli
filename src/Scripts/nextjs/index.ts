@@ -150,6 +150,10 @@ const actions: INextjsActions = {
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
+	/* 	const createFuncComponentParams = {
+			templatePath
+		}
+ */
 		Helper.createFuncComponent(answers);
 
 		if (hasStyle) {

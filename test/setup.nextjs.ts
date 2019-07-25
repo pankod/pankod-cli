@@ -16,21 +16,20 @@ fs.mkdirSync('/src/Components/Test');
 
 // Create Templates
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
-
 fs.writeFileSync('/app/pages/test/index.tsx', 'nextjs test page');
 
-// AddRoute 
+// AddRoute
 fs.writeFileSync('/Templates/nextjs/Routes.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Routes.mustache')));
 fs.writeFileSync('/app/routes.js', `\n\nmodule.exports = routes;`);
 
 // CreateInterface
+
 fs.writeFileSync('/Templates/nextjs/Interfaces/ComponentIndex.mustache',realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/ComponentIndex.mustache')))
 fs.writeFileSync('/Templates/nextjs/Interfaces/Component.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/Component.mustache')));
 fs.writeFileSync('/Templates/nextjs/Interfaces/ComponentIndex.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/ComponentIndex.mustache')));
 fs.writeFileSync('/Templates/nextjs/Interfaces/PageIndex.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/PageIndex.mustache')));
 fs.writeFileSync('/Templates/nextjs/Interfaces/ReduxImport.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/ReduxImport.mustache')));
 fs.writeFileSync('/Templates/nextjs/Interfaces/ReduxStore.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/ReduxStore.mustache')));
-
 fs.writeFileSync('/src/Interfaces/index.ts', '// PAGE INTERFACES\n\n// COMPONENT INTERFACES');
 fs.writeFileSync('/src/Interfaces/Redux/Store.d.ts', `//#region Interface Imports
 import { IHomePage } from '@Interfaces';
@@ -42,6 +41,9 @@ export interface IStore {
 `);
 
 // CreateStyle
-
 fs.writeFileSync('/Templates/nextjs/Styles.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Styles.mustache')));
+
+// CreateFuncComponent
+fs.writeFileSync('/Templates/nextjs/Components/Functional.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Components/Functional.mustache')));
+
 

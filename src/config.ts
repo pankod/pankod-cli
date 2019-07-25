@@ -45,7 +45,8 @@ export const Config = {
 			storeInterface: './dist/Templates/nextjs/Interfaces/ReduxStore.mustache',
 			classComponentTemplatePath: './dist/Templates/nextjs/Components/Class.mustache',
 			classComponentIndexTemplatePath: './dist/Templates/nextjs/Components/index.mustache',
-			stylePageTemplate: './dist/Templates/nextjs/Styles.mustache'
+			stylePageTemplate: './dist/Templates/nextjs/Styles.mustache',
+			funcCompTemplate: './dist/Templates/nextjs/Components/Functional.mustache'
 		}
 	}
 };

@@ -52,4 +52,9 @@ export declare module INextjsHelper {
 		templatePath: string;
 		indexTemplatePath: string;
 	}
+
+	export interface ICreateFuncComponentParams {
+		templatePath: string;
+		indexTemplatePath: string;
+	}
 }

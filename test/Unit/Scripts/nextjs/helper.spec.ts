@@ -121,22 +121,25 @@ describe('Helper tests', () => {
 		it('Should create style file', () => {
 			const answers = {
 				fileName: 'Test',
-				isPage: false,
+				hasStyle: true,
 				lowerFileName: 'test'
 			};
 
-			const createStyleParams = {
+			const createFuncCompParams = {
+				templatePath:
+
+			}
+
+	/* 		const createStyleParams = {
 				compDirPath: '/src/Components',
 				pageDirPath: '/pages',
 				templatePath: '/Templates/nextjs/Styles.mustache'
 			};
 
-			Helper.createStyle(answers, createStyleParams);
 
 			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Styles.mustache', answers);
-			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss'));
+			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss')); */
 
-			expect(createdStyle).toBe(fileContent);
 
 		});
 	});

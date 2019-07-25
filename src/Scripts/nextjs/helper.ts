@@ -232,10 +232,10 @@ export const Helper = {
 		}
 	},
 
-	createFuncComponent: (answers: ICommon.IAnswers): void => {
+	createFuncComponent: (answers: ICommon.IAnswers, ICreateFuncComponentParams:INextjsHelper.ICreateFuncComponentParams): void => {
 		const { lowerFileName, fileName, hasStyle } = answers;
 		const funcDir = `${Config.nextjs.componentsDir}/${answers.fileName}`;
-		const templatePath = './dist/Templates/nextjs/Components/Functional.mustache';
+	/* 	const templatePath = './dist/Templates/nextjs/Components/Functional.mustache'; */
 		const templateProps = {
 			fileName,
 			hasStyle,
@@ -252,7 +252,7 @@ export const Helper = {
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: `${funcDir}/index.tsx`,
-			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(ICreateFuncComponentParams.templatePath, templateProps),
 			message: 'Add new functional component.'
 		};
 
