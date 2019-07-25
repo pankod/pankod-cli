@@ -1,4 +1,7 @@
 import { fs } from 'memfs';
+import * as path from 'path'
+const realFs = jest.requireActual('fs')
+
 process.chdir('/');
 
 // Create Directories
@@ -45,7 +48,7 @@ fs.writeFileSync('/app/helpers/Test.ts', 'moleculer/nextjs helper');
 
 fs.writeFileSync('/test/Utils/BrokerHelper.ts', '//#endregion Local Imports');
 
-fs.writeFileSync('/Templates/moleculer/Tests/BrokerHelperImport.mustache', `const {{upperFileName}}Service = require('../../services/{{lowerFileName}}.service');\n//#endregion Local Imports`);
+fs.writeFileSync('/Templates/moleculer/Tests/BrokerHelperImport.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Tests/BrokerHelperImport.mustache')));
 fs.writeFileSync('/Templates/moleculer/Tests/BrokerHelperCreate.mustache', `broker.createService({{upperFileName}}Service);\nreturn broker;`);
 
 fs.writeFileSync('/src/Entities/index.ts', '');

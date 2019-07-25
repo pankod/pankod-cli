@@ -26,9 +26,14 @@ describe('Helper tests', () => {
 			lowerFileName: 'tests',
 			upperFileName: 'Tests'
 		};
-		// tslint:disable-next-line
-		const fileContent = `const ${answers.upperFileName}Service = require('../../services/${answers.lowerFileName}.service');\n//#endregion Local Imports`;
+
+		const fileContent = CommonHelper.getTemplate(
+			'/Templates/moleculer/Tests/BrokerHelperImport.mustache',
+			{ upperFileName: answers.upperFileName, lowerFileName: answers.lowerFileName }
+		)
+
 		Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
+
 		const addedBrokerHelper = fs.readFileSync('/test/Utils/BrokerHelper.ts');
 
 		expect(String(addedBrokerHelper)).toEqual(`${fileContent}`);
