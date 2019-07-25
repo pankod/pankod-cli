@@ -96,7 +96,6 @@ describe('Helper tests', () => {
 
 		});
 
-
 		it('Should add component interface export', () => {
 			Helper.createInterface(answers, true, createInterfaceParams);
 
@@ -120,6 +119,18 @@ describe('Helper tests', () => {
 
 	describe('Test createStyle method', () => {
 		it('Should create style file', () => {
+			const answers = {
+				fileName: 'Test',
+				lowerFileName: 'test',
+				upperFileName: 'Test',
+				isPage: false,
+				isConnectStore: true,
+				isClass: true
+			};
+
+
+		/* 	Helper.createStyle(answers, true, createInterfaceParams); */
+
 
 
 		});

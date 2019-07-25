@@ -96,17 +96,16 @@ export const Helper = {
 		}
 	},
 
-	createStyle: (answers: ICommon.IAnswers): void => {
+	createStyle: (answers: ICommon.IAnswers, createStyleParams: INextjsHelper.ICreateStyle): void => {
 		const { fileName, isPage = false, lowerFileName } = answers;
-
-		const templatePath = './dist/Templates/nextjs/Styles.mustache';
+ 
 		const templateProps = { fileName, lowerFileName };
-		const pageDirPath = `${Config.nextjs.pagesDir}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
-		const compDirPath = `${Config.nextjs.componentsDir}/${answers.fileName}/style.scss`;
+		const pageDirPath = `${createStyleParams.pageDirPath}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
+		const compDirPath = `${createStyleParams.compDirPath}/${answers.fileName}/style.scss`;
 
 		const writeFileProps = {
 			dirPath: isPage ? pageDirPath : compDirPath,
-			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createStyleParams.templatePath, templateProps),
 			message: 'Added new style file'
 		};
 

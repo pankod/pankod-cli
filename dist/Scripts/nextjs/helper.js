@@ -76,15 +76,14 @@ exports.Helper = {
             }, 500);
         }
     },
-    createStyle: (answers) => {
+    createStyle: (answers, createStyleParams) => {
         const { fileName, isPage = false, lowerFileName } = answers;
-        const templatePath = './dist/Templates/nextjs/Styles.mustache';
         const templateProps = { fileName, lowerFileName };
-        const pageDirPath = `${config_1.Config.nextjs.pagesDir}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
-        const compDirPath = `${config_1.Config.nextjs.componentsDir}/${answers.fileName}/style.scss`;
+        const pageDirPath = `${createStyleParams.pageDirPath}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
+        const compDirPath = `${createStyleParams.compDirPath}/${answers.fileName}/style.scss`;
         const writeFileProps = {
             dirPath: isPage ? pageDirPath : compDirPath,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createStyleParams.templatePath, templateProps),
             message: 'Added new style file'
         };
         Common_1.CommonHelper.writeFile(writeFileProps);

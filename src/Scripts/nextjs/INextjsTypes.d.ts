@@ -42,6 +42,12 @@ export declare module INextjsHelper {
 		reduxInterfaceDir: string;
 	}
 
+	export interface ICreateStyle {
+		templatePath: string;
+		pageDirPath: string;
+		compDirPath: string;
+	}
+
 	export interface ICreateClassComponentParams {
 		templatePath: string;
 		indexTemplatePath: string;
