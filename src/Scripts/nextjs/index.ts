@@ -7,7 +7,7 @@ import { PluginHelper } from '../../Plugins/nextjs/helpers';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
-import { INextjsActions, INextjsCommonQuestions, INextjsQuestions } from './INextjsTypes';
+import { INextjsActions, INextjsCommonQuestions, INextjsQuestions, INextjsHelper } from './INextjsTypes';
 import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
@@ -120,7 +120,14 @@ const questions: INextjsQuestions = {
 	]
 };
 
+const createStyleParams: INextjsHelper.ICreateStyle = {
+	compDirPath: Config.nextjs.componentsDir,
+	pageDirPath: Config.nextjs.pagesDir,
+	templatePath: Config.nextjs.templates.stylePageTemplate
+};
+
 const actions: INextjsActions = {
+
 	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { hasStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -130,7 +137,7 @@ const actions: INextjsActions = {
 		Helper.createClassComponent(answers);
 
 		if (hasStyle) {
-			Helper.createStyle(answers);
+			Helper.createStyle(answers, createStyleParams);
 		}
 	},
 	FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
@@ -141,7 +148,7 @@ const actions: INextjsActions = {
 		Helper.createFuncComponent(answers);
 
 		if (hasStyle) {
-			Helper.createStyle(answers);
+			Helper.createStyle(answers, createStyleParams);
 		}
 	},
 	Page: async (answers: ICommon.IAnswers): Promise<void> => {
@@ -150,7 +157,7 @@ const actions: INextjsActions = {
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 		answers.isPage = true;
-		
+
 		const addRouteParams = {
 			routesDir: Config.nextjs.routesDir,
 			routesTemplate: Config.nextjs.templates.addRouteTemplate
@@ -160,7 +167,7 @@ const actions: INextjsActions = {
 		Helper.addRoute(answers, addRouteParams);
 
 		if (hasStyle) {
-			Helper.createStyle(answers);
+			Helper.createStyle(answers, createStyleParams);
 		}
 	},
 	Plugin: async (answers: ICommon.IAnswers): Promise<void> => {

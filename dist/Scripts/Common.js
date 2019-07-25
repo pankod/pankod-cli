@@ -67,7 +67,7 @@ exports.CommonHelper = {
         }
         catch (error) {
             console.error(error);
-            process.exit(error);
+            process.exit(1);
         }
     }
 };

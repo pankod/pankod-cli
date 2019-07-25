@@ -44,7 +44,8 @@ exports.Config = {
             createInterfaceTempPath: './dist/Templates/nextjs/Interfaces/Component.mustache',
             pageInterfaceIndex: './dist/Templates/nextjs/Interfaces/PageIndex.mustache',
             storeImportInterface: './dist/Templates/nextjs/Interfaces/ReduxImport.mustache',
-            storeInterface: './dist/Templates/nextjs/Interfaces/ReduxStore.mustache'
+            storeInterface: './dist/Templates/nextjs/Interfaces/ReduxStore.mustache',
+            stylePageTemplate: './dist/Templates/nextjs/Styles.mustache'
         }
     }
 };

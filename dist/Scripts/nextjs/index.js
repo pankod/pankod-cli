@@ -122,6 +122,11 @@ const questions = {
         }
     ]
 };
+const createStyleParams = {
+    compDirPath: config_1.Config.nextjs.componentsDir,
+    pageDirPath: config_1.Config.nextjs.pagesDir,
+    templatePath: config_1.Config.nextjs.templates.stylePageTemplate
+};
 const actions = {
     ClassComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
         const { hasStyle = false } = answers;
@@ -130,7 +135,7 @@ const actions = {
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createClassComponent(answers);
         if (hasStyle) {
-            helper_1.Helper.createStyle(answers);
+            helper_1.Helper.createStyle(answers, createStyleParams);
         }
     }),
     FunctionalComponent: (answers) => __awaiter(this, void 0, void 0, function* () {
@@ -139,7 +144,7 @@ const actions = {
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
         helper_1.Helper.createFuncComponent(answers);
         if (hasStyle) {
-            helper_1.Helper.createStyle(answers);
+            helper_1.Helper.createStyle(answers, createStyleParams);
         }
     }),
     Page: (answers) => __awaiter(this, void 0, void 0, function* () {
@@ -155,7 +160,7 @@ const actions = {
         helper_1.Helper.createClassComponent(answers);
         helper_1.Helper.addRoute(answers, addRouteParams);
         if (hasStyle) {
-            helper_1.Helper.createStyle(answers);
+            helper_1.Helper.createStyle(answers, createStyleParams);
         }
     }),
     Plugin: (answers) => __awaiter(this, void 0, void 0, function* () {
