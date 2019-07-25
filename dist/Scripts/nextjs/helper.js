@@ -151,11 +151,12 @@ exports.Helper = {
             exports.Helper.addActionConstIndex(templateProps);
         }
     },
-    createClassComponent: (answers) => {
+    createClassComponent: (answers, params) => {
+        const { templatePath, indexTemplatePath } = params;
         const { lowerFileName, isConnectStore = false, isPage = false } = answers;
         const pagesDir = `${config_1.Config.nextjs.pagesDir}/${lowerFileName}`;
         const classDir = isPage ? pagesDir : `${config_1.Config.nextjs.componentsDir}/${answers.fileName}`;
-        const templatePath = './dist/Templates/nextjs/Components/Class.mustache';
+        // const templatePath = './dist/Templates/nextjs/Components/Class.mustache';
         const templateProps = {
             fileName: answers.fileName,
             hasStyle: answers.hasStyle,
@@ -164,10 +165,10 @@ exports.Helper = {
             lowerFileName: answers.lowerFileName,
             upperFileName: answers.upperFileName
         };
-        const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
+        // const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
         const addIndexParams = {
             dirPath: `${config_1.Config.nextjs.componentsDir}/index.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(indexTemplate, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(indexTemplatePath, templateProps),
             message: 'Component added to index.ts'
         };
         const writeFileProps = {

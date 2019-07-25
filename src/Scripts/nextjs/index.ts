@@ -7,7 +7,7 @@ import { PluginHelper } from '../../Plugins/nextjs/helpers';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
-import { INextjsActions, INextjsCommonQuestions, INextjsQuestions } from './INextjsTypes';
+import { INextjsActions, INextjsCommonQuestions, INextjsQuestions, INextjsHelper } from './INextjsTypes';
 import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
@@ -120,6 +120,11 @@ const questions: INextjsQuestions = {
 	]
 };
 
+const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
+	templatePath: Config.nextjs.templates.classComponentTemplatePath,
+	indexTemplatePath: Config.nextjs.templates.classComponentIndexTemplatePath
+}
+
 const actions: INextjsActions = {
 	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { hasStyle = false } = answers;
@@ -127,7 +132,7 @@ const actions: INextjsActions = {
 		answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
-		Helper.createClassComponent(answers);
+		Helper.createClassComponent(answers, createClassComponentParams);
 
 		if (hasStyle) {
 			Helper.createStyle(answers);
@@ -156,7 +161,7 @@ const actions: INextjsActions = {
 			routesTemplate: Config.nextjs.templates.addRouteTemplate
 		};
 
-		Helper.createClassComponent(answers);
+		Helper.createClassComponent(answers, createClassComponentParams);
 		Helper.addRoute(answers, addRouteParams);
 
 		if (hasStyle) {
