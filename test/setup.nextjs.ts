@@ -1,4 +1,8 @@
 import { fs } from 'memfs';
+import * as path from 'path'
+
+const realFs = jest.requireActual('fs')
+
 process.chdir('/');
 
 // Nextjs Directories
@@ -21,28 +25,7 @@ fs.writeFileSync('/app/routes.js', `\n\nmodule.exports = routes;`);
 
 // CreateInterface
 fs.writeFileSync('/Templates/nextjs/Interfaces/ComponentIndex.mustache',`// COMPONENT INTERFACES\nexport { I{{fileName}} } from '@Interfaces/Components/{{fileName}}.d.ts';`)
-fs.writeFileSync('/Templates/nextjs/Interfaces/Component.mustache', `
-//#region Global Imports
-import { Props } from 'prop-types';
-//#endregion Global Imports
-
-declare module I{{fileName}} {
-    export interface IProps extends Props<{}> {
-  
-    }
-    {{#isClass}}
-    export interface IState { }
-    export interface IStateProps { }
-    {{/isClass}}
-
-    {{#isConnectStore}}
-    module Actions {
-	    export interface IMapPayload { }
-		export interface IMapResponse { }
-	}
-    {{/isConnectStore}}
-}
-`);
+fs.writeFileSync('/Templates/nextjs/Interfaces/Component.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Interfaces/Component.mustache')));
 
 fs.writeFileSync('/Templates/nextjs/Interfaces/ComponentIndex.mustache', `// COMPONENT INTERFACES \nexport { I{{fileName}} } from '@Interfaces/Components/{{fileName}}.d.ts';`);
 fs.writeFileSync('/Templates/nextjs/Interfaces/PageIndex.mustache', `// PAGE INTERFACES \nexport { I{{fileName}} } from '@Interfaces/Pages/{{fileName}}.d.ts';`);

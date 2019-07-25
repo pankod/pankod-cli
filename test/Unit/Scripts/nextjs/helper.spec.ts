@@ -26,27 +26,28 @@ describe('Helper tests', () => {
 		});
 	});
 
-	const createInterfaceParams = {
-		templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
-		pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
-		storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
-		compInterfaceIndex: '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
-		storeInterface: '/Templates/nextjs/Interfaces/ReduxStore.mustache',
-		interfaceDir: '/src/Interfaces/index.ts',
-		reduxInterfaceDir: '/src/Interfaces/Redux/Store.d.ts',
-		pageInterfaceDir: '/src/Interfaces/Pages',
-		compInterfaceDir: '/src/Interfaces/Components'
-	};
-
-	const answers = {
-		fileName: 'Test',
-		lowerFileName: 'test',
-		upperFileName: 'Test',
-		isPage: false,
-		isConnectStore: true,
-		isClass: true
-	};
 	describe('Test createInterface methods', () => {
+		const createInterfaceParams = {
+			templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
+			pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
+			storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
+			compInterfaceIndex: '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
+			storeInterface: '/Templates/nextjs/Interfaces/ReduxStore.mustache',
+			interfaceDir: '/src/Interfaces/index.ts',
+			reduxInterfaceDir: '/src/Interfaces/Redux/Store.d.ts',
+			pageInterfaceDir: '/src/Interfaces/Pages',
+			compInterfaceDir: '/src/Interfaces/Components'
+		};
+	
+		const answers = {
+			fileName: 'Test',
+			lowerFileName: 'test',
+			upperFileName: 'Test',
+			isPage: false,
+			isConnectStore: true,
+			isClass: true
+		};
+
 		it('Should create component interface file', () => {
 			Helper.createInterface(answers, true, createInterfaceParams);
 
