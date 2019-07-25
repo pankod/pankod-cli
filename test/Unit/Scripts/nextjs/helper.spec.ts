@@ -2,8 +2,9 @@ import { fs } from 'memfs';
 import { Helper } from '../../../../src/Scripts/nextjs/helper';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Config } from '../../../../src/config';
+import { INextjsHelper } from '../../../../src/Scripts/nextjs/INextjsTypes';
 
-const createInterfaceParams = {
+const createInterfaceParams: INextjsHelper.ICreateInterfaceParams = {
 	templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
 	pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
 	storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
@@ -15,11 +16,16 @@ const createInterfaceParams = {
 	compInterfaceDir: '/src/Interfaces/Components'
 };
 
-const addActionConstIndexParams = {
+const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
 	actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
 }
 
-const addReducerParams = {
+const addActionParams: INextjsHelper.IAddActionParams = {
+	actionIndexTemplatePath: '/Templates/nextjs/Reducers/ActionIndex.mustache',
+	actionTemplatePath: '/Templates/nextjs/Reducers/Action.mustache'
+}
+
+const addReducerParams: INextjsHelper.IAddReducerParams = {
 	addActionConstIndexParams,
 	reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
 	reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
@@ -190,11 +196,12 @@ describe('Helper tests', () => {
 			hasStyle: true
 		}
 
-		const params = {
+		const params: INextjsHelper.ICreateClassComponentParams = {
 			templatePath: '/Templates/nextjs/Components/Class.mustache',
 			indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
 			createInterfaceParams,
-			addReducerParams
+			addReducerParams,
+			addActionParams
 		}
 
 		Helper.createClassComponent(answers, params)

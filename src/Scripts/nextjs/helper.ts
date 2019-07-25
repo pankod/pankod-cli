@@ -113,22 +113,21 @@ export const Helper = {
 		CommonHelper.replaceContent(replaceContentParams);
 	},
 
-	addAction: (answers: ICommon.IAnswers): void => {
+	addAction: (answers: ICommon.IAnswers, params: INextjsHelper.IAddActionParams): void => {
+		const { actionIndexTemplatePath, actionTemplatePath } = params
 		const { fileName } = answers;
 		const actionFileDir = `${Config.nextjs.actionDir}/${fileName}Actions.ts`;
-		const actionTemplate = './dist/Templates/nextjs/Reducers/Action.mustache';
-		const indexTemplate = './dist/Templates/nextjs/Reducers/ActionIndex.mustache';
 		const templateProps = { fileName };
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: actionFileDir,
-			getFileContent: () => CommonHelper.getTemplate(actionTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(actionTemplatePath, templateProps),
 			message: 'Added new action file'
 		};
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.nextjs.actionDir}/index.ts`,
-			getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(actionIndexTemplatePath, templateProps),
 			message: 'Added action file to index.ts Actions/index.ts'
 		};
 
@@ -173,7 +172,7 @@ export const Helper = {
 			1500
 		);
 
-		
+
 
 		if (isConnectStore) {
 			Helper.addActionConstIndex(templateProps, addActionConstIndexParams);
@@ -181,7 +180,7 @@ export const Helper = {
 	},
 
 	createClassComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateClassComponentParams): void => {
-		const { templatePath, indexTemplatePath, createInterfaceParams, addReducerParams } = params
+		const { templatePath, indexTemplatePath, createInterfaceParams, addReducerParams, addActionParams } = params
 		const { lowerFileName, isConnectStore = false, isPage = false } = answers;
 		const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
 		const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
@@ -214,7 +213,7 @@ export const Helper = {
 
 		if (isConnectStore) {
 			Helper.addReducer(templateProps, addReducerParams);
-			Helper.addAction(templateProps);
+			Helper.addAction(templateProps, addActionParams);
 		}
 
 		if (!isPage) {
@@ -222,10 +221,10 @@ export const Helper = {
 		}
 	},
 
-	createFuncComponent: (answers: ICommon.IAnswers, ICreateFuncComponentParams:INextjsHelper.ICreateFuncComponentParams): void => {
+	createFuncComponent: (answers: ICommon.IAnswers, ICreateFuncComponentParams: INextjsHelper.ICreateFuncComponentParams): void => {
 		const { lowerFileName, fileName, hasStyle } = answers;
 		const funcDir = `${Config.nextjs.componentsDir}/${answers.fileName}`;
-	/* 	const templatePath = './dist/Templates/nextjs/Components/Functional.mustache'; */
+		/* 	const templatePath = './dist/Templates/nextjs/Components/Functional.mustache'; */
 		const templateProps = {
 			fileName,
 			hasStyle,

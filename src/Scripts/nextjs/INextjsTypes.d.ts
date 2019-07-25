@@ -53,6 +53,7 @@ export declare module INextjsHelper {
 		indexTemplatePath: string;
 		createInterfaceParams: ICreateInterfaceParams;
 		addReducerParams: IAddReducerParams;
+		addActionParams: IAddActionParams;
 	}
 
 	export interface ICreateFuncComponentParams {
@@ -70,7 +71,8 @@ export declare module INextjsHelper {
 	}
 
 	export interface IAddActionParams {
-		
+		actionTemplatePath: string;
+		actionIndexTemplatePath: string;
 	}
 
 	export interface ICreateFuncComponentParams {
