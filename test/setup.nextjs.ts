@@ -16,9 +16,6 @@ fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');
 fs.mkdirSync('/src/Components');
-fs.mkdirSync('/src/Components/Test');
-
-fs.mkdirSync('/src/Components')
 
 fs.mkdirSync('/src/Redux')
 fs.mkdirSync('/src/Redux/Reducers')
