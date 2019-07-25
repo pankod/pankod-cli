@@ -38,7 +38,7 @@ describe('Helper tests', () => {
 			pageInterfaceDir: '/src/Interfaces/Pages',
 			compInterfaceDir: '/src/Interfaces/Components'
 		};
-	
+
 		const answers = {
 			fileName: 'Test',
 			lowerFileName: 'test',
@@ -132,8 +132,69 @@ describe('Helper tests', () => {
 		/* 	Helper.createStyle(answers, true, createInterfaceParams); */
 
 
-		
+
 		});
 	});
 
+	describe('addActionConstIndex', () => {
+		it('should add action constants to index', () => {
+
+		})
+	})
+
+	describe('addAction', () => {
+		it('should add new action file', () => {
+
+		})
+
+		it('should add to action index file', () => {
+
+		})
+	})
+
+	describe('addReducer', () => {
+		it('should add to reducers/index', () => {
+
+		})
+
+		it('should add new reducer', () => {
+
+		})
+	})
+
+	describe('createClassComponent', () => {
+		it('should create class component file', () => {
+
+		})
+
+		it('should add component to index.ts', () => {
+
+		})
+
+		it('should create interface', () => {
+
+		})
+
+		it('should add reducer', () => {
+
+		})
+
+		it('should add action', () => {
+
+		})
+	})
+
+	describe('createFunctionalComponent', () => {
+		it('should create functional component dir and file', () => {
+
+		})
+
+		it('should add to index', () => {
+
+		})
+
+		it('should create interface', () => {
+
+		})
+	})
 });
