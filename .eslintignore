@@ -1,0 +1,4 @@
+dist
+src/Templates/*
+coverage
+node_modules

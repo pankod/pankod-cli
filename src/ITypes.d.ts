@@ -1,14 +1,15 @@
-import { ConfirmQuestion, ListQuestion } from "inquirer";
-import { ICommon } from "./Scripts/ICommon";
+import { ListQuestion } from 'inquirer';
+import { ICommon } from './Scripts/ICommon';
 
 export interface IPankodConfig {
-	projectType: string
-	plugins: Array<string>
+	projectType: string;
+	plugins: string[];
 }
 
 export interface IText {
 	moleculer: string;
 	nextjs: string;
+	pankodCli: string;
 	[key: string]: string;
 }
 
@@ -20,12 +21,18 @@ export interface IQuestions {
 
 export interface IQuestionsHelper {
 	default: {
-		showQuestions: Function
-	}
+		showQuestions: Function;
+	};
 }
 
 export interface IPluginsHelper {
 	default: {
-		addPlugin: Function
-	}
+		addPlugin: Function;
+	};
+}
+
+export interface ISupportedCommands {
+	moleculer: string[];
+	nextjs: string[];
+	[key: string]: string[];
 }

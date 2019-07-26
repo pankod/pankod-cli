@@ -149,7 +149,7 @@ describe('Common Helper', () => {
 					expect(isAlreadyExist).toEqual(false);
 				});
 			});
-		})
+		});
 
 		describe('folder', () => {
 			describe('when folder exist', () => {
@@ -172,7 +172,7 @@ describe('Common Helper', () => {
 					expect(isAlreadyExist).toEqual(false);
 				});
 			});
-		})
+		});
 	});
 
 	describe('replaceContent', () => {
@@ -187,7 +187,7 @@ describe('Common Helper', () => {
 				regexKey: /nextjs test page/gm
 			};
 
-			CommonHelper.replaceContent(replaceContentParams)
+			CommonHelper.replaceContent(replaceContentParams);
 
 			const replacedContent = String(fs.readFileSync(filePath));
 
@@ -196,22 +196,40 @@ describe('Common Helper', () => {
 	});
 
 	describe('validate', () => {
-		it('should handle empty val', () => {
-			const response = CommonHelper.validate('', '/src', true, 'page')
+		describe('empty val', () => {
+			it('should return an error message', () => {
+				const msg = CommonHelper.validate('', '', true, '');
 
-			expect(response).toBe('Can not be empty')
-		})
+				expect(msg).toEqual('Can not be empty');
+			});
+		});
 
-		it('should return true if file doesnt exist', () => {
-			const response = CommonHelper.validate('test', '/src', true, 'service')
+		describe('non-existent file', () => {
+			it('should return true', () => {
+				const msg = CommonHelper.validate('non-existent-file.ts', '/src', true, '');
 
-			expect(response).toBe(true)
-		})
+				expect(msg).toEqual(true);
+			});
+		});
 
-		it('should return false if file exist', () => {
-			const response = CommonHelper.validate('test', '/app/pages', false, 'page')
+		describe('existing file', () => {
+			it('should return an error message', () => {
+				const msg = CommonHelper.validate('index.tsx', '/app/pages/test', true, 'page');
 
-			expect(response).toBe('This page name already used before, enter new name.')
-		})
-	})
+				expect(msg).toEqual('This page name already used before, enter new name.');
+			});
+		});
+	});
+
+	describe('writeFile', () => {
+		describe('error', () => {
+			it('should exit process', () => {
+				const mockExit = jest.spyOn(process, 'exit').mockImplementation();
+
+				CommonHelper.writeFile({ dirPath: 'non-existent-path/123', getFileContent: () => 'test', message: 'Test' });
+
+				expect(mockExit).toHaveBeenCalled();
+			});
+		});
+	});
 });

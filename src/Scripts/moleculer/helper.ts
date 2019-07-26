@@ -57,13 +57,13 @@ export const Helper = {
 
 	},
 	createRepository: (answers: ICommon.IAnswers): void => {
-		const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
+		const templatePath = './src/Templates/moleculer/Repositories/Repository.mustache';
 
 		const templateProps = {
 			upperFileName: answers.upperFileName
 		};
 
-		const indexTemplate = './dist/Templates/moleculer/Repositories/RepoIndex.mustache';
+		const indexTemplate = './src/Templates/moleculer/Repositories/RepoIndex.mustache';
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.repositoriesDir}/index.ts`,
@@ -81,7 +81,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
 			successMessage: 'Added new Repository test.',
-			templatePath: './dist/Templates/moleculer/Tests/Repository.mustache',
+			templatePath: './src/Templates/moleculer/Tests/Repository.mustache',
 			templateProps
 		};
 
@@ -100,7 +100,7 @@ export const Helper = {
 		Helper.createTest(repositoryTestParams);
 	},
 	createService: (answers: ICommon.IAnswers): void => {
-		const templatePath = './dist/Templates/moleculer/Services/Service.mustache';
+		const templatePath = './src/Templates/moleculer/Services/Service.mustache';
 		const templateProps = {
 			fileName: answers.fileName,
 			hasDatabase: answers.hasDatabase,
@@ -109,7 +109,7 @@ export const Helper = {
 			upperFileName: answers.upperFileName
 		};
 
-		const indexTemplate = './dist/Templates/moleculer/Services/index.mustache';
+		const indexTemplate = './src/Templates/moleculer/Services/index.mustache';
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.servicesDir}/index.ts`,
@@ -127,7 +127,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
 			successMessage: 'Added new Microservice test.',
-			templatePath: './dist/Templates/moleculer/Tests/Service.mustache',
+			templatePath: './src/Templates/moleculer/Tests/Service.mustache',
 			templateProps
 		};
 
@@ -135,7 +135,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
 			successMessage: 'Added new Integration test.',
-			templatePath: './dist/Templates/moleculer/Tests/IntegrationTest.mustache',
+			templatePath: './src/Templates/moleculer/Tests/IntegrationTest.mustache',
 			templateProps
 		};
 
@@ -195,19 +195,19 @@ export const Helper = {
 	},
 
 	createIntegrationTest: (options: ICommon.ICreateTest): void => {
-
 		const integrationProps: ICommon.IWriteFile = {
 			dirPath: options.dirPath,
-			getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+			getFileContent: () =>
+				CommonHelper.getTemplate(options.templatePath, options.templateProps),
 			message: options.successMessage
 		};
 
 		CommonHelper.writeFile(integrationProps);
 	},
 	createInterface: (answers: ICommon.IAnswers, dirType: string, prefix: string = '') => {
-		const templatePath = `./dist/Templates/moleculer/Interfaces/${prefix}Interface.mustache`;
-		const indexInterfaceTemplate = './dist/Templates/moleculer/Interfaces/index.mustache';
-		const folderIndexTemplate = './dist/Templates/moleculer/Interfaces/FolderIndex.mustache';
+		const templatePath = `./src/Templates/moleculer/Interfaces/${prefix}Interface.mustache`;
+		const indexInterfaceTemplate = './src/Templates/moleculer/Interfaces/index.mustache';
+		const folderIndexTemplate = './src/Templates/moleculer/Interfaces/FolderIndex.mustache';
 
 		const templateProps = { upperFileName: answers.upperFileName, dirType };
 		const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
@@ -239,11 +239,11 @@ export const Helper = {
 	createTest: (options: ICommon.ICreateTest): void => {
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: options.dirPath,
-			getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+			getFileContent: () =>
+				CommonHelper.getTemplate(options.templatePath, options.templateProps),
 			message: options.successMessage
 		};
 
 		CommonHelper.writeFile(writeFileProps);
-
 	}
 };

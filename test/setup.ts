@@ -40,7 +40,9 @@ fs.mkdirSync('/Templates/moleculer/Repositories');
 // Create Templates
 fs.writeFileSync('/src/Templates/index.ts', '');
 fs.writeFileSync('/src/Templates/moleculer/moleculer.mustache', 'Test template moleculer.mustache');
+fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
 
+fs.writeFileSync('/app/pages/test/index.tsx', 'nextjs test page');
 fs.writeFileSync('/app/services/test.service.ts', 'moleculer test service');
 
 fs.writeFileSync('/app/helpers/Test.ts', 'moleculer/nextjs helper');
@@ -194,4 +196,5 @@ describe("Test {{fileName}} service requests", () => {
 // Create Package.json
 fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["styled"] } }`);
 
+// eslint-disable-next-line
 jest.mock('fs', () => require('memfs'));
