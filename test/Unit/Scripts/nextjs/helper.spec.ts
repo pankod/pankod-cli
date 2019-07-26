@@ -201,7 +201,7 @@ describe('Helper tests', () => {
 				lowerFileName: 'test',
 				upperFileName: 'Test',
 				isConnectStore: true,
-				isPage: false,
+				isPage: undefined,
 				hasStyle: true,
 				isClass: true
 			}
@@ -269,7 +269,7 @@ describe('Helper tests', () => {
 				fileName: 'Page',
 				lowerFileName: 'page',
 				upperFileName: 'Page',
-				isConnectStore: false,
+				isConnectStore: undefined,
 				isPage: true,
 				hasStyle: true,
 				interfaceName: 'IPage'
