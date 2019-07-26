@@ -33,7 +33,7 @@ const addReducerParams: INextjsHelper.IAddReducerParams = {
 }
 
 describe('Helper tests', () => {
-	xdescribe('Test addRoute method', () => {
+	describe('Test addRoute method', () => {
 		it('Should add page route', () => {
 
 			const addRouteParams = {
@@ -55,7 +55,7 @@ describe('Helper tests', () => {
 		});
 	});
 
-	xdescribe('Test createInterface methods', () => {
+	describe('Test createInterface methods', () => {
 
 
 		const answers = {
@@ -136,7 +136,7 @@ describe('Helper tests', () => {
 
 	});
 
-	xdescribe('Test createStyle method', () => {
+	describe('Test createStyle method', () => {
 		it('Should create style file', () => {
 			const answers = {
 				fileName: 'Test',
@@ -243,26 +243,51 @@ describe('Helper tests', () => {
 			})
 
 			it('should add reducer', () => {
+				const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test.ts'))
 
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Reducers/Reducer.mustache',
+					answers
+				)
+
+				expect(createdReducer).toBe(fileContent)
 			})
 
 			it('should add action', () => {
+				const createdAction = String(fs.readFileSync('/src/Actions/TestActions.ts'))
 
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Reducers/Action.mustache',
+					answers
+				)
+
+				expect(createdAction).toBe(fileContent)
 			})
 		})
 
-		xdescribe('Page', () => {
+		describe('Page', () => {
 			const answers = {
 				fileName: 'Page',
 				lowerFileName: 'page',
 				upperFileName: 'Page',
-				isConnectStore: true,
+				isConnectStore: false,
 				isPage: true,
-				hasStyle: true
+				hasStyle: true,
+				interfaceName: 'IPage'
 			}
 
 			Helper.createClassComponent(answers, params)
 
+			it('should create page/index.tsx', () => {
+				const createdPage = String(fs.readFileSync('/pages/page/index.tsx'))
+
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Components/Class.mustache',
+					answers
+				)
+
+				expect(createdPage).toBe(fileContent)
+			})
 		})
 	})
 

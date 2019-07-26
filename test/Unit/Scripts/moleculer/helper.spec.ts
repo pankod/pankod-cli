@@ -6,7 +6,7 @@ import { Config } from '../../../../src/config';
 import { IMoleculerHelper } from './../../../../src/Scripts/moleculer/IMoleculerTypes.d';
 import { ICommon } from '../../../../src/Scripts/ICommon';
 
-xdescribe('Helper tests', () => {
+describe('Helper tests', () => {
 
 
 	it('should addBrokerHelper', () => {
