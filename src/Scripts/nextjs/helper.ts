@@ -173,7 +173,7 @@ export const Helper = {
 			1500
 		);
 
-		
+
 
 		if (isConnectStore) {
 			Helper.addActionConstIndex(templateProps, addActionConstIndexParams);
@@ -222,35 +222,34 @@ export const Helper = {
 		}
 	},
 
-	createFuncComponent: (answers: ICommon.IAnswers, ICreateFuncComponentParams:INextjsHelper.ICreateFuncComponentParams): void => {
+	createFuncComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateFuncComponentParams): void => {
 		const { lowerFileName, fileName, hasStyle } = answers;
-		const funcDir = `${Config.nextjs.componentsDir}/${answers.fileName}`;
-	/* 	const templatePath = './dist/Templates/nextjs/Components/Functional.mustache'; */
+		const funcDir = `${params.componentsDir}/${answers.fileName}`;
+		/* 	const templatePath = './dist/Templates/nextjs/Components/Functional.mustache'; */
 		const templateProps = {
 			fileName,
 			hasStyle,
 			interfaceName: `I${fileName}`,
 			lowerFileName
 		};
-		const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
+		/* 	const indexTemplate = './dist/Templates/nextjs/Components/index.mustache'; */
 
 		const addIndexParams: ICommon.IAddIndex = {
-			dirPath: `${Config.nextjs.componentsDir}/index.ts`,
-			getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
+			/* 	dirPath: `${Config.nextjs.componentsDir}/index.ts`, */
+			dirPath: `${params.componentsDir}/index.ts`,
+			getFileContent: () => CommonHelper.getTemplate(params.indexTemplatePath, templateProps),
 			message: 'Component added to index.ts.'
 		};
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: `${funcDir}/index.tsx`,
-			getFileContent: () => CommonHelper.getTemplate(ICreateFuncComponentParams.templatePath, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(params.templatePath, templateProps),
 			message: 'Add new functional component.'
 		};
-
-		// const createInterfaceParams = {}
 
 		CommonHelper.createFile(funcDir);
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
-		// Helper.createInterface(answers, false, createInterfaceParams);
+		Helper.createInterface(answers, false, params.createInterfaceParams);
 	}
 };

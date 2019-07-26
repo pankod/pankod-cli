@@ -88,10 +88,11 @@ fs.writeFileSync('/src/Definitions/ActionConsts.ts', `export const ActionConsts 
 		SetReducer: 'Home_SetReducer',
 	},
 };`)
+
 // CreateStyle
 fs.writeFileSync('/Templates/nextjs/Styles.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Styles.mustache')));
 
 // CreateFuncComponent
 fs.writeFileSync('/Templates/nextjs/Components/Functional.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Components/Functional.mustache')));
-
+fs.writeFileSync('/Templates/nextjs/Components/index.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Components/index.mustache')));
 

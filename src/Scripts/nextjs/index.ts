@@ -144,10 +144,17 @@ const questions: INextjsQuestions = {
 
 const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
 	templatePath: Config.nextjs.templates.classComponentTemplatePath,
-	indexTemplatePath: Config.nextjs.templates.classComponentIndexTemplatePath,
+	indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
 	createInterfaceParams,
 	addReducerParams
-}
+};
+
+const createFuncComponentParams: INextjsHelper.ICreateFuncComponentParams = {
+	templatePath: Config.nextjs.templates.funcComponentTemplate,
+	indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
+	componentsDir: Config.nextjs.componentsDir,
+	createInterfaceParams
+};
 
 const createStyleParams: INextjsHelper.ICreateStyle = {
 	compDirPath: Config.nextjs.componentsDir,
@@ -174,11 +181,7 @@ const actions: INextjsActions = {
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
-	/* 	const createFuncComponentParams = {
-			templatePath
-		}
- */
-		Helper.createFuncComponent(answers);
+		Helper.createFuncComponent(answers, createFuncComponentParams);
 
 		if (hasStyle) {
 			Helper.createStyle(answers, createStyleParams);

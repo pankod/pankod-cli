@@ -76,5 +76,6 @@ export declare module INextjsHelper {
 	export interface ICreateFuncComponentParams {
 		templatePath: string;
 		indexTemplatePath: string;
+		componentsDir: string;
 	}
 }
