@@ -45,7 +45,7 @@ exports.Helper = {
         };
         return replaceBrokerParams;
     },
-    createRepository: (answers) => {
+    createRepository: (answers, createInterfaceParams) => {
         const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
         const templateProps = {
             upperFileName: answers.upperFileName
@@ -69,7 +69,7 @@ exports.Helper = {
             templateProps
         };
         if (!Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.interfaceDir, answers.upperFileName)) {
-            exports.Helper.createInterface(answers, 'Repositories');
+            exports.Helper.createInterface(answers, 'Repositories', '', createInterfaceParams);
         }
         const createEntityTemplatesParams = {
             indexTemplate: config_1.Config.moleculer.templates.createEntityIndexTemplate,
@@ -80,8 +80,7 @@ exports.Helper = {
         exports.Helper.createEntityInstance(answers, createEntityTemplatesParams);
         exports.Helper.createTest(repositoryTestParams);
     },
-    createService: (answers) => {
-        const templatePath = './dist/Templates/moleculer/Services/Service.mustache';
+    createService: (answers, createServiceParams) => {
         const templateProps = {
             fileName: answers.fileName,
             hasDatabase: answers.hasDatabase,
@@ -89,50 +88,39 @@ exports.Helper = {
             lowerFileName: answers.lowerFileName,
             upperFileName: answers.upperFileName
         };
-        const indexTemplate = './dist/Templates/moleculer/Services/index.mustache';
         const addIndexParams = {
             dirPath: `${config_1.Config.moleculer.servicesDir}/index.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(indexTemplate, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createServiceParams.indexTemplate, templateProps),
             message: 'Service added to index.ts.'
         };
         const writeFileProps = {
             dirPath: `${config_1.Config.moleculer.servicesDir}/${answers.lowerFileName}.service.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createServiceParams.templatePath, templateProps),
             message: 'Added new Service.'
         };
         const serviceTestParams = {
             answers,
             dirPath: `${config_1.Config.moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
             successMessage: 'Added new Microservice test.',
-            templatePath: './dist/Templates/moleculer/Tests/Service.mustache',
+            templatePath: createServiceParams.testTemplatePath,
             templateProps
         };
         const integrationTestParams = {
             answers,
             dirPath: `${config_1.Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
             successMessage: 'Added new Integration test.',
-            templatePath: './dist/Templates/moleculer/Tests/IntegrationTest.mustache',
+            templatePath: createServiceParams.integrationTemplatePath,
             templateProps
         };
-        if (!Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.interfaceDir, answers.upperFileName)) {
-            exports.Helper.createInterface(answers, 'Services', 'Service');
+        if (!Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.interfaceDir, answers.upperFileName, true)) {
+            exports.Helper.createInterface(answers, 'Services', 'Service', createServiceParams.createInterfaceParams);
         }
-        const brokerHelperTemplatesParams = {
-            brokerHelperCreate: config_1.Config.moleculer.templates.brokerHelperCreate,
-            brokerHelperImport: config_1.Config.moleculer.templates.brokerHelperImport,
-            replaceFileDir: config_1.Config.moleculer.brokerHelper
-        };
-        const createServiceHelperParams = {
-            indexTemplate: config_1.Config.moleculer.templates.createServiceHelperIndexTemplate,
-            templatePath: config_1.Config.moleculer.templates.createServiceHelperTemplatePath,
-            testTemplatePath: config_1.Config.moleculer.templates.createServiceHelperTestTemplatePath
-        };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
-        exports.Helper.createServiceHelper(answers, createServiceHelperParams);
+        exports.Helper.createServiceHelper(answers, createServiceParams.createServiceHelperParams);
         exports.Helper.createTest(serviceTestParams);
         exports.Helper.createIntegrationTest(integrationTestParams);
-        exports.Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
+        exports.Helper.addBrokerHelper(answers, createServiceParams.brokerHelperTemplatesParams);
     },
     createServiceHelper: (answers, createServiceHelperParams) => {
         const templateProps = {
@@ -168,11 +156,10 @@ exports.Helper = {
         };
         Common_1.CommonHelper.writeFile(integrationProps);
     },
-    createInterface: (answers, dirType, prefix = '') => {
-        const templatePath = `./dist/Templates/moleculer/Interfaces/${prefix}Interface.mustache`;
-        const indexInterfaceTemplate = './dist/Templates/moleculer/Interfaces/index.mustache';
-        const folderIndexTemplate = './dist/Templates/moleculer/Interfaces/FolderIndex.mustache';
+    createInterface: (answers, dirType, prefix = '', createInterfaceParams) => {
+        const templatePath = `${createInterfaceParams.templatePath}/${prefix}Interface.mustache`;
         const templateProps = { upperFileName: answers.upperFileName, dirType };
+        // /src/Interfaces/Services/Service/IService.d.ts
         const interfaceFilePath = `${config_1.Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
         const interfaceDirPath = `${config_1.Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
         const writeFileProps = {
@@ -182,12 +169,12 @@ exports.Helper = {
         };
         const addIndexParams = {
             dirPath: `${config_1.Config.moleculer.interfaceDir}/index.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(indexInterfaceTemplate, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createInterfaceParams.indexInterfaceTemplate, templateProps),
             message: 'Interface added to index.ts.'
         };
         const addFolderIndex = {
             dirPath: `${config_1.Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/index.ts`,
-            getFileContent: () => Common_1.CommonHelper.getTemplate(folderIndexTemplate, templateProps),
+            getFileContent: () => Common_1.CommonHelper.getTemplate(createInterfaceParams.folderIndexTemplate, templateProps),
             message: 'Interface added to folder index.ts.'
         };
         Common_1.CommonHelper.createFile(interfaceDirPath);

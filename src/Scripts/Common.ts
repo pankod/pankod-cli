@@ -15,7 +15,7 @@ export const CommonHelper = {
 	addToIndex: (params: ICommon.IAddIndex): void => {
 		fs.appendFileSync(
 			path.resolve('', params.dirPath),
-			`${params.getFileContent()}\n`
+			`${params.getFileContent()}`
 		);
 
 		console.log(logSymbols.success, params.message);
@@ -70,7 +70,6 @@ export const CommonHelper = {
 			getFileContent: () => replaceFile,
 			message: params.message
 		};
-
 		CommonHelper.writeFile(writeFileProps);
 	},
 	validate: (val: string, dirPath: string, isFile: boolean, fileType: string): string | boolean => {

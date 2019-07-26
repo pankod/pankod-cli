@@ -1,6 +1,7 @@
 import { IMoleculerActions } from './IMoleculerTypes.d';
 import { InputQuestion, Answers, Question } from "inquirer";
 import { ICommon } from "../ICommon";
+import { create } from 'domain';
 
 export interface IMoleculerQuestions {
 	entity: Question<ICommon.IAnswers>[];
@@ -25,9 +26,24 @@ export declare module IMoleculerHelper {
 		templatePath: string;
 		indexTemplate: string;
 	}
+	export interface ICreateServiceParams {
+		templatePath: string;
+		indexTemplate: string;
+		testTemplatePath: string;
+		integrationTemplatePath: string;
+		brokerHelperTemplatesParams: IBrokerHelperTemplatesParams;
+		createServiceHelperParams: ICreateServiceHelperParams;
+		createInterfaceParams: ICreateInterfaceParams;
+	}
 	export interface ICreateServiceHelperParams {
 		templatePath: string;
 		indexTemplate: string;
 		testTemplatePath: string;
+	}
+
+	export interface ICreateInterfaceParams {
+		templatePath: string;
+		indexInterfaceTemplate: string;
+		folderIndexTemplate: string;
 	}
 }

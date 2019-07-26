@@ -52,10 +52,36 @@ const questions = {
 };
 const actions = {
     entity: (answers) => {
-        helper_1.Helper.createRepository(answers);
+        const crateInterfaceParams = {
+            folderIndexTemplate: config_1.Config.moleculer.templates.createInterfaceFolderIndexTemplate,
+            indexInterfaceTemplate: config_1.Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+            templatePath: config_1.Config.moleculer.templates.createInterfaceTemplatePath
+        };
+        helper_1.Helper.createRepository(answers, crateInterfaceParams);
     },
     service: (answers) => {
-        helper_1.Helper.createService(answers);
+        const createServiceParams = {
+            indexTemplate: config_1.Config.moleculer.templates.createServiceIndexTemplate,
+            integrationTemplatePath: config_1.Config.moleculer.templates.createServiceIntegrationTestTemplate,
+            templatePath: config_1.Config.moleculer.templates.createServiceTemplatePath,
+            testTemplatePath: config_1.Config.moleculer.templates.createServiceTestTemplate,
+            brokerHelperTemplatesParams: {
+                brokerHelperCreate: config_1.Config.moleculer.templates.brokerHelperCreate,
+                brokerHelperImport: config_1.Config.moleculer.templates.brokerHelperImport,
+                replaceFileDir: config_1.Config.moleculer.brokerHelper
+            },
+            createServiceHelperParams: {
+                indexTemplate: config_1.Config.moleculer.templates.createServiceHelperIndexTemplate,
+                templatePath: config_1.Config.moleculer.templates.createServiceHelperTemplatePath,
+                testTemplatePath: config_1.Config.moleculer.templates.createServiceHelperTestTemplatePath
+            },
+            createInterfaceParams: {
+                folderIndexTemplate: config_1.Config.moleculer.templates.createInterfaceFolderIndexTemplate,
+                indexInterfaceTemplate: config_1.Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+                templatePath: config_1.Config.moleculer.templates.createInterfaceTemplatePath
+            }
+        };
+        helper_1.Helper.createService(answers, createServiceParams);
     }
 };
 exports.default = {

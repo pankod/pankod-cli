@@ -1,6 +1,6 @@
 import { fs } from 'memfs';
-import * as path from 'path'
-const realFs = jest.requireActual('fs')
+import * as path from 'path';
+const realFs = jest.requireActual('fs');
 
 process.chdir('/');
 
@@ -16,7 +16,9 @@ fs.mkdirSync('/src/ServiceHelpers');
 fs.mkdirSync('/src/Interfaces');
 fs.mkdirSync('/src/Interfaces/Repositories');
 fs.mkdirSync('/src/Interfaces/Repositories/Test');
+fs.mkdirSync('/src/Interfaces/Services');
 
+fs.mkdirSync('/services');
 
 fs.mkdirSync('/app');
 fs.mkdirSync('/app/pages');
@@ -30,12 +32,14 @@ fs.mkdirSync('/test/Utils');
 fs.mkdirSync('/test/Unit');
 fs.mkdirSync('/test/Unit/ServiceHelpers');
 fs.mkdirSync('/test/Integration');
+fs.mkdirSync('/test/Unit/MicroServices');
 
 fs.mkdirSync('/Templates');
 fs.mkdirSync('/Templates/moleculer');
 fs.mkdirSync('/Templates/moleculer/Tests');
 fs.mkdirSync('/Templates/moleculer/Services');
 fs.mkdirSync('/Templates/moleculer/Repositories');
+fs.mkdirSync('/Templates/moleculer/Interfaces');
 
 // Create Templates
 fs.writeFileSync('/src/Templates/index.ts', '');
@@ -49,7 +53,8 @@ fs.writeFileSync('/app/helpers/Test.ts', 'moleculer/nextjs helper');
 fs.writeFileSync('/test/Utils/BrokerHelper.ts', '//#endregion Local Imports');
 
 fs.writeFileSync('/Templates/moleculer/Tests/BrokerHelperImport.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Tests/BrokerHelperImport.mustache')));
-fs.writeFileSync('/Templates/moleculer/Tests/BrokerHelperCreate.mustache', `broker.createService({{upperFileName}}Service);\nreturn broker;`);
+
+fs.writeFileSync('/Templates/moleculer/Tests/BrokerHelperCreate.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Tests/BrokerHelperCreate.mustache')));
 
 fs.writeFileSync('/src/Entities/index.ts', '');
 fs.writeFileSync('/Templates/moleculer/Repositories/Entity.mustache', `//#region Global Imports
@@ -147,50 +152,25 @@ export module {{upperFileName}}Helper {
 
 fs.writeFileSync('/Templates/moleculer/Services/HelperIndex.mustache', `export { {{upperFileName}}Helper } from '@ServiceHelpers/{{upperFileName}}Helper';`);
 
-fs.writeFileSync('/test/Integration/Integration.spec.ts', '');
-fs.writeFileSync('/Templates/moleculer/Tests/IntegrationTest.mustache', `import ApiGateway = require('moleculer-web');
-import setupDatabase from '@Test/Config/SetupDatabase';
-import { getConnection } from 'typeorm';
-import { BrokerHelper } from '@Test/Utils';
+fs.writeFileSync('/test/Integration/service.spec.ts', '');
+fs.writeFileSync('/test/Integration/integration.spec.ts', '');
 
-const request = require("supertest");
-const broker = BrokerHelper.setupBroker();
-let server;
+fs.writeFileSync('/Templates/moleculer/Tests/IntegrationTest.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Tests/IntegrationTest.mustache')));
 
-beforeEach(async () => {
-    await setupDatabase();
-});
+// fs.writeFileSync('/src/Interfaces/Services/Service/IService.d.ts', '');
+fs.writeFileSync('/test/Unit/MicroServices/service.spec.ts', '');
 
-afterEach(async () => {
-    await getConnection().close();
-});
+fs.writeFileSync('/Templates/moleculer/Interfaces/index.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/index.mustache')));
 
-beforeAll(() => {
-    const service = broker.createService(ApiGateway);
-    server = service.server;
-    return broker.start();
-});
+fs.writeFileSync('/Templates/moleculer/Interfaces/FolderIndex.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/FolderIndex.mustache')));
 
-afterAll(() => broker.stop());
+fs.writeFileSync('/Templates/moleculer/Interfaces/ServiceInterface.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/ServiceInterface.mustache')));
 
-describe("Test {{fileName}} service requests", () => {
-    it("Test POST request on {{fileName}} service <methodName> method", () => {
+fs.writeFileSync('/Templates/moleculer/Services/index.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Services/index.mustache')));
 
-        const params = {
-            //params
-        }
+fs.writeFileSync('/Templates/moleculer/Services/Service.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Services/Service.mustache')));
 
-        return request(server)
-            .post("/{{lowerFileName}}/<methodName>")
-            .query({ ...params })
-            .then(res => {
-                expect(res.statusCode).toBe(200);
-                expect(res.headers["content-type"]).toBe("application/json; charset=utf-8");
-                expect(res.body).toBe({});
-            });
-    });
-});
-`);
+fs.writeFileSync('/Templates/moleculer/Tests/Service.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Tests/Service.mustache')));
 
 // Create Package.json
 fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["styled"] } }`);
