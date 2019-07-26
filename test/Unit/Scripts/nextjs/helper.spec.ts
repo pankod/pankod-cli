@@ -2,8 +2,9 @@ import { fs } from 'memfs';
 import { Helper } from '../../../../src/Scripts/nextjs/helper';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Config } from '../../../../src/config';
+import { INextjsHelper } from '../../../../src/Scripts/nextjs/INextjsTypes';
 
-const createInterfaceParams = {
+const createInterfaceParams: INextjsHelper.ICreateInterfaceParams = {
 	templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
 	pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
 	storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
@@ -15,13 +16,19 @@ const createInterfaceParams = {
 	compInterfaceDir: '/src/Interfaces/Components'
 };
 
-const addActionConstIndexParams = {
+const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
 	actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
 };
 
-const addReducerParams = {
+const addActionParams: INextjsHelper.IAddActionParams = {
+	actionIndexTemplatePath: '/Templates/nextjs/Reducers/ActionIndex.mustache',
+	actionTemplatePath: '/Templates/nextjs/Reducers/Action.mustache'
+}
+
+const addReducerParams: INextjsHelper.IAddReducerParams = {
 	addActionConstIndexParams,
 	reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
+	reducerStoreTemplatePath: '/Templates/nextjs/Reducers/Store.mustache',
 	reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
 };
 
@@ -48,7 +55,7 @@ describe('Helper tests', () => {
 		});
 	});
 
-	xdescribe('Test createInterface methods', () => {
+	describe('Test createInterface methods', () => {
 
 
 		const answers = {
@@ -104,7 +111,7 @@ describe('Helper tests', () => {
 				const createdInterface = String(fs.readFileSync(Config.nextjs.reduxInterfaceDir));
 				expect(createdInterface).toMatch(reduxImportContent);
 				done();
-			}, 500);
+			}, 100);
 
 		});
 
@@ -132,9 +139,9 @@ describe('Helper tests', () => {
 	describe('Test createStyle method', () => {
 		it('Should create style file', () => {
 			const answers = {
-				fileName: 'Test',
+				fileName: 'Style',
 				hasStyle: true,
-				lowerFileName: 'test'
+				lowerFileName: 'style'
 			};
 
 			const createStyleParams = {
@@ -146,7 +153,7 @@ describe('Helper tests', () => {
 			Helper.createStyle(answers, createStyleParams);
 
 			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Styles.mustache', answers);
-			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss'));
+			const createdStyle = String(fs.readFileSync('./src/Components/Style/style.scss'));
 
 			expect(createdStyle).toBe(fileContent);
 		});
@@ -179,42 +186,107 @@ describe('Helper tests', () => {
 	})
 
 	describe('createClassComponent', () => {
-		const answers = {
-			fileName: 'Test',
-			lowerFileName: 'test',
-			upperFileName: 'Test',
-			isConnectStore: true,
-			isPage: false,
-			hasStyle: true
-		}
 
-		const params = {
+		const params: INextjsHelper.ICreateClassComponentParams = {
 			templatePath: '/Templates/nextjs/Components/Class.mustache',
 			indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
 			createInterfaceParams,
-			addReducerParams
+			addReducerParams,
+			addActionParams
 		}
 
-		/* 		Helper.createClassComponent(answers, params) */
+		describe('Class Component', () => {
+			const answers = {
+				fileName: 'Test',
+				lowerFileName: 'test',
+				upperFileName: 'Test',
+				isConnectStore: true,
+				isPage: false,
+				hasStyle: true,
+				isClass: true
+			}
 
-		it('should create class component file', () => {
+			Helper.createClassComponent(answers, params)
 
+			it('should create class component file', () => {
+				const createdClassComponent = String(fs.readFileSync('/src/Components/Test/index.tsx'))
+
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Components/Class.mustache',
+					{ ...answers, interfaceName: 'ITest' }
+				)
+
+				expect(createdClassComponent).toBe(fileContent)
+			})
+
+			it('should add component to index.ts', () => {
+				const createdIndexFile = String(fs.readFileSync('/src/Components/index.ts'));
+
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Components/index.mustache',
+					answers
+				)
+
+				expect(createdIndexFile).toBe(fileContent)
+			})
+
+			it('should create interface', () => {
+				const createdComponentInterfaceFile = String(fs.readFileSync('/src/Interfaces/Components/Test.d.ts'))
+
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Interfaces/Component.mustache',
+					{ ...answers }
+				)
+
+				expect(createdComponentInterfaceFile).toBe(fileContent)
+			})
+
+			it('should add reducer', () => {
+				const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test.ts'))
+
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Reducers/Reducer.mustache',
+					answers
+				)
+
+				expect(createdReducer).toBe(fileContent)
+			})
+
+			it('should add action', () => {
+				const createdAction = String(fs.readFileSync('/src/Actions/TestActions.ts'))
+
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Reducers/Action.mustache',
+					answers
+				)
+
+				expect(createdAction).toBe(fileContent)
+			})
 		})
 
-		it('should add component to index.ts', () => {
+		describe('Page', () => {
+			const answers = {
+				fileName: 'Page',
+				lowerFileName: 'page',
+				upperFileName: 'Page',
+				isConnectStore: false,
+				isPage: true,
+				hasStyle: true,
+				interfaceName: 'IPage'
+			}
 
-		})
+			Helper.createClassComponent(answers, params)
 
-		it('should create interface', () => {
+			it('should create page/index.tsx', () => {
+				const createdPage = String(fs.readFileSync('/pages/page/index.tsx'))
 
-		})
+				const fileContent = CommonHelper.getTemplate(
+					'/Templates/nextjs/Components/Class.mustache',
+					answers
+				)
 
-		it('should add reducer', () => {
-
-		})
-
-		it('should add action', () => {
-
+				expect(createdPage).toBe(fileContent)
+			})
 		})
 	})
 

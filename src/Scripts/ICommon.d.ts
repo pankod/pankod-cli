@@ -5,6 +5,7 @@ export declare module ICommon {
 		upperFileName?: string;
 		isPrivate?: boolean;
 		lowerFileName?: string;
+		interfaceName?: string;
 	}
 
 	export interface IAnswers {

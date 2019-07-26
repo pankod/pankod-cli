@@ -16,12 +16,14 @@ fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');
 fs.mkdirSync('/src/Components');
-fs.mkdirSync('/src/Components/Test');
+fs.mkdirSync('/src/Components/Style');
 
 fs.mkdirSync('/src/Redux')
 fs.mkdirSync('/src/Redux/Reducers')
-
+fs.mkdirSync('/src/Actions')
 fs.mkdirSync('/src/Definitions')
+
+fs.mkdirSync('/pages')
 
 // Create Templates
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
@@ -62,6 +64,21 @@ fs.writeFileSync(
 fs.writeFileSync(
 	'/Templates/nextjs/Reducers/ActionIndex.mustache',
 	realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Reducers/ActionIndex.mustache'))
+)
+
+fs.writeFileSync(
+	'/Templates/nextjs/Reducers/Action.mustache',
+	realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Reducers/Action.mustache'))
+)
+
+fs.writeFileSync(
+	'/Templates/nextjs/Reducers/Store.mustache',
+	realFs.readFileSync(path.resolve(__dirname, '../src/Templates/nextjs/Reducers/Store.mustache'))
+)
+
+fs.writeFileSync(
+	'/src/Actions/index.ts',
+	`export { HomeActions } from './HomeActions';`
 )
 
 fs.writeFileSync('/src/Interfaces/index.ts', '// PAGE INTERFACES\n\n// COMPONENT INTERFACES');

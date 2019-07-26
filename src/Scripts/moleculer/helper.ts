@@ -16,7 +16,7 @@ export const Helper = {
 			() => {
 				CommonHelper.replaceContent(Helper.createParamsForAddBrokerHelper('create', brokerHelperTemplatesParams, answers));
 			},
-			1500
+			100
 		);
 
 		CommonHelper.replaceContent(Helper.createParamsForAddBrokerHelper('import', brokerHelperTemplatesParams, answers));

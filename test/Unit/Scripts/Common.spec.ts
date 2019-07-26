@@ -17,7 +17,7 @@ describe('Common Helper', () => {
 
 			const addedIndex = fs.readFileSync('/src/Templates/index.ts');
 
-			expect(String(addedIndex)).toEqual(`${fileContent}\n`);
+			expect(String(addedIndex)).toEqual(fileContent);
 		});
 	});
 
@@ -194,4 +194,24 @@ describe('Common Helper', () => {
 			expect(replacedContent).toEqual('replaced for test');
 		});
 	});
+
+	describe('validate', () => {
+		it('should handle empty val', () => {
+			const response = CommonHelper.validate('', '/src', true, 'page')
+
+			expect(response).toBe('Can not be empty')
+		})
+
+		it('should return true if file doesnt exist', () => {
+			const response = CommonHelper.validate('test', '/src', true, 'service')
+
+			expect(response).toBe(true)
+		})
+
+		it('should return false if file exist', () => {
+			const response = CommonHelper.validate('test', '/app/pages', false, 'page')
+
+			expect(response).toBe('This page name already used before, enter new name.')
+		})
+	})
 });

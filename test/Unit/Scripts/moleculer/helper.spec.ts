@@ -66,7 +66,7 @@ describe('Helper tests', () => {
 
 		const fileIndexContent = String(fs.readFileSync(fileIndexContentPath));
 
-		expect(fileIndexContent).toBe(CommonHelper.getTemplate(createEntityTemplatesParams.indexTemplate, answers) + '\n');
+		expect(fileIndexContent).toBe(CommonHelper.getTemplate(createEntityTemplatesParams.indexTemplate, answers));
 
 	});
 	// it('should createRepository', () => {

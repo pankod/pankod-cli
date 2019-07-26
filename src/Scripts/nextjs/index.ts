@@ -28,9 +28,15 @@ const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
 	actionConstTemplatePath: Config.nextjs.templates.actionConstTemplatePath
 }
 
+const addActionParams: INextjsHelper.IAddActionParams = {
+	actionIndexTemplatePath: Config.nextjs.templates.actionIndexTemplatePath,
+	actionTemplatePath: Config.nextjs.templates.actionTemplatePath
+}
+
 const addReducerParams: INextjsHelper.IAddReducerParams = {
 	addActionConstIndexParams,
 	reducerIndexTemplatePath: Config.nextjs.templates.reducerIndexTemplatePath,
+	reducerStoreTemplatePath: Config.nextjs.templates.reducerStoreTemplatePath,
 	reducerTemplatePath: Config.nextjs.templates.reducerTemplatePath
 };
 
@@ -146,7 +152,8 @@ const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
 	templatePath: Config.nextjs.templates.classComponentTemplatePath,
 	indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
 	createInterfaceParams,
-	addReducerParams
+	addReducerParams,
+	addActionParams
 };
 
 const createFuncComponentParams: INextjsHelper.ICreateFuncComponentParams = {
