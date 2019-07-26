@@ -10,6 +10,10 @@ import { ICommon } from '../ICommon';
 import { INextjsHelper } from './INextjsTypes';
 //#endregion Local Imports
 
+const commonStoreReplaceParams = {
+
+}
+
 export const Helper = {
 
 	addRoute: (answers: ICommon.IAnswers, IAddRoutesReplaceParams: INextjsHelper.IAddRoutesReplaceParams) => {
@@ -52,13 +56,19 @@ export const Helper = {
 			regexKey: isPage ? /...PAGE INTERFACES/g : /...COMPONENT INTERFACES/g
 		};
 
-		const replaceStoreParams: ICommon.IReplaceContent = {
+		const commonReplaceParams = (contentFile: string, message: string, regexKey: RegExp) => ({
 			fileDir: createInterfaceParams.reduxInterfaceDir,
 			filetoUpdate: fs.readFileSync(path.resolve('', createInterfaceParams.reduxInterfaceDir), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate(createInterfaceParams.storeInterface, templateProps),
-			message: 'Interface file added to Interfaces/Redux/Store.d.ts',
-			regexKey: /export interface IStore\s[{]/g
-		};
+			getFileContent: () => CommonHelper.getTemplate(contentFile, templateProps),
+			message,
+			regexKey
+		})
+
+		const replaceStoreParams: ICommon.IReplaceContent = commonReplaceParams(
+			createInterfaceParams.storeInterface,
+			'Interface file added to Interfaces/Redux/Store.d.ts',
+			/export interface IStore\s[{]/g
+		)
 
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.replaceContent(replaceContentParams);
@@ -68,13 +78,12 @@ export const Helper = {
 
 			setTimeout(
 				() => {
-					const replaceStoreImportParams: ICommon.IReplaceContent = {
-						fileDir: createInterfaceParams.reduxInterfaceDir,
-						filetoUpdate: fs.readFileSync(path.resolve('', createInterfaceParams.reduxInterfaceDir), 'utf8'),
-						getFileContent: () => CommonHelper.getTemplate(createInterfaceParams.storeImportInterface, templateProps),
-						message: 'Interface file added to import section in Interfaces/Redux/Store.d.ts',
-						regexKey: /\s[}] from '@Interfaces';/g
-					};
+					const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
+						createInterfaceParams.storeImportInterface,
+						'Interface file added to import section in Interfaces/Redux/Store.d.ts',
+						/\s[}] from '@Interfaces';/g
+					)
+
 					CommonHelper.replaceContent(replaceStoreImportParams);
 				},
 				100
