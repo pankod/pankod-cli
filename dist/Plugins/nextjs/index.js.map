@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../../src/Plugins/nextjs/index.ts"],"names":[],"mappings":";;;;;;;;;;AACA,uCAA+C;AAE/C,MAAM,OAAO,GAAmB;IAC/B,IAAI,EAAE,iBAAO;IACb,MAAM,EAAE,mBAAS;CACjB,CAAC;AAEF,kBAAe;IACd,SAAS,EAAE,CAAO,UAAkB,EAAE,EAAE;QACvC,OAAO,CAAC,UAAU,CAAC,EAAE,CAAC;IACvB,CAAC,CAAA;CACD,CAAC"}
