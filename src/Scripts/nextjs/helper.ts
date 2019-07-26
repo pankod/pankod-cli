@@ -225,17 +225,14 @@ export const Helper = {
 	createFuncComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateFuncComponentParams): void => {
 		const { lowerFileName, fileName, hasStyle } = answers;
 		const funcDir = `${params.componentsDir}/${answers.fileName}`;
-		/* 	const templatePath = './dist/Templates/nextjs/Components/Functional.mustache'; */
 		const templateProps = {
 			fileName,
 			hasStyle,
 			interfaceName: `I${fileName}`,
 			lowerFileName
 		};
-		/* 	const indexTemplate = './dist/Templates/nextjs/Components/index.mustache'; */
 
 		const addIndexParams: ICommon.IAddIndex = {
-			/* 	dirPath: `${Config.nextjs.componentsDir}/index.ts`, */
 			dirPath: `${params.componentsDir}/index.ts`,
 			getFileContent: () => CommonHelper.getTemplate(params.indexTemplatePath, templateProps),
 			message: 'Component added to index.ts.'
