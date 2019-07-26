@@ -17,17 +17,16 @@ const createInterfaceParams = {
 
 const addActionConstIndexParams = {
 	actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
-}
+};
 
 const addReducerParams = {
 	addActionConstIndexParams,
 	reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
 	reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
-}
-
+};
 
 describe('Helper tests', () => {
-	xdescribe('Test addRoute method', () => {
+	describe('Test addRoute method', () => {
 		it('Should add page route', () => {
 
 			const addRouteParams = {
@@ -138,7 +137,7 @@ describe('Helper tests', () => {
 				lowerFileName: 'test'
 			};
 
-		const createStyleParams = {
+			const createStyleParams = {
 				compDirPath: '/src/Components',
 				pageDirPath: '/pages',
 				templatePath: '/Templates/nextjs/Styles.mustache'
@@ -148,7 +147,7 @@ describe('Helper tests', () => {
 
 			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Styles.mustache', answers);
 			const createdStyle = String(fs.readFileSync('./src/Components/Test/style.scss'));
-			
+
 			expect(createdStyle).toBe(fileContent);
 		});
 	});
@@ -196,7 +195,7 @@ describe('Helper tests', () => {
 			addReducerParams
 		}
 
-/* 		Helper.createClassComponent(answers, params) */
+		/* 		Helper.createClassComponent(answers, params) */
 
 		it('should create class component file', () => {
 
@@ -220,16 +219,42 @@ describe('Helper tests', () => {
 	})
 
 	describe('createFunctionalComponent', () => {
-		it('should create functional component dir and file', () => {
+		const answers = {
+			fileName: 'Functest',
+			hasStyle: true,
+			lowerFileName: 'functest',
+			interfaceName: 'IFunctest'
+		};
 
-		})
+		const createFunctionalComponentParams = {
+			indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
+			templatePath: '/Templates/nextjs/Components/Functional.mustache',
+			componentsDir: '/src/Components',
+			createInterfaceParams
+		};
+
+		it('should create functional component dir and file', () => {
+			Helper.createFuncComponent(answers, createFunctionalComponentParams);
+
+			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Components/Functional.mustache', answers);
+			const createdComponent = String(fs.readFileSync('/src/Components/Functest/index.tsx'));
+
+			expect(createdComponent).toBe(fileContent);
+		});
 
 		it('should add to index', () => {
+			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Components/index.mustache', answers);
+			const createdComponent = String(fs.readFileSync('/src/Components/index.ts'));
 
-		})
+			expect(createdComponent).toMatch(fileContent);
+		});
 
 		it('should create interface', () => {
+			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/Component.mustache', answers);
+			const interfaceFilePath = `${Config.nextjs.compInterfaceDir}/${answers.fileName}.d.ts`;
+			const createdInterface = String(fs.readFileSync(interfaceFilePath));
 
-		})
-	})
+			expect(createdInterface).toBe(fileContent);
+		});
+	});
 });

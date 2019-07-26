@@ -18,6 +18,25 @@ const Common_1 = require("../Common");
 const helper_1 = require("./helper");
 const pluginsEnum_1 = require("./pluginsEnum");
 //#endregion Local Imports
+const createInterfaceParams = {
+    templatePath: config_1.Config.nextjs.templates.createInterfaceTempPath,
+    pageInterfaceIndex: config_1.Config.nextjs.templates.pageInterfaceIndex,
+    storeImportInterface: config_1.Config.nextjs.templates.storeImportInterface,
+    compInterfaceIndex: config_1.Config.nextjs.templates.compInterfaceIndex,
+    storeInterface: config_1.Config.nextjs.templates.storeInterface,
+    interfaceDir: config_1.Config.nextjs.interfaceDir,
+    reduxInterfaceDir: config_1.Config.nextjs.reduxInterfaceDir,
+    pageInterfaceDir: config_1.Config.nextjs.pageInterfaceDir,
+    compInterfaceDir: config_1.Config.nextjs.compInterfaceDir
+};
+const addActionConstIndexParams = {
+    actionConstTemplatePath: config_1.Config.nextjs.templates.actionConstTemplatePath
+};
+const addReducerParams = {
+    addActionConstIndexParams,
+    reducerIndexTemplatePath: config_1.Config.nextjs.templates.reducerIndexTemplatePath,
+    reducerTemplatePath: config_1.Config.nextjs.templates.reducerTemplatePath
+};
 const commonQuestions = {
     addStyle: {
         default: true,
@@ -124,7 +143,15 @@ const questions = {
 };
 const createClassComponentParams = {
     templatePath: config_1.Config.nextjs.templates.classComponentTemplatePath,
-    indexTemplatePath: config_1.Config.nextjs.templates.classComponentIndexTemplatePath
+    indexTemplatePath: config_1.Config.nextjs.templates.componentIndexTemplatePath,
+    createInterfaceParams,
+    addReducerParams
+};
+const createFuncComponentParams = {
+    templatePath: config_1.Config.nextjs.templates.funcComponentTemplate,
+    indexTemplatePath: config_1.Config.nextjs.templates.componentIndexTemplatePath,
+    componentsDir: config_1.Config.nextjs.componentsDir,
+    createInterfaceParams
 };
 const createStyleParams = {
     compDirPath: config_1.Config.nextjs.componentsDir,
@@ -146,7 +173,7 @@ const actions = {
         const { hasStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
-        helper_1.Helper.createFuncComponent(answers);
+        helper_1.Helper.createFuncComponent(answers, createFuncComponentParams);
         if (hasStyle) {
             helper_1.Helper.createStyle(answers, createStyleParams);
         }
