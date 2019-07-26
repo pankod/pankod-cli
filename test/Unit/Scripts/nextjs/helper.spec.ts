@@ -236,7 +236,7 @@ describe('Helper tests', () => {
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Interfaces/Component.mustache',
-					{...answers}
+					{ ...answers }
 				)
 
 				expect(createdComponentInterfaceFile).toBe(fileContent)
