@@ -57,14 +57,14 @@ export const Helper = {
 		return replaceBrokerParams;
 
 	},
-	createRepository: (answers: ICommon.IAnswers, createInterfaceParams: IMoleculerHelper.ICreateInterfaceParams): void => {
-		const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
+	createRepository: (answers: ICommon.IAnswers, createRepositoryParams: IMoleculerHelper.ICreateRepositoryParams): void => {
+		const templatePath = createRepositoryParams.templatePath;
 
 		const templateProps = {
 			upperFileName: answers.upperFileName
 		};
 
-		const indexTemplate = './dist/Templates/moleculer/Repositories/RepoIndex.mustache';
+		const indexTemplate = createRepositoryParams.indexTemplate;
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.repositoriesDir}/index.ts`,
@@ -82,22 +82,19 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
 			successMessage: 'Added new Repository test.',
-			templatePath: './dist/Templates/moleculer/Tests/Repository.mustache',
+			templatePath: createRepositoryParams.testTemplatePath,
 			templateProps
 		};
 
 		if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.upperFileName)) {
-			Helper.createInterface(answers, 'Repositories', '', createInterfaceParams);
+			Helper.createInterface(answers, 'Repositories', '', createRepositoryParams.createInterfaceParams);
 		}
 
-		const createEntityTemplatesParams = {
-			indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
-			templatePath: Config.moleculer.templates.createEntityTemplatePath
-		};
+
 
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
-		Helper.createEntityInstance(answers, createEntityTemplatesParams);
+		Helper.createEntityInstance(answers, createRepositoryParams.createEntityTemplatesParams);
 		Helper.createTest(repositoryTestParams);
 	},
 	createService: (answers: ICommon.IAnswers, createServiceParams: IMoleculerHelper.ICreateServiceParams): void => {

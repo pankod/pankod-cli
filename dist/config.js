@@ -27,6 +27,9 @@ exports.Config = {
             createInterfaceFolderIndexTemplate: './dist/Templates/moleculer/Interfaces/FolderIndex.mustache',
             createInterfaceIndexInterfaceTemplate: './dist/Templates/moleculer/Interfaces/index.mustache',
             createInterfaceTemplatePath: './dist/Templates/moleculer/Interfaces',
+            createRepositoryIndexTemplate: './dist/Templates/moleculer/Repositories/RepoIndex.mustache',
+            createRepositoryTemplatePath: './dist/Templates/moleculer/Repositories/Repository.mustache',
+            createRepositoryTestTemplatePath: './dist/Templates/moleculer/Tests/Repository.mustache'
         }
     },
     nextjs: {

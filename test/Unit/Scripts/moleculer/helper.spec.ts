@@ -33,9 +33,11 @@ describe('Helper tests', () => {
 
 	});
 
+
+
 	it('should createEntityInstance', () => {
 		const answers: ICommon.IAnswers = {
-			fileName: 'tests'
+			fileName: 'test'
 		};
 
 		const createEntityTemplatesParams = {
@@ -44,6 +46,7 @@ describe('Helper tests', () => {
 		};
 
 		const fileIndexContentPath = `${Config.moleculer.entityDir}/index.ts`;
+
 		Helper.createEntityInstance(answers, createEntityTemplatesParams);
 
 		const fileContentPath = `${Config.moleculer.entityDir}/${answers.fileName}.ts`;
@@ -56,32 +59,6 @@ describe('Helper tests', () => {
 		expect(fileIndexContent).toBe(CommonHelper.getTemplate(createEntityTemplatesParams.indexTemplate, answers));
 
 	});
-	// it('should createRepository', () => {
-	// 	const answers: ICommon.IAnswers = {
-	// 		fileName: '',
-	// 		upperFileName: 'Test'
-	// 	};
-
-	// 	const createRepositoryTestTemplateParams = {
-	// 		indexTemplate: '/Templates/moleculer/Repositories/RepoIndex.mustache',
-	// 		templatePath: '/Templates/moleculer/Repositories/Repository.mustache'
-	// 	};
-
-	// 	const createTestRepositoryTemplatePath = '/Templates/moleculer/Tests/Repository.mustache';
-	// 	console.log('createRepository');
-
-	// 	Helper.createRepository(answers, createRepositoryTestTemplateParams, createTestRepositoryTemplatePath);
-
-	// 	const fileContentPath = `${Config.moleculer.repositoriesDir}/${answers.upperFileName}.ts`;
-	// 	const fileContent = String(fs.readFileSync(fileContentPath));
-
-	// 	expect(fileContent).toBe(CommonHelper.getTemplate(createRepositoryTestTemplateParams.templatePath, answers));
-
-	// 	console.log('fileContent', fileContent);
-
-	// 	console.log('fileContent', CommonHelper.getTemplate(createRepositoryTestTemplateParams.templatePath, answers));
-
-	// });
 
 	it('should createTest', () => {
 		const answers: ICommon.IAnswers = {
@@ -147,6 +124,8 @@ describe('Helper tests', () => {
 
 	});
 
+
+
 	it('should createInterface', () => {
 		const answers: ICommon.IAnswers = {
 			fileName: 'test',
@@ -189,7 +168,68 @@ describe('Helper tests', () => {
 		const folderFileContent = String(fs.readFileSync(folderDirPath));
 
 		expect(folderFileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.folderIndexTemplate, templateProps));
+
 	});
+
+	it('should createRepository', () => {
+		const answers: ICommon.IAnswers = {
+			fileName: 'test2',
+			lowerFileName: 'test2',
+			upperFileName: 'Test2'
+		};
+
+
+		const templateProps = {
+			upperFileName: answers.upperFileName
+		};
+
+		const createRepositoryParams: IMoleculerHelper.ICreateRepositoryParams = {
+			indexTemplate: '/Templates/moleculer/Repositories/RepoIndex.mustache',
+			templatePath: '/Templates/moleculer/Repositories/Repository.mustache',
+			testTemplatePath: '/Templates/moleculer/Tests/Repository.mustache',
+			createInterfaceParams: {
+				folderIndexTemplate: '/Templates/moleculer/Interfaces/FolderIndex.mustache',
+				indexInterfaceTemplate: '/Templates/moleculer/Interfaces/index.mustache',
+				templatePath: `/Templates/moleculer/Interfaces`
+			},
+			createEntityTemplatesParams: {
+				indexTemplate: '/Templates/moleculer/Repositories/EntityIndex.mustache',
+				templatePath: '/Templates/moleculer/Repositories/Entity.mustache'
+			}
+		};
+
+		// Reset file for ready to test
+		fs.writeFileSync(`${Config.moleculer.entityDir}/index.ts`, '');
+
+		Helper.createRepository(answers, createRepositoryParams);
+
+		// WriteFile
+		const repoFilePath = `${Config.moleculer.repositoriesDir}/${answers.upperFileName}.ts`;
+		const fileContent = String(fs.readFileSync(repoFilePath));
+
+		expect(fileContent).toBe(CommonHelper.getTemplate(createRepositoryParams.templatePath, templateProps));
+
+		// addToIndex
+		const indexContentPath = `${Config.moleculer.repositoriesDir}/index.ts`;
+		const indexFileContent = String(fs.readFileSync(indexContentPath));
+
+		expect(indexFileContent).toBe(CommonHelper.getTemplate(createRepositoryParams.indexTemplate, answers));
+
+		// createEntityInstance
+
+		const fileContentPath = `${Config.moleculer.entityDir}/${answers.fileName}.ts`;
+		const fileEntityContent = String(fs.readFileSync(fileContentPath));
+
+		expect(fileEntityContent).toBe(CommonHelper.getTemplate(createRepositoryParams.createEntityTemplatesParams.templatePath, answers));
+
+		const fileIndexContentPath = `${Config.moleculer.entityDir}/index.ts`;
+		const fileIndexContent = String(fs.readFileSync(fileIndexContentPath));
+
+		expect(fileIndexContent).toBe(CommonHelper.getTemplate(createRepositoryParams.createEntityTemplatesParams.indexTemplate, answers));
+
+	});
+
+
 
 	it('should createService', () => {
 		const answers: ICommon.IAnswers = {

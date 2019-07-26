@@ -52,12 +52,21 @@ const questions = {
 };
 const actions = {
     entity: (answers) => {
-        const crateInterfaceParams = {
-            folderIndexTemplate: config_1.Config.moleculer.templates.createInterfaceFolderIndexTemplate,
-            indexInterfaceTemplate: config_1.Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
-            templatePath: config_1.Config.moleculer.templates.createInterfaceTemplatePath
+        const createRepositoryParams = {
+            indexTemplate: config_1.Config.moleculer.templates.createRepositoryIndexTemplate,
+            templatePath: config_1.Config.moleculer.templates.createRepositoryTemplatePath,
+            testTemplatePath: config_1.Config.moleculer.templates.createRepositoryTestTemplatePath,
+            createInterfaceParams: {
+                folderIndexTemplate: config_1.Config.moleculer.templates.createInterfaceFolderIndexTemplate,
+                indexInterfaceTemplate: config_1.Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+                templatePath: config_1.Config.moleculer.templates.createInterfaceTemplatePath
+            },
+            createEntityTemplatesParams: {
+                indexTemplate: config_1.Config.moleculer.templates.createEntityIndexTemplate,
+                templatePath: config_1.Config.moleculer.templates.createEntityTemplatePath
+            }
         };
-        helper_1.Helper.createRepository(answers, crateInterfaceParams);
+        helper_1.Helper.createRepository(answers, createRepositoryParams);
     },
     service: (answers) => {
         const createServiceParams = {

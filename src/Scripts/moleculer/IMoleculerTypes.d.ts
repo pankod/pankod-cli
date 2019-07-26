@@ -41,6 +41,14 @@ export declare module IMoleculerHelper {
 		testTemplatePath: string;
 	}
 
+	export interface ICreateRepositoryParams {
+		templatePath: string;
+		indexTemplate: string;
+		testTemplatePath: string;
+		createInterfaceParams: IMoleculerHelper.ICreateInterfaceParams;
+		createEntityTemplatesParams: IMoleculerHelper.ICreateEntityHelperParams;
+	}
+
 	export interface ICreateInterfaceParams {
 		templatePath: string;
 		indexInterfaceTemplate: string;

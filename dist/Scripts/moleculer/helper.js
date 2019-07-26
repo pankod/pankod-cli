@@ -12,7 +12,7 @@ exports.Helper = {
     addBrokerHelper: (answers, brokerHelperTemplatesParams) => {
         setTimeout(() => {
             Common_1.CommonHelper.replaceContent(exports.Helper.createParamsForAddBrokerHelper('create', brokerHelperTemplatesParams, answers));
-        }, 1500);
+        }, 100);
         Common_1.CommonHelper.replaceContent(exports.Helper.createParamsForAddBrokerHelper('import', brokerHelperTemplatesParams, answers));
     },
     createEntityInstance: (answers, createEntityHelperParams) => {
@@ -45,12 +45,12 @@ exports.Helper = {
         };
         return replaceBrokerParams;
     },
-    createRepository: (answers, createInterfaceParams) => {
-        const templatePath = './dist/Templates/moleculer/Repositories/Repository.mustache';
+    createRepository: (answers, createRepositoryParams) => {
+        const templatePath = createRepositoryParams.templatePath;
         const templateProps = {
             upperFileName: answers.upperFileName
         };
-        const indexTemplate = './dist/Templates/moleculer/Repositories/RepoIndex.mustache';
+        const indexTemplate = createRepositoryParams.indexTemplate;
         const addIndexParams = {
             dirPath: `${config_1.Config.moleculer.repositoriesDir}/index.ts`,
             getFileContent: () => Common_1.CommonHelper.getTemplate(indexTemplate, templateProps),
@@ -65,19 +65,15 @@ exports.Helper = {
             answers,
             dirPath: `${config_1.Config.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
             successMessage: 'Added new Repository test.',
-            templatePath: './dist/Templates/moleculer/Tests/Repository.mustache',
+            templatePath: createRepositoryParams.testTemplatePath,
             templateProps
         };
         if (!Common_1.CommonHelper.isAlreadyExist(config_1.Config.moleculer.interfaceDir, answers.upperFileName)) {
-            exports.Helper.createInterface(answers, 'Repositories', '', createInterfaceParams);
+            exports.Helper.createInterface(answers, 'Repositories', '', createRepositoryParams.createInterfaceParams);
         }
-        const createEntityTemplatesParams = {
-            indexTemplate: config_1.Config.moleculer.templates.createEntityIndexTemplate,
-            templatePath: config_1.Config.moleculer.templates.createEntityTemplatePath
-        };
         Common_1.CommonHelper.writeFile(writeFileProps);
         Common_1.CommonHelper.addToIndex(addIndexParams);
-        exports.Helper.createEntityInstance(answers, createEntityTemplatesParams);
+        exports.Helper.createEntityInstance(answers, createRepositoryParams.createEntityTemplatesParams);
         exports.Helper.createTest(repositoryTestParams);
     },
     createService: (answers, createServiceParams) => {
@@ -159,7 +155,6 @@ exports.Helper = {
     createInterface: (answers, dirType, prefix = '', createInterfaceParams) => {
         const templatePath = `${createInterfaceParams.templatePath}/${prefix}Interface.mustache`;
         const templateProps = { upperFileName: answers.upperFileName, dirType };
-        // /src/Interfaces/Services/Service/IService.d.ts
         const interfaceFilePath = `${config_1.Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
         const interfaceDirPath = `${config_1.Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
         const writeFileProps = {

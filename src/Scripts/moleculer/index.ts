@@ -49,13 +49,23 @@ const questions: IMoleculerQuestions = {
 
 const actions: IMoleculerActions = {
 	entity: (answers: ICommon.IAnswers) => {
-		const crateInterfaceParams: IMoleculerHelper.ICreateInterfaceParams = {
-			folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
-			indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
-			templatePath: Config.moleculer.templates.createInterfaceTemplatePath
 
-		}
-		Helper.createRepository(answers, crateInterfaceParams);
+		const createRepositoryParams: IMoleculerHelper.ICreateRepositoryParams = {
+			indexTemplate: Config.moleculer.templates.createRepositoryIndexTemplate,
+			templatePath: Config.moleculer.templates.createRepositoryTemplatePath,
+			testTemplatePath: Config.moleculer.templates.createRepositoryTestTemplatePath,
+			createInterfaceParams: {
+				folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
+				indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+				templatePath: Config.moleculer.templates.createInterfaceTemplatePath
+			},
+			createEntityTemplatesParams: {
+				indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
+				templatePath: Config.moleculer.templates.createEntityTemplatePath
+			}
+		};
+
+		Helper.createRepository(answers, createRepositoryParams);
 	},
 	service: (answers: ICommon.IAnswers) => {
 
