@@ -26,12 +26,12 @@ const createInterfaceParams = {
 
 const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
 	actionConstTemplatePath: Config.nextjs.templates.actionConstTemplatePath
-}
+};
 
 const addActionParams: INextjsHelper.IAddActionParams = {
 	actionIndexTemplatePath: Config.nextjs.templates.actionIndexTemplatePath,
 	actionTemplatePath: Config.nextjs.templates.actionTemplatePath
-}
+};
 
 const addReducerParams: INextjsHelper.IAddReducerParams = {
 	addActionConstIndexParams,

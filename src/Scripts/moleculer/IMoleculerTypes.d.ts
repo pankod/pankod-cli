@@ -13,7 +13,7 @@ export interface IMoleculerActions {
     [key: string]: Function;
 }
 
-export declare module IMoleculerHelper {
+export declare namespace IMoleculerHelper {
 	export interface IBrokerHelperTemplatesParams {
 		replaceFileDir: string;
 		brokerHelperImport: string;

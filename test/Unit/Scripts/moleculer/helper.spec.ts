@@ -1,4 +1,3 @@
-import { Answers } from 'inquirer';
 import { fs } from 'memfs';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Helper } from '../../../../src/Scripts/moleculer/helper';
@@ -30,7 +29,7 @@ describe('Helper tests', () => {
 		const fileContent = CommonHelper.getTemplate(
 			'/Templates/moleculer/Tests/BrokerHelperImport.mustache',
 			{ upperFileName: answers.upperFileName, lowerFileName: answers.lowerFileName }
-		)
+		);
 
 		Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
 

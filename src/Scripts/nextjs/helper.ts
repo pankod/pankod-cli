@@ -10,10 +10,6 @@ import { ICommon } from '../ICommon';
 import { INextjsHelper } from './INextjsTypes';
 //#endregion Local Imports
 
-const commonStoreReplaceParams = {
-
-}
-
 export const Helper = {
 
 	addRoute: (answers: ICommon.IAnswers, IAddRoutesReplaceParams: INextjsHelper.IAddRoutesReplaceParams) => {
@@ -62,13 +58,13 @@ export const Helper = {
 			getFileContent: () => CommonHelper.getTemplate(contentFile, templateProps),
 			message,
 			regexKey
-		})
+		});
 
 		const replaceStoreParams: ICommon.IReplaceContent = commonReplaceParams(
 			createInterfaceParams.storeInterface,
 			'Interface file added to Interfaces/Redux/Store.d.ts',
 			/export interface IStore\s[{]/g
-		)
+		);
 
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.replaceContent(replaceContentParams);
@@ -82,7 +78,7 @@ export const Helper = {
 						createInterfaceParams.storeImportInterface,
 						'Interface file added to import section in Interfaces/Redux/Store.d.ts',
 						/\s[}] from '@Interfaces';/g
-					)
+					);
 
 					CommonHelper.replaceContent(replaceStoreImportParams);
 				},
@@ -109,7 +105,7 @@ export const Helper = {
 	},
 
 	addActionConstIndex: (templateProps: ICommon.ITemplateProps, params: INextjsHelper.IAddActionConstIndexParams): void => {
-		const { actionConstTemplatePath } = params
+		const { actionConstTemplatePath } = params;
 
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.definitionsDir}/ActionConsts.ts`,
@@ -123,7 +119,7 @@ export const Helper = {
 	},
 
 	addAction: (answers: ICommon.IAnswers, params: INextjsHelper.IAddActionParams): void => {
-		const { actionIndexTemplatePath, actionTemplatePath } = params
+		const { actionIndexTemplatePath, actionTemplatePath } = params;
 		const { fileName } = answers;
 		const actionFileDir = `${Config.nextjs.actionDir}/${fileName}Actions.ts`;
 		const templateProps = { fileName };
@@ -145,7 +141,7 @@ export const Helper = {
 	},
 
 	addReducer: (answers: ICommon.IAnswers, params: INextjsHelper.IAddReducerParams): void => {
-		const { reducerIndexTemplatePath, reducerTemplatePath, addActionConstIndexParams, reducerStoreTemplatePath } = params
+		const { reducerIndexTemplatePath, reducerTemplatePath, addActionConstIndexParams, reducerStoreTemplatePath } = params;
 		const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
 
 		const reducerFileDir = `${Config.nextjs.reducerDir}/${lowerFileName}.ts`;
@@ -187,7 +183,7 @@ export const Helper = {
 	},
 
 	createClassComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateClassComponentParams): void => {
-		const { templatePath, indexTemplatePath, createInterfaceParams, addReducerParams, addActionParams } = params
+		const { templatePath, indexTemplatePath, createInterfaceParams, addReducerParams, addActionParams } = params;
 		const { lowerFileName, isConnectStore = false, isPage = false } = answers;
 		const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
 		const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;

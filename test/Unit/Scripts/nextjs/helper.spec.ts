@@ -23,7 +23,7 @@ const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
 const addActionParams: INextjsHelper.IAddActionParams = {
 	actionIndexTemplatePath: '/Templates/nextjs/Reducers/ActionIndex.mustache',
 	actionTemplatePath: '/Templates/nextjs/Reducers/Action.mustache'
-}
+};
 
 const addReducerParams: INextjsHelper.IAddReducerParams = {
 	addActionConstIndexParams,
@@ -162,28 +162,28 @@ describe('Helper tests', () => {
 	describe('addActionConstIndex', () => {
 		it('should add action constants to index', () => {
 
-		})
-	})
+		});
+	});
 
 	describe('addAction', () => {
 		it('should add new action file', () => {
 
-		})
+		});
 
 		it('should add to action index file', () => {
 
-		})
-	})
+		});
+	});
 
 	describe('addReducer', () => {
 		it('should add to reducers/index', () => {
 
-		})
+		});
 
 		it('should add new reducer', () => {
 
-		})
-	})
+		});
+	});
 
 	describe('createClassComponent', () => {
 
@@ -193,7 +193,7 @@ describe('Helper tests', () => {
 			createInterfaceParams,
 			addReducerParams,
 			addActionParams
-		}
+		};
 
 		describe('Class Component', () => {
 			const answers = {
@@ -204,20 +204,20 @@ describe('Helper tests', () => {
 				isPage: undefined,
 				hasStyle: true,
 				isClass: true
-			}
+			};
 
-			Helper.createClassComponent(answers, params)
+			Helper.createClassComponent(answers, params);
 
 			it('should create class component file', () => {
-				const createdClassComponent = String(fs.readFileSync('/src/Components/Test/index.tsx'))
+				const createdClassComponent = String(fs.readFileSync('/src/Components/Test/index.tsx'));
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Components/Class.mustache',
 					{ ...answers, interfaceName: 'ITest' }
-				)
+				);
 
-				expect(createdClassComponent).toBe(fileContent)
-			})
+				expect(createdClassComponent).toBe(fileContent);
+			});
 
 			it('should add component to index.ts', () => {
 				const createdIndexFile = String(fs.readFileSync('/src/Components/index.ts'));
@@ -225,44 +225,44 @@ describe('Helper tests', () => {
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Components/index.mustache',
 					answers
-				)
+				);
 
-				expect(createdIndexFile).toBe(fileContent)
-			})
+				expect(createdIndexFile).toBe(fileContent);
+			});
 
 			it('should create interface', () => {
-				const createdComponentInterfaceFile = String(fs.readFileSync('/src/Interfaces/Components/Test.d.ts'))
+				const createdComponentInterfaceFile = String(fs.readFileSync('/src/Interfaces/Components/Test.d.ts'));
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Interfaces/Component.mustache',
 					{ ...answers }
-				)
+				);
 
-				expect(createdComponentInterfaceFile).toBe(fileContent)
-			})
+				expect(createdComponentInterfaceFile).toBe(fileContent);
+			});
 
 			it('should add reducer', () => {
-				const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test.ts'))
+				const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test.ts'));
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Reducers/Reducer.mustache',
 					answers
-				)
+				);
 
-				expect(createdReducer).toBe(fileContent)
-			})
+				expect(createdReducer).toBe(fileContent);
+			});
 
 			it('should add action', () => {
-				const createdAction = String(fs.readFileSync('/src/Actions/TestActions.ts'))
+				const createdAction = String(fs.readFileSync('/src/Actions/TestActions.ts'));
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Reducers/Action.mustache',
 					answers
-				)
+				);
 
-				expect(createdAction).toBe(fileContent)
-			})
-		})
+				expect(createdAction).toBe(fileContent);
+			});
+		});
 
 		describe('Page', () => {
 			const answers = {
@@ -273,22 +273,22 @@ describe('Helper tests', () => {
 				isPage: true,
 				hasStyle: true,
 				interfaceName: 'IPage'
-			}
+			};
 
-			Helper.createClassComponent(answers, params)
+			Helper.createClassComponent(answers, params);
 
 			it('should create page/index.tsx', () => {
-				const createdPage = String(fs.readFileSync('/pages/page/index.tsx'))
+				const createdPage = String(fs.readFileSync('/pages/page/index.tsx'));
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Components/Class.mustache',
 					answers
-				)
+				);
 
-				expect(createdPage).toBe(fileContent)
-			})
-		})
-	})
+				expect(createdPage).toBe(fileContent);
+			});
+		});
+	});
 
 	describe('createFunctionalComponent', () => {
 		const answers = {

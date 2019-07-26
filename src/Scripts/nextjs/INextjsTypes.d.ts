@@ -24,7 +24,7 @@ export interface INextjsActions {
     [key: string]: Function;
 }
 
-export declare module INextjsHelper {
+export declare namespace INextjsHelper {
 	export interface IAddRoutesReplaceParams {
 		routesDir: string;
 		routesTemplate: string;

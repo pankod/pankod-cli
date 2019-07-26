@@ -50,7 +50,7 @@ export const Helper = {
 			filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
 			getFileContent: () => CommonHelper.getTemplate(type === 'import' ? brokerHelperTemplatesParams.brokerHelperImport : brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
 			message: type === 'import' ? 'Service added to BrokerHelper Import' : 'Service added to BrokerHelper setupBroker.\n',
-			regexKey: type === 'import' ? /\/\/\#endregion Local Imports/g : /^\s*return broker;/gm
+			regexKey: type === 'import' ? /\/\/#endregion Local Imports/g : /^\s*return broker;/gm
 		};
 
 		return replaceBrokerParams;
@@ -147,13 +147,13 @@ export const Helper = {
 			brokerHelperCreate: Config.moleculer.templates.brokerHelperCreate,
 			brokerHelperImport: Config.moleculer.templates.brokerHelperImport,
 			replaceFileDir: Config.moleculer.brokerHelper
-		}
+		};
 
 		const createServiceHelperParams: IMoleculerHelper.ICreateServiceHelperParams = {
 			indexTemplate: Config.moleculer.templates.createServiceHelperIndexTemplate,
 			templatePath: Config.moleculer.templates.createServiceHelperTemplatePath,
 			testTemplatePath: Config.moleculer.templates.createServiceHelperTestTemplatePath
-		}
+		};
 
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);

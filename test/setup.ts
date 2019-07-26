@@ -1,6 +1,6 @@
 import { fs } from 'memfs';
-import * as path from 'path'
-const realFs = jest.requireActual('fs')
+import * as path from 'path';
+const realFs = jest.requireActual('fs');
 
 process.chdir('/');
 
