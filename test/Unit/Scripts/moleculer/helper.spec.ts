@@ -147,6 +147,50 @@ describe('Helper tests', () => {
 
 	});
 
+	it('should createInterface', () => {
+		const answers: ICommon.IAnswers = {
+			fileName: 'test',
+			lowerFileName: 'test',
+			upperFileName: 'Test'
+		};
+
+		const dirType = 'Repositories';
+		const prefix: string = '';
+
+		const templateProps = { upperFileName: answers.upperFileName, dirType };
+
+
+		const createInterfaceParams: IMoleculerHelper.ICreateInterfaceParams = {
+			folderIndexTemplate: '/Templates/moleculer/Interfaces/FolderIndex.mustache',
+			indexInterfaceTemplate: '/Templates/moleculer/Interfaces/index.mustache',
+			templatePath: `/Templates/moleculer/Interfaces`
+		};
+
+		Helper.createInterface(answers, dirType, '', createInterfaceParams);
+
+		// CreateFile
+		const interfaceDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
+		expect(fs.existsSync(interfaceDirPath)).toEqual(true);
+
+		// WriteFile
+		const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
+		const fileContent = String(fs.readFileSync(interfaceFilePath));
+
+		expect(fileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.templatePath + `/${prefix}Interface.mustache`, templateProps));
+
+		// AddIndexParams
+		const dirPath = `${Config.moleculer.interfaceDir}/index.ts`;
+		const addToIndexFileContent = String(fs.readFileSync(dirPath));
+
+		expect(addToIndexFileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.indexInterfaceTemplate, templateProps));
+
+		// AddFolderIndex
+		const folderDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/index.ts`;
+		const folderFileContent = String(fs.readFileSync(folderDirPath));
+
+		expect(folderFileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.folderIndexTemplate, templateProps));
+	});
+
 	it('should createService', () => {
 		const answers: ICommon.IAnswers = {
 			fileName: 'service',
@@ -239,5 +283,7 @@ describe('Helper tests', () => {
 
 		expect(fileContent).toBe(CommonHelper.getTemplate(createServiceHelperParams.templatePath, answers));
 	});
+
+
 
 });

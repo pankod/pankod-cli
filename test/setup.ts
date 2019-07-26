@@ -15,8 +15,9 @@ fs.mkdirSync('/src/ServiceHelpers');
 
 fs.mkdirSync('/src/Interfaces');
 fs.mkdirSync('/src/Interfaces/Repositories');
-fs.mkdirSync('/src/Interfaces/Repositories/Test');
+// fs.mkdirSync('/src/Interfaces/Repositories/Test');
 fs.mkdirSync('/src/Interfaces/Services');
+// fs.mkdirSync('/src/Interfaces/Services/Test');
 
 fs.mkdirSync('/services');
 
@@ -157,14 +158,18 @@ fs.writeFileSync('/test/Integration/integration.spec.ts', '');
 
 fs.writeFileSync('/Templates/moleculer/Tests/IntegrationTest.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Tests/IntegrationTest.mustache')));
 
-// fs.writeFileSync('/src/Interfaces/Services/Service/IService.d.ts', '');
 fs.writeFileSync('/test/Unit/MicroServices/service.spec.ts', '');
+
+// fs.writeFileSync('/src/Interfaces/Services/Test/ITest.d.ts', '');
+
+fs.writeFileSync('/Templates/moleculer/Interfaces/Interface.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/Interface.mustache')));
 
 fs.writeFileSync('/Templates/moleculer/Interfaces/index.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/index.mustache')));
 
 fs.writeFileSync('/Templates/moleculer/Interfaces/FolderIndex.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/FolderIndex.mustache')));
 
 fs.writeFileSync('/Templates/moleculer/Interfaces/ServiceInterface.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Interfaces/ServiceInterface.mustache')));
+
 
 fs.writeFileSync('/Templates/moleculer/Services/index.mustache', realFs.readFileSync(path.resolve(__dirname, '../src/Templates/moleculer/Services/index.mustache')));
 
