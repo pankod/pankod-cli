@@ -22,6 +22,8 @@ fs.mkdirSync('/src/Redux/Reducers')
 fs.mkdirSync('/src/Actions')
 fs.mkdirSync('/src/Definitions')
 
+fs.mkdirSync('/pages')
+
 // Create Templates
 fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.mustache {{fileName}}');
 fs.writeFileSync('/app/pages/test/index.tsx', 'nextjs test page');

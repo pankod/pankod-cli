@@ -172,8 +172,6 @@ export const Helper = {
 			100
 		);
 
-
-
 		if (isConnectStore) {
 			Helper.addActionConstIndex(templateProps, addActionConstIndexParams);
 		}
@@ -184,7 +182,6 @@ export const Helper = {
 		const { lowerFileName, isConnectStore = false, isPage = false } = answers;
 		const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
 		const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
-		// const templatePath = './dist/Templates/nextjs/Components/Class.mustache';
 		const templateProps = {
 			fileName: answers.fileName,
 			hasStyle: answers.hasStyle,
@@ -193,7 +190,6 @@ export const Helper = {
 			lowerFileName: answers.lowerFileName,
 			upperFileName: answers.upperFileName
 		};
-		// const indexTemplate = './dist/Templates/nextjs/Components/index.mustache';
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.nextjs.componentsDir}/index.ts`,

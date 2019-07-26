@@ -17,7 +17,7 @@ describe('Common Helper', () => {
 
 			const addedIndex = fs.readFileSync('/src/Templates/index.ts');
 
-			expect(String(addedIndex)).toEqual(`${fileContent}\n`);
+			expect(String(addedIndex)).toEqual(fileContent);
 		});
 	});
 

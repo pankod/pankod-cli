@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc && npm run sync-templates",
-    "test": "jest --coverage",
+    "test": "jest --coverage --runInBand",
     "generate": "node ./dist/index.js a",
     "watch": "tsc -w",
     "sync-templates": "rm -rf ./dist/Templates && cp -r ./src/Templates ./dist"
