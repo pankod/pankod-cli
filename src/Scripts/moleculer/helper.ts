@@ -7,61 +7,54 @@ import * as path from 'path';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
+import { IMoleculerHelper } from './IMoleculerTypes';
 //#endregion Local Imports
 
 export const Helper = {
-	addBrokerHelper: (answers: ICommon.IAnswers): void => {
-		const brokerHelperImport = './src/Templates/moleculer/Tests/BrokerHelperImport.mustache';
-		const brokerHelperCreate = './src/Templates/moleculer/Tests/BrokerHelperCreate.mustache';
+	addBrokerHelper: (answers: ICommon.IAnswers, brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams): void => {
+		setTimeout(
+			() => {
+				CommonHelper.replaceContent(Helper.createParamsForAddBrokerHelper('create', brokerHelperTemplatesParams, answers));
+			},
+			100
+		);
 
-		const templateProps = {
-			lowerFileName: answers.lowerFileName,
-			upperFileName: answers.upperFileName
-		};
-
-		const replaceBrokerImportParams: ICommon.IReplaceContent = {
-			fileDir: Config.moleculer.brokerHelper,
-			filetoUpdate: fs.readFileSync(path.resolve('', Config.moleculer.brokerHelper), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate(brokerHelperImport, templateProps),
-			message: 'Service added to BrokerHelper Import',
-			regexKey: /\/\/#endregion Local Imports/g
-		};
-
-		setTimeout(() => {
-			const replaceBrokerCreateParams: ICommon.IReplaceContent = {
-				fileDir: Config.moleculer.brokerHelper,
-				filetoUpdate: fs.readFileSync(
-					path.resolve('', Config.moleculer.brokerHelper),
-					'utf8'
-				),
-				getFileContent: () => CommonHelper.getTemplate(brokerHelperCreate, templateProps),
-				message: 'Service added to BrokerHelper setupBroker.\n',
-				regexKey: /^\s*return broker;/gm
-			};
-			CommonHelper.replaceContent(replaceBrokerCreateParams);
-		}, 1500);
-
-		CommonHelper.replaceContent(replaceBrokerImportParams);
+		CommonHelper.replaceContent(Helper.createParamsForAddBrokerHelper('import', brokerHelperTemplatesParams, answers));
 	},
-	createEntityInstance: (answers: ICommon.IAnswers) => {
-		const templatePath = './src/Templates/moleculer/Repositories/Entity.mustache';
+	createEntityInstance: (answers: ICommon.IAnswers, createEntityHelperParams: IMoleculerHelper.ICreateEntityHelperParams) => {
 		const templateProps = { fileName: answers.fileName };
-		const indexTemplate = './src/Templates/moleculer/Repositories/EntityIndex.mustache';
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: `${Config.moleculer.entityDir}/${answers.fileName}.ts`,
-			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createEntityHelperParams.templatePath, templateProps),
 			message: 'Added new Entity Instance.'
 		};
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.entityDir}/index.ts`,
-			getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createEntityHelperParams.indexTemplate, templateProps),
 			message: 'Entity added to index.ts.'
 		};
 
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
+	},
+	// tslint:disable-next-line: max-line-length
+	createParamsForAddBrokerHelper: (type: string, brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams, answers: ICommon.IAnswers): ICommon.IReplaceContent => {
+		const templateProps = {
+			lowerFileName: answers.lowerFileName,
+			upperFileName: answers.upperFileName
+		};
+		const replaceBrokerParams: ICommon.IReplaceContent = {
+			fileDir: brokerHelperTemplatesParams.replaceFileDir,
+			filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
+			getFileContent: () => CommonHelper.getTemplate(type === 'import' ? brokerHelperTemplatesParams.brokerHelperImport : brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
+			message: type === 'import' ? 'Service added to BrokerHelper Import' : 'Service added to BrokerHelper setupBroker.\n',
+			regexKey: type === 'import' ? /\/\/#endregion Local Imports/g : /^\s*return broker;/gm
+		};
+
+		return replaceBrokerParams;
+
 	},
 	createRepository: (answers: ICommon.IAnswers): void => {
 		const templatePath = './src/Templates/moleculer/Repositories/Repository.mustache';
@@ -96,9 +89,14 @@ export const Helper = {
 			Helper.createInterface(answers, 'Repositories');
 		}
 
+		const createEntityTemplatesParams = {
+			indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
+			templatePath: Config.moleculer.templates.createEntityTemplatePath
+		};
+
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
-		Helper.createEntityInstance(answers);
+		Helper.createEntityInstance(answers, createEntityTemplatesParams);
 		Helper.createTest(repositoryTestParams);
 	},
 	createService: (answers: ICommon.IAnswers): void => {
@@ -145,16 +143,26 @@ export const Helper = {
 			Helper.createInterface(answers, 'Services', 'Service');
 		}
 
+		const brokerHelperTemplatesParams = {
+			brokerHelperCreate: Config.moleculer.templates.brokerHelperCreate,
+			brokerHelperImport: Config.moleculer.templates.brokerHelperImport,
+			replaceFileDir: Config.moleculer.brokerHelper
+		};
+
+		const createServiceHelperParams: IMoleculerHelper.ICreateServiceHelperParams = {
+			indexTemplate: Config.moleculer.templates.createServiceHelperIndexTemplate,
+			templatePath: Config.moleculer.templates.createServiceHelperTemplatePath,
+			testTemplatePath: Config.moleculer.templates.createServiceHelperTestTemplatePath
+		};
+
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
-		Helper.createServiceHelper(answers);
+		Helper.createServiceHelper(answers, createServiceHelperParams);
 		Helper.createTest(serviceTestParams);
 		Helper.createIntegrationTest(integrationTestParams);
-		Helper.addBrokerHelper(answers);
+		Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
 	},
-	createServiceHelper: (answers: ICommon.IAnswers): void => {
-		const templatePath = './src/Templates/moleculer/Services/Helper.mustache';
-		const indexTemplate = './src/Templates/moleculer/Services/HelperIndex.mustache';
+	createServiceHelper: (answers: ICommon.IAnswers, createServiceHelperParams: IMoleculerHelper.ICreateServiceHelperParams): void => {
 
 		const templateProps = {
 			lowerFileName: answers.lowerFileName,
@@ -163,13 +171,13 @@ export const Helper = {
 
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`,
-			getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createServiceHelperParams.templatePath, templateProps),
 			message: 'Added new Service Helper'
 		};
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.servicesHelperDir}/index.ts`,
-			getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(createServiceHelperParams.indexTemplate, templateProps),
 			message: 'Service Helper added to index.ts.'
 		};
 
@@ -177,7 +185,7 @@ export const Helper = {
 			answers,
 			dirPath: `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`,
 			successMessage: 'Added new Micro Service Helper test.',
-			templatePath: './src/Templates/moleculer/Tests/ServiceHelper.mustache',
+			templatePath: createServiceHelperParams.testTemplatePath,
 			templateProps
 		};
 

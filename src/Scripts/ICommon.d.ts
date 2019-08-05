@@ -4,6 +4,8 @@ export declare namespace ICommon {
         fileName?: string;
         upperFileName?: string;
         isPrivate?: boolean;
+		lowerFileName?: string;
+		interfaceName?: string;
     }
 
     export interface IAnswers {

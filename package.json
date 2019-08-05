@@ -102,7 +102,8 @@
       "**/*.spec.(ts)"
     ],
     "setupFiles": [
-      "<rootDir>/test/setup.ts"
+      "<rootDir>/test/setup.ts",
+      "<rootDir>/test/setup.nextjs.ts"
     ],
     "globals": {
       "ts-jest": {

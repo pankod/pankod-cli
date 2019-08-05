@@ -13,7 +13,10 @@ import { Plugins } from './nextjs/pluginsEnum';
 
 export const CommonHelper = {
 	addToIndex: (params: ICommon.IAddIndex): void => {
-		fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}\n`);
+		fs.appendFileSync(
+			path.resolve('', params.dirPath),
+			`${params.getFileContent()}`
+		);
 
 		console.log(logSymbols.success, params.message);
 	},
@@ -64,6 +67,7 @@ export const CommonHelper = {
 		return fs.existsSync(path.resolve('', _path));
 	},
 	replaceContent: (params: ICommon.IReplaceContent): void => {
+
 		const replaceFile = params.filetoUpdate.replace(params.regexKey, params.getFileContent());
 
 		const writeFileProps: ICommon.IWriteFile = {

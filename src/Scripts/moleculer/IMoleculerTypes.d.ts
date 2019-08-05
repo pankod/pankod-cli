@@ -12,3 +12,21 @@ export interface IMoleculerActions {
     service: Function;
     [key: string]: Function;
 }
+
+export declare namespace IMoleculerHelper {
+	export interface IBrokerHelperTemplatesParams {
+		replaceFileDir: string;
+		brokerHelperImport: string;
+		brokerHelperCreate: string;
+	}
+
+	export interface ICreateEntityHelperParams {
+		templatePath: string;
+		indexTemplate: string;
+	}
+	export interface ICreateServiceHelperParams {
+		templatePath: string;
+		indexTemplate: string;
+		testTemplatePath: string;
+	}
+}
