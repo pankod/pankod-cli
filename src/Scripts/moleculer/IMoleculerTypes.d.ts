@@ -1,6 +1,5 @@
 import { Question } from "inquirer";
 import { ICommon } from "../ICommon";
-import { create } from 'domain';
 
 export interface IMoleculerQuestions {
     entity: Question<ICommon.IAnswers>[];
@@ -44,8 +43,8 @@ export declare namespace IMoleculerHelper {
 		templatePath: string;
 		indexTemplate: string;
 		testTemplatePath: string;
-		createInterfaceParams: IMoleculerHelper.ICreateInterfaceParams;
-		createEntityTemplatesParams: IMoleculerHelper.ICreateEntityHelperParams;
+		createInterfaceParams: ICreateInterfaceParams;
+		createEntityTemplatesParams: ICreateEntityHelperParams;
 	}
 
 	export interface ICreateInterfaceParams {

@@ -1,4 +1,3 @@
-import { create } from 'istanbul-reports';
 export const Config = {
 	moleculer: {
 		brokerHelper: './test/Utils/BrokerHelper.ts',
