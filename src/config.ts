@@ -37,15 +37,33 @@ export const Config = {
 		componentsDir: './src/Components',
 		definitionsDir: './src/Definitions',
 		filesDir: './files',
-		interfaceDir: './src/Interfaces',
+		interfaceDir: './src/Interfaces/index.ts',
 		mockDir: '/dir',
 		mockPagesDir: '/pages',
 		mockSrcDir: '/src',
 		pageInterfaceDir: './src/Interfaces/Pages',
 		pagesDir: './pages',
 		reducerDir: './src/Redux/Reducers',
-		reduxInterfaceDir: './src/Interfaces/Redux',
-		routesDir: './app',
-		storeDir: './src'
+		reduxInterfaceDir: './src/Interfaces/Redux/Store.d.ts',
+		routesDir: './app/routes.js',
+		storeDir: './src',
+		templates: {
+			addRouteTemplate: './dist/Templates/nextjs/Routes.mustache',
+			compInterfaceIndex: './dist/Templates/nextjs/Interfaces/ComponentIndex.mustache',
+			createInterfaceTempPath: './dist/Templates/nextjs/Interfaces/Component.mustache',
+			pageInterfaceIndex: './dist/Templates/nextjs/Interfaces/PageIndex.mustache',
+			storeImportInterface: './dist/Templates/nextjs/Interfaces/ReduxImport.mustache',
+			storeInterface: './dist/Templates/nextjs/Interfaces/ReduxStore.mustache',
+			classComponentTemplatePath: './dist/Templates/nextjs/Components/Class.mustache',
+			componentIndexTemplatePath: './dist/Templates/nextjs/Components/index.mustache',
+			stylePageTemplate: './dist/Templates/nextjs/Styles.mustache',
+			funcComponentTemplate: './dist/Templates/nextjs/Components/Functional.mustache',
+			reducerIndexTemplatePath: './dist/Templates/nextjs/Reducers/index.mustache',
+			reducerTemplatePath: './dist/Templates/nextjs/Reducers/Reducer.mustache',
+			actionConstTemplatePath: './dist/Templates/nextjs/Reducers/ActionConst.mustache',
+			actionTemplatePath: './dist/Templates/nextjs/Reducers/Action.mustache',
+			actionIndexTemplatePath: './dist/Templates/nextjs/Reducers/ActionIndex.mustache',
+			reducerStoreTemplatePath: './dist/Templates/nextjs/Reducers/Store.mustache'
+		}
 	}
 };

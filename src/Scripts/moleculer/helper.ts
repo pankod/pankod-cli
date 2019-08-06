@@ -51,7 +51,7 @@ export const Helper = {
 			filetoUpdate: fs.readFileSync(path.resolve('', brokerHelperTemplatesParams.replaceFileDir), 'utf8'),
 			getFileContent: () => CommonHelper.getTemplate(type === 'import' ? brokerHelperTemplatesParams.brokerHelperImport : brokerHelperTemplatesParams.brokerHelperCreate, templateProps),
 			message: type === 'import' ? 'Service added to BrokerHelper Import' : 'Service added to BrokerHelper setupBroker.\n',
-			regexKey: type === 'import' ? /\/\/\#endregion Local Imports/g : /^\s*return broker;/gm
+			regexKey: type === 'import' ? /\/\/#endregion Local Imports/g : /^\s*return broker;/gm
 		};
 
 		return replaceBrokerParams;
@@ -105,7 +105,6 @@ export const Helper = {
 			lowerFileName: answers.lowerFileName,
 			upperFileName: answers.upperFileName
 		};
-
 
 		const addIndexParams: ICommon.IAddIndex = {
 			dirPath: `${Config.moleculer.servicesDir}/index.ts`,
@@ -179,10 +178,10 @@ export const Helper = {
 	},
 
 	createIntegrationTest: (options: ICommon.ICreateTest): void => {
-
 		const integrationProps: ICommon.IWriteFile = {
 			dirPath: options.dirPath,
-			getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+			getFileContent: () =>
+				CommonHelper.getTemplate(options.templatePath, options.templateProps),
 			message: options.successMessage
 		};
 
@@ -221,11 +220,11 @@ export const Helper = {
 	createTest: (options: ICommon.ICreateTest): void => {
 		const writeFileProps: ICommon.IWriteFile = {
 			dirPath: options.dirPath,
-			getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+			getFileContent: () =>
+				CommonHelper.getTemplate(options.templatePath, options.templateProps),
 			message: options.successMessage
 		};
 
 		CommonHelper.writeFile(writeFileProps);
-
 	}
 };

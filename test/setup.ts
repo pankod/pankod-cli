@@ -50,6 +50,7 @@ fs.writeFileSync('/src/Templates/nextjs/nextjs.mustache', 'Test template nextjs.
 
 fs.writeFileSync('/app/pages/test/index.tsx', 'nextjs test page');
 fs.writeFileSync('/app/services/test.service.ts', 'moleculer test service');
+
 fs.writeFileSync('/app/helpers/Test.ts', 'moleculer/nextjs helper');
 
 fs.writeFileSync('/test/Utils/BrokerHelper.ts', '//#endregion Local Imports');
@@ -107,4 +108,5 @@ fs.writeFileSync('/Templates/moleculer/Tests/Service.mustache', realFs.readFileS
 // Create Package.json
 fs.writeFileSync('/package.json', `{ "pankod": { "projectType": "test", "plugins": ["styled"] } }`);
 
+// eslint-disable-next-line
 jest.mock('fs', () => require('memfs'));

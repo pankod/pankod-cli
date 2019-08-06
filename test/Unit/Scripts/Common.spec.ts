@@ -17,7 +17,7 @@ describe('Common Helper', () => {
 
 			const addedIndex = fs.readFileSync('/src/Templates/index.ts');
 
-			expect(String(addedIndex)).toEqual(`${fileContent}`);
+			expect(String(addedIndex)).toEqual(fileContent);
 		});
 	});
 
@@ -149,7 +149,7 @@ describe('Common Helper', () => {
 					expect(isAlreadyExist).toEqual(false);
 				});
 			});
-		})
+		});
 
 		describe('folder', () => {
 			describe('when folder exist', () => {
@@ -172,7 +172,7 @@ describe('Common Helper', () => {
 					expect(isAlreadyExist).toEqual(false);
 				});
 			});
-		})
+		});
 	});
 
 	describe('replaceContent', () => {
@@ -187,11 +187,49 @@ describe('Common Helper', () => {
 				regexKey: /nextjs test page/gm
 			};
 
-			CommonHelper.replaceContent(replaceContentParams)
+			CommonHelper.replaceContent(replaceContentParams);
 
 			const replacedContent = String(fs.readFileSync(filePath));
 
 			expect(replacedContent).toEqual('replaced for test');
+		});
+	});
+
+	describe('validate', () => {
+		describe('empty val', () => {
+			it('should return an error message', () => {
+				const msg = CommonHelper.validate('', '', true, '');
+
+				expect(msg).toEqual('Can not be empty');
+			});
+		});
+
+		describe('non-existent file', () => {
+			it('should return true', () => {
+				const msg = CommonHelper.validate('non-existent-file.ts', '/src', true, '');
+
+				expect(msg).toEqual(true);
+			});
+		});
+
+		describe('existing file', () => {
+			it('should return an error message', () => {
+				const msg = CommonHelper.validate('index.tsx', '/app/pages/test', true, 'page');
+
+				expect(msg).toEqual('This page name already used before, enter new name.');
+			});
+		});
+	});
+
+	describe('writeFile', () => {
+		describe('error', () => {
+			it('should exit process', () => {
+				const mockExit = jest.spyOn(process, 'exit').mockImplementation();
+
+				CommonHelper.writeFile({ dirPath: 'non-existent-path/123', getFileContent: () => 'test', message: 'Test' });
+
+				expect(mockExit).toHaveBeenCalled();
+			});
 		});
 	});
 });
