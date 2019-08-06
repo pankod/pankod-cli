@@ -14,9 +14,9 @@ fs.mkdirSync('/src/Templates/nextjs');
 fs.mkdirSync('/src/Entities');
 fs.mkdirSync('/src/ServiceHelpers');
 
-fs.mkdirSync('/src/Interfaces');
-fs.mkdirSync('/src/Interfaces/Repositories');
-fs.mkdirSync('/src/Interfaces/Services');
+fs.mkdirSync('/src/Interface');
+fs.mkdirSync('/src/Interface/Repositories');
+fs.mkdirSync('/src/Interface/Services');
 
 fs.mkdirSync('/services');
 

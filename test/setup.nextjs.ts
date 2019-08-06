@@ -12,6 +12,7 @@ fs.mkdirSync('/Templates/nextjs/Components');
 fs.mkdirSync('/Templates/nextjs/Reducers');
 
 
+fs.mkdirSync('/src/Interfaces');
 fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');
