@@ -45,6 +45,12 @@ const questions: IMoleculerQuestions = {
 	]
 };
 
+const createInterfaceParams = {
+	folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
+	indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+	templatePath: Config.moleculer.templates.createInterfaceTemplatePath
+};
+
 const actions: IMoleculerActions = {
 	entity: (answers: ICommon.IAnswers) => {
 
@@ -52,11 +58,7 @@ const actions: IMoleculerActions = {
 			indexTemplate: Config.moleculer.templates.createRepositoryIndexTemplate,
 			templatePath: Config.moleculer.templates.createRepositoryTemplatePath,
 			testTemplatePath: Config.moleculer.templates.createRepositoryTestTemplatePath,
-			createInterfaceParams: {
-				folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
-				indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
-				templatePath: Config.moleculer.templates.createInterfaceTemplatePath
-			},
+			createInterfaceParams,
 			createEntityTemplatesParams: {
 				indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
 				templatePath: Config.moleculer.templates.createEntityTemplatePath
@@ -82,12 +84,7 @@ const actions: IMoleculerActions = {
 				templatePath: Config.moleculer.templates.createServiceHelperTemplatePath,
 				testTemplatePath: Config.moleculer.templates.createServiceHelperTestTemplatePath
 			},
-			createInterfaceParams: {
-				folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
-				indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
-				templatePath: Config.moleculer.templates.createInterfaceTemplatePath
-
-			}
+			createInterfaceParams,
 		};
 		Helper.createService(answers, createServiceParams);
 	}
