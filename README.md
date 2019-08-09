@@ -22,44 +22,44 @@ Save a lot of time by generating services, components, tests for Pankod Boilerpl
 <!-- usage -->
 ```sh-session
 $ npm install -g @pankod/pankod-cli
-$ pankod COMMAND
+$ pankod-cli COMMAND
 running command...
-$ pankod (-v|--version|version)
-@pankod/pankod-cli/0.2.2 darwin-x64 node-v10.16.0
-$ pankod --help [COMMAND]
+$ pankod-cli (-v|--version|version)
+@pankod/pankod-cli/0.2.3 darwin-x64 node-v10.16.0
+$ pankod-cli --help [COMMAND]
 USAGE
-  $ pankod COMMAND
+  $ pankod-cli COMMAND
 ...
 ```
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`pankod add Entity`](#pankod-add-entity)
-* [`pankod help [COMMAND]`](#pankod-help-command)
+* [`pankod-cli add Entity`](#pankod-cli-add-entity)
+* [`pankod-cli help [COMMAND]`](#pankod-cli-help-command)
 
-## `pankod add Entity`
+## `pankod-cli add Entity`
 
 Add services, components and more...
 
 ```
 USAGE
-  $ pankod add Entity
-  $ pankod add Service
-  $ pankod add Page
-  $ pankod add FunctionalComponent
-  $ pankod add ClassComponent
-  $ pankod add Plugin
+  $ pankod-cli add Entity
+  $ pankod-cli add Service
+  $ pankod-cli add Page
+  $ pankod-cli add FunctionalComponent
+  $ pankod-cli add ClassComponent
+  $ pankod-cli add Plugin
 ```
 
-_See code: [src/commands/add/index.ts](https://github.com/Pankod/pankod-cli/blob/v0.2.2/src/commands/add/index.ts)_
+_See code: [src/commands/add/index.ts](https://github.com/Pankod/pankod-cli/blob/v0.2.3/src/commands/add/index.ts)_
 
-## `pankod help [COMMAND]`
+## `pankod-cli help [COMMAND]`
 
-display help for pankod
+display help for pankod-cli
 
 ```
 USAGE
-  $ pankod help [COMMAND]
+  $ pankod-cli help [COMMAND]
 
 ARGUMENTS
   COMMAND  command to show help for
