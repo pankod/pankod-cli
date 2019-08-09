@@ -130,6 +130,9 @@ describe('Helper tests', () => {
 
 
 	it('should createInterface', () => {
+		// Reset file since also NextJS modifies
+		fs.writeFileSync(`${Config.moleculer.interfaceDir}/index.ts`, '');
+
 		const answers: ICommon.IAnswers = {
 			fileName: 'test',
 			lowerFileName: 'test',
@@ -148,7 +151,7 @@ describe('Helper tests', () => {
 			templatePath: `/Templates/moleculer/Interfaces`
 		};
 
-		Helper.createInterface(answers, dirType, '', createInterfaceParams);
+		Helper.createInterface(answers, dirType, undefined, createInterfaceParams);
 
 		// CreateFile
 		const interfaceDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
@@ -168,6 +171,7 @@ describe('Helper tests', () => {
 		// AddIndexParams
 		const dirPath = `${Config.moleculer.interfaceDir}/index.ts`;
 		const addToIndexFileContent = String(fs.readFileSync(dirPath));
+
 
 		expect(addToIndexFileContent).toBe(
 			CommonHelper.getTemplate(createInterfaceParams.indexInterfaceTemplate, templateProps)

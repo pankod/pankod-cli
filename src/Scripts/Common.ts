@@ -31,7 +31,7 @@ export const CommonHelper = {
 		return config.pankod;
 	},
 	getTemplate: (templatePath: string, templateProps: ICommon.ITemplateProps): string =>
-		// __dirname + ../../ path is root of the dist folder.
+		// __dirname + ../../ path is root of the lib folder.
 		mustache.render(
 			fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'),
 			templateProps
