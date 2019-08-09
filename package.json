@@ -1,10 +1,20 @@
 {
   "name": "@pankod/pankod-cli",
   "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "author": "Batuhan Ozgur Ozdemir @BatuhanW",
+  "scripts": {
+    "postpack": "rm -f oclif.manifest.json",
+    "posttest": "npm run format",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
+    "sync-templates": "cp -r src/Templates lib",
+    "test": "jest --coverage",
+    "version": "oclif-dev readme && git add README.md",
+    "lint": "eslint . --ext .ts",
+    "format": "eslint . --fix --ext .ts"
+  },
   "bin": {
-    "pankod": "./bin/run"
+    "pankod-cli": "./bin/run"
   },
   "bugs": "https://github.com/Pankod/pankod-cli/issues",
   "dependencies": {
@@ -52,15 +62,20 @@
     "/npm-shrinkwrap.json",
     "/oclif.manifest.json"
   ],
-  "homepage": "https://github.com/Pankod/pankod-cli",
+  "homepage": "https://github.com/pankod/pankod-cli",
   "keywords": [
-    "oclif"
+    "pankod",
+    "cli",
+    "oclif",
+    "moleculer",
+    "react",
+    "nextjs"
   ],
   "license": "MIT",
   "main": "lib/index.js",
   "oclif": {
     "commands": "./lib/commands",
-    "bin": "pankod",
+    "bin": "pankod-cli",
     "plugins": [
       "@oclif/plugin-help",
       "@oclif/plugin-not-found",
@@ -75,16 +90,6 @@
     }
   },
   "repository": "Pankod/pankod-cli",
-  "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "npm run format",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
-    "sync-templates": "cp -r src/Templates lib",
-    "test": "jest --coverage",
-    "version": "oclif-dev readme && git add README.md",
-    "lint": "eslint . --ext .ts",
-    "format": "eslint . --fix --ext .ts"
-  },
   "types": "lib/index.d.ts",
   "jest": {
     "coverageDirectory": "<rootDir>/coverage",
