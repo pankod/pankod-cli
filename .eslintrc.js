@@ -60,5 +60,6 @@ module.exports = {
 				ignoreReadBeforeAssign: true,
 			},
 		],
+		"max-len": ['error', { code: 120, tabWidth: 4 }]
 	},
 };
