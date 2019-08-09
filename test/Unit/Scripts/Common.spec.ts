@@ -127,7 +127,7 @@ describe('Common Helper', () => {
 			describe('when helper exist', () => {
 				it('should return true', () => {
 					const isAlreadyExist = CommonHelper.isAlreadyExist(
-						'/app/helpers',
+						'/exist',
 						'test',
 						true,
 						'helper'
