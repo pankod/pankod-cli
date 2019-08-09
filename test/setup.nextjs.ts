@@ -18,7 +18,6 @@ fs.mkdirSync('/app/pages/test');
 fs.mkdirSync('/app/services');
 fs.mkdirSync('/app/Test');
 
-fs.mkdirSync('/src/Interfaces');
 fs.mkdirSync('/src/Interfaces/Redux');
 fs.mkdirSync('/src/Interfaces/Pages');
 fs.mkdirSync('/src/Interfaces/Components');

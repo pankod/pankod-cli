@@ -3,7 +3,7 @@ export const Config = {
 		brokerHelper: './test/Utils/BrokerHelper.ts',
 		entityDir: './src/Entities',
 		integrationTestDir: './test/Integration',
-		interfaceDir: './src/Interface',
+		interfaceDir: './src/Interfaces',
 		repositoriesDir: './src/Repositories',
 		repositoriesTestDir: './test/Unit/Repositories',
 		serviceHelperTestDir: './test/Unit/ServiceHelpers',

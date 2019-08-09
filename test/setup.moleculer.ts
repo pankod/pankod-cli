@@ -11,8 +11,8 @@ fs.mkdirSync('/src/Templates/moleculer');
 fs.mkdirSync('/src/Entities');
 fs.mkdirSync('/src/ServiceHelpers');
 
-fs.mkdirSync('/src/Interface/Repositories');
-fs.mkdirSync('/src/Interface/Services');
+fs.mkdirSync('/src/Interfaces/Repositories');
+fs.mkdirSync('/src/Interfaces/Services');
 
 fs.mkdirSync('/services');
 

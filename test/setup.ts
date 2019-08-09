@@ -5,7 +5,7 @@ process.chdir('/');
 // Create Directories
 fs.mkdirSync('/src');
 fs.mkdirSync('/src/Templates');
-fs.mkdirSync('/src/Interface');
+fs.mkdirSync('/src/Interfaces');
 
 fs.mkdirSync('/test');
 fs.mkdirSync('/test/Utils');
