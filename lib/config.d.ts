@@ -10,6 +10,25 @@ export declare const Config: {
         servicesDir: string;
         servicesHelperDir: string;
         servicesTestDir: string;
+        templates: {
+            brokerHelperCreate: string;
+            brokerHelperImport: string;
+            createEntityIndexTemplate: string;
+            createEntityTemplatePath: string;
+            createServiceHelperIndexTemplate: string;
+            createServiceHelperTemplatePath: string;
+            createServiceHelperTestTemplatePath: string;
+            createServiceIndexTemplate: string;
+            createServiceIntegrationTestTemplate: string;
+            createServiceTemplatePath: string;
+            createServiceTestTemplate: string;
+            createInterfaceFolderIndexTemplate: string;
+            createInterfaceIndexInterfaceTemplate: string;
+            createInterfaceTemplatePath: string;
+            createRepositoryIndexTemplate: string;
+            createRepositoryTemplatePath: string;
+            createRepositoryTestTemplatePath: string;
+        };
     };
     nextjs: {
         actionDir: string;
@@ -27,5 +46,23 @@ export declare const Config: {
         reduxInterfaceDir: string;
         routesDir: string;
         storeDir: string;
+        templates: {
+            addRouteTemplate: string;
+            compInterfaceIndex: string;
+            createInterfaceTempPath: string;
+            pageInterfaceIndex: string;
+            storeImportInterface: string;
+            storeInterface: string;
+            classComponentTemplatePath: string;
+            componentIndexTemplatePath: string;
+            stylePageTemplate: string;
+            funcComponentTemplate: string;
+            reducerIndexTemplatePath: string;
+            reducerTemplatePath: string;
+            actionConstTemplatePath: string;
+            actionTemplatePath: string;
+            actionIndexTemplatePath: string;
+            reducerStoreTemplatePath: string;
+        };
     };
 };

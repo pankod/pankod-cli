@@ -6,5 +6,7 @@ export default class Add extends Command {
         options: string[];
     }[];
     static usage: string[];
+    validateProjectSupported: (projectType: string) => void;
+    validateCommand: (entityType: string, projectType: string) => void;
     run(): Promise<void>;
 }

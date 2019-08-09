@@ -1,7 +1,7 @@
 {
   "name": "@pankod/pankod-cli",
   "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
-  "version": "0.1.0",
+  "version": "0.2.2",
   "author": "Batuhan Ozgur Ozdemir @BatuhanW",
   "bin": {
     "pankod": "./bin/run"
@@ -78,7 +78,8 @@
   "scripts": {
     "postpack": "rm -f oclif.manifest.json",
     "posttest": "npm run format",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme",
+    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
+    "sync-templates": "cp -r src/Templates lib",
     "test": "jest --coverage",
     "version": "oclif-dev readme && git add README.md",
     "lint": "eslint . --ext .ts",
