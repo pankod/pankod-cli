@@ -151,7 +151,7 @@ describe('Helper tests', () => {
 			templatePath: `/Templates/moleculer/Interfaces`
 		};
 
-		Helper.createInterface(answers, dirType, '', createInterfaceParams);
+		Helper.createInterface(answers, dirType, undefined, createInterfaceParams);
 
 		// CreateFile
 		const interfaceDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
