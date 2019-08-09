@@ -39,7 +39,6 @@ export const Helper = {
 		CommonHelper.writeFile(writeFileProps);
 		CommonHelper.addToIndex(addIndexParams);
 	},
-	// tslint:disable-next-line: max-line-length
 	createParamsForAddBrokerHelper: (type: string, brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams, answers: ICommon.IAnswers): ICommon.IReplaceContent => {
 		const templateProps = {
 			lowerFileName: answers.lowerFileName,

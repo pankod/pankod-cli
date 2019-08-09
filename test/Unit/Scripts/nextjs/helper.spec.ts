@@ -45,7 +45,6 @@ describe('Helper tests', () => {
 				hasPath: true,
 				routePath: 'test-route'
 			};
-			// tslint:disable-next-line: max-line-length
 			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Routes.mustache', answers);
 
 			Helper.addRoute(answers, addRouteParams);
