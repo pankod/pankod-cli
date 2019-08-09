@@ -6,7 +6,7 @@ import * as inquirer from 'inquirer';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
-import { IMoleculerActions, IMoleculerQuestions } from './IMoleculerTypes';
+import { IMoleculerActions, IMoleculerHelper, IMoleculerQuestions } from './IMoleculerTypes';
 import { Helper } from './helper';
 //#endregion Local Imports
 
@@ -45,12 +45,48 @@ const questions: IMoleculerQuestions = {
 	]
 };
 
+const createInterfaceParams = {
+	folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
+	indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+	templatePath: Config.moleculer.templates.createInterfaceTemplatePath
+};
+
 const actions: IMoleculerActions = {
 	entity: (answers: ICommon.IAnswers) => {
-		Helper.createRepository(answers);
+
+		const createRepositoryParams: IMoleculerHelper.ICreateRepositoryParams = {
+			indexTemplate: Config.moleculer.templates.createRepositoryIndexTemplate,
+			templatePath: Config.moleculer.templates.createRepositoryTemplatePath,
+			testTemplatePath: Config.moleculer.templates.createRepositoryTestTemplatePath,
+			createInterfaceParams,
+			createEntityTemplatesParams: {
+				indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
+				templatePath: Config.moleculer.templates.createEntityTemplatePath
+			}
+		};
+
+		Helper.createRepository(answers, createRepositoryParams);
 	},
 	service: (answers: ICommon.IAnswers) => {
-		Helper.createService(answers);
+
+		const createServiceParams: IMoleculerHelper.ICreateServiceParams = {
+			indexTemplate: Config.moleculer.templates.createServiceIndexTemplate,
+			integrationTemplatePath: Config.moleculer.templates.createServiceIntegrationTestTemplate,
+			templatePath: Config.moleculer.templates.createServiceTemplatePath,
+			testTemplatePath: Config.moleculer.templates.createServiceTestTemplate,
+			brokerHelperTemplatesParams: {
+				brokerHelperCreate: Config.moleculer.templates.brokerHelperCreate,
+				brokerHelperImport: Config.moleculer.templates.brokerHelperImport,
+				replaceFileDir: Config.moleculer.brokerHelper
+			},
+			createServiceHelperParams: {
+				indexTemplate: Config.moleculer.templates.createServiceHelperIndexTemplate,
+				templatePath: Config.moleculer.templates.createServiceHelperTemplatePath,
+				testTemplatePath: Config.moleculer.templates.createServiceHelperTestTemplatePath
+			},
+			createInterfaceParams,
+		};
+		Helper.createService(answers, createServiceParams);
 	}
 };
 

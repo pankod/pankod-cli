@@ -75,7 +75,6 @@ export const CommonHelper = {
 			getFileContent: () => replaceFile,
 			message: params.message
 		};
-
 		CommonHelper.writeFile(writeFileProps);
 	},
 	validate: (
@@ -102,7 +101,7 @@ export const CommonHelper = {
 		} catch (error) {
 			console.error(error);
 
-			process.exit(1);
+			process.exit(error);
 		}
 	}
 };

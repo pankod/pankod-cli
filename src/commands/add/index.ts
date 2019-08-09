@@ -29,7 +29,8 @@ export default class Add extends Command {
 		}
 	];
 
-	static usage = ['add Entity', 'add Service', 'add Page', 'add FunctionalComponent', 'add ClassComponent', 'add Plugin'];
+	static usage =
+		['add Entity', 'add Service', 'add Page', 'add FunctionalComponent', 'add ClassComponent', 'add Plugin'];
 
 	validateProjectSupported = (projectType: string) => {
 		if (!supportedProjects.includes(projectType)) {

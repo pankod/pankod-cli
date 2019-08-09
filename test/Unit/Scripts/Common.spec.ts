@@ -127,7 +127,7 @@ describe('Common Helper', () => {
 			describe('when helper exist', () => {
 				it('should return true', () => {
 					const isAlreadyExist = CommonHelper.isAlreadyExist(
-						'/app/helpers',
+						'/exist',
 						'test',
 						true,
 						'helper'
@@ -226,7 +226,10 @@ describe('Common Helper', () => {
 			it('should exit process', () => {
 				const mockExit = jest.spyOn(process, 'exit').mockImplementation();
 
-				CommonHelper.writeFile({ dirPath: 'non-existent-path/123', getFileContent: () => 'test', message: 'Test' });
+				CommonHelper.writeFile(
+					{ dirPath: 'non-existent-path/123',
+					getFileContent: () => 'test', message: 'Test' }
+				);
 
 				expect(mockExit).toHaveBeenCalled();
 			});

@@ -12,7 +12,10 @@ import { INextjsHelper } from './INextjsTypes';
 
 export const Helper = {
 
-	addRoute: (answers: ICommon.IAnswers, IAddRoutesReplaceParams: INextjsHelper.IAddRoutesReplaceParams) => {
+	addRoute: (
+		answers: ICommon.IAnswers,
+		IAddRoutesReplaceParams: INextjsHelper.IAddRoutesReplaceParams
+	) => {
 		const { hasPath = false, routePath, fileName } = answers;
 
 		const templateProps = {
@@ -24,14 +27,20 @@ export const Helper = {
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: IAddRoutesReplaceParams.routesDir,
 			filetoUpdate: fs.readFileSync(path.resolve('', IAddRoutesReplaceParams.routesDir), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(
+				IAddRoutesReplaceParams.routesTemplate, templateProps
+			),
 			message: `Route added to routes.js as ${hasPath ? `'/${routePath}'` : `'/${fileName}/index'`}`,
 			regexKey: /^(?:[\t ]*(?:\r?\n|\r))+module.exports = routes;/gm
 		};
 
 		CommonHelper.replaceContent(replaceContentParams);
 	},
-	createInterface: (answers: ICommon.IAnswers, isClass: boolean, createInterfaceParams: INextjsHelper.ICreateInterfaceParams) => {
+	createInterface: (
+		answers: ICommon.IAnswers,
+		isClass: boolean,
+		createInterfaceParams: INextjsHelper.ICreateInterfaceParams
+	) => {
 		const { fileName, lowerFileName, isPage = false, isConnectStore = false, upperFileName } = answers;
 		const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
 
@@ -47,7 +56,10 @@ export const Helper = {
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: createInterfaceParams.interfaceDir,
 			filetoUpdate: fs.readFileSync(path.resolve('', createInterfaceParams.interfaceDir), 'utf8'),
-			getFileContent: () => CommonHelper.getTemplate(isPage ? createInterfaceParams.pageInterfaceIndex : createInterfaceParams.compInterfaceIndex, templateProps),
+			getFileContent: () => CommonHelper.getTemplate(
+				isPage ? createInterfaceParams.pageInterfaceIndex : createInterfaceParams.compInterfaceIndex,
+				templateProps
+			),
 			message: 'Interface file added to Interfaces/index.ts',
 			regexKey: isPage ? /...PAGE INTERFACES/g : /...COMPONENT INTERFACES/g
 		};
@@ -92,7 +104,8 @@ export const Helper = {
 		const { fileName, isPage = false, lowerFileName } = answers;
 
 		const templateProps = { fileName, lowerFileName };
-		const pageDirPath = `${createStyleParams.pageDirPath}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
+		const pageDirPath = 
+		`${createStyleParams.pageDirPath}/${answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase())}/style.scss`;
 		const compDirPath = `${createStyleParams.compDirPath}/${answers.fileName}/style.scss`;
 
 		const writeFileProps = {
@@ -104,12 +117,17 @@ export const Helper = {
 		CommonHelper.writeFile(writeFileProps);
 	},
 
-	addActionConstIndex: (templateProps: ICommon.ITemplateProps, params: INextjsHelper.IAddActionConstIndexParams): void => {
+	addActionConstIndex: (
+		templateProps: ICommon.ITemplateProps,
+		params: INextjsHelper.IAddActionConstIndexParams
+	): void => {
 		const { actionConstTemplatePath } = params;
 
 		const replaceContentParams: ICommon.IReplaceContent = {
 			fileDir: `${Config.nextjs.definitionsDir}/ActionConsts.ts`,
-			filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.definitionsDir}/ActionConsts.ts`), 'utf8'),
+			filetoUpdate: fs.readFileSync(
+				path.resolve('', `${Config.nextjs.definitionsDir}/ActionConsts.ts`), 'utf8'
+			),
 			getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),
 			message: 'Action constants added to Definitions/ActionConsts.ts',
 			regexKey: /export const ActionConsts\s[=]\s[{]/g
@@ -141,7 +159,11 @@ export const Helper = {
 	},
 
 	addReducer: (answers: ICommon.IAnswers, params: INextjsHelper.IAddReducerParams): void => {
-		const { reducerIndexTemplatePath, reducerTemplatePath, addActionConstIndexParams, reducerStoreTemplatePath } = params;
+		const {
+			reducerIndexTemplatePath, reducerTemplatePath,
+			addActionConstIndexParams, reducerStoreTemplatePath
+		} = params;
+
 		const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
 
 		const reducerFileDir = `${Config.nextjs.reducerDir}/${lowerFileName}.ts`;
@@ -167,7 +189,9 @@ export const Helper = {
 			() => {
 				const replaceReducerContentParams: ICommon.IReplaceContent = {
 					fileDir: `${Config.nextjs.reducerDir}/index.ts`,
-					filetoUpdate: fs.readFileSync(path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'),
+					filetoUpdate: fs.readFileSync(
+						path.resolve('', `${Config.nextjs.reducerDir}/index.ts`), 'utf8'
+					),
 					getFileContent: () => CommonHelper.getTemplate(reducerStoreTemplatePath, templateProps),
 					message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
 					regexKey: /export default combineReducers[(][{]/g
@@ -182,8 +206,14 @@ export const Helper = {
 		}
 	},
 
-	createClassComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateClassComponentParams): void => {
-		const { templatePath, indexTemplatePath, createInterfaceParams, addReducerParams, addActionParams } = params;
+	createClassComponent: (
+		answers: ICommon.IAnswers,
+		params: INextjsHelper.ICreateClassComponentParams
+	): void => {
+		const {
+			templatePath, indexTemplatePath, createInterfaceParams, addReducerParams, addActionParams
+		} = params;
+
 		const { lowerFileName, isConnectStore = false, isPage = false } = answers;
 		const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
 		const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
@@ -222,7 +252,10 @@ export const Helper = {
 		}
 	},
 
-	createFuncComponent: (answers: ICommon.IAnswers, params: INextjsHelper.ICreateFuncComponentParams): void => {
+	createFuncComponent: (
+		answers: ICommon.IAnswers,
+		params: INextjsHelper.ICreateFuncComponentParams
+	): void => {
 		const { lowerFileName, fileName, hasStyle } = answers;
 		const funcDir = `${params.componentsDir}/${answers.fileName}`;
 		const templateProps = {

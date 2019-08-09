@@ -24,9 +24,32 @@ export declare namespace IMoleculerHelper {
 		templatePath: string;
 		indexTemplate: string;
 	}
+	export interface ICreateServiceParams {
+		templatePath: string;
+		indexTemplate: string;
+		testTemplatePath: string;
+		integrationTemplatePath: string;
+		brokerHelperTemplatesParams: IBrokerHelperTemplatesParams;
+		createServiceHelperParams: ICreateServiceHelperParams;
+		createInterfaceParams: ICreateInterfaceParams;
+	}
 	export interface ICreateServiceHelperParams {
 		templatePath: string;
 		indexTemplate: string;
 		testTemplatePath: string;
+	}
+
+	export interface ICreateRepositoryParams {
+		templatePath: string;
+		indexTemplate: string;
+		testTemplatePath: string;
+		createInterfaceParams: ICreateInterfaceParams;
+		createEntityTemplatesParams: ICreateEntityHelperParams;
+	}
+
+	export interface ICreateInterfaceParams {
+		templatePath: string;
+		indexInterfaceTemplate: string;
+		folderIndexTemplate: string;
 	}
 }

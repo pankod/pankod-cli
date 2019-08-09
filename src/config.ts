@@ -3,7 +3,7 @@ export const Config = {
 		brokerHelper: './test/Utils/BrokerHelper.ts',
 		entityDir: './src/Entities',
 		integrationTestDir: './test/Integration',
-		interfaceDir: './src/Interfaces',
+		interfaceDir: './src/Interface',
 		repositoriesDir: './src/Repositories',
 		repositoriesTestDir: './test/Unit/Repositories',
 		serviceHelperTestDir: './test/Unit/ServiceHelpers',
@@ -18,6 +18,16 @@ export const Config = {
 			createServiceHelperIndexTemplate: './dist/Templates/moleculer/Services/HelperIndex.mustache',
 			createServiceHelperTemplatePath: './dist/Templates/moleculer/Services/Helper.mustache',
 			createServiceHelperTestTemplatePath: './dist/Templates/moleculer/Tests/ServiceHelper.mustache',
+			createServiceIndexTemplate: './dist/Templates/moleculer/Services/index.mustache',
+			createServiceIntegrationTestTemplate: './dist/Templates/moleculer/Tests/IntegrationTest.mustache',
+			createServiceTemplatePath: './dist/Templates/moleculer/Services/Service.mustache',
+			createServiceTestTemplate: './dist/Templates/moleculer/Tests/Service.mustache',
+			createInterfaceFolderIndexTemplate: './dist/Templates/moleculer/Interfaces/FolderIndex.mustache',
+			createInterfaceIndexInterfaceTemplate: './dist/Templates/moleculer/Interfaces/index.mustache',
+			createInterfaceTemplatePath: './dist/Templates/moleculer/Interfaces',
+			createRepositoryIndexTemplate: './dist/Templates/moleculer/Repositories/RepoIndex.mustache',
+			createRepositoryTemplatePath: './dist/Templates/moleculer/Repositories/Repository.mustache',
+			createRepositoryTestTemplatePath: './dist/Templates/moleculer/Tests/Repository.mustache'
 		}
 	},
 	nextjs: {
