@@ -96,7 +96,7 @@
       "^.+\\.(ts)$": "ts-jest"
     },
     "testPathIgnorePatterns": [
-      "dist"
+      "lib"
     ],
     "testMatch": [
       "**/*.spec.(ts)"
