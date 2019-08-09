@@ -56,7 +56,9 @@ describe('Helper tests', () => {
 
 		const fileIndexContent = String(fs.readFileSync(fileIndexContentPath));
 
-		expect(fileIndexContent).toBe(CommonHelper.getTemplate(createEntityTemplatesParams.indexTemplate, answers));
+		expect(fileIndexContent).toBe(
+			CommonHelper.getTemplate(createEntityTemplatesParams.indexTemplate, answers)
+		);
 
 	});
 
@@ -85,7 +87,8 @@ describe('Helper tests', () => {
 
 		Helper.createTest(options);
 
-		const fileContentPath = `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`;
+		const fileContentPath =
+			`${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`;
 		const fileContent = String(fs.readFileSync(fileContentPath));
 
 		expect(fileContent).toBe(CommonHelper.getTemplate(options.templatePath, answers));
@@ -152,22 +155,31 @@ describe('Helper tests', () => {
 		expect(fs.existsSync(interfaceDirPath)).toEqual(true);
 
 		// WriteFile
-		const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
+		const interfaceFilePath =
+			`${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
 		const fileContent = String(fs.readFileSync(interfaceFilePath));
 
-		expect(fileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.templatePath + `/${prefix}Interface.mustache`, templateProps));
+		expect(fileContent).toBe(
+			CommonHelper.getTemplate(
+				createInterfaceParams.templatePath + `/${prefix}Interface.mustache`, templateProps
+			)
+		);
 
 		// AddIndexParams
 		const dirPath = `${Config.moleculer.interfaceDir}/index.ts`;
 		const addToIndexFileContent = String(fs.readFileSync(dirPath));
 
-		expect(addToIndexFileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.indexInterfaceTemplate, templateProps));
+		expect(addToIndexFileContent).toBe(
+			CommonHelper.getTemplate(createInterfaceParams.indexInterfaceTemplate, templateProps)
+		);
 
 		// AddFolderIndex
 		const folderDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/index.ts`;
 		const folderFileContent = String(fs.readFileSync(folderDirPath));
 
-		expect(folderFileContent).toBe(CommonHelper.getTemplate(createInterfaceParams.folderIndexTemplate, templateProps));
+		expect(folderFileContent).toBe(
+			CommonHelper.getTemplate(createInterfaceParams.folderIndexTemplate, templateProps)
+		);
 
 	});
 
@@ -220,12 +232,16 @@ describe('Helper tests', () => {
 		const fileContentPath = `${Config.moleculer.entityDir}/${answers.fileName}.ts`;
 		const fileEntityContent = String(fs.readFileSync(fileContentPath));
 
-		expect(fileEntityContent).toBe(CommonHelper.getTemplate(createRepositoryParams.createEntityTemplatesParams.templatePath, answers));
+		expect(fileEntityContent).toBe(
+			CommonHelper.getTemplate(createRepositoryParams.createEntityTemplatesParams.templatePath, answers)
+		);
 
 		const fileIndexContentPath = `${Config.moleculer.entityDir}/index.ts`;
 		const fileIndexContent = String(fs.readFileSync(fileIndexContentPath));
 
-		expect(fileIndexContent).toBe(CommonHelper.getTemplate(createRepositoryParams.createEntityTemplatesParams.indexTemplate, answers));
+		expect(fileIndexContent).toBe(
+			CommonHelper.getTemplate(createRepositoryParams.createEntityTemplatesParams.indexTemplate, answers)
+		);
 
 	});
 
@@ -278,26 +294,37 @@ describe('Helper tests', () => {
 		expect(indexFileContent).toBe(CommonHelper.getTemplate(createServiceParams.indexTemplate, answers));
 
 		// CreateServiceHelper
-		const serviceHelperFileContentPath = `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`;
+		const serviceHelperFileContentPath =
+			`${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`;
 		const serviceHelperFileContent = String(fs.readFileSync(serviceHelperFileContentPath));
 
-		expect(serviceHelperFileContent).toBe(CommonHelper.getTemplate(createServiceParams.createServiceHelperParams.templatePath, answers));
+		expect(serviceHelperFileContent).toBe(
+			CommonHelper.getTemplate(createServiceParams.createServiceHelperParams.templatePath, answers)
+		);
 
 		// CreateTest
-		const testFileContentPath = `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`;
+		const testFileContentPath =
+			`${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`;
 		const testFileContent = String(fs.readFileSync(testFileContentPath));
 
-		expect(testFileContent).toBe(CommonHelper.getTemplate(createServiceParams.createServiceHelperParams.testTemplatePath, answers));
+		expect(testFileContent).toBe(
+			CommonHelper.getTemplate(createServiceParams.createServiceHelperParams.testTemplatePath, answers)
+		);
 
 		// CreateIntegrationTest
-		const integrationFileContentPath = `${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`;
+		const integrationFileContentPath =
+			`${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`;
 		const integrationFileContent = String(fs.readFileSync(integrationFileContentPath));
 
-		expect(integrationFileContent).toBe(CommonHelper.getTemplate(createServiceParams.integrationTemplatePath, answers));
+		expect(integrationFileContent).toBe(
+			CommonHelper.getTemplate(createServiceParams.integrationTemplatePath, answers)
+		);
 
 		// AddBrokerHelper
 		const addedBrokerHelper = String(fs.readFileSync('/test/Utils/BrokerHelper.ts'));
-		const addBrokerHelperFileContent = CommonHelper.getTemplate(createServiceParams.brokerHelperTemplatesParams.brokerHelperImport, answers);
+		const addBrokerHelperFileContent = CommonHelper.getTemplate(
+			createServiceParams.brokerHelperTemplatesParams.brokerHelperImport, answers
+		);
 
 		expect(String(addedBrokerHelper)).toBe(`${addBrokerHelperFileContent}`);
 

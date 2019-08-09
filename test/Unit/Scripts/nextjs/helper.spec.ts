@@ -69,7 +69,9 @@ describe('Helper tests', () => {
 		it('Should create component interface file', () => {
 			Helper.createInterface(answers, true, createInterfaceParams);
 
-			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/Component.mustache', answers);
+			const fileContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Interfaces/Component.mustache', answers
+			);
 
 			const interfaceFilePath = `${Config.nextjs.compInterfaceDir}/${answers.fileName}.d.ts`;
 			const createdInterface = String(fs.readFileSync(interfaceFilePath));
@@ -88,7 +90,9 @@ describe('Helper tests', () => {
 			`);
 
 			Helper.createInterface(answers, true, createInterfaceParams);
-			const reduxStoreContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/ReduxStore.mustache', answers);
+			const reduxStoreContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Interfaces/ReduxStore.mustache', answers
+			);
 			const createdInterface = String(fs.readFileSync(Config.nextjs.reduxInterfaceDir));
 			expect(createdInterface).toMatch(reduxStoreContent);
 		});
@@ -104,7 +108,9 @@ describe('Helper tests', () => {
 			`);
 
 			Helper.createInterface(answers, true, createInterfaceParams);
-			const reduxImportContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/ReduxImport.mustache', answers);
+			const reduxImportContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Interfaces/ReduxImport.mustache', answers
+			);
 
 			setTimeout(() => {
 				const createdInterface = String(fs.readFileSync(Config.nextjs.reduxInterfaceDir));
@@ -117,7 +123,9 @@ describe('Helper tests', () => {
 		it('Should add component interface export', () => {
 			Helper.createInterface(answers, true, createInterfaceParams);
 
-			const fileIndexContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/ComponentIndex.mustache', answers);
+			const fileIndexContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Interfaces/ComponentIndex.mustache', answers
+			);
 			const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
 
 			expect(createdInterface).toMatch(fileIndexContent);
@@ -127,7 +135,9 @@ describe('Helper tests', () => {
 			answers.isPage = true;
 			Helper.createInterface(answers, true, createInterfaceParams);
 
-			const pageIndexContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/PageIndex.mustache', answers);
+			const pageIndexContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Interfaces/PageIndex.mustache', answers
+			);
 			const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
 
 			expect(createdInterface).toMatch(pageIndexContent);
@@ -230,7 +240,9 @@ describe('Helper tests', () => {
 			});
 
 			it('should create interface', () => {
-				const createdComponentInterfaceFile = String(fs.readFileSync('/src/Interfaces/Components/Test.d.ts'));
+				const createdComponentInterfaceFile = String(
+					fs.readFileSync('/src/Interfaces/Components/Test.d.ts')
+				);
 
 				const fileContent = CommonHelper.getTemplate(
 					'/Templates/nextjs/Interfaces/Component.mustache',
@@ -307,7 +319,9 @@ describe('Helper tests', () => {
 		it('should create functional component dir and file', () => {
 			Helper.createFuncComponent(answers, createFunctionalComponentParams);
 
-			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Components/Functional.mustache', answers);
+			const fileContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Components/Functional.mustache', answers
+			);
 			const createdComponent = String(fs.readFileSync('/src/Components/Functest/index.tsx'));
 
 			expect(createdComponent).toBe(fileContent);
@@ -321,7 +335,9 @@ describe('Helper tests', () => {
 		});
 
 		it('should create interface', () => {
-			const fileContent = CommonHelper.getTemplate('/Templates/nextjs/Interfaces/Component.mustache', answers);
+			const fileContent = CommonHelper.getTemplate(
+				'/Templates/nextjs/Interfaces/Component.mustache', answers
+			);
 			const interfaceFilePath = `${Config.nextjs.compInterfaceDir}/${answers.fileName}.d.ts`;
 			const createdInterface = String(fs.readFileSync(interfaceFilePath));
 
