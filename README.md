@@ -11,7 +11,7 @@ Save a lot of time by generating services, components, tests for Pankod Boilerpl
 [![Test Coverage](https://api.codeclimate.com/v1/badges/2c2209c30b0d428bab96/test_coverage)](https://codeclimate.com/github/pankod/pankod-cli/test_coverage)
 [![oclif](https://img.shields.io/badge/cli-oclif-brightgreen.svg)](https://oclif.io)
 [![Version](https://img.shields.io/npm/v/@pankod/pankod-cli.svg)](https://npmjs.org/package/@pankod/pankod-cli)
-[![Downloads/week](https://img.shields.io/npm/dw/@pankod/pankod-cli.svg)](https://npmjs.org/package/@pankod/pankod-cli)
+[![Downloads/month](https://img.shields.io/npm/dm/@pankod/pankod-cli.svg)](https://npmjs.org/package/@pankod/pankod-cli)
 [![License](https://img.shields.io/npm/l/@pankod/pankod-cli.svg)](https://github.com/Pankod/pankod-cli/blob/master/package.json)
 
 <!-- toc -->
