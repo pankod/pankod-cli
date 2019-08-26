@@ -110,7 +110,8 @@
     "setupFiles": [
       "<rootDir>/test/setup.ts",
       "<rootDir>/test/setup.nextjs.ts",
-      "<rootDir>/test/setup.moleculer.ts"
+      "<rootDir>/test/setup.moleculer.ts",
+      "<rootDir>/test/setup.svelte.ts"
     ],
     "globals": {
       "ts-jest": {
