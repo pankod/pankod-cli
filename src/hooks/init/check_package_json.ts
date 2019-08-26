@@ -8,6 +8,7 @@ import { CommonHelper } from '../../Scripts/Common';
 const text: IText = {
 	moleculer: 'Pankod Moleculer CLI',
 	nextjs: 'Pankod NextJS CLI',
+	svelte: 'Pankod Svelte CLI',
 	pankodCli: 'Pankod CLI'
 };
 

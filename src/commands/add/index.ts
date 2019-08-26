@@ -12,11 +12,12 @@ interface IAddArgs {
 	}
 }
 
-const supportedProjects: string[] = ['nextjs', 'moleculer'];
+const supportedProjects: string[] = ['nextjs', 'moleculer', 'svelte'];
 
 const supportedCommands: ISupportedCommands = {
 	moleculer: ['Entity', 'Service'],
-	nextjs: ['Page', 'FunctionalComponent', 'ClassComponent', 'Plugin']
+	nextjs: ['Page', 'FunctionalComponent', 'ClassComponent', 'Plugin'],
+	svelte: ['Component']
 };
 
 export default class Add extends Command {
@@ -25,7 +26,7 @@ export default class Add extends Command {
 	static args = [
 		{
 			name: 'entityType',
-			options: ['Entity', 'Service', 'Page', 'FunctionalComponent', 'ClassComponent', 'Plugin']
+			options: ['Entity', 'Service', 'Page', 'FunctionalComponent', 'ClassComponent', 'Plugin', 'Component']
 		}
 	];
 
