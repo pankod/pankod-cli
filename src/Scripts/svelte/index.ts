@@ -44,12 +44,26 @@ const createStyleParams: ISvelteHelper.ICreateStyle = {
 const actions: ISvelteActions = {
 
 	Component: async (answers: ICommon.IAnswers): Promise<void> => {
-		const { hasStyle = false } = answers;
+		const { hasStyle = false, lowerFileName, fileName } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
 		answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
-		Helper.createComponent(answers, createComponentParams);
+		const templateProps = {
+			fileName,
+			hasStyle,
+			lowerFileName
+		};
 
+		const createTestParams = {
+			answers,
+			dirPath: `${Config.svelte.componentsDir}/${answers.fileName}/index.spec.js`,
+			successMessage: 'Added new component test.',
+			templatePath: Config.svelte.templates.componentTestTemplate,
+			templateProps
+		};
+
+		Helper.createComponent(answers, createComponentParams);
+		Helper.createTest(createTestParams);
 
 		if (hasStyle) {
 			Helper.createStyle(answers, createStyleParams);

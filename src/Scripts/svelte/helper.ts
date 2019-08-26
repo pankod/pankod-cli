@@ -1,10 +1,8 @@
 //#region Global Imports
-import * as fs from 'fs';
-import * as path from 'path';
+
 //#endregion Global Imports
 
 //#region Local Imports
-import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import { ISvelteHelper } from './ISvelteTypes';
@@ -13,7 +11,7 @@ import { ISvelteHelper } from './ISvelteTypes';
 export const Helper = {
 
 	createStyle: (answers: ICommon.IAnswers, createStyleParams: ISvelteHelper.ICreateStyle): void => {
-		const { fileName, isPage = false, lowerFileName } = answers;
+		const { fileName, lowerFileName } = answers;
 
 		const templateProps = { fileName, lowerFileName };
 		const compDirPath = `${createStyleParams.compDirPath}/${answers.fileName}/style.scss`;
@@ -45,17 +43,7 @@ export const Helper = {
 			message: 'Add new component.'
 		};
 
-
-		const createTestParams = {
-			answers,
-			dirPath: `${Config.svelte.componentsDir}/${answers.fileName}/index.spec.js`,
-			successMessage: 'Added new component test.',
-			templatePath: Config.svelte.templates.componentTestTemplate,
-			templateProps
-		};
-
 		CommonHelper.createFile(componentDir);
-		Helper.createTest(createTestParams);
 		CommonHelper.writeFile(writeFileProps);
 	}, 
 
