@@ -25,7 +25,7 @@ $ npm install -g @pankod/pankod-cli
 $ pankod-cli COMMAND
 running command...
 $ pankod-cli (-v|--version|version)
-@pankod/pankod-cli/0.2.3 darwin-x64 node-v10.16.0
+@pankod/pankod-cli/0.3.3 darwin-x64 node-v10.16.0
 $ pankod-cli --help [COMMAND]
 USAGE
   $ pankod-cli COMMAND
@@ -51,7 +51,7 @@ USAGE
   $ pankod-cli add Plugin
 ```
 
-_See code: [src/commands/add/index.ts](https://github.com/Pankod/pankod-cli/blob/v0.2.3/src/commands/add/index.ts)_
+_See code: [src/commands/add/index.ts](https://github.com/Pankod/pankod-cli/blob/v0.3.3/src/commands/add/index.ts)_
 
 ## `pankod-cli help [COMMAND]`
 
