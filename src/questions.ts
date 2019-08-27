@@ -12,7 +12,14 @@ const questions: IQuestions = {
 		message: 'What do you want to add?',
 		name: 'fileType',
 		type: 'list'
-	}
+	},
+	svelte: {
+		choices: ['Component'],
+		message: 'What do you want to add?',
+		name: 'fileType',
+		type: 'list'
+	},
+
 };
 
 export default questions;

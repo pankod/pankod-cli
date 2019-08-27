@@ -65,4 +65,12 @@ export declare const Config: {
             reducerStoreTemplatePath: string;
         };
     };
+    svelte: {
+        componentsDir: string;
+        templates: {
+            stylePageTemplate: string;
+            componentTestTemplate: string;
+            componentTemplate: string;
+        };
+    };
 };

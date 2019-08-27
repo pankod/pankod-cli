@@ -64,5 +64,13 @@ export const Config = {
 			actionIndexTemplatePath: './lib/Templates/nextjs/Reducers/ActionIndex.mustache',
 			reducerStoreTemplatePath: './lib/Templates/nextjs/Reducers/Store.mustache'
 		}
+	},
+	svelte: {
+		componentsDir: './src/Components',
+		templates: {
+			stylePageTemplate: './lib/Templates/svelte/Styles.mustache',
+			componentTestTemplate: './lib/Templates/svelte/Tests/Test.mustache',
+			componentTemplate: './lib/Templates/svelte/Components/Component.mustache'
+		}
 	}
 };
