@@ -1,14 +1,11 @@
 import {{fileName}} from './index.svelte';
+import { render } from '@testing-library/svelte'
 
 describe('Sample', () => {
-	it('is empty by default', (next) => {
-		const target = document.createElement('div');
-		const sample = new {{fileName}}({ target });
+	it('renders without failing', () => {
+		const { container, getAllByText } = render({{fileName}})
 
-		setTimeout(() => {
-			const { firstElementChild: element } = target;
-			expect(element.className).toBe('{{fileName}}');
-			next();
-		}, 10);
+		expect(getAllByText('Hello World!').length).toBe(1)
+		expect(container).toMatchSnapshot()
 	});
 });
