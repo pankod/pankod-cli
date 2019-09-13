@@ -245,7 +245,6 @@ const actions: INextjs2Actions = {
         Helper.addRoute(answers, addRouteParams);
 
 
-        console.log("answers", answers);
         
         switch (hasStyle) {
             case 'styled':
@@ -257,10 +256,6 @@ const actions: INextjs2Actions = {
             default:
                 break;
         }
-
-      /*   if (hasStyle) {
-            Helper.createStyle(answers, createStyleParams);
-        } */
     },
     Plugin: async (answers: ICommon.IAnswers): Promise<void> => {
         const { pluginType = Plugins.styled } = answers;

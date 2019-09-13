@@ -93,7 +93,11 @@ export const Helper = {
         );
 
         CommonHelper.writeFile(writeFileProps);
-        CommonHelper.replaceContent(replaceContentParams);
+        
+        if (isPage) {
+
+            CommonHelper.replaceContent(replaceContentParams);
+        }
 
         if (isConnectStore) {
             CommonHelper.replaceContent(replaceStoreParams);
