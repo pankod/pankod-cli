@@ -4,14 +4,14 @@ import { ActionConsts } from "@Definitions";
  * ACTIONS
 */
 export const {{fileName}}Actions = {
-	Map: (payload: any) => (
-		{
-			payload,
-			type: ActionConsts.{{fileName}}.SetReducer
-		}
-	),
+    Map: (payload: any) => (
+        {
+            payload,
+            type: ActionConsts.{{fileName}}.SetReducer
+        }
+    ),
 
-	Reset: () => ({
-		type: ActionConsts.{{fileName}}.ResetReducer
-	})
+    Reset: () => ({
+        type: ActionConsts.{{fileName}}.ResetReducer
+    })
 }
