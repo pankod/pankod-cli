@@ -70,14 +70,9 @@ export const Helper = {
                 'utf8'
             ),
             getFileContent: () =>
-                CommonHelper.getTemplate(
-                    isPage
-                        ? createInterfaceParams.pageInterfaceIndex
-                        : createInterfaceParams.compInterfaceIndex,
-                    templateProps
-                ),
+                CommonHelper.getTemplate(createInterfaceParams.pageInterfaceIndex, templateProps),
             message: 'Interface file added to Interfaces/index.ts',
-            regexKey: isPage ? /...PAGE INTERFACES/g : /...COMPONENT INTERFACES/g
+            regexKey: /\/\/ #region Page Interfaces/g
         };
 
         const commonReplaceParams = (contentFile: string, message: string, regexKey: RegExp) => ({
@@ -107,7 +102,7 @@ export const Helper = {
                 const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
                     createInterfaceParams.storeImportInterface,
                     'Interface file added to import section in Interfaces/Redux/Store.d.ts',
-                    /\s[}] from '@Interfaces';/g
+                    /\s[}] from "@Interfaces";/g
                 );
 
                 CommonHelper.replaceContent(replaceStoreImportParams);
@@ -169,10 +164,12 @@ export const Helper = {
     },
 
     addAction: (answers: ICommon.IAnswers, params: INextjs2Helper.IAddActionParams): void => {
-        const { actionIndexTemplatePath, actionTemplatePath } = params;
-        const { fileName } = answers;
-        const actionFileDir = `${Config.nextjs2.actionDir}/${fileName}Actions.ts`;
-        const templateProps = { fileName };
+        const { actionIndexTemplatePath, actionTemplatePath, actionTestTemplatePath } = params;
+        const { fileName, lowerFileName } = answers;
+        const actionFolderDir = `${Config.nextjs2.actionDir}/${fileName}Actions`;
+        const actionFileDir = `${actionFolderDir}/index.ts`;
+        const testFileDir = `${actionFolderDir}/index.spec.ts`;
+        const templateProps = { fileName, lowerFileName };
 
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: actionFileDir,
@@ -186,8 +183,16 @@ export const Helper = {
             message: 'Added action file to index.ts Actions/index.ts'
         };
 
+        const addTestParams: ICommon.IAddTest = {
+            dirPath: testFileDir,
+            getFileContent: () => CommonHelper.getTemplate(actionTestTemplatePath, templateProps),
+            message: 'Added action test'
+        };
+
+        CommonHelper.createFile(actionFolderDir);
         CommonHelper.addToIndex(addIndexParams);
         CommonHelper.writeFile(writeFileProps);
+        CommonHelper.writeFile(addTestParams);
     },
 
     addReducer: (answers: ICommon.IAnswers, params: INextjs2Helper.IAddReducerParams): void => {
@@ -210,7 +215,7 @@ export const Helper = {
             ),
             getFileContent: () => CommonHelper.getTemplate(reducerIndexTemplatePath, templateProps),
             message: 'Reducer added to Redux/Reducers/index.ts',
-            regexKey: /import { combineReducers } from 'redux';/g
+            regexKey: /\/\/ #endregion Local Imports/g
         };
 
         const writeFileProps: ICommon.IWriteFile = {

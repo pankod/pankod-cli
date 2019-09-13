@@ -116,6 +116,7 @@ export const Config = {
             actionIndexTemplatePath: './lib/Templates/nextjs2/Reducers/ActionIndex.mustache',
             reducerStoreTemplatePath: './lib/Templates/nextjs2/Reducers/Store.mustache',
             styledComponentsTemplatePath: './lib/Templates/nextjs2/StyledComponents.mustache',
+            actionTestTemplatePath: './lib/Templates/nextjs2/Tests/ActionTest.mustache',
         }
     }
 };

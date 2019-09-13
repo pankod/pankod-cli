@@ -76,6 +76,7 @@ export declare namespace INextjs2Helper {
     export interface IAddActionParams {
         actionTemplatePath: string;
         actionIndexTemplatePath: string;
+        actionTestTemplatePath: string;
     }
 
     export interface ICreateFuncComponentParams {

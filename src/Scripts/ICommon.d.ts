@@ -31,6 +31,12 @@ export declare namespace ICommon {
         message: string;
     }
 
+    export interface IAddTest {
+        dirPath: string;
+        getFileContent: Function;
+        message: string;
+    }
+
     export interface IWriteFile {
         dirPath: string;
         getFileContent: Function;

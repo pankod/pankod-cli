@@ -108,6 +108,7 @@ export declare const Config: {
             actionIndexTemplatePath: string;
             reducerStoreTemplatePath: string;
             styledComponentsTemplatePath: string;
+            actionTestTemplatePath: string;
         };
     };
 };

@@ -35,7 +35,8 @@ const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
 
 const addActionParams: INextjs2Helper.IAddActionParams = {
     actionIndexTemplatePath: Config.nextjs2.templates.actionIndexTemplatePath,
-    actionTemplatePath: Config.nextjs2.templates.actionTemplatePath
+    actionTemplatePath: Config.nextjs2.templates.actionTemplatePath,
+    actionTestTemplatePath: Config.nextjs2.templates.actionTestTemplatePath
 };
 
 const addReducerParams: INextjs2Helper.IAddReducerParams = {
