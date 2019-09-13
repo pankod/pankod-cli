@@ -18,39 +18,60 @@ import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
 
 const createInterfaceParams = {
-    templatePath: Config.nextjs.templates.createInterfaceTempPath,
-    pageInterfaceIndex: Config.nextjs.templates.pageInterfaceIndex,
-    storeImportInterface: Config.nextjs.templates.storeImportInterface,
-    compInterfaceIndex: Config.nextjs.templates.compInterfaceIndex,
-    storeInterface: Config.nextjs.templates.storeInterface,
-    interfaceDir: Config.nextjs.interfaceDir,
-    reduxInterfaceDir: Config.nextjs.reduxInterfaceDir,
-    pageInterfaceDir: Config.nextjs.pageInterfaceDir,
-    compInterfaceDir: Config.nextjs.compInterfaceDir
+    templatePath: Config.nextjs2.templates.createInterfaceTempPath,
+    pageInterfaceIndex: Config.nextjs2.templates.pageInterfaceIndex,
+    storeImportInterface: Config.nextjs2.templates.storeImportInterface,
+    compInterfaceIndex: Config.nextjs2.templates.compInterfaceIndex,
+    storeInterface: Config.nextjs2.templates.storeInterface,
+    interfaceDir: Config.nextjs2.interfaceDir,
+    reduxInterfaceDir: Config.nextjs2.reduxInterfaceDir,
+    pageInterfaceDir: Config.nextjs2.pageInterfaceDir,
+    compInterfaceDir: Config.nextjs2.compInterfaceDir
 };
 
 const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: Config.nextjs.templates.actionConstTemplatePath
+    actionConstTemplatePath: Config.nextjs2.templates.actionConstTemplatePath
 };
 
 const addActionParams: INextjs2Helper.IAddActionParams = {
-    actionIndexTemplatePath: Config.nextjs.templates.actionIndexTemplatePath,
-    actionTemplatePath: Config.nextjs.templates.actionTemplatePath
+    actionIndexTemplatePath: Config.nextjs2.templates.actionIndexTemplatePath,
+    actionTemplatePath: Config.nextjs2.templates.actionTemplatePath
 };
 
 const addReducerParams: INextjs2Helper.IAddReducerParams = {
     addActionConstIndexParams,
-    reducerIndexTemplatePath: Config.nextjs.templates.reducerIndexTemplatePath,
-    reducerStoreTemplatePath: Config.nextjs.templates.reducerStoreTemplatePath,
-    reducerTemplatePath: Config.nextjs.templates.reducerTemplatePath
+    reducerIndexTemplatePath: Config.nextjs2.templates.reducerIndexTemplatePath,
+    reducerStoreTemplatePath: Config.nextjs2.templates.reducerStoreTemplatePath,
+    reducerTemplatePath: Config.nextjs2.templates.reducerTemplatePath
 };
 
 const commonQuestions: INextjs2CommonQuestions = {
-    addStyle: {
+/*     addStyle: {
         default: true,
         message: 'Do you want to add style file?',
         name: 'hasStyle',
         type: 'confirm'
+    }, */
+    
+    addStyle: {
+        choices: [
+            new inquirer.Separator(),
+            {
+                name: 'styled-components',
+                value: 'styled'
+            },
+            {
+                name: 'SCSS/SASS',
+                value: 'scss'
+            },
+            {
+                name: "I don't want to add style file.",
+                value: 'noStyle'
+            }
+        ],
+        message: 'What kind of css do you want to implement?',
+        name: 'hasStyle',
+        type: 'list',
     },
     connectStore: {
         default: false,
@@ -63,7 +84,7 @@ const commonQuestions: INextjs2CommonQuestions = {
         name: 'fileName',
         type: 'input',
         validate(val: string): string | boolean {
-            return CommonHelper.validate(val, Config.nextjs.componentsDir, false, 'component');
+            return CommonHelper.validate(val, Config.nextjs2.componentsDir, false, 'component');
         }
     },
     isHaveReducer: {
@@ -82,7 +103,8 @@ const commonQuestions: INextjs2CommonQuestions = {
         name: 'isHaveReducer',
         type: 'list',
         when: ({ isConnectStore = false }: { isConnectStore?: boolean }): boolean => isConnectStore
-    }
+    },
+   
 };
 
 const questions: INextjs2Questions = {
@@ -99,7 +121,7 @@ const questions: INextjs2Questions = {
             name: 'fileName',
             type: 'input',
             validate(val: string): string | boolean {
-                return CommonHelper.validate(val, Config.nextjs.pagesDir, false, 'page');
+                return CommonHelper.validate(val, Config.nextjs2.pagesDir, false, 'page');
             }
         },
         {
@@ -127,7 +149,8 @@ const questions: INextjs2Questions = {
 
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
-        commonQuestions.addStyle
+        commonQuestions.addStyle,
+    
     ],
     Plugin: [
         {
@@ -150,24 +173,31 @@ const questions: INextjs2Questions = {
 };
 
 const createClassComponentParams: INextjs2Helper.ICreateClassComponentParams = {
-    templatePath: Config.nextjs.templates.classComponentTemplatePath,
-    indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
+    templatePath: Config.nextjs2.templates.classComponentTemplatePath,
+    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
     createInterfaceParams,
     addReducerParams,
     addActionParams
 };
 
 const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
-    templatePath: Config.nextjs.templates.funcComponentTemplate,
-    indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
-    componentsDir: Config.nextjs.componentsDir,
+    templatePath: Config.nextjs2.templates.funcComponentTemplate,
+    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
+    componentsDir: Config.nextjs2.componentsDir,
     createInterfaceParams
 };
 
 const createStyleParams: INextjs2Helper.ICreateStyle = {
-    compDirPath: Config.nextjs.componentsDir,
-    pageDirPath: Config.nextjs.pagesDir,
-    templatePath: Config.nextjs.templates.stylePageTemplate
+    compDirPath: Config.nextjs2.componentsDir,
+    pageDirPath: Config.nextjs2.pagesDir,
+    templatePath: Config.nextjs2.templates.stylePageTemplate
+};
+
+const createStyledComponentParams: INextjs2Helper.ICreateStyle = {
+    compDirPath: Config.nextjs2.componentsDir,
+    pageStyledDirPath: Config.nextjs2.pageStyledDir,
+    templatePath: Config.nextjs2.templates.styledComponentsTemplatePath,
+    isStyledComponent: true
 };
 
 const actions: INextjs2Actions = {
@@ -195,6 +225,7 @@ const actions: INextjs2Actions = {
         }
     },
     Page: async (answers: ICommon.IAnswers): Promise<void> => {
+        
         const { hasStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -202,16 +233,33 @@ const actions: INextjs2Actions = {
         answers.isPage = true;
 
         const addRouteParams = {
-            routesDir: Config.nextjs.routesDir,
-            routesTemplate: Config.nextjs.templates.addRouteTemplate
+            routesDir: Config.nextjs2.routesDir,
+            routesTemplate: Config.nextjs2.templates.addRouteTemplate
         };
+
+        answers.isStyled = answers.hasStyle === 'styled';
+        answers.isScss = answers.hasStyle === 'scss';
 
         Helper.createClassComponent(answers, createClassComponentParams);
         Helper.addRoute(answers, addRouteParams);
 
-        if (hasStyle) {
-            Helper.createStyle(answers, createStyleParams);
+
+        console.log("answers", answers);
+        
+        switch (hasStyle) {
+            case 'styled':
+             Helper.createStyle(answers, createStyledComponentParams); 
+                break;
+            case 'scss':
+             Helper.createStyle(answers, createStyleParams); 
+                break;
+            default:
+                break;
         }
+
+      /*   if (hasStyle) {
+            Helper.createStyle(answers, createStyleParams);
+        } */
     },
     Plugin: async (answers: ICommon.IAnswers): Promise<void> => {
         const { pluginType = Plugins.styled } = answers;

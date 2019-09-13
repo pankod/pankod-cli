@@ -49,7 +49,7 @@ export default class Add extends Command {
     ];
 
     validateProjectSupported = (projectType: string) => {
-        console.log('selam');
+        console.log('asss');
         if (!supportedProjects.includes(projectType)) {
             this.error(`The project ${projectType} isn't supported.`);
         }

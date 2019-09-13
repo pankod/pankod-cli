@@ -19,8 +19,10 @@ export declare namespace ICommon {
         lowerFileName?: string;
         isPage?: boolean;
         isConnectStore?: boolean;
-        hasStyle?: boolean;
+        hasStyle?: string;
         pluginType?: string;
+        isStyled?:boolean;
+        isScss?:boolean;
     }
 
     export interface IAddIndex {
