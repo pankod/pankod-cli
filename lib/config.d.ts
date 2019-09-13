@@ -89,6 +89,7 @@ export declare const Config: {
         reduxInterfaceDir: string;
         routesDir: string;
         storeDir: string;
+        pageStyledDir: string;
         templates: {
             addRouteTemplate: string;
             compInterfaceIndex: string;
@@ -106,6 +107,7 @@ export declare const Config: {
             actionTemplatePath: string;
             actionIndexTemplatePath: string;
             reducerStoreTemplatePath: string;
+            styledComponentsTemplatePath: string;
         };
     };
 };

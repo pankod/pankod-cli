@@ -2,7 +2,7 @@ import { InputQuestion, Question, ConfirmQuestion, ListQuestion } from 'inquirer
 import { ICommon } from '../ICommon';
 
 export interface INextjs2CommonQuestions {
-    addStyle: ConfirmQuestion<ICommon.IAnswers>;
+    addStyle: ListQuestion<ICommon.IAnswers>;
     connectStore: ConfirmQuestion<ICommon.IAnswers>;
     enterComponentName: InputQuestion<ICommon.IAnswers>;
     isHaveReducer: ListQuestion<ICommon.IAnswers>;
@@ -44,8 +44,10 @@ export declare namespace INextjs2Helper {
 
     export interface ICreateStyle {
         templatePath: string;
-        pageDirPath: string;
+        pageDirPath?: string;
         compDirPath: string;
+        pageStyledDirPath?:string;
+        isStyledComponent?: boolean;
     }
 
     export interface ICreateClassComponentParams {
