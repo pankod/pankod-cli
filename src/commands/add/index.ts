@@ -12,12 +12,13 @@ interface IAddArgs {
     };
 }
 
-const supportedProjects: string[] = ['nextjs', 'moleculer', 'svelte'];
+const supportedProjects: string[] = ['nextjs', 'moleculer', 'svelte', 'nextjs2'];
 
 const supportedCommands: ISupportedCommands = {
     moleculer: ['Entity', 'Service'],
-    nextjs: ['Page', 'FunctionalComponent', 'ClassComponent', 'Plugin'],
-    svelte: ['Component']
+    nextjs: ['Page', 'FunctionalComponent', 'ClassComponent'],
+    svelte: ['Component'],
+    nextjs2: ['Page', 'FunctionalComponent']
 };
 
 export default class Add extends Command {
@@ -48,6 +49,7 @@ export default class Add extends Command {
     ];
 
     validateProjectSupported = (projectType: string) => {
+        console.log('selam');
         if (!supportedProjects.includes(projectType)) {
             this.error(`The project ${projectType} isn't supported.`);
         }

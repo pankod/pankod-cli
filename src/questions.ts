@@ -18,6 +18,12 @@ const questions: IQuestions = {
         message: 'What do you want to add?',
         name: 'fileType',
         type: 'list'
+    },
+    nextjs2: {
+        choices: ['Page', 'Functional Component'],
+        message: 'What do you want to add?',
+        name: 'fileType',
+        type: 'list'
     }
 };
 

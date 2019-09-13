@@ -9,6 +9,7 @@ const text: IText = {
     moleculer: 'Pankod Moleculer CLI',
     nextjs: 'Pankod NextJS CLI',
     svelte: 'Pankod Svelte CLI',
+    nextjs2: 'Pankod NextJS CLI',
     pankodCli: 'Pankod CLI'
 };
 

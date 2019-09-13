@@ -9,6 +9,8 @@ export interface IPankodConfig {
 export interface IText {
     moleculer: string;
     nextjs: string;
+    svelte: string;
+    nextjs2: string;
     pankodCli: string;
     [key: string]: string;
 }
@@ -16,6 +18,8 @@ export interface IText {
 export interface IQuestions {
     moleculer: ListQuestion<ICommon.IAnswers>;
     nextjs: ListQuestion<ICommon.IAnswers>;
+    svelte: ListQuestion<ICommon.IAnswers>;
+    nextjs2: ListQuestion<ICommon.IAnswers>;
     [key: string]: ListQuestion<ICommon.IAnswers>;
 }
 
@@ -34,5 +38,7 @@ export interface IPluginsHelper {
 export interface ISupportedCommands {
     moleculer: string[];
     nextjs: string[];
+    svelte: string[];
+    nextjs2: string[];
     [key: string]: string[];
 }
