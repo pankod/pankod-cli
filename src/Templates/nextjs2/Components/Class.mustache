@@ -1,48 +1,46 @@
 //#region Global Imports
 import * as React from "react";
-{{#isConnectStore}}
-import { connect } from "react-redux";
-import { bindActionCreators, Dispatch } from "redux";
-{{/isConnectStore}}
+import { NextPage } from "next";
+import { useSelector, useDispatch } from "react-redux";
 //#endregion Global Imports
 
 //#region Local Imports
-{{#hasStyle}}
+import { withTranslation } from "@Server/i18n";
+{{#isScss}}
 import './style.scss';
-{{/hasStyle}}
+{{/isScss}}
+{{#isStyled}}
+import { Container } from "@Styled/{{upperFileName}}";
+{{/isStyled}}
+import { IStore } from "@Redux/IStore";
+import { {{upperFileName}}Actions } from "@Actions";
 //#endregion Local Imports
 
 //#region Interface Imports
-import { {{interfaceName}} } from "@Interfaces";
+import { ReduxNextPageContext, I{{upperFileName}}Page } from "@Interfaces";
 //#endregion Interface Imports
 
-class {{fileName}} extends React.Component<{{interfaceName}}.IProps, {{interfaceName}}.IState> {
+const {{upperFileName}}: NextPage<I{{upperFileName}}Page.IProps, I{{upperFileName}}Page.InitialProps> = ({
+    t,
+    i18n,
+}) => {
+    const {{fileName}} = useSelector((state: IStore) => state.{{lowerFileName}});
+    const dispatch = useDispatch();
 
-    constructor(props: {{interfaceName}}.IProps) {
-        super(props);
+    return (
+        <Container>
+         {{upperFileName}} page
+        </Container>
+    );
+};
 
-        this.state = {
-        };
-    }
+{{upperFileName}}.getInitialProps = async (
+    ctx: ReduxNextPageContext
+): Promise<I{{upperFileName}}Page.InitialProps> => {
 
-    public render(): JSX.Element {
-        return (
-            <div className="{{lowerFileName}}">
-                {{fileName}}
-            </div>
-        );
-    }
-}
+    return { namespacesRequired: ["common"] };
+};
 
-{{#isConnectStore}}
-const mapStateToProps = state => state;
+const Extended = withTranslation("common")({{upperFileName}});
 
-const mapDispatchToProps = (dispatch: Dispatch) => (
-);
-
-export default connect(mapStateToProps, mapDispatchToProps)({{fileName}});
-{{/isConnectStore}}
-
-{{^isConnectStore}}
-export default {{fileName}};
-{{/isConnectStore}}
+export default Extended;

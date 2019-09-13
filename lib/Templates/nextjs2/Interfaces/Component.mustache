@@ -1,10 +1,10 @@
 //#region Global Imports
-import { Props } from 'prop-types';
+import { WithTranslation } from "next-i18next";
 //#endregion Global Imports
 
 declare module I{{fileName}} {
-    export interface IProps extends Props<{}> {
-  
+    export interface IProps extends WithTranslation<{}> {
+
     }
     {{#isClass}}
     export interface IState { }
@@ -13,8 +13,10 @@ declare module I{{fileName}} {
 
     {{#isConnectStore}}
     module Actions {
-	    export interface IMapPayload { }
-		export interface IMapResponse { }
-	}
+        export interface IMapPayload { }
+        export interface IMapResponse { }
+    }
     {{/isConnectStore}}
 }
+
+export { I{{fileName}}Name };
