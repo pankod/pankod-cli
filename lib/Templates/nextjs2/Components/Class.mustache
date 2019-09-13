@@ -1,48 +1,54 @@
 //#region Global Imports
-import * as React from 'react';
-{{#isConnectStore}}
-import { connect } from 'react-redux';
-import { bindActionCreators, Dispatch } from 'redux';
-{{/isConnectStore}}
+import * as React from "react";
+import { NextPage } from "next";
+import { useSelector, useDispatch } from "react-redux";
+import { withTranslation } from "@Server/i18n";
+
 //#endregion Global Imports
 
 //#region Local Imports
-{{#hasStyle}}
+
+{{#isScss}}
 import './style.scss';
-{{/hasStyle}}
+{{/isScss}}
+
+{{#isStyled}}
+import { Container } from "@Styled/{{upperFileName}}";
+{{/isStyled}}
+
+import { IStore } from "@Redux/IStore";
+import { {{upperFileName}}Actions } from "@Actions";
+
 //#endregion Local Imports
 
 //#region Interface Imports
-import { {{interfaceName}} } from '@Interfaces';
+import { ReduxNextPageContext, I{{upperFileName}}Page } from "@Interfaces";
 //#endregion Interface Imports
 
-class {{fileName}} extends React.Component<{{interfaceName}}.IProps, {{interfaceName}}.IState> {
 
-	constructor(props: {{interfaceName}}.IProps) {
-		super(props);
+const {{upperFileName}}: NextPage<I{{upperFileName}}Page.IProps, I{{upperFileName}}Page.InitialProps> = ({
+    t,
+    i18n,
+}) => {
+    const {{fileName}} = useSelector((state: IStore) => state.{{lowerFileName}});
+    const dispatch = useDispatch();
 
-		this.state = {
-		};
-	}
 
-	public render(): JSX.Element {
-		return (
-			<div className="{{lowerFileName}}">
-				{{fileName}}
-			</div>
-		);
-	}
-}
 
-{{#isConnectStore}}
-const mapStateToProps = state => state;
+    return (
+        <Container>
+         {{upperFileName}} page
+        </Container>
+    );
+};
 
-const mapDispatchToProps = (dispatch: Dispatch) => (
-);
+{{upperFileName}}.getInitialProps = async (
+    ctx: ReduxNextPageContext
+): Promise<I{{upperFileName}}Page.InitialProps> => {
 
-export default connect(mapStateToProps, mapDispatchToProps)({{fileName}});
-{{/isConnectStore}}
+    return { namespacesRequired: ["common"] };
+};
 
-{{^isConnectStore}}
-export default {{fileName}};
-{{/isConnectStore}}
+const Extended = withTranslation("common")({{upperFileName}});
+
+export default Extended;
