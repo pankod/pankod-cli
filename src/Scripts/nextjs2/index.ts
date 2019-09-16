@@ -52,6 +52,7 @@ const commonQuestions: INextjs2CommonQuestions = {
         default: true,
         message: 'Do you want to add style file?',
         name: 'hasStyle',
+        
         type: 'confirm'
     }, */
 
