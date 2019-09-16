@@ -33,7 +33,7 @@ export const Helper = {
                 CommonHelper.getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
             message: `Route added to routes.ts as ${
                 hasPath ? `'/${routePath}'` : `'/${fileName}/index'`
-                }`,
+            }`,
             regexKey: /^(?:[\t ]*(?:\r?\n|\r))+export default routes;/gm
         };
 
@@ -49,12 +49,27 @@ export const Helper = {
             lowerFileName,
             isPage = false,
             isConnectStore = false,
+            isFuncComponent = false,
             upperFileName
         } = answers;
-        const templateProps = { fileName, isClass, lowerFileName, isConnectStore, upperFileName };
+
+        const templateProps = {
+            fileName,
+            isClass,
+            lowerFileName,
+            isConnectStore,
+            upperFileName,
+            isFuncComponent
+        };
 
         const pageDirPath = `${createInterfaceParams.pageInterfaceDir}/${fileName}.d.ts`;
-        const compDirPath = `${createInterfaceParams.compInterfaceDir}/${fileName}.d.ts`;
+        let compDirPath;
+
+        if (isFuncComponent) {
+            compDirPath = `${createInterfaceParams.componentsDir}/${fileName}/${fileName}.d.ts`;
+        } else {
+            compDirPath = `${createInterfaceParams.compInterfaceDir}/${fileName}.d.ts`;
+        }
 
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: isPage ? pageDirPath : compDirPath,
@@ -93,9 +108,8 @@ export const Helper = {
         );
 
         CommonHelper.writeFile(writeFileProps);
-        
-        if (isPage) {
 
+        if (isPage) {
             CommonHelper.replaceContent(replaceContentParams);
         }
 
@@ -119,28 +133,34 @@ export const Helper = {
         createStyleParams: INextjs2Helper.ICreateStyle
     ): void => {
         const { fileName, isPage = false, lowerFileName } = answers;
-        const { isStyledComponent, pageDirPath, compDirPath, pageStyledDirPath } = createStyleParams;
+        const {
+            isStyledComponent,
+            pageDirPath,
+            compDirPath,
+            pageStyledDirPath,
+            templatePath
+        } = createStyleParams;
         const templateProps = { fileName, lowerFileName };
-        const _compDirPath = `${compDirPath}/${answers.fileName}/style.scss`;
 
+        let _compDirPath;
         let _pageDirPath;
 
         if (isStyledComponent) {
-            _pageDirPath = `${pageStyledDirPath}/${answers.fileName.replace(
-                /\b\w/g,
-                foo => foo.toUpperCase()
-            )}.ts` || '';
+            _compDirPath = `${compDirPath}/${answers.fileName}/styled.ts`;
+            _pageDirPath =
+                `${pageStyledDirPath}/${answers.fileName.replace(/\b\w/g, foo =>
+                    foo.toUpperCase()
+                )}.ts` || '';
         } else {
-            _pageDirPath = `${pageDirPath}/${answers.fileName.replace(
-                /\b\w/g,
-                foo => foo.toLowerCase()
+            _compDirPath = `${compDirPath}/${answers.fileName}/style.scss`;
+            _pageDirPath = `${pageDirPath}/${answers.fileName.replace(/\b\w/g, foo =>
+                foo.toLowerCase()
             )}/style.scss`;
         }
 
         const writeFileProps = {
             dirPath: isPage ? _pageDirPath : _compDirPath,
-            getFileContent: () =>
-                CommonHelper.getTemplate(createStyleParams.templatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
             message: 'Added new style file'
         };
 
@@ -307,11 +327,11 @@ export const Helper = {
         answers: ICommon.IAnswers,
         params: INextjs2Helper.ICreateFuncComponentParams
     ): void => {
-        const { lowerFileName, fileName, hasStyle } = answers;
+        const { lowerFileName, fileName, isScss } = answers;
         const funcDir = `${params.componentsDir}/${answers.fileName}`;
         const templateProps = {
             fileName,
-            hasStyle,
+            isScss,
             interfaceName: `I${fileName}`,
             lowerFileName
         };

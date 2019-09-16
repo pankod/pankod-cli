@@ -1,11 +1,10 @@
-
 export declare namespace ICommon {
     export interface ITemplateProps {
         fileName?: string;
         upperFileName?: string;
         isPrivate?: boolean;
-		lowerFileName?: string;
-		interfaceName?: string;
+        lowerFileName?: string;
+        interfaceName?: string;
     }
 
     export interface IAnswers {
@@ -21,8 +20,9 @@ export declare namespace ICommon {
         isConnectStore?: boolean;
         hasStyle?: string;
         pluginType?: string;
-        isStyled?:boolean;
-        isScss?:boolean;
+        isStyled?: boolean;
+        isScss?: boolean;
+        isFuncComponent?: boolean;
     }
 
     export interface IAddIndex {

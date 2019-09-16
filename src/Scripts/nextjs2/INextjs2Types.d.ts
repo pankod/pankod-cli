@@ -40,13 +40,14 @@ export declare namespace INextjs2Helper {
         storeImportInterface: string;
         interfaceDir: string;
         reduxInterfaceDir: string;
+        componentsDir: string;
     }
 
     export interface ICreateStyle {
         templatePath: string;
         pageDirPath?: string;
         compDirPath: string;
-        pageStyledDirPath?:string;
+        pageStyledDirPath?: string;
         isStyledComponent?: boolean;
     }
 

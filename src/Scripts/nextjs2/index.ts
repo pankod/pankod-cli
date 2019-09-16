@@ -17,7 +17,7 @@ import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
 
-const createInterfaceParams = {
+const createInterfaceParams: INextjs2Helper.ICreateInterfaceParams = {
     templatePath: Config.nextjs2.templates.createInterfaceTempPath,
     pageInterfaceIndex: Config.nextjs2.templates.pageInterfaceIndex,
     storeImportInterface: Config.nextjs2.templates.storeImportInterface,
@@ -26,7 +26,8 @@ const createInterfaceParams = {
     interfaceDir: Config.nextjs2.interfaceDir,
     reduxInterfaceDir: Config.nextjs2.reduxInterfaceDir,
     pageInterfaceDir: Config.nextjs2.pageInterfaceDir,
-    compInterfaceDir: Config.nextjs2.compInterfaceDir
+    compInterfaceDir: Config.nextjs2.compInterfaceDir,
+    componentsDir: Config.nextjs2.componentsDir
 };
 
 const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
@@ -47,13 +48,13 @@ const addReducerParams: INextjs2Helper.IAddReducerParams = {
 };
 
 const commonQuestions: INextjs2CommonQuestions = {
-/*     addStyle: {
+    /*     addStyle: {
         default: true,
         message: 'Do you want to add style file?',
         name: 'hasStyle',
         type: 'confirm'
     }, */
-    
+
     addStyle: {
         choices: [
             new inquirer.Separator(),
@@ -72,7 +73,7 @@ const commonQuestions: INextjs2CommonQuestions = {
         ],
         message: 'What kind of css do you want to implement?',
         name: 'hasStyle',
-        type: 'list',
+        type: 'list'
     },
     connectStore: {
         default: false,
@@ -104,8 +105,7 @@ const commonQuestions: INextjs2CommonQuestions = {
         name: 'isHaveReducer',
         type: 'list',
         when: ({ isConnectStore = false }: { isConnectStore?: boolean }): boolean => isConnectStore
-    },
-   
+    }
 };
 
 const questions: INextjs2Questions = {
@@ -150,8 +150,7 @@ const questions: INextjs2Questions = {
 
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
-        commonQuestions.addStyle,
-    
+        commonQuestions.addStyle
     ],
     Plugin: [
         {
@@ -188,6 +187,13 @@ const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
     createInterfaceParams
 };
 
+const createStyledFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
+    templatePath: Config.nextjs2.templates.styledFuncComponentTemplate,
+    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
+    componentsDir: Config.nextjs2.componentsDir,
+    createInterfaceParams
+};
+
 const createStyleParams: INextjs2Helper.ICreateStyle = {
     compDirPath: Config.nextjs2.componentsDir,
     pageDirPath: Config.nextjs2.pagesDir,
@@ -215,18 +221,28 @@ const actions: INextjs2Actions = {
         }
     },
     FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-        const { hasStyle = false } = answers;
+        const { hasStyle = 'noStyle' } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
+        answers.isFuncComponent = true;
 
-        Helper.createFuncComponent(answers, createFuncComponentParams);
-
-        if (hasStyle) {
-            Helper.createStyle(answers, createStyleParams);
+        switch (hasStyle) {
+            case 'styled':
+                Helper.createFuncComponent(answers, createStyledFuncComponentParams);
+                Helper.createStyle(answers, createStyledComponentParams);
+                break;
+            case 'scss':
+                answers.isScss = true;
+                Helper.createFuncComponent(answers, createFuncComponentParams);
+                Helper.createStyle(answers, createStyleParams);
+                break;
+            default:
+                break;
         }
+
+        Helper.createInterface(answers, false, createInterfaceParams);
     },
     Page: async (answers: ICommon.IAnswers): Promise<void> => {
-        
         const { hasStyle = false } = answers;
         answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
         answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
@@ -244,14 +260,12 @@ const actions: INextjs2Actions = {
         Helper.createClassComponent(answers, createClassComponentParams);
         Helper.addRoute(answers, addRouteParams);
 
-
-        
         switch (hasStyle) {
             case 'styled':
-             Helper.createStyle(answers, createStyledComponentParams); 
+                Helper.createStyle(answers, createStyledComponentParams);
                 break;
             case 'scss':
-             Helper.createStyle(answers, createStyleParams); 
+                Helper.createStyle(answers, createStyleParams);
                 break;
             default:
                 break;
