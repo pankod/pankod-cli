@@ -1,16 +1,18 @@
+{{^isFuncComponent}}
 //#region Global Imports
 import { WithTranslation } from "next-i18next";
 //#endregion Global Imports
 
+{{/isFuncComponent}}
 declare module I{{fileName}} {
-    export interface IProps extends WithTranslation<{}> {
+    export interface IProps {{^isFuncComponent}} extends WithTranslation {{/isFuncComponent}}{
 
     }
     {{#isClass}}
     export interface IState { }
     export interface IStateProps { }
-    {{/isClass}}
 
+    {{/isClass}}
     {{#isConnectStore}}
     module Actions {
         export interface IMapPayload { }
