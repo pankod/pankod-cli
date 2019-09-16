@@ -97,7 +97,7 @@ export const Config = {
         reduxInterfaceDir: './src/Redux/IStore.d.ts',
         routesDir: './server/routes.ts',
         storeDir: './src',
-        pageStyledDir:'./src/Styled',
+        pageStyledDir: './src/Styled',
         templates: {
             addRouteTemplate: './lib/Templates/nextjs2/Routes.mustache',
             compInterfaceIndex: './lib/Templates/nextjs2/Interfaces/ComponentIndex.mustache',
@@ -109,6 +109,8 @@ export const Config = {
             componentIndexTemplatePath: './lib/Templates/nextjs2/Components/index.mustache',
             stylePageTemplate: './lib/Templates/nextjs2/Styles.mustache',
             funcComponentTemplate: './lib/Templates/nextjs2/Components/Functional.mustache',
+            styledFuncComponentTemplate:
+                './lib/Templates/nextjs2/Components/StyledFunctional.mustache',
             reducerIndexTemplatePath: './lib/Templates/nextjs2/Reducers/index.mustache',
             reducerTemplatePath: './lib/Templates/nextjs2/Reducers/Reducer.mustache',
             actionConstTemplatePath: './lib/Templates/nextjs2/Reducers/ActionConst.mustache',
@@ -116,7 +118,7 @@ export const Config = {
             actionIndexTemplatePath: './lib/Templates/nextjs2/Reducers/ActionIndex.mustache',
             reducerStoreTemplatePath: './lib/Templates/nextjs2/Reducers/Store.mustache',
             styledComponentsTemplatePath: './lib/Templates/nextjs2/StyledComponents.mustache',
-            actionTestTemplatePath: './lib/Templates/nextjs2/Tests/ActionTest.mustache',
+            actionTestTemplatePath: './lib/Templates/nextjs2/Tests/ActionTest.mustache'
         }
     }
 };
