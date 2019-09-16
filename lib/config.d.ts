@@ -101,6 +101,7 @@ export declare const Config: {
             componentIndexTemplatePath: string;
             stylePageTemplate: string;
             funcComponentTemplate: string;
+            styledFuncComponentTemplate: string;
             reducerIndexTemplatePath: string;
             reducerTemplatePath: string;
             actionConstTemplatePath: string;
