@@ -173,14 +173,12 @@ export const Helper = {
     ): void => {
         const { actionConstTemplatePath } = params;
 
+        const actionConstsDir = `${Config.nextjs2.definitionsDir}/ActionConsts/ActionConsts.ts`;
         const replaceContentParams: ICommon.IReplaceContent = {
-            fileDir: `${Config.nextjs2.definitionsDir}/ActionConsts.ts`,
-            filetoUpdate: fs.readFileSync(
-                path.resolve('', `${Config.nextjs2.definitionsDir}/ActionConsts.ts`),
-                'utf8'
-            ),
+            fileDir: actionConstsDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', actionConstsDir), 'utf8'),
             getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),
-            message: 'Action constants added to Definitions/ActionConsts.ts',
+            message: 'Action constants added to Definitions/ActionConsts/ActionConsts.ts',
             regexKey: /export const ActionConsts\s[=]\s[{]/g
         };
 
