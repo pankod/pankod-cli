@@ -9,7 +9,10 @@ declare module I{{fileName}} {
 
     }
     {{#isClass}}
-    export interface IState { }
+    export interface InitialProps {
+        namespacesRequired: string[];
+    }
+    
     export interface IStateProps { }
 
     {{/isClass}}
