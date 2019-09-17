@@ -18,7 +18,7 @@ export declare namespace ICommon {
         lowerFileName?: string;
         isPage?: boolean;
         isConnectStore?: boolean;
-        hasStyle?: string;
+        hasStyle?: string | boolean;
         pluginType?: string;
         isStyled?: boolean;
         isScss?: boolean;
