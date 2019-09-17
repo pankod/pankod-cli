@@ -5,42 +5,43 @@ import { Config } from '../../../../src/config';
 import { INextjs2Helper } from '../../../../src/Scripts/nextjs2/INextjs2Types';
 
 const createInterfaceParams: INextjs2Helper.ICreateInterfaceParams = {
-    templatePath: '/Templates/nextjs/Interfaces/Component.mustache',
-    pageInterfaceIndex: '/Templates/nextjs/Interfaces/PageIndex.mustache',
-    storeImportInterface: '/Templates/nextjs/Interfaces/ReduxImport.mustache',
-    compInterfaceIndex: '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
-    storeInterface: '/Templates/nextjs/Interfaces/ReduxStore.mustache',
+    templatePath: '/Templates/nextjs2/Interfaces/Component.mustache',
+    pageInterfaceIndex: '/Templates/nextjs2/Interfaces/PageIndex.mustache',
+    storeImportInterface: '/Templates/nextjs2/Interfaces/ReduxImport.mustache',
+    compInterfaceIndex: '/Templates/nextjs2/Interfaces/ComponentIndex.mustache',
+    storeInterface: '/Templates/nextjs2/Interfaces/ReduxStore.mustache',
     interfaceDir: '/src/Interfaces/index.ts',
-    reduxInterfaceDir: '/src/Interfaces/Redux/Store.d.ts',
+    reduxInterfaceDir: 'app2/src/Redux/IStore.d.ts',
     pageInterfaceDir: '/src/Interfaces/Pages',
     compInterfaceDir: '/src/Interfaces/Components',
     componentsDir: 'src/Components'
 };
 
 const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
+    actionConstTemplatePath: '/Templates/nextjs2/Reducers/ActionConst.mustache',
+    actionConstsFileDir: '/app2/src/Definitions/ActionConsts/ActionConsts.ts'
 };
 
 const addActionParams: INextjs2Helper.IAddActionParams = {
-    actionIndexTemplatePath: '/Templates/nextjs/Reducers/ActionIndex.mustache',
-    actionTemplatePath: '/Templates/nextjs/Reducers/Action.mustache',
-    actionTestTemplatePath: './lib/Templates/nextjs2/Tests/ActionTest.mustache'
+    actionIndexTemplatePath: '/Templates/nextjs2/Reducers/ActionIndex.mustache',
+    actionTemplatePath: '/Templates/nextjs2/Reducers/Action.mustache',
+    actionTestTemplatePath: '/Templates/nextjs2/Tests/ActionTest.mustache'
 };
 
 const addReducerParams: INextjs2Helper.IAddReducerParams = {
     addActionConstIndexParams,
-    reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
-    reducerStoreTemplatePath: '/Templates/nextjs/Reducers/Store.mustache',
-    reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache',
-    reducerTestTemplatePath: './lib/Templates/nextjs2/Tests/ReducerTest.mustache'
+    reducerIndexTemplatePath: '/Templates/nextjs2/Reducers/index.mustache',
+    reducerStoreTemplatePath: '/Templates/nextjs2/Reducers/Store.mustache',
+    reducerTemplatePath: '/Templates/nextjs2/Reducers/Reducer.mustache',
+    reducerTestTemplatePath: '/Templates/nextjs2/Tests/ReducerTest.mustache'
 };
 
 describe('Helper tests', () => {
     describe('Test addRoute method', () => {
         it('Should add page route', () => {
             const addRouteParams = {
-                routesDir: '/app/routes.js',
-                routesTemplate: '/Templates/nextjs/Routes.mustache'
+                routesDir: '/app2/routes.js',
+                routesTemplate: '/Templates/nextjs2/Routes.mustache'
             };
             const answers = {
                 fileName: 'test',
@@ -48,13 +49,14 @@ describe('Helper tests', () => {
                 routePath: 'test-route'
             };
             const fileContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Routes.mustache',
+                '/Templates/nextjs2/Routes.mustache',
                 answers
             );
 
             Helper.addRoute(answers, addRouteParams);
 
-            const addedRoute = fs.readFileSync('/app/routes.js');
+            const addedRoute = fs.readFileSync('/app2/routes.js');
+
             expect(String(addedRoute)).toEqual(`${fileContent}`);
         });
     });
@@ -73,19 +75,19 @@ describe('Helper tests', () => {
             Helper.createInterface(answers, true, createInterfaceParams);
 
             const fileContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Interfaces/Component.mustache',
+                '/Templates/nextjs2/Interfaces/Component.mustache',
                 answers
             );
 
-            const interfaceFilePath = `${Config.nextjs.compInterfaceDir}/${answers.fileName}.d.ts`;
+            const interfaceFilePath = `${Config.nextjs2.compInterfaceDir}/${answers.fileName}.d.ts`;
             const createdInterface = String(fs.readFileSync(interfaceFilePath));
 
             expect(createdInterface).toBe(fileContent);
         });
 
-        it('Should add export interface definitions to Redux/Store.d.ts', () => {
+        it('Should add export interface definitions to Redux/IStore.d.ts', async () => {
             fs.writeFileSync(
-                '/src/Interfaces/Redux/Store.d.ts',
+                'app2/src/Redux/IStore.d.ts',
                 `//#region Interface Imports
 			import { IHomePage } from '@Interfaces';
 			//#endregion Interface Imports
@@ -96,18 +98,22 @@ describe('Helper tests', () => {
 			`
             );
 
-            Helper.createInterface(answers, true, createInterfaceParams);
+            await Helper.createInterface(answers, true, createInterfaceParams);
+
             const reduxStoreContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Interfaces/ReduxStore.mustache',
+                '/Templates/nextjs2/Interfaces/ReduxStore.mustache',
                 answers
             );
-            const createdInterface = String(fs.readFileSync(Config.nextjs.reduxInterfaceDir));
+            const createdInterface = String(
+                fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
+            );
+
             expect(createdInterface).toMatch(reduxStoreContent);
         });
 
-        it('Should add @Interface import to Redux/Store.d.ts', done => {
+        it('Should add @Interface import to Redux/IStore.d.ts', () => {
             fs.writeFileSync(
-                '/src/Interfaces/Redux/Store.d.ts',
+                'app2/src/Redux/IStore.d.ts',
                 `//#region Interface Imports
 			import { IHomePage } from '@Interfaces';
 			//#endregion Interface Imports
@@ -119,15 +125,17 @@ describe('Helper tests', () => {
             );
 
             Helper.createInterface(answers, true, createInterfaceParams);
+
             const reduxImportContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Interfaces/ReduxImport.mustache',
+                '/Templates/nextjs2/Interfaces/ReduxImport.mustache',
                 answers
             );
 
             setTimeout(() => {
-                const createdInterface = String(fs.readFileSync(Config.nextjs.reduxInterfaceDir));
+                const createdInterface = String(
+                    fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
+                );
                 expect(createdInterface).toMatch(reduxImportContent);
-                done();
             }, 100);
         });
 
@@ -135,12 +143,17 @@ describe('Helper tests', () => {
             Helper.createInterface(answers, true, createInterfaceParams);
 
             const fileIndexContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
+                '/Templates/nextjs2/Interfaces/PageIndex.mustache',
                 answers
             );
-            const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
 
-            expect(createdInterface).toMatch(fileIndexContent);
+            setTimeout(() => {
+                const createdInterface = String(
+                    fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
+                );
+
+                expect(createdInterface).toMatch(fileIndexContent);
+            }, 100);
         });
 
         it('Should add page interface export', () => {
@@ -148,12 +161,16 @@ describe('Helper tests', () => {
             Helper.createInterface(answers, true, createInterfaceParams);
 
             const pageIndexContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Interfaces/PageIndex.mustache',
+                '/Templates/nextjs2/Interfaces/PageIndex.mustache',
                 answers
             );
-            const createdInterface = String(fs.readFileSync(Config.nextjs.interfaceDir));
+            setTimeout(() => {
+                const createdInterface = String(
+                    fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
+                );
 
-            expect(createdInterface).toMatch(pageIndexContent);
+                expect(createdInterface).toMatch(pageIndexContent);
+            }, 100);
         });
     });
 
@@ -168,13 +185,13 @@ describe('Helper tests', () => {
             const createStyleParams = {
                 compDirPath: '/src/Components',
                 pageDirPath: '/pages',
-                templatePath: '/Templates/nextjs/Styles.mustache'
+                templatePath: '/Templates/nextjs2/Styles.mustache'
             };
 
             Helper.createStyle(answers, createStyleParams);
 
             const fileContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Styles.mustache',
+                '/Templates/nextjs2/Styles.mustache',
                 answers
             );
             const createdStyle = String(fs.readFileSync('./src/Components/Style/style.scss'));
@@ -201,8 +218,8 @@ describe('Helper tests', () => {
 
     describe('createClassComponent', () => {
         const params: INextjs2Helper.ICreateClassComponentParams = {
-            templatePath: '/Templates/nextjs/Components/Class.mustache',
-            indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
+            templatePath: '/Templates/nextjs2/Components/Class.mustache',
+            indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
             createInterfaceParams,
             addReducerParams,
             addActionParams
@@ -227,7 +244,7 @@ describe('Helper tests', () => {
                 );
 
                 const fileContent = CommonHelper.getTemplate(
-                    '/Templates/nextjs/Components/Class.mustache',
+                    '/Templates/nextjs2/Components/Class.mustache',
                     { ...answers, interfaceName: 'ITest' }
                 );
 
@@ -238,7 +255,7 @@ describe('Helper tests', () => {
                 const createdIndexFile = String(fs.readFileSync('/src/Components/index.ts'));
 
                 const fileContent = CommonHelper.getTemplate(
-                    '/Templates/nextjs/Components/index.mustache',
+                    '/Templates/nextjs2/Components/index.mustache',
                     answers
                 );
 
@@ -251,7 +268,7 @@ describe('Helper tests', () => {
                 );
 
                 const fileContent = CommonHelper.getTemplate(
-                    '/Templates/nextjs/Interfaces/Component.mustache',
+                    '/Templates/nextjs2/Interfaces/Component.mustache',
                     { ...answers }
                 );
 
@@ -262,7 +279,7 @@ describe('Helper tests', () => {
                 const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test.ts'));
 
                 const fileContent = CommonHelper.getTemplate(
-                    '/Templates/nextjs/Reducers/Reducer.mustache',
+                    '/Templates/nextjs2/Reducers/Reducer.mustache',
                     answers
                 );
 
@@ -273,7 +290,7 @@ describe('Helper tests', () => {
                 const createdAction = String(fs.readFileSync('/src/Actions/TestActions.ts'));
 
                 const fileContent = CommonHelper.getTemplate(
-                    '/Templates/nextjs/Reducers/Action.mustache',
+                    '/Templates/nextjs2/Reducers/Action.mustache',
                     answers
                 );
 
@@ -298,7 +315,7 @@ describe('Helper tests', () => {
                 const createdPage = String(fs.readFileSync('/pages/page/index.tsx'));
 
                 const fileContent = CommonHelper.getTemplate(
-                    '/Templates/nextjs/Components/Class.mustache',
+                    '/Templates/nextjs2/Components/Class.mustache',
                     answers
                 );
 
@@ -316,8 +333,8 @@ describe('Helper tests', () => {
         };
 
         const createFunctionalComponentParams = {
-            indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
-            templatePath: '/Templates/nextjs/Components/Functional.mustache',
+            indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
+            templatePath: '/Templates/nextjs2/Components/Functional.mustache',
             componentsDir: '/src/Components',
             createInterfaceParams
         };
@@ -326,7 +343,7 @@ describe('Helper tests', () => {
             Helper.createFuncComponent(answers, createFunctionalComponentParams);
 
             const fileContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Components/Functional.mustache',
+                '/Templates/nextjs2/Components/Functional.mustache',
                 answers
             );
             const createdComponent = String(fs.readFileSync('/src/Components/Functest/index.tsx'));
@@ -336,7 +353,7 @@ describe('Helper tests', () => {
 
         it('should add to index', () => {
             const fileContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Components/index.mustache',
+                '/Templates/nextjs2/Components/index.mustache',
                 answers
             );
             const createdComponent = String(fs.readFileSync('/src/Components/index.ts'));
@@ -346,10 +363,10 @@ describe('Helper tests', () => {
 
         it('should create interface', () => {
             const fileContent = CommonHelper.getTemplate(
-                '/Templates/nextjs/Interfaces/Component.mustache',
+                '/Templates/nextjs2/Interfaces/Component.mustache',
                 answers
             );
-            const interfaceFilePath = `${Config.nextjs.compInterfaceDir}/${answers.fileName}.d.ts`;
+            const interfaceFilePath = `${Config.nextjs2.compInterfaceDir}/${answers.fileName}.d.ts`;
             const createdInterface = String(fs.readFileSync(interfaceFilePath));
 
             expect(createdInterface).toBe(fileContent);
