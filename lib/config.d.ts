@@ -78,6 +78,7 @@ export declare const Config: {
         compInterfaceDir: string;
         componentsDir: string;
         definitionsDir: string;
+        actionConstsFileDir: string;
         filesDir: string;
         interfaceDir: string;
         mockDir: string;
