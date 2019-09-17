@@ -227,7 +227,8 @@ export const Helper = {
 
         const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
 
-        const reducerFileDir = `${Config.nextjs2.reducerDir}/${lowerFileName}.ts`;
+        const reducerFolderDir = `${Config.nextjs2.reducerDir}/${lowerFileName}`;
+        const reducerFileDir = `${reducerFolderDir}/index.ts`;
         const templateProps = { fileName, lowerFileName, upperFileName };
         const replaceContentParams: ICommon.IReplaceContent = {
             fileDir: `${Config.nextjs2.reducerDir}/index.ts`,
@@ -246,6 +247,7 @@ export const Helper = {
             message: 'Added new reducer file'
         };
 
+        CommonHelper.createFile(reducerFolderDir);
         CommonHelper.writeFile(writeFileProps);
         CommonHelper.replaceContent(replaceContentParams);
 
