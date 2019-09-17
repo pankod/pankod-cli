@@ -1,125 +1,126 @@
 {
-  "name": "@pankod/pankod-cli",
-  "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
-  "version": "0.3.3",
-  "author": "Batuhan Ozgur Ozdemir @BatuhanW",
-  "scripts": {
-    "postpack": "rm -f oclif.manifest.json",
-    "posttest": "npm run format",
-    "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
-    "sync-templates": "cp -r src/Templates lib",
-    "test": "jest --coverage",
-    "version": "oclif-dev readme && git add README.md",
-    "lint": "eslint . --ext .ts",
-    "format": "eslint . --fix --ext .ts"
-  },
-  "bin": {
-    "pankod-cli": "./bin/run"
-  },
-  "bugs": "https://github.com/Pankod/pankod-cli/issues",
-  "dependencies": {
-    "@oclif/command": "^1.5.18",
-    "@oclif/config": "^1.13.2",
-    "@oclif/plugin-help": "^2.2.0",
-    "@oclif/plugin-not-found": "^1.2.2",
-    "@oclif/plugin-warn-if-update-available": "^1.7.0",
-    "@types/mustache": "^0.8.32",
-    "chalk": "^2.4.2",
-    "figlet": "^1.2.3",
-    "inquirer": "^6.5.0",
-    "log-symbols": "^3.0.0",
-    "mustache": "^3.0.1",
-    "tslib": "^1.10.0"
-  },
-  "devDependencies": {
-    "@oclif/dev-cli": "^1.22.0",
-    "@types/chalk": "^2.2.0",
-    "@types/figlet": "^1.2.0",
-    "@types/inquirer": "^6.0.3",
-    "@types/jest": "^24.0.15",
-    "@types/node": "^10.14.13",
-    "@typescript-eslint/eslint-plugin": "^1.13.0",
-    "@typescript-eslint/parser": "^1.13.0",
-    "eslint": "^5.16.0",
-    "eslint-config-prettier": "^6.0.0",
-    "eslint-plugin-oclif": "0.0.15",
-    "eslint-plugin-prettier": "^3.1.0",
-    "globby": "^10.0.1",
-    "jest": "^24.8.0",
-    "jest-cli": "^24.8.0",
-    "memfs": "^2.15.5",
-    "prettier": "^1.18.2",
-    "ts-jest": "^24.0.2",
-    "ts-node": "^8.3.0",
-    "typescript": "^3.5.3"
-  },
-  "engines": {
-    "node": ">=8.0.0"
-  },
-  "files": [
-    "/bin",
-    "/lib",
-    "/npm-shrinkwrap.json",
-    "/oclif.manifest.json"
-  ],
-  "homepage": "https://github.com/pankod/pankod-cli",
-  "keywords": [
-    "pankod",
-    "cli",
-    "oclif",
-    "moleculer",
-    "react",
-    "nextjs"
-  ],
-  "license": "MIT",
-  "main": "lib/index.js",
-  "oclif": {
-    "commands": "./lib/commands",
-    "bin": "pankod-cli",
-    "plugins": [
-      "@oclif/plugin-help",
-      "@oclif/plugin-not-found",
-      "@oclif/plugin-warn-if-update-available"
-    ],
-    "hooks": {
-      "init": "./lib/hooks/init/check_package_json"
+    "name": "@pankod/pankod-cli",
+    "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
+    "version": "0.3.3",
+    "author": "Batuhan Ozgur Ozdemir @BatuhanW",
+    "scripts": {
+        "postpack": "rm -f oclif.manifest.json",
+        "posttest": "npm run format",
+        "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
+        "sync-templates": "cp -r src/Templates lib",
+        "test": "jest --coverage",
+        "version": "oclif-dev readme && git add README.md",
+        "lint": "eslint . --ext .ts",
+        "format": "eslint . --fix --ext .ts"
     },
-    "warn-if-update-available": {
-      "timeoutInDays": 1,
-      "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>."
-    }
-  },
-  "repository": "Pankod/pankod-cli",
-  "types": "lib/index.d.ts",
-  "jest": {
-    "coverageDirectory": "<rootDir>/coverage",
-    "testEnvironment": "node",
-    "moduleFileExtensions": [
-      "ts",
-      "js"
-    ],
-    "transform": {
-      "^.+\\.(ts)$": "ts-jest"
+    "bin": {
+        "pankod-cli": "./bin/run"
     },
-    "testPathIgnorePatterns": [
-      "lib"
+    "bugs": "https://github.com/Pankod/pankod-cli/issues",
+    "dependencies": {
+        "@oclif/command": "^1.5.18",
+        "@oclif/config": "^1.13.2",
+        "@oclif/plugin-help": "^2.2.0",
+        "@oclif/plugin-not-found": "^1.2.2",
+        "@oclif/plugin-warn-if-update-available": "^1.7.0",
+        "@types/mustache": "^0.8.32",
+        "chalk": "^2.4.2",
+        "figlet": "^1.2.3",
+        "inquirer": "^6.5.0",
+        "log-symbols": "^3.0.0",
+        "mustache": "^3.0.1",
+        "tslib": "^1.10.0"
+    },
+    "devDependencies": {
+        "@oclif/dev-cli": "^1.22.0",
+        "@types/chalk": "^2.2.0",
+        "@types/figlet": "^1.2.0",
+        "@types/inquirer": "^6.0.3",
+        "@types/jest": "^24.0.15",
+        "@types/node": "^10.14.13",
+        "@typescript-eslint/eslint-plugin": "^1.13.0",
+        "@typescript-eslint/parser": "^1.13.0",
+        "eslint": "^5.16.0",
+        "eslint-config-prettier": "^6.0.0",
+        "eslint-plugin-oclif": "0.0.15",
+        "eslint-plugin-prettier": "^3.1.0",
+        "globby": "^10.0.1",
+        "jest": "^24.8.0",
+        "jest-cli": "^24.8.0",
+        "memfs": "^2.15.5",
+        "prettier": "^1.18.2",
+        "ts-jest": "^24.0.2",
+        "ts-node": "^8.3.0",
+        "typescript": "^3.5.3"
+    },
+    "engines": {
+        "node": ">=8.0.0"
+    },
+    "files": [
+        "/bin",
+        "/lib",
+        "/npm-shrinkwrap.json",
+        "/oclif.manifest.json"
     ],
-    "testMatch": [
-      "**/*.spec.(ts)"
+    "homepage": "https://github.com/pankod/pankod-cli",
+    "keywords": [
+        "pankod",
+        "cli",
+        "oclif",
+        "moleculer",
+        "react",
+        "nextjs"
     ],
-    "setupFiles": [
-      "<rootDir>/test/setup.ts",
-      "<rootDir>/test/setup.nextjs.ts",
-      "<rootDir>/test/setup.moleculer.ts",
-      "<rootDir>/test/setup.svelte.ts"
-    ],
-    "globals": {
-      "ts-jest": {
-        "tsConfig": "tsconfig.json"
-      }
+    "license": "MIT",
+    "main": "lib/index.js",
+    "oclif": {
+        "commands": "./lib/commands",
+        "bin": "pankod-cli",
+        "plugins": [
+            "@oclif/plugin-help",
+            "@oclif/plugin-not-found",
+            "@oclif/plugin-warn-if-update-available"
+        ],
+        "hooks": {
+            "init": "./lib/hooks/init/check_package_json"
+        },
+        "warn-if-update-available": {
+            "timeoutInDays": 1,
+            "message": "<%= config.name %> update available from <%= chalk.greenBright(config.version) %> to <%= chalk.greenBright(latest) %>."
+        }
+    },
+    "repository": "Pankod/pankod-cli",
+    "types": "lib/index.d.ts",
+    "jest": {
+        "coverageDirectory": "<rootDir>/coverage",
+        "testEnvironment": "node",
+        "moduleFileExtensions": [
+            "ts",
+            "js"
+        ],
+        "transform": {
+            "^.+\\.(ts)$": "ts-jest"
+        },
+        "testPathIgnorePatterns": [
+            "lib"
+        ],
+        "testMatch": [
+            "**/*.spec.(ts)"
+        ],
+        "setupFiles": [
+            "<rootDir>/test/setup.ts",
+            "<rootDir>/test/setup.nextjs.ts",
+            "<rootDir>/test/setup.nextjs2.ts",
+            "<rootDir>/test/setup.moleculer.ts",
+            "<rootDir>/test/setup.svelte.ts"
+        ],
+        "globals": {
+            "ts-jest": {
+                "tsConfig": "tsconfig.json"
+            }
+        }
+    },
+    "pankod": {
+        "projectType": "pankodCli"
     }
-  },
-  "pankod": {
-    "projectType": "pankodCli"
-  }
 }
