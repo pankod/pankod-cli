@@ -119,7 +119,7 @@ export const Helper = {
             setTimeout(() => {
                 const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
                     createInterfaceParams.storeImportInterface,
-                    'Interface file added to import section in Interfaces/Redux/Store.d.ts',
+                    'Interface file added to import section in Redux/IStore.d.ts',
                     /\s[}] from "@Interfaces";/g
                 );
 
@@ -171,12 +171,11 @@ export const Helper = {
         templateProps: ICommon.ITemplateProps,
         params: INextjs2Helper.IAddActionConstIndexParams
     ): void => {
-        const { actionConstTemplatePath } = params;
+        const { actionConstTemplatePath, actionConstsFileDir } = params;
 
-        const actionConstsDir = `${Config.nextjs2.definitionsDir}/ActionConsts/ActionConsts.ts`;
         const replaceContentParams: ICommon.IReplaceContent = {
-            fileDir: actionConstsDir,
-            filetoUpdate: fs.readFileSync(path.resolve('', actionConstsDir), 'utf8'),
+            fileDir: actionConstsFileDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', actionConstsFileDir), 'utf8'),
             getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),
             message: 'Action constants added to Definitions/ActionConsts/ActionConsts.ts',
             regexKey: /export const ActionConsts\s[=]\s[{]/g

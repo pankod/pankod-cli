@@ -73,6 +73,7 @@ export declare namespace INextjs2Helper {
 
     export interface IAddActionConstIndexParams {
         actionConstTemplatePath: string;
+        actionConstsFileDir: string;
     }
 
     export interface IAddActionParams {

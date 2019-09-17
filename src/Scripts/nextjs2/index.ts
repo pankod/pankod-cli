@@ -31,7 +31,8 @@ const createInterfaceParams: INextjs2Helper.ICreateInterfaceParams = {
 };
 
 const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: Config.nextjs2.templates.actionConstTemplatePath
+    actionConstTemplatePath: Config.nextjs2.templates.actionConstTemplatePath,
+    actionConstsFileDir: Config.nextjs2.actionConstsFileDir
 };
 
 const addActionParams: INextjs2Helper.IAddActionParams = {

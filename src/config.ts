@@ -86,6 +86,7 @@ export const Config = {
         compInterfaceDir: './src/Interfaces/Components',
         componentsDir: './src/Components',
         definitionsDir: './src/Definitions',
+        actionConstsFileDir: './src/Definitions/ActionConsts/ActionConsts.ts',
         filesDir: './files',
         interfaceDir: './src/Interfaces/index.ts',
         mockDir: '/dir',
