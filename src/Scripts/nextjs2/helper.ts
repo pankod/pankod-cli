@@ -222,7 +222,8 @@ export const Helper = {
             reducerIndexTemplatePath,
             reducerTemplatePath,
             addActionConstIndexParams,
-            reducerStoreTemplatePath
+            reducerStoreTemplatePath,
+            reducerTestTemplatePath
         } = params;
 
         const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
@@ -241,6 +242,13 @@ export const Helper = {
             regexKey: /\/\/ #endregion Local Imports/g
         };
 
+        const testFileDir = `${reducerFolderDir}/index.spec.ts`;
+        const addTestParams: ICommon.IAddTest = {
+            dirPath: testFileDir,
+            getFileContent: () => CommonHelper.getTemplate(reducerTestTemplatePath, templateProps),
+            message: 'Added reducer test'
+        };
+
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: reducerFileDir,
             getFileContent: () => CommonHelper.getTemplate(reducerTemplatePath, templateProps),
@@ -250,6 +258,7 @@ export const Helper = {
         CommonHelper.createFile(reducerFolderDir);
         CommonHelper.writeFile(writeFileProps);
         CommonHelper.replaceContent(replaceContentParams);
+        CommonHelper.writeFile(addTestParams);
 
         setTimeout(() => {
             const replaceReducerContentParams: ICommon.IReplaceContent = {

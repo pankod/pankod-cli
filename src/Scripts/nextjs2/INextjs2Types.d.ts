@@ -68,6 +68,7 @@ export declare namespace INextjs2Helper {
         reducerTemplatePath: string;
         reducerStoreTemplatePath: string;
         addActionConstIndexParams: IAddActionConstIndexParams;
+        reducerTestTemplatePath: string;
     }
 
     export interface IAddActionConstIndexParams {

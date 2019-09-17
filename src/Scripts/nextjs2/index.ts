@@ -44,7 +44,8 @@ const addReducerParams: INextjs2Helper.IAddReducerParams = {
     addActionConstIndexParams,
     reducerIndexTemplatePath: Config.nextjs2.templates.reducerIndexTemplatePath,
     reducerStoreTemplatePath: Config.nextjs2.templates.reducerStoreTemplatePath,
-    reducerTemplatePath: Config.nextjs2.templates.reducerTemplatePath
+    reducerTemplatePath: Config.nextjs2.templates.reducerTemplatePath,
+    reducerTestTemplatePath: Config.nextjs2.templates.reducerTestTemplatePath
 };
 
 const commonQuestions: INextjs2CommonQuestions = {
