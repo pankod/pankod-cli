@@ -17,10 +17,10 @@ import { {{upperFileName}}Actions } from "@Actions";
 //#endregion Local Imports
 
 //#region Interface Imports
-import { ReduxNextPageContext, I{{upperFileName}}Page } from "@Interfaces";
+import { ReduxNextPageContext, I{{upperFileName}} } from "@Interfaces";
 //#endregion Interface Imports
 
-const {{upperFileName}}: NextPage<I{{upperFileName}}Page.IProps, I{{upperFileName}}Page.InitialProps> = ({
+const {{upperFileName}}: NextPage<I{{upperFileName}}.IProps, I{{upperFileName}}.InitialProps> = ({
     t,
     i18n,
 }) => {
@@ -36,7 +36,7 @@ const {{upperFileName}}: NextPage<I{{upperFileName}}Page.IProps, I{{upperFileNam
 
 {{upperFileName}}.getInitialProps = async (
     ctx: ReduxNextPageContext
-): Promise<I{{upperFileName}}Page.InitialProps> => {
+): Promise<I{{upperFileName}}.InitialProps> => {
 
     return { namespacesRequired: ["common"] };
 };
