@@ -1,10 +1,10 @@
-//#region Global Imports
+// #region Global Imports
 import * as React from "react";
 import { NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
-//#endregion Global Imports
+// #endregion Global Imports
 
-//#region Local Imports
+// #region Local Imports
 import { withTranslation } from "@Server/i18n";
 {{#isScss}}
 import './style.scss';
@@ -14,11 +14,11 @@ import { Container } from "@Styled/{{upperFileName}}";
 {{/isStyled}}
 import { IStore } from "@Redux/IStore";
 import { {{upperFileName}}Actions } from "@Actions";
-//#endregion Local Imports
+// #endregion Local Imports
 
-//#region Interface Imports
+// #region Interface Imports
 import { ReduxNextPageContext, I{{upperFileName}} } from "@Interfaces";
-//#endregion Interface Imports
+// #endregion Interface Imports
 
 const {{upperFileName}}: NextPage<I{{upperFileName}}.IProps, I{{upperFileName}}.InitialProps> = ({
     t,

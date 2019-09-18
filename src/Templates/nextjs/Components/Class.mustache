@@ -1,20 +1,20 @@
-//#region Global Imports
+// #region Global Imports
 import * as React from 'react';
 {{#isConnectStore}}
 import { connect } from 'react-redux';
 import { bindActionCreators, Dispatch } from 'redux';
 {{/isConnectStore}}
-//#endregion Global Imports
+// #endregion Global Imports
 
-//#region Local Imports
+// #region Local Imports
 {{#hasStyle}}
 import './style.scss';
 {{/hasStyle}}
-//#endregion Local Imports
+// #endregion Local Imports
 
-//#region Interface Imports
+// #region Interface Imports
 import { {{interfaceName}} } from '@Interfaces';
-//#endregion Interface Imports
+// #endregion Interface Imports
 
 class {{fileName}} extends React.Component<{{interfaceName}}.IProps, {{interfaceName}}.IState> {
 

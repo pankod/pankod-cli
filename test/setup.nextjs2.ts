@@ -140,9 +140,9 @@ fs.writeFileSync('app2/src/Interfaces/index.ts', '// PAGE INTERFACES\n\n// COMPO
 
 fs.writeFileSync(
     'app2/src/Redux/IStore.d.ts',
-    `//#region Interface Imports
+    `// #region Interface Imports
 import { IHomePage } from '@Interfaces';
-//#endregion Interface Imports
+// #endregion Interface Imports
 
 export interface IStore {
 	home: IHomePage.IStateProps;

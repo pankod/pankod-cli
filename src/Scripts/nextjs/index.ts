@@ -1,8 +1,8 @@
-//#region Global Imports
+// #region Global Imports
 import * as inquirer from 'inquirer';
-//#region Global Imports
+// #region Global Imports
 
-//#region Local Imports
+// #region Local Imports
 import { PluginHelper } from '../../Plugins/nextjs/helpers';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
@@ -15,7 +15,7 @@ import {
 } from './INextjsTypes';
 import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
-//#endregion Local Imports
+// #endregion Local Imports
 
 const createInterfaceParams = {
     templatePath: Config.nextjs.templates.createInterfaceTempPath,

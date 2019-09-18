@@ -88,9 +88,9 @@ describe('Helper tests', () => {
         it('Should add export interface definitions to Redux/IStore.d.ts', async () => {
             fs.writeFileSync(
                 'app2/src/Redux/IStore.d.ts',
-                `//#region Interface Imports
+                `// #region Interface Imports
 			import { IHomePage } from '@Interfaces';
-			//#endregion Interface Imports
+			// #endregion Interface Imports
 
 			export interface IStore {
 				home: IHomePage.IStateProps;
@@ -114,9 +114,9 @@ describe('Helper tests', () => {
         it('Should add @Interface import to Redux/IStore.d.ts', done => {
             fs.writeFileSync(
                 createInterfaceParams.reduxInterfaceDir,
-                `//#region Interface Imports
+                `// #region Interface Imports
 			import { IHomePage } from "@Interfaces";
-			//#endregion Interface Imports
+			// #endregion Interface Imports
 
 			export interface IStore {
 				home: IHomePage.IStateProps;
@@ -136,17 +136,17 @@ describe('Helper tests', () => {
                     fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
                 );
 
-                done();
                 expect(createdInterface).toMatch(reduxImportContent);
+                done();
             }, 100);
         });
 
-        it('Should add component interface export', () => {
+        it('Should add component interface export', done => {
             fs.writeFileSync(
                 createInterfaceParams.reduxInterfaceDir,
-                `//#region Interface Imports
+                `// #region Interface Imports
 			import { IHomePage } from "@Interfaces";
-			//#endregion Interface Imports
+			// #endregion Interface Imports
 
 			export interface IStore {
 				home: IHomePage.IStateProps;
@@ -167,6 +167,7 @@ describe('Helper tests', () => {
                 );
 
                 expect(createdInterface).toMatch(fileIndexContent);
+                done();
             }, 100);
         });
 

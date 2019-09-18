@@ -1,18 +1,18 @@
-//#region Global Imports
+// #region Global Imports
 import { Context } from 'moleculer';
 import { Action, BaseSchema, Method } from 'moleculer-decorators';
 import { getConnection } from 'typeorm';
-//#endregion Global Imports
+// #endregion Global Imports
 
-//#region Local Imports
+// #region Local Imports
 import { } from '@ServiceHelpers';
 import { } from '@Repositories';
 {{#hasDatabase}}import connectionInstance from "@Entities/Connection"{{/hasDatabase}}
-//#endregion Local Imports
+// #endregion Local Imports
 
-//#region Interface Imports
+// #region Interface Imports
 import { } from '@Interfaces';
-//#endregion Interface Imports
+// #endregion Interface Imports
 
 export class {{upperFileName}}Service extends BaseSchema {
 

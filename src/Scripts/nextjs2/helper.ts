@@ -1,14 +1,14 @@
-//#region Global Imports
+// #region Global Imports
 import * as fs from 'fs';
 import * as path from 'path';
-//#endregion Global Imports
+// #endregion Global Imports
 
-//#region Local Imports
+// #region Local Imports
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import { INextjs2Helper } from './INextjs2Types';
-//#endregion Local Imports
+// #endregion Local Imports
 
 export const Helper = {
     addRoute: (
