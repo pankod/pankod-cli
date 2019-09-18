@@ -111,11 +111,11 @@ describe('Helper tests', () => {
             expect(createdInterface).toMatch(reduxStoreContent);
         });
 
-        it('Should add @Interface import to Redux/IStore.d.ts', () => {
+        it('Should add @Interface import to Redux/IStore.d.ts', done => {
             fs.writeFileSync(
-                'app2/src/Redux/IStore.d.ts',
+                createInterfaceParams.reduxInterfaceDir,
                 `//#region Interface Imports
-			import { IHomePage } from '@Interfaces';
+			import { IHomePage } from "@Interfaces";
 			//#endregion Interface Imports
 
 			export interface IStore {
@@ -135,11 +135,25 @@ describe('Helper tests', () => {
                 const createdInterface = String(
                     fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
                 );
+
+                done();
                 expect(createdInterface).toMatch(reduxImportContent);
             }, 100);
         });
 
         it('Should add component interface export', () => {
+            fs.writeFileSync(
+                createInterfaceParams.reduxInterfaceDir,
+                `//#region Interface Imports
+			import { IHomePage } from "@Interfaces";
+			//#endregion Interface Imports
+
+			export interface IStore {
+				home: IHomePage.IStateProps;
+			}
+			`
+            );
+
             Helper.createInterface(answers, true, createInterfaceParams);
 
             const fileIndexContent = CommonHelper.getTemplate(
@@ -149,7 +163,7 @@ describe('Helper tests', () => {
 
             setTimeout(() => {
                 const createdInterface = String(
-                    fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
+                    fs.readFileSync(createInterfaceParams.interfaceDir)
                 );
 
                 expect(createdInterface).toMatch(fileIndexContent);
@@ -276,7 +290,7 @@ describe('Helper tests', () => {
             });
 
             it('should add reducer', () => {
-                const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test.ts'));
+                const createdReducer = String(fs.readFileSync('/src/Redux/Reducers/test/index.ts'));
 
                 const fileContent = CommonHelper.getTemplate(
                     '/Templates/nextjs2/Reducers/Reducer.mustache',
@@ -287,7 +301,7 @@ describe('Helper tests', () => {
             });
 
             it('should add action', () => {
-                const createdAction = String(fs.readFileSync('/src/Actions/TestActions.ts'));
+                const createdAction = String(fs.readFileSync('/src/Actions/TestActions/index.ts'));
 
                 const fileContent = CommonHelper.getTemplate(
                     '/Templates/nextjs2/Reducers/Action.mustache',

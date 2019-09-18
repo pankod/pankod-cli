@@ -171,6 +171,21 @@ fs.writeFileSync(
 };`
 );
 
+// Actions
+fs.writeFileSync(
+    'app2/src/Actions/TestReducer.ts',
+    realFs.readFileSync(
+        path.resolve(__dirname, '../src/Templates/nextjs2/Reducers/Reducer.mustache')
+    )
+);
+
+fs.writeFileSync(
+    'app2/src/Actions/TestActions.ts',
+    realFs.readFileSync(
+        path.resolve(__dirname, '../src/Templates/nextjs2/Reducers/Action.mustache')
+    )
+);
+
 // Tests
 fs.writeFileSync(
     '/Templates/nextjs2/Tests/ReducerTest.mustache',
