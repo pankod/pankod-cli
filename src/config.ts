@@ -120,7 +120,8 @@ export const Config = {
             reducerStoreTemplatePath: './lib/Templates/nextjs2/Reducers/Store.mustache',
             styledComponentsTemplatePath: './lib/Templates/nextjs2/StyledComponents.mustache',
             actionTestTemplatePath: './lib/Templates/nextjs2/Tests/ActionTest.mustache',
-            reducerTestTemplatePath: './lib/Templates/nextjs2/Tests/ReducerTest.mustache'
+            reducerTestTemplatePath: './lib/Templates/nextjs2/Tests/ReducerTest.mustache',
+            componentTestTemplatePath: './lib/Templates/nextjs2/Tests/ComponentTest.mustache'
         }
     }
 };

@@ -61,6 +61,10 @@ export declare namespace INextjs2Helper {
 
     export interface ICreateFuncComponentParams {
         createInterfaceParams: ICreateInterfaceParams;
+        templatePath: string;
+        indexTemplatePath: string;
+        componentsDir: string;
+        componentTestTemplatePath: string;
     }
 
     export interface IAddReducerParams {
@@ -80,11 +84,5 @@ export declare namespace INextjs2Helper {
         actionTemplatePath: string;
         actionIndexTemplatePath: string;
         actionTestTemplatePath: string;
-    }
-
-    export interface ICreateFuncComponentParams {
-        templatePath: string;
-        indexTemplatePath: string;
-        componentsDir: string;
     }
 }

@@ -339,7 +339,7 @@ export const Helper = {
         params: INextjs2Helper.ICreateFuncComponentParams
     ): void => {
         const { lowerFileName, fileName, isScss } = answers;
-        const funcDir = `${params.componentsDir}/${answers.fileName}`;
+        const funcComponentDir = `${params.componentsDir}/${answers.fileName}`;
         const templateProps = {
             fileName,
             isScss,
@@ -354,13 +354,21 @@ export const Helper = {
         };
 
         const writeFileProps: ICommon.IWriteFile = {
-            dirPath: `${funcDir}/index.tsx`,
+            dirPath: `${funcComponentDir}/index.tsx`,
             getFileContent: () => CommonHelper.getTemplate(params.templatePath, templateProps),
-            message: 'Add new functional component.'
+            message: 'Added new functional component.'
         };
 
-        CommonHelper.createFile(funcDir);
+        const writeTestFileProps: ICommon.IWriteFile = {
+            dirPath: `${funcComponentDir}/index.spec.tsx`,
+            getFileContent: () =>
+                CommonHelper.getTemplate(params.componentTestTemplatePath, templateProps),
+            message: 'Added unit test of component.'
+        };
+
+        CommonHelper.createFile(funcComponentDir);
         CommonHelper.writeFile(writeFileProps);
+        CommonHelper.writeFile(writeTestFileProps);
         CommonHelper.addToIndex(addIndexParams);
         Helper.createInterface(answers, false, params.createInterfaceParams);
     }

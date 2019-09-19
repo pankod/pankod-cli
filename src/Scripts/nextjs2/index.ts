@@ -187,14 +187,16 @@ const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
     templatePath: Config.nextjs2.templates.funcComponentTemplate,
     indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
     componentsDir: Config.nextjs2.componentsDir,
-    createInterfaceParams
+    createInterfaceParams,
+    componentTestTemplatePath: Config.nextjs2.templates.componentTestTemplatePath
 };
 
 const createStyledFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
     templatePath: Config.nextjs2.templates.styledFuncComponentTemplate,
     indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
     componentsDir: Config.nextjs2.componentsDir,
-    createInterfaceParams
+    createInterfaceParams,
+    componentTestTemplatePath: Config.nextjs2.templates.componentTestTemplatePath
 };
 
 const createStyleParams: INextjs2Helper.ICreateStyle = {
