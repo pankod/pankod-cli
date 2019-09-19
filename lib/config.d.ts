@@ -112,6 +112,7 @@ export declare const Config: {
             styledComponentsTemplatePath: string;
             actionTestTemplatePath: string;
             reducerTestTemplatePath: string;
+            componentTestTemplatePath: string;
         };
     };
 };
