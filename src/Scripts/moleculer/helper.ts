@@ -79,7 +79,7 @@ export const Helper = {
                 type === 'import'
                     ? 'Service added to BrokerHelper Import'
                     : 'Service added to BrokerHelper setupBroker.\n',
-            regexKey: type === 'import' ? /\/\/#endregion Local Imports/g : /^\s*return broker;/gm
+            regexKey: type === 'import' ? /\/\/ #endregion Local Imports/g : /^\s*return broker;/gm
         };
 
         return replaceBrokerParams;
