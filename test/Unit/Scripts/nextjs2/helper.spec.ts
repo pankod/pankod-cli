@@ -111,7 +111,7 @@ describe('Helper tests', () => {
             expect(createdInterface).toMatch(reduxStoreContent);
         });
 
-        it('Should add @Interface import to Redux/IStore.d.ts', done => {
+        it('Should add @Interface import to Redux/IStore.d.ts', () => {
             fs.writeFileSync(
                 createInterfaceParams.reduxInterfaceDir,
                 `// #region Interface Imports
@@ -137,7 +137,6 @@ describe('Helper tests', () => {
                 );
 
                 expect(createdInterface).toMatch(reduxImportContent);
-                done();
             }, 100);
         });
 
