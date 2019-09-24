@@ -201,6 +201,12 @@ fs.writeFileSync(
     )
 );
 
+fs.writeFileSync(
+    '/Templates/nextjs2/Tests/ComponentTest.mustache',
+    realFs.readFileSync(
+        path.resolve(__dirname, '../src/Templates/nextjs2/Tests/ComponentTest.mustache')
+    )
+);
 // CreateStyle
 fs.writeFileSync(
     '/Templates/nextjs2/Styles.mustache',

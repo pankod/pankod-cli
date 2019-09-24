@@ -141,7 +141,7 @@ describe('Helper tests', () => {
             }, 100);
         });
 
-        it('Should add component interface export', done => {
+        it('Should add component interface export', () => {
             fs.writeFileSync(
                 createInterfaceParams.reduxInterfaceDir,
                 `// #region Interface Imports
@@ -167,7 +167,6 @@ describe('Helper tests', () => {
                 );
 
                 expect(createdInterface).toMatch(fileIndexContent);
-                done();
             }, 100);
         });
 
@@ -351,7 +350,8 @@ describe('Helper tests', () => {
             indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
             templatePath: '/Templates/nextjs2/Components/Functional.mustache',
             componentsDir: '/src/Components',
-            createInterfaceParams
+            createInterfaceParams,
+            componentTestTemplatePath: '/Templates/nextjs2/Tests/ComponentTest.mustache'
         };
 
         it('should create functional component dir and file', () => {
