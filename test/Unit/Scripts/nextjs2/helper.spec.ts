@@ -159,10 +159,9 @@ describe('Helper tests', () => {
                 '/Templates/nextjs2/Interfaces/PageIndex.mustache',
                 answers
             );
-
             setTimeout(() => {
                 const createdInterface = String(
-                    fs.readFileSync(createInterfaceParams.interfaceDir)
+                    fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
                 );
 
                 expect(createdInterface).toMatch(fileIndexContent);
@@ -170,6 +169,18 @@ describe('Helper tests', () => {
         });
 
         it('Should add page interface export', () => {
+            fs.writeFileSync(
+                createInterfaceParams.reduxInterfaceDir,
+                `// #region Interface Imports
+			import { IHomePage } from "@Interfaces";
+			// #endregion Interface Imports
+
+			export interface IStore {
+				home: IHomePage.IStateProps;
+			}
+			`
+            );
+
             answers.isPage = true;
             Helper.createInterface(answers, true, createInterfaceParams);
 
@@ -177,6 +188,7 @@ describe('Helper tests', () => {
                 '/Templates/nextjs2/Interfaces/PageIndex.mustache',
                 answers
             );
+
             setTimeout(() => {
                 const createdInterface = String(
                     fs.readFileSync(createInterfaceParams.reduxInterfaceDir)
