@@ -37,7 +37,7 @@ class {{fileName}} extends React.Component<{{interfaceName}}.IProps, {{interface
 {{#isConnectStore}}
 const mapStateToProps = state => state;
 
-const mapDispatchToProps = (dispatch: Dispatch) => {};
+const mapDispatchToProps = (dispatch: Dispatch) => ({});
 
 export default connect(mapStateToProps, mapDispatchToProps)({{fileName}});
 {{/isConnectStore}}
