@@ -7,7 +7,12 @@ import { PluginHelper } from '../../Plugins/nextjs/helpers';
 import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
-import { INextjsActions, INextjsCommonQuestions, INextjsQuestions, INextjsHelper } from './INextjsTypes';
+import {
+	INextjsActions,
+	INextjsCommonQuestions,
+	INextjsQuestions,
+	INextjsHelper
+} from './INextjsTypes';
 import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
 //#endregion Local Imports
@@ -146,7 +151,7 @@ const questions: INextjsQuestions = {
 
 const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
 	templatePath: Config.nextjs.templates.classComponentTemplatePath,
-	indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
+	indexTemplatePath: Config.nextjs.templates.classComponentIndexTemplatePath,
 	createInterfaceParams,
 	addReducerParams,
 	addActionParams
@@ -154,7 +159,7 @@ const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
 
 const createFuncComponentParams: INextjsHelper.ICreateFuncComponentParams = {
 	templatePath: Config.nextjs.templates.funcComponentTemplate,
-	indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
+	indexTemplatePath: Config.nextjs.templates.funcComponentIndexTemplatePath,
 	componentsDir: Config.nextjs.componentsDir,
 	createInterfaceParams
 };
@@ -166,7 +171,6 @@ const createStyleParams: INextjsHelper.ICreateStyle = {
 };
 
 const actions: INextjsActions = {
-
 	ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
 		const { hasStyle = false } = answers;
 		answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());

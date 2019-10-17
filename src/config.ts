@@ -13,20 +13,28 @@ export const Config = {
 		templates: {
 			brokerHelperCreate: './lib/Templates/moleculer/Tests/BrokerHelperCreate.mustache',
 			brokerHelperImport: './lib/Templates/moleculer/Tests/BrokerHelperImport.mustache',
-			createEntityIndexTemplate: './lib/Templates/moleculer/Repositories/EntityIndex.mustache',
+			createEntityIndexTemplate:
+				'./lib/Templates/moleculer/Repositories/EntityIndex.mustache',
 			createEntityTemplatePath: './lib/Templates/moleculer/Repositories/Entity.mustache',
-			createServiceHelperIndexTemplate: './lib/Templates/moleculer/Services/HelperIndex.mustache',
+			createServiceHelperIndexTemplate:
+				'./lib/Templates/moleculer/Services/HelperIndex.mustache',
 			createServiceHelperTemplatePath: './lib/Templates/moleculer/Services/Helper.mustache',
-			createServiceHelperTestTemplatePath: './lib/Templates/moleculer/Tests/ServiceHelper.mustache',
+			createServiceHelperTestTemplatePath:
+				'./lib/Templates/moleculer/Tests/ServiceHelper.mustache',
 			createServiceIndexTemplate: './lib/Templates/moleculer/Services/index.mustache',
-			createServiceIntegrationTestTemplate: './lib/Templates/moleculer/Tests/IntegrationTest.mustache',
+			createServiceIntegrationTestTemplate:
+				'./lib/Templates/moleculer/Tests/IntegrationTest.mustache',
 			createServiceTemplatePath: './lib/Templates/moleculer/Services/Service.mustache',
 			createServiceTestTemplate: './lib/Templates/moleculer/Tests/Service.mustache',
-			createInterfaceFolderIndexTemplate: './lib/Templates/moleculer/Interfaces/FolderIndex.mustache',
-			createInterfaceIndexInterfaceTemplate: './lib/Templates/moleculer/Interfaces/index.mustache',
+			createInterfaceFolderIndexTemplate:
+				'./lib/Templates/moleculer/Interfaces/FolderIndex.mustache',
+			createInterfaceIndexInterfaceTemplate:
+				'./lib/Templates/moleculer/Interfaces/index.mustache',
 			createInterfaceTemplatePath: './lib/Templates/moleculer/Interfaces',
-			createRepositoryIndexTemplate: './lib/Templates/moleculer/Repositories/RepoIndex.mustache',
-			createRepositoryTemplatePath: './lib/Templates/moleculer/Repositories/Repository.mustache',
+			createRepositoryIndexTemplate:
+				'./lib/Templates/moleculer/Repositories/RepoIndex.mustache',
+			createRepositoryTemplatePath:
+				'./lib/Templates/moleculer/Repositories/Repository.mustache',
 			createRepositoryTestTemplatePath: './lib/Templates/moleculer/Tests/Repository.mustache'
 		}
 	},
@@ -54,7 +62,10 @@ export const Config = {
 			storeImportInterface: './lib/Templates/nextjs/Interfaces/ReduxImport.mustache',
 			storeInterface: './lib/Templates/nextjs/Interfaces/ReduxStore.mustache',
 			classComponentTemplatePath: './lib/Templates/nextjs/Components/Class.mustache',
-			componentIndexTemplatePath: './lib/Templates/nextjs/Components/index.mustache',
+			classComponentIndexTemplatePath:
+				'./lib/Templates/nextjs/Components/class.index.mustache',
+			funcComponentIndexTemplatePath:
+				'./lib/Templates/nextjs/Components/functional.index.mustache',
 			stylePageTemplate: './lib/Templates/nextjs/Styles.mustache',
 			funcComponentTemplate: './lib/Templates/nextjs/Components/Functional.mustache',
 			reducerIndexTemplatePath: './lib/Templates/nextjs/Reducers/index.mustache',
