@@ -50,14 +50,6 @@ const addReducerParams: INextjs2Helper.IAddReducerParams = {
 };
 
 const commonQuestions: INextjs2CommonQuestions = {
-    /*     addStyle: {
-        default: true,
-        message: 'Do you want to add style file?',
-        name: 'hasStyle',
-        
-        type: 'confirm'
-    }, */
-
     addStyle: {
         choices: [
             new inquirer.Separator(),
@@ -112,13 +104,11 @@ const commonQuestions: INextjs2CommonQuestions = {
 };
 
 const questions: INextjs2Questions = {
-    ClassComponent: [
+    ClassComponent: [ ...Object.values(commonQuestions) ],
+    FunctionalComponent: [
         commonQuestions.enterComponentName,
-        commonQuestions.connectStore,
-        commonQuestions.isHaveReducer,
         commonQuestions.addStyle
     ],
-    FunctionalComponent: [commonQuestions.enterComponentName, commonQuestions.addStyle],
     Page: [
         {
             message: 'Enter page name',
@@ -150,7 +140,6 @@ const questions: INextjs2Questions = {
             type: 'input',
             when: ({ hasPath = false }: { hasPath?: boolean }): boolean => hasPath
         },
-
         commonQuestions.connectStore,
         commonQuestions.isHaveReducer,
         commonQuestions.addStyle
