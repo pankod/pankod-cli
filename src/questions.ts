@@ -1,30 +1,20 @@
-import { IQuestions } from './ITypes';
+import { Questions } from 'inquirer';
+import { ICommon } from './Scripts/ICommon';
 
-const questions: IQuestions = {
-    moleculer: {
-        choices: ['Entity', 'Service'],
-        message: 'What would you like to add?',
-        name: 'fileType',
-        type: 'list'
-    },
-    nextjs: {
-        choices: ['Page', 'Functional Component', 'Class Component', 'Plugin'],
-        message: 'What do you want to add?',
-        name: 'fileType',
-        type: 'list'
-    },
-    svelte: {
-        choices: ['Component'],
-        message: 'What do you want to add?',
-        name: 'fileType',
-        type: 'list'
-    },
-    nextjs2: {
-        choices: ['Page', 'Functional Component'],
-        message: 'What do you want to add?',
-        name: 'fileType',
-        type: 'list'
-    }
+interface ChoicesObject {
+    [projectType: string]: string[];
+}
+
+export const choices: ChoicesObject = {
+    moleculer: ['Entity', 'Service'],
+    nextjs: ['Page', 'Functional Component', 'Class Component', 'Plugin'],
+    svelte: ['Component'],
+    nextjs2: ['Page', 'Functional Component']
 };
 
-export default questions;
+export const getQuestionByProjectType = (projectType: string): Questions<ICommon.IAnswers> => ({
+    choices: choices[projectType],
+    message: 'What would you like to add?',
+    name: 'fileType',
+    type: 'list'
+});
