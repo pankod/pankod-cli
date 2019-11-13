@@ -66,6 +66,7 @@ const commonQuestions: INextjs2CommonQuestions = {
                 value: 'noStyle'
             }
         ],
+        default: 'noStyle',
         message: 'What kind of css do you want to implement?',
         name: 'hasStyle',
         type: 'list'
@@ -104,11 +105,8 @@ const commonQuestions: INextjs2CommonQuestions = {
 };
 
 const questions: INextjs2Questions = {
-    ClassComponent: [ ...Object.values(commonQuestions) ],
-    FunctionalComponent: [
-        commonQuestions.enterComponentName,
-        commonQuestions.addStyle
-    ],
+    ClassComponent: [...Object.values(commonQuestions)],
+    FunctionalComponent: [commonQuestions.enterComponentName, commonQuestions.addStyle],
     Page: [
         {
             message: 'Enter page name',
@@ -130,6 +128,7 @@ const questions: INextjs2Questions = {
                     value: false
                 }
             ],
+            default: false,
             message: 'Do you want to add custom route or use default route name?',
             name: 'hasPath',
             type: 'list'
@@ -157,6 +156,7 @@ const questions: INextjs2Questions = {
                     value: Plugins.sass
                 }
             ],
+            default: Plugins.styled,
             message: 'What plugin do you want to add?',
             name: 'pluginType',
             type: 'list'
@@ -201,34 +201,40 @@ const createStyledComponentParams: INextjs2Helper.ICreateStyle = {
     isStyledComponent: true
 };
 
+const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
+    const capitalizedName = answers.fileName.replace(/\b\w/g, f => f.toUpperCase());
+    const unCapitalizedName = answers.fileName.replace(/\b\w/g, f => f.toLowerCase());
+
+    return {
+        ...answers,
+        fileName: capitalizedName,
+        // TODO: Rename 'upperFileName' as 'capitalizedFileName'
+        upperFileName: capitalizedName,
+        lowerFileName: unCapitalizedName,
+        interfaceName: `I${capitalizedName}`,
+        ...custom
+    };
+};
+
 const actions: INextjs2Actions = {
     ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-        const { hasStyle = false } = answers;
-        answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
-        answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
-        answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
+        const options = prepareOptions(answers);
 
-        Helper.createClassComponent(answers, createClassComponentParams);
-
-        if (hasStyle) {
-            Helper.createStyle(answers, createStyleParams);
-        }
+        Helper.createClassComponent(options, createClassComponentParams);
     },
     FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-        const { hasStyle = 'noStyle' } = answers;
-        answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
-        answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
-        answers.isFuncComponent = true;
+        const options = prepareOptions(answers, { isFuncComponent: true });
 
-        switch (hasStyle) {
+        // TODO: Options need to be taken care in create()
+        switch (options.hasStyle) {
             case 'styled':
-                Helper.createFuncComponent(answers, createStyledFuncComponentParams);
-                Helper.createStyle(answers, createStyledComponentParams);
+                Helper.createFuncComponent(options, createStyledFuncComponentParams);
+                Helper.createStyle(options, createStyledComponentParams);
                 break;
             case 'scss':
-                answers.isScss = true;
-                Helper.createFuncComponent(answers, createFuncComponentParams);
-                Helper.createStyle(answers, createStyleParams);
+                options.isScss = true;
+                Helper.createFuncComponent(options, createFuncComponentParams);
+                Helper.createStyle(options, createStyleParams);
                 break;
             default:
                 break;
@@ -237,38 +243,12 @@ const actions: INextjs2Actions = {
         Helper.createInterface(answers, false, createInterfaceParams);
     },
     Page: async (answers: ICommon.IAnswers): Promise<void> => {
-        const { hasStyle = false } = answers;
-        answers.fileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
-        answers.upperFileName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
-        answers.lowerFileName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
-        answers.isPage = true;
+        const options = prepareOptions(answers, { isPage: true });
 
-        const addRouteParams = {
-            routesDir: Config.nextjs2.routesDir,
-            routesTemplate: Config.nextjs2.templates.addRouteTemplate
-        };
-
-        answers.isStyled = answers.hasStyle === 'styled';
-        answers.isScss = answers.hasStyle === 'scss';
-
-        Helper.createClassComponent(answers, createClassComponentParams);
-        Helper.addRoute(answers, addRouteParams);
-
-        switch (hasStyle) {
-            case 'styled':
-                Helper.createStyle(answers, createStyledComponentParams);
-                break;
-            case 'scss':
-                Helper.createStyle(answers, createStyleParams);
-                break;
-            default:
-                break;
-        }
+        Helper.createClassComponent(options, createClassComponentParams);
     },
     Plugin: async (answers: ICommon.IAnswers): Promise<void> => {
-        const { pluginType = Plugins.styled } = answers;
-
-        PluginHelper[pluginType]();
+        if (answers.pluginType) PluginHelper[answers.pluginType]();
     }
 };
 
