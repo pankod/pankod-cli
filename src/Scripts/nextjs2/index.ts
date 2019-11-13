@@ -4,50 +4,16 @@ import * as inquirer from 'inquirer';
 
 // #region Local Imports
 import { PluginHelper } from '../../Plugins/nextjs/helpers';
-import { Config } from '../../config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import {
     INextjs2Actions,
     INextjs2CommonQuestions,
-    INextjs2Questions,
-    INextjs2Helper
+    INextjs2Questions
 } from './INextjs2Types';
 import { Helper } from './helper';
 import { Plugins } from './pluginsEnum';
 // #endregion Local Imports
-
-const createInterfaceParams: INextjs2Helper.ICreateInterfaceParams = {
-    templatePath: Config.nextjs2.templates.createInterfaceTempPath,
-    pageInterfaceIndex: Config.nextjs2.templates.pageInterfaceIndex,
-    storeImportInterface: Config.nextjs2.templates.storeImportInterface,
-    compInterfaceIndex: Config.nextjs2.templates.compInterfaceIndex,
-    storeInterface: Config.nextjs2.templates.storeInterface,
-    interfaceDir: Config.nextjs2.interfaceDir,
-    reduxInterfaceDir: Config.nextjs2.reduxInterfaceDir,
-    pageInterfaceDir: Config.nextjs2.pageInterfaceDir,
-    compInterfaceDir: Config.nextjs2.compInterfaceDir,
-    componentsDir: Config.nextjs2.componentsDir
-};
-
-const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: Config.nextjs2.templates.actionConstTemplatePath,
-    actionConstsFileDir: Config.nextjs2.actionConstsFileDir
-};
-
-const addActionParams: INextjs2Helper.IAddActionParams = {
-    actionIndexTemplatePath: Config.nextjs2.templates.actionIndexTemplatePath,
-    actionTemplatePath: Config.nextjs2.templates.actionTemplatePath,
-    actionTestTemplatePath: Config.nextjs2.templates.actionTestTemplatePath
-};
-
-const addReducerParams: INextjs2Helper.IAddReducerParams = {
-    addActionConstIndexParams,
-    reducerIndexTemplatePath: Config.nextjs2.templates.reducerIndexTemplatePath,
-    reducerStoreTemplatePath: Config.nextjs2.templates.reducerStoreTemplatePath,
-    reducerTemplatePath: Config.nextjs2.templates.reducerTemplatePath,
-    reducerTestTemplatePath: Config.nextjs2.templates.reducerTestTemplatePath
-};
 
 const commonQuestions: INextjs2CommonQuestions = {
     addStyle: {
@@ -164,43 +130,6 @@ const questions: INextjs2Questions = {
     ]
 };
 
-const createClassComponentParams: INextjs2Helper.ICreateClassComponentParams = {
-    templatePath: Config.nextjs2.templates.classComponentTemplatePath,
-    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
-    createInterfaceParams,
-    addReducerParams,
-    addActionParams
-};
-
-const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
-    templatePath: Config.nextjs2.templates.funcComponentTemplate,
-    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
-    componentsDir: Config.nextjs2.componentsDir,
-    createInterfaceParams,
-    componentTestTemplatePath: Config.nextjs2.templates.componentTestTemplatePath
-};
-
-const createStyledFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
-    templatePath: Config.nextjs2.templates.styledFuncComponentTemplate,
-    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
-    componentsDir: Config.nextjs2.componentsDir,
-    createInterfaceParams,
-    componentTestTemplatePath: Config.nextjs2.templates.componentTestTemplatePath
-};
-
-const createStyleParams: INextjs2Helper.ICreateStyle = {
-    compDirPath: Config.nextjs2.componentsDir,
-    pageDirPath: Config.nextjs2.pagesDir,
-    templatePath: Config.nextjs2.templates.stylePageTemplate
-};
-
-const createStyledComponentParams: INextjs2Helper.ICreateStyle = {
-    compDirPath: Config.nextjs2.componentsDir,
-    pageStyledDirPath: Config.nextjs2.pageStyledDir,
-    templatePath: Config.nextjs2.templates.styledComponentsTemplatePath,
-    isStyledComponent: true
-};
-
 const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
     const capitalizedName = answers.fileName.replace(/\b\w/g, f => f.toUpperCase());
     const unCapitalizedName = answers.fileName.replace(/\b\w/g, f => f.toLowerCase());
@@ -217,35 +146,21 @@ const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
 };
 
 const actions: INextjs2Actions = {
+    Page: async (answers: ICommon.IAnswers): Promise<void> => {
+        const options = prepareOptions(answers, { isPage: true });
+
+        Helper.createClassComponent(options);
+    },
     ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
         const options = prepareOptions(answers);
 
-        Helper.createClassComponent(options, createClassComponentParams);
+        Helper.createClassComponent(options);
     },
     FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
         const options = prepareOptions(answers, { isFuncComponent: true });
 
-        // TODO: Options need to be taken care in create()
-        switch (options.hasStyle) {
-            case 'styled':
-                Helper.createFuncComponent(options, createStyledFuncComponentParams);
-                Helper.createStyle(options, createStyledComponentParams);
-                break;
-            case 'scss':
-                options.isScss = true;
-                Helper.createFuncComponent(options, createFuncComponentParams);
-                Helper.createStyle(options, createStyleParams);
-                break;
-            default:
-                break;
-        }
-
-        Helper.createInterface(answers, false, createInterfaceParams);
-    },
-    Page: async (answers: ICommon.IAnswers): Promise<void> => {
-        const options = prepareOptions(answers, { isPage: true });
-
-        Helper.createClassComponent(options, createClassComponentParams);
+        // TODO: Clean up leftovers
+        // Helper.createInterface(answers);
     },
     Plugin: async (answers: ICommon.IAnswers): Promise<void> => {
         if (answers.pluginType) PluginHelper[answers.pluginType]();
