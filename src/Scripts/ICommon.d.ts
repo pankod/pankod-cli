@@ -10,6 +10,8 @@ export declare namespace ICommon {
     export interface IAnswers {
         fileName: string;
         fileType?: string;
+        interfaceName?: string;
+        classDir?: string;
         upperFileName?: string;
         isPrivate?: boolean;
         hasDatabase?: boolean;
@@ -18,7 +20,7 @@ export declare namespace ICommon {
         lowerFileName?: string;
         isPage?: boolean;
         isConnectStore?: boolean;
-        hasStyle?: string | boolean;
+        hasStyle?: string;
         pluginType?: string;
         isStyled?: boolean;
         isScss?: boolean;
