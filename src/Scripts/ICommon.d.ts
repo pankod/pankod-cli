@@ -8,6 +8,8 @@ export declare namespace ICommon {
     }
 
     export interface IAnswers {
+        params?: any;
+        styleParams?: any;
         fileName: string;
         fileType?: string;
         interfaceName?: string;
