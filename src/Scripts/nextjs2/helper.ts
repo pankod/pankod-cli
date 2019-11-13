@@ -15,7 +15,7 @@ export const Helper = {
         answers: ICommon.IAnswers,
         IAddRoutesReplaceParams: INextjs2Helper.IAddRoutesReplaceParams
     ) => {
-        const { hasPath = false, routePath, fileName } = answers;
+        const { hasPath, routePath, fileName } = answers;
 
         const templateProps = {
             fileName: fileName.replace(/\b\w/g, foo => foo.toLowerCase()),
@@ -47,9 +47,9 @@ export const Helper = {
         const {
             fileName,
             lowerFileName,
-            isPage = false,
-            isConnectStore = false,
-            isFuncComponent = false,
+            isPage,
+            isConnectStore,
+            isFuncComponent,
             upperFileName
         } = answers;
 
@@ -135,7 +135,7 @@ export const Helper = {
         answers: ICommon.IAnswers,
         createStyleParams: INextjs2Helper.ICreateStyle
     ): void => {
-        const { fileName, isPage = false, lowerFileName } = answers;
+        const { fileName, isPage, lowerFileName } = answers;
         const {
             isStyledComponent,
             pageDirPath,
@@ -228,7 +228,7 @@ export const Helper = {
             reducerTestTemplatePath
         } = params;
 
-        const { fileName, lowerFileName, isConnectStore = false, upperFileName } = answers;
+        const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
 
         const reducerFolderDir = `${Config.nextjs2.reducerDir}/${lowerFileName}`;
         const reducerFileDir = `${reducerFolderDir}/index.ts`;
@@ -283,9 +283,10 @@ export const Helper = {
     },
 
     createClassComponent: (
-        answers: ICommon.IAnswers,
+        options: ICommon.IAnswers,
         params: INextjs2Helper.ICreateClassComponentParams
     ): void => {
+        // Access global config
         const {
             templatePath,
             indexTemplatePath,
@@ -294,43 +295,55 @@ export const Helper = {
             addActionParams
         } = params;
 
-        const { lowerFileName, isConnectStore = false, isPage = false } = answers;
-        const pagesDir = `${Config.nextjs2.pagesDir}/${lowerFileName}`;
-        const classDir = isPage ? pagesDir : `${Config.nextjs2.componentsDir}/${answers.fileName}`;
-        const templateProps = {
-            fileName: answers.fileName,
-            hasStyle: answers.hasStyle,
-            interfaceName: `I${answers.fileName}`,
-            isConnectStore: answers.isConnectStore,
-            lowerFileName: answers.lowerFileName,
-            upperFileName: answers.upperFileName,
-            isStyled: answers.isStyled,
-            isScss: answers.isScss
-        };
+        const { lowerFileName, isConnectStore, isPage } = options;
 
         const addIndexParams: ICommon.IAddIndex = {
             dirPath: `${Config.nextjs2.componentsDir}/index.ts`,
-            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
             message: 'Component added to index.ts'
         };
 
         const writeFileProps: ICommon.IWriteFile = {
-            dirPath: `${classDir}/index.tsx`,
-            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+            dirPath: `${options.classDir}/index.tsx`,
+            getFileContent: () => CommonHelper.getTemplate(templatePath, options),
             message: 'Added new class component'
         };
 
-        CommonHelper.createFile(classDir);
-        CommonHelper.writeFile(writeFileProps);
-        Helper.createInterface(answers, true, createInterfaceParams);
+        if (isPage) {
+            options.classDir = `${Config.nextjs2.pagesDir}/${lowerFileName}`;
 
-        if (isConnectStore) {
-            Helper.addReducer(templateProps, addReducerParams);
-            Helper.addAction(templateProps, addActionParams);
+            const addRouteParams = {
+                routesDir: Config.nextjs2.routesDir,
+                routesTemplate: Config.nextjs2.templates.addRouteTemplate
+            };
+
+            options.hasPath && Helper.addRoute(options, addRouteParams);
+        } else {
+            options.classDir = `${Config.nextjs2.componentsDir}/${options.fileName}`;
+            CommonHelper.addToIndex(addIndexParams);
         }
 
-        if (!isPage) {
-            CommonHelper.addToIndex(addIndexParams);
+        CommonHelper.createFile(options.classDir);
+        CommonHelper.writeFile(writeFileProps);
+        Helper.createInterface(options, true, createInterfaceParams);
+
+        if (isConnectStore) {
+            Helper.addReducer(options, addReducerParams);
+            Helper.addAction(options, addActionParams);
+        }
+
+        // Access global config
+        switch (options.hasStyle) {
+            case 'styled':
+                options.isStyled = true;
+                Helper.createStyle(options, createStyledComponentParams);
+                break;
+            case 'scss':
+                options.isScss = true;
+                Helper.createStyle(options, createStyleParams);
+                break;
+            default:
+                break;
         }
     },
 
