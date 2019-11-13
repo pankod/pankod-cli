@@ -5,6 +5,7 @@ import * as path from 'path';
 
 // #region Local Imports
 import { Config } from '../../config';
+import * as params from './nextjs2.config';
 import { CommonHelper } from '../Common';
 import { ICommon } from '../ICommon';
 import { INextjs2Helper } from './INextjs2Types';
@@ -39,11 +40,7 @@ export const Helper = {
 
         CommonHelper.replaceContent(replaceContentParams);
     },
-    createInterface: (
-        answers: ICommon.IAnswers,
-        isClass: boolean,
-        createInterfaceParams: INextjs2Helper.ICreateInterfaceParams
-    ) => {
+    createInterface: (answers: ICommon.IAnswers) => {
         const {
             fileName,
             lowerFileName,
@@ -52,6 +49,8 @@ export const Helper = {
             isFuncComponent,
             upperFileName
         } = answers;
+
+        const isClass = !!answers.classDir;
 
         const templateProps = {
             fileName,
@@ -62,28 +61,36 @@ export const Helper = {
             isFuncComponent
         };
 
-        const pageDirPath = `${createInterfaceParams.pageInterfaceDir}/${fileName}.d.ts`;
+        const {
+            interfaceDir,
+            pageInterfaceIndex,
+            pageInterfaceDir,
+            componentsDir,
+            compInterfaceDir,
+            templatePath,
+            reduxInterfaceDir,
+            storeImportInterface,
+            storeInterface
+        } = params.createInterfaceParams;
+
+        const pageDirPath = `${pageInterfaceDir}/${fileName}.d.ts`;
         let compDirPath;
 
         if (isFuncComponent) {
-            compDirPath = `${createInterfaceParams.componentsDir}/${fileName}/${fileName}.d.ts`;
+            compDirPath = `${componentsDir}/${fileName}/${fileName}.d.ts`;
         } else {
-            compDirPath = `${createInterfaceParams.compInterfaceDir}/${fileName}.d.ts`;
+            compDirPath = `${compInterfaceDir}/${fileName}.d.ts`;
         }
 
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: isPage ? pageDirPath : compDirPath,
-            getFileContent: () =>
-                CommonHelper.getTemplate(createInterfaceParams.templatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
             message: 'Added new interface file'
         };
 
         const commonReplaceParams = (contentFile: string, message: string, regexKey: RegExp) => ({
-            fileDir: createInterfaceParams.reduxInterfaceDir,
-            filetoUpdate: fs.readFileSync(
-                path.resolve('', createInterfaceParams.reduxInterfaceDir),
-                'utf8'
-            ),
+            fileDir: reduxInterfaceDir,
+            filetoUpdate: fs.readFileSync(path.resolve('', reduxInterfaceDir), 'utf8'),
             getFileContent: () => CommonHelper.getTemplate(contentFile, templateProps),
             message,
             regexKey
@@ -93,16 +100,9 @@ export const Helper = {
 
         if (isPage) {
             const replaceContentParams: ICommon.IReplaceContent = {
-                fileDir: createInterfaceParams.interfaceDir,
-                filetoUpdate: fs.readFileSync(
-                    path.resolve('', createInterfaceParams.interfaceDir),
-                    'utf8'
-                ),
-                getFileContent: () =>
-                    CommonHelper.getTemplate(
-                        createInterfaceParams.pageInterfaceIndex,
-                        templateProps
-                    ),
+                fileDir: interfaceDir,
+                filetoUpdate: fs.readFileSync(path.resolve('', interfaceDir), 'utf8'),
+                getFileContent: () => CommonHelper.getTemplate(pageInterfaceIndex, templateProps),
                 message: 'Interface file added to Interfaces/index.ts',
                 regexKey: /\/\/ #region Page Interfaces/g
             };
@@ -112,7 +112,7 @@ export const Helper = {
 
         if (isConnectStore) {
             const replaceStoreParams: ICommon.IReplaceContent = commonReplaceParams(
-                createInterfaceParams.storeInterface,
+                storeInterface,
                 'Interface file added to Redux/IStore.d.ts',
                 /export interface IStore\s[{]/g
             );
@@ -121,7 +121,7 @@ export const Helper = {
 
             setTimeout(() => {
                 const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
-                    createInterfaceParams.storeImportInterface,
+                    storeImportInterface,
                     'Interface file added to import section in Redux/IStore.d.ts',
                     /\s[}] from "@Interfaces";/g
                 );
@@ -136,6 +136,7 @@ export const Helper = {
         createStyleParams: INextjs2Helper.ICreateStyle
     ): void => {
         const { fileName, isPage, lowerFileName } = answers;
+
         const {
             isStyledComponent,
             pageDirPath,
@@ -143,9 +144,11 @@ export const Helper = {
             pageStyledDirPath,
             templatePath
         } = createStyleParams;
+
         const templateProps = { fileName, lowerFileName };
 
         let _compDirPath;
+
         let _pageDirPath;
 
         if (isStyledComponent) {
@@ -282,20 +285,15 @@ export const Helper = {
         }
     },
 
-    createClassComponent: (
-        options: ICommon.IAnswers,
-        params: INextjs2Helper.ICreateClassComponentParams
-    ): void => {
-        // Access global config
+    createClassComponent: (options: ICommon.IAnswers): void => {
         const {
             templatePath,
             indexTemplatePath,
-            createInterfaceParams,
             addReducerParams,
             addActionParams
-        } = params;
+        } = params.createClassComponentParams;
 
-        const { lowerFileName, isConnectStore, isPage } = options;
+        const { lowerFileName, isConnectStore, isPage, hasPath } = options;
 
         const addIndexParams: ICommon.IAddIndex = {
             dirPath: `${Config.nextjs2.componentsDir}/index.ts`,
@@ -317,7 +315,7 @@ export const Helper = {
                 routesTemplate: Config.nextjs2.templates.addRouteTemplate
             };
 
-            options.hasPath && Helper.addRoute(options, addRouteParams);
+            hasPath && Helper.addRoute(options, addRouteParams);
         } else {
             options.classDir = `${Config.nextjs2.componentsDir}/${options.fileName}`;
             CommonHelper.addToIndex(addIndexParams);
@@ -325,57 +323,76 @@ export const Helper = {
 
         CommonHelper.createFile(options.classDir);
         CommonHelper.writeFile(writeFileProps);
-        Helper.createInterface(options, true, createInterfaceParams);
+        Helper.createInterface(options);
 
         if (isConnectStore) {
             Helper.addReducer(options, addReducerParams);
             Helper.addAction(options, addActionParams);
         }
 
-        // Access global config
         switch (options.hasStyle) {
             case 'styled':
                 options.isStyled = true;
-                Helper.createStyle(options, createStyledComponentParams);
+                Helper.createStyle(options, params.createStyledComponentParams);
                 break;
             case 'scss':
                 options.isScss = true;
-                Helper.createStyle(options, createStyleParams);
+                Helper.createStyle(options, params.createStyleParams);
                 break;
             default:
                 break;
         }
     },
 
-    createFuncComponent: (
-        answers: ICommon.IAnswers,
-        params: INextjs2Helper.ICreateFuncComponentParams
-    ): void => {
-        const { lowerFileName, fileName, isScss } = answers;
-        const funcComponentDir = `${params.componentsDir}/${answers.fileName}`;
+    createFuncComponent: (options: ICommon.IAnswers): void => {
+        const { lowerFileName, fileName, hasStyle, isScss } = options;
+
+        switch (hasStyle) {
+            case 'styled':
+                options.isStyled = true;
+                options.params = params.createStyledFuncComponentParams;
+                Helper.createStyle(options, params.createStyledComponentParams);
+                break;
+            case 'scss':
+                options.isScss = true;
+                options.params = params.createFuncComponentParams;
+                Helper.createStyle(options, params.createStyleParams);
+                break;
+            default:
+                break;
+        }
+
+        const {
+            componentsDir,
+            templatePath,
+            indexTemplatePath,
+            componentTestTemplatePath
+        } = options.params;
+
+        const funcComponentDir = `${componentsDir}/${fileName}`;
+
         const templateProps = {
             fileName,
             isScss,
-            interfaceName: `I${fileName}`,
             lowerFileName
         };
 
         const addIndexParams: ICommon.IAddIndex = {
-            dirPath: `${params.componentsDir}/index.ts`,
-            getFileContent: () => CommonHelper.getTemplate(params.indexTemplatePath, templateProps),
+            dirPath: `${componentsDir}/index.ts`,
+            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, templateProps),
             message: 'Component added to index.ts.'
         };
 
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: `${funcComponentDir}/index.tsx`,
-            getFileContent: () => CommonHelper.getTemplate(params.templatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
             message: 'Added new functional component.'
         };
 
         const writeTestFileProps: ICommon.IWriteFile = {
             dirPath: `${funcComponentDir}/index.spec.tsx`,
             getFileContent: () =>
-                CommonHelper.getTemplate(params.componentTestTemplatePath, templateProps),
+                CommonHelper.getTemplate(componentTestTemplatePath, templateProps),
             message: 'Added unit test of component.'
         };
 
@@ -383,6 +400,6 @@ export const Helper = {
         CommonHelper.writeFile(writeFileProps);
         CommonHelper.writeFile(writeTestFileProps);
         CommonHelper.addToIndex(addIndexParams);
-        Helper.createInterface(answers, false, params.createInterfaceParams);
+        Helper.createInterface(options);
     }
 };
