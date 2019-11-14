@@ -52,9 +52,10 @@ export default class Add extends Command {
         }
 
         const questionsHelper: IQuestionsHelper = require(`../../Scripts/${projectType}/index`) as IQuestionsHelper;
-
+        
         try {
-            await questionsHelper.default.showQuestions(answers.fileType || element);
+            const elementType = (answers.fileType || element).replace(' ', '');
+            await questionsHelper.default.showQuestions(elementType);
         } catch (error) {
             this.error(error);
         }

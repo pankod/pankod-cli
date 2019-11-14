@@ -50,12 +50,10 @@ const actions: INextjs2Actions = {
 };
 
 export default {
-    showQuestions: async (type: string): Promise<void> => {
-        const elementType = type.replace(' ', '');
+    showQuestions: async (elementType: string): Promise<void> => {
+        const questions = getQuestionsByElementType(elementType);
 
-        const answers: ICommon.IAnswers = await inquirer.prompt<ICommon.IAnswers>(
-            getQuestionsByElementType(elementType)
-        );
+        const answers = await inquirer.prompt<ICommon.IAnswers>(questions);
 
         actions[elementType](answers);
     }
