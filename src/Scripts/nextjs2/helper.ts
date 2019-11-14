@@ -40,26 +40,16 @@ export const Helper = {
 
         CommonHelper.replaceContent(replaceContentParams);
     },
-    createInterface: (answers: ICommon.IAnswers) => {
+    createInterface: (options: ICommon.IAnswers) => {
         const {
             fileName,
             lowerFileName,
             isPage,
             isConnectStore,
             isFuncComponent,
-            upperFileName
-        } = answers;
-
-        const isClass = !!answers.classDir;
-
-        const templateProps = {
-            fileName,
-            isClass,
-            lowerFileName,
-            isConnectStore,
             upperFileName,
-            isFuncComponent
-        };
+            isClass = !!options.classDir
+        } = options;
 
         const {
             interfaceDir,
@@ -84,14 +74,14 @@ export const Helper = {
 
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: isPage ? pageDirPath : compDirPath,
-            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(templatePath, options),
             message: 'Added new interface file'
         };
 
         const commonReplaceParams = (contentFile: string, message: string, regexKey: RegExp) => ({
             fileDir: reduxInterfaceDir,
             filetoUpdate: fs.readFileSync(path.resolve('', reduxInterfaceDir), 'utf8'),
-            getFileContent: () => CommonHelper.getTemplate(contentFile, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(contentFile, options),
             message,
             regexKey
         });
@@ -102,7 +92,7 @@ export const Helper = {
             const replaceContentParams: ICommon.IReplaceContent = {
                 fileDir: interfaceDir,
                 filetoUpdate: fs.readFileSync(path.resolve('', interfaceDir), 'utf8'),
-                getFileContent: () => CommonHelper.getTemplate(pageInterfaceIndex, templateProps),
+                getFileContent: () => CommonHelper.getTemplate(pageInterfaceIndex, options),
                 message: 'Interface file added to Interfaces/index.ts',
                 regexKey: /\/\/ #region Page Interfaces/g
             };
