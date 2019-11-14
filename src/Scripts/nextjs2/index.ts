@@ -25,36 +25,36 @@ const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
     };
 };
 
-const actions: INextjs2Actions = {
-    Page: async (answers: ICommon.IAnswers): Promise<void> => {
-        const options = prepareOptions(answers, { isPage: true });
+const createElement = (elementType: ICommon.ElementType, answers: ICommon.IAnswers) => {
+    const options = prepareOptions(answers);
 
-        Helper.createClassComponent(options);
-    },
+    const factory: INextjs2Actions = {
+        Page: () => {
+            Helper.createClassComponent({ ...options, isPage: true });
+        },
 
-    ClassComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-        const options = prepareOptions(answers);
+        ClassComponent: () => {
+            Helper.createClassComponent(options);
+        },
 
-        Helper.createClassComponent(options);
-    },
+        FunctionalComponent: () => {
+            Helper.createFuncComponent({ ...options, isFuncComponent: true });
+        },
 
-    FunctionalComponent: async (answers: ICommon.IAnswers): Promise<void> => {
-        const options = prepareOptions(answers, { isFuncComponent: true });
+        Plugin: () => {
+            if (answers.pluginType) PluginHelper[answers.pluginType]();
+        }
+    };
 
-        Helper.createFuncComponent(options);
-    },
-
-    Plugin: async (answers: ICommon.IAnswers): Promise<void> => {
-        if (answers.pluginType) PluginHelper[answers.pluginType]();
-    }
+    factory[elementType]();
 };
 
 export default {
-    showQuestions: async (elementType: string): Promise<void> => {
+    showQuestions: async (elementType: ICommon.ElementType): Promise<void> => {
         const questions = getQuestionsByElementType(elementType);
 
         const answers = await inquirer.prompt<ICommon.IAnswers>(questions);
 
-        actions[elementType](answers);
+        createElement(elementType, answers);
     }
 };

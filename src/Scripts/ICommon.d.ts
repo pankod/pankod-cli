@@ -1,4 +1,6 @@
 export declare namespace ICommon {
+    export type ElementType = 'Page' | 'ClassComponent' | 'FunctionalComponent' | 'Plugin';
+    
     export interface ITemplateProps {
         fileName?: string;
         upperFileName?: string;
