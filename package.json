@@ -8,7 +8,8 @@
         "posttest": "npm run format",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
         "sync-templates": "cp -r src/Templates lib",
-        "test": "jest --coverage",
+        "test": "jest",
+        "test:next2": "jest -- test/Unit/Scripts/nextjs2",
         "version": "oclif-dev readme && git add README.md",
         "lint": "eslint . --ext .ts",
         "format": "eslint . --fix --ext .ts"
