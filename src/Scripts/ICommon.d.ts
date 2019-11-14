@@ -9,6 +9,7 @@ export declare namespace ICommon {
 
     export interface IAnswers {
         params?: any;
+        isClass?: boolean;
         styleParams?: any;
         fileName: string;
         fileType?: string;
