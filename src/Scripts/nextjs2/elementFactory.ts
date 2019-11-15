@@ -1,7 +1,7 @@
-import { Helper } from './helper';
 import { ICommon } from '../ICommon';
 import { INextjs2Actions } from './INextjs2Types';
 import { PluginHelper } from '../../Plugins/nextjs/helpers';
+import * as Helpers from './Helpers';
 
 const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
     const capitalizedName = answers.fileName.replace(/\b\w/g, f => f.toUpperCase());
@@ -23,15 +23,15 @@ export const createElement = (elementType: ICommon.ElementType, answers: ICommon
 
     const factory: INextjs2Actions = {
         Page: () => {
-            Helper.createClassComponent({ ...options, isPage: true });
+            Helpers.createClassComponent({ ...options, isPage: true });
         },
 
         ClassComponent: () => {
-            Helper.createClassComponent(options);
+            Helpers.createClassComponent(options);
         },
 
         FunctionalComponent: () => {
-            Helper.createFuncComponent({ ...options, isFuncComponent: true });
+            Helpers.createFuncComponent({ ...options, isFuncComponent: true });
         },
 
         Plugin: () => {
