@@ -49,23 +49,14 @@ export const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParam
     componentTestTemplatePath: Config.nextjs2.templates.componentTestTemplatePath
 };
 
-export const createStyledFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
-    templatePath: Config.nextjs2.templates.styledFuncComponentTemplate,
-    indexTemplatePath: Config.nextjs2.templates.componentIndexTemplatePath,
-    componentsDir: Config.nextjs2.componentsDir,
-    createInterfaceParams,
-    componentTestTemplatePath: Config.nextjs2.templates.componentTestTemplatePath
-};
-
 export const createStyleParams: INextjs2Helper.ICreateStyle = {
+    templatePath: Config.nextjs2.templates.stylePageTemplate,
     compDirPath: Config.nextjs2.componentsDir,
-    pageDirPath: Config.nextjs2.pagesDir,
-    templatePath: Config.nextjs2.templates.stylePageTemplate
+    pageDirPath: Config.nextjs2.pagesDir
 };
 
 export const createStyledComponentParams: INextjs2Helper.ICreateStyle = {
-    compDirPath: Config.nextjs2.componentsDir,
-    pageStyledDirPath: Config.nextjs2.pageStyledDir,
     templatePath: Config.nextjs2.templates.styledComponentsTemplatePath,
-    isStyledComponent: true
+    compDirPath: Config.nextjs2.componentsDir,
+    pageStyledDirPath: Config.nextjs2.pageStyledDir
 };

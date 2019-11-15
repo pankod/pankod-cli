@@ -110,8 +110,6 @@ export const Config = {
             componentIndexTemplatePath: './lib/Templates/nextjs2/Components/index.mustache',
             stylePageTemplate: './lib/Templates/nextjs2/Styles.mustache',
             funcComponentTemplate: './lib/Templates/nextjs2/Components/Functional.mustache',
-            styledFuncComponentTemplate:
-                './lib/Templates/nextjs2/Components/StyledFunctional.mustache',
             reducerIndexTemplatePath: './lib/Templates/nextjs2/Reducers/index.mustache',
             reducerTemplatePath: './lib/Templates/nextjs2/Reducers/Reducer.mustache',
             actionConstTemplatePath: './lib/Templates/nextjs2/Reducers/ActionConst.mustache',
