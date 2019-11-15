@@ -121,42 +121,28 @@ export const Helper = {
         }
     },
 
-    createStyle: (
-        answers: ICommon.IAnswers,
-        createStyleParams: INextjs2Helper.ICreateStyle
-    ): void => {
-        const { fileName, isPage, lowerFileName } = answers;
+    createStyle: (options: ICommon.IAnswers): void => {
+        const { fileName, lowerFileName, isPage, isStyled } = options;
 
-        const {
-            isStyledComponent,
-            pageDirPath,
-            compDirPath,
-            pageStyledDirPath,
-            templatePath
-        } = createStyleParams;
+        const styleParams = isStyled
+            ? params.createStyledComponentParams
+            : params.createStyleParams;
 
-        const templateProps = { fileName, lowerFileName };
+        const { templatePath, pageDirPath, compDirPath, pageStyledDirPath } = styleParams;
 
-        let _compDirPath;
-
-        let _pageDirPath;
-
-        if (isStyledComponent) {
-            _compDirPath = `${compDirPath}/${answers.fileName}/styled.ts`;
-            _pageDirPath =
-                `${pageStyledDirPath}/${answers.fileName.replace(/\b\w/g, foo =>
-                    foo.toUpperCase()
-                )}.ts` || '';
+        if (isPage) {
+            if (isStyled) {
+                options.target = `${pageStyledDirPath}/${fileName}.ts`;
+            } else {
+                options.target = `${pageDirPath}/${lowerFileName}/style.scss`;
+            }
         } else {
-            _compDirPath = `${compDirPath}/${answers.fileName}/style.scss`;
-            _pageDirPath = `${pageDirPath}/${answers.fileName.replace(/\b\w/g, foo =>
-                foo.toLowerCase()
-            )}/style.scss`;
+            options.target = `${compDirPath}/${fileName}/${isStyled ? 'styled.ts' : 'style.scss'}`;
         }
 
         const writeFileProps = {
-            dirPath: isPage ? _pageDirPath : _compDirPath,
-            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+            dirPath: options.target,
+            getFileContent: () => CommonHelper.getTemplate(templatePath, options),
             message: 'Added new style file'
         };
 
@@ -283,19 +269,12 @@ export const Helper = {
             addActionParams
         } = params.createClassComponentParams;
 
-        const { lowerFileName, isConnectStore, isPage, hasPath } = options;
+        const { lowerFileName, isConnectStore, isPage } = options;
 
-        const addIndexParams: ICommon.IAddIndex = {
-            dirPath: `${Config.nextjs2.componentsDir}/index.ts`,
-            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
-            message: 'Component added to index.ts'
-        };
+        options.isScss = options.hasStyle === 'scss';
+        options.isStyled = options.hasStyle === 'styled';
 
-        const writeFileProps: ICommon.IWriteFile = {
-            dirPath: `${options.classDir}/index.tsx`,
-            getFileContent: () => CommonHelper.getTemplate(templatePath, options),
-            message: 'Added new class component'
-        };
+        // TODO: Modularize Preparation of Params
 
         if (isPage) {
             options.classDir = `${Config.nextjs2.pagesDir}/${lowerFileName}`;
@@ -305,91 +284,76 @@ export const Helper = {
                 routesTemplate: Config.nextjs2.templates.addRouteTemplate
             };
 
-            hasPath && Helper.addRoute(options, addRouteParams);
+            Helper.addRoute(options, addRouteParams);
         } else {
             options.classDir = `${Config.nextjs2.componentsDir}/${options.fileName}`;
+
+            const addIndexParams: ICommon.IAddIndex = {
+                dirPath: `${Config.nextjs2.componentsDir}/index.ts`,
+                getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
+                message: 'Component added to index.ts'
+            };
+
             CommonHelper.addToIndex(addIndexParams);
         }
+
+        const writeFileProps: ICommon.IWriteFile = {
+            dirPath: `${options.classDir}/index.tsx`,
+            getFileContent: () => CommonHelper.getTemplate(templatePath, options),
+            message: 'Added new class component'
+        };
 
         CommonHelper.createFile(options.classDir);
         CommonHelper.writeFile(writeFileProps);
         Helper.createInterface(options);
+        Helper.createStyle(options);
 
         if (isConnectStore) {
             Helper.addReducer(options, addReducerParams);
             Helper.addAction(options, addActionParams);
         }
-
-        switch (options.hasStyle) {
-            case 'styled':
-                options.isStyled = true;
-                Helper.createStyle(options, params.createStyledComponentParams);
-                break;
-            case 'scss':
-                options.isScss = true;
-                Helper.createStyle(options, params.createStyleParams);
-                break;
-            default:
-                break;
-        }
     },
 
     createFuncComponent: (options: ICommon.IAnswers): void => {
-        const { lowerFileName, fileName, hasStyle, isScss } = options;
-
-        switch (hasStyle) {
-            case 'styled':
-                options.isStyled = true;
-                options.params = params.createStyledFuncComponentParams;
-                Helper.createStyle(options, params.createStyledComponentParams);
-                break;
-            case 'scss':
-                options.isScss = true;
-                options.params = params.createFuncComponentParams;
-                Helper.createStyle(options, params.createStyleParams);
-                break;
-            default:
-                break;
-        }
-
         const {
             componentsDir,
             templatePath,
             indexTemplatePath,
             componentTestTemplatePath
-        } = options.params;
+        } = params.createFuncComponentParams;
+
+        const { fileName, hasStyle } = options;
+
+        options.isScss = hasStyle === 'scss';
+        options.isStyled = hasStyle === 'styled';
 
         const funcComponentDir = `${componentsDir}/${fileName}`;
 
-        const templateProps = {
-            fileName,
-            isScss,
-            lowerFileName
-        };
-
+        // TODO: # Modularize Preparation of CommonHelper Props
         const addIndexParams: ICommon.IAddIndex = {
             dirPath: `${componentsDir}/index.ts`,
-            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
             message: 'Component added to index.ts.'
         };
 
         const writeFileProps: ICommon.IWriteFile = {
             dirPath: `${funcComponentDir}/index.tsx`,
-            getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(templatePath, options),
             message: 'Added new functional component.'
         };
 
         const writeTestFileProps: ICommon.IWriteFile = {
             dirPath: `${funcComponentDir}/index.spec.tsx`,
-            getFileContent: () =>
-                CommonHelper.getTemplate(componentTestTemplatePath, templateProps),
+            getFileContent: () => CommonHelper.getTemplate(componentTestTemplatePath, options),
             message: 'Added unit test of component.'
         };
+        // TODO: / Modularize Preparation of CommonHelper Props
 
         CommonHelper.createFile(funcComponentDir);
         CommonHelper.writeFile(writeFileProps);
         CommonHelper.writeFile(writeTestFileProps);
         CommonHelper.addToIndex(addIndexParams);
         Helper.createInterface(options);
+        Helper.createStyle(options);
     }
 };
