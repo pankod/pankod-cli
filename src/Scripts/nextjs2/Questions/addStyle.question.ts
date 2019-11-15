@@ -5,7 +5,7 @@ export const addStyle: inquirer.ListQuestion<ICommon.IAnswers> = {
     message: 'What kind of css do you want to implement?',
     name: 'hasStyle',
     type: 'list',
-    default: 'noStyle',
+    default: false,
     choices: [
         new inquirer.Separator(),
         {
@@ -18,7 +18,7 @@ export const addStyle: inquirer.ListQuestion<ICommon.IAnswers> = {
         },
         {
             name: "I don't want to add style file.",
-            value: 'noStyle'
+            value: false
         }
     ]
 };
