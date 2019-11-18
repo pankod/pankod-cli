@@ -3,12 +3,12 @@ import { ActionConsts } from "@Definitions";
 // #endregion Local Imports
 
 // #region Interface Imports
-import { IAction, I{{fileName}} } from "@Interfaces";
+import { IAction, {{interfaceName}} } from "@Interfaces";
 // #endregion Interface Imports
 
-const INITIAL_STATE: I{{fileName}}.IStateProps = { };
+const INITIAL_STATE: {{interfaceName}}.IStateProps = { };
 
-type IMapPayload = I{{fileName}}.Actions.IMapPayload;
+type IMapPayload = {{interfaceName}}.Actions.IMapPayload;
 
 export const {{fileName}}Reducer = (state = INITIAL_STATE, action: IAction<IMapPayload>) => {
     switch (action.type) {

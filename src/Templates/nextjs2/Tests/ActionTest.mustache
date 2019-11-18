@@ -12,23 +12,17 @@ const middlewares = [thunk];
 const mockStore = configureMockStore(middlewares);
 
 describe("{{fileName}} action tests", () => {
-    test("Map test", async () => {
+    test("Map test", () => {
         const store = mockStore();
 
         const expectedActions = [
             {
-                payload: {
-                    version: 2,
-                },
-                type: ActionConsts.{{fileName}}.SetReducer,
+                payload: { version: 2 },
+                type: ActionConsts.{{fileName}}.SetReducer
             },
         ];
 
-        store.dispatch(
-            {{fileName}}Actions.Map({
-                version: 2,
-            })
-        );
+        store.dispatch({{fileName}}Actions.Map({ version: 2 }));
 
         expect(store.getActions()).toEqual(expectedActions);
     });
@@ -36,13 +30,13 @@ describe("{{fileName}} action tests", () => {
     test("Reset test", async () => {
         const store = mockStore({
             {{lowerFileName}}: {
-                version: 1,
+                version: 1
             },
         });
 
         const expectedActions = [
             {
-                type: ActionConsts.{{fileName}}.ResetReducer,
+                type: ActionConsts.{{fileName}}.ResetReducer
             },
         ];
 

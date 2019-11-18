@@ -2,18 +2,13 @@
 import { ActionConsts } from "@Definitions";
 // #endregion Local Imports
 
-/**
- * ACTIONS
-*/
 export const {{fileName}}Actions = {
-    Map: (payload: any) => (
-        {
+    Map: (payload: any) => ({
             payload,
             type: ActionConsts.{{fileName}}.SetReducer
-        }
-    ),
+    }),
 
     Reset: () => ({
         type: ActionConsts.{{fileName}}.ResetReducer
     })
-}
+};

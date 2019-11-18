@@ -4,10 +4,9 @@ import { WithTranslation } from "next-i18next";
 // #endregion Global Imports
 
 {{/isFuncComponent}}
-declare module I{{fileName}} {
-    export interface IProps {{^isFuncComponent}} extends WithTranslation {{/isFuncComponent}}{
+declare module {{interfaceName}} {
+    export interface IProps {{^isFuncComponent}}extends WithTranslation{{/isFuncComponent}} { }
 
-    }
     {{#isClass}}
     export interface InitialProps {
         namespacesRequired: string[];
@@ -16,6 +15,7 @@ declare module I{{fileName}} {
     export interface IStateProps { }
 
     {{/isClass}}
+
     {{#isConnectStore}}
     module Actions {
         export interface IMapPayload { }
@@ -24,4 +24,4 @@ declare module I{{fileName}} {
     {{/isConnectStore}}
 }
 
-export { I{{fileName}} };
+export { {{interfaceName}} };
