@@ -1,6 +1,6 @@
 import { ICommon } from '../ICommon';
 import { INextjs2Actions } from './INextjs2Types';
-import { PluginHelper } from '../../Plugins/nextjs/helpers';
+import { PluginHelper } from '../../Plugins/nextjs2/helpers';
 import * as Helpers from './Helpers';
 
 const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
