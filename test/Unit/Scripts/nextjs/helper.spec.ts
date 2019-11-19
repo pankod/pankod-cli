@@ -16,21 +16,21 @@ const createInterfaceParams: INextjsHelper.ICreateInterfaceParams = {
     compInterfaceDir: '/src/Interfaces/Components'
 };
 
-const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
-};
+// const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
+//     actionConstTemplatePath: '/Templates/nextjs/Reducers/ActionConst.mustache'
+// };
 
-const addActionParams: INextjsHelper.IAddActionParams = {
-    actionIndexTemplatePath: '/Templates/nextjs/Reducers/ActionIndex.mustache',
-    actionTemplatePath: '/Templates/nextjs/Reducers/Action.mustache'
-};
+// const addActionParams: INextjsHelper.IAddActionParams = {
+//     actionIndexTemplatePath: '/Templates/nextjs/Reducers/ActionIndex.mustache',
+//     actionTemplatePath: '/Templates/nextjs/Reducers/Action.mustache'
+// };
 
-const addReducerParams: INextjsHelper.IAddReducerParams = {
-    addActionConstIndexParams,
-    reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
-    reducerStoreTemplatePath: '/Templates/nextjs/Reducers/Store.mustache',
-    reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
-};
+// const addReducerParams: INextjsHelper.IAddReducerParams = {
+//     addActionConstIndexParams,
+//     reducerIndexTemplatePath: '/Templates/nextjs/Reducers/index.mustache',
+//     reducerStoreTemplatePath: '/Templates/nextjs/Reducers/Store.mustache',
+//     reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
+// };
 
 describe('Helpers tests', () => {
     describe('Test addRoute method', () => {
@@ -197,13 +197,13 @@ describe('Helpers tests', () => {
     });
 
     describe('createClassComponent', () => {
-        const params: INextjsHelper.ICreateClassComponentParams = {
-            templatePath: '/Templates/nextjs/Components/Class.mustache',
-            indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
-            createInterfaceParams,
-            addReducerParams,
-            addActionParams
-        };
+        // const params: INextjsHelper.ICreateClassComponentParams = {
+        //     templatePath: '/Templates/nextjs/Components/Class.mustache',
+        //     indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
+        //     createInterfaceParams,
+        //     addReducerParams,
+        //     addActionParams
+        // };
 
         describe('Class Component', () => {
             const answers = {

@@ -17,24 +17,24 @@ const createInterfaceParams: INextjs2Helper.ICreateInterfaceParams = {
     componentsDir: 'src/Components'
 };
 
-const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: '/Templates/nextjs2/Reducers/ActionConst.mustache',
-    actionConstsFileDir: '/app2/src/Definitions/ActionConsts/ActionConsts.ts'
-};
+// const addActionConstIndexParams: INextjs2Helper.IAddActionConstIndexParams = {
+//     actionConstTemplatePath: '/Templates/nextjs2/Reducers/ActionConst.mustache',
+//     actionConstsFileDir: '/app2/src/Definitions/ActionConsts/ActionConsts.ts'
+// };
 
-const addActionParams: INextjs2Helper.IAddActionParams = {
-    actionIndexTemplatePath: '/Templates/nextjs2/Reducers/ActionIndex.mustache',
-    actionTemplatePath: '/Templates/nextjs2/Reducers/Action.mustache',
-    actionTestTemplatePath: '/Templates/nextjs2/Tests/ActionTest.mustache'
-};
+// const addActionParams: INextjs2Helper.IAddActionParams = {
+//     actionIndexTemplatePath: '/Templates/nextjs2/Reducers/ActionIndex.mustache',
+//     actionTemplatePath: '/Templates/nextjs2/Reducers/Action.mustache',
+//     actionTestTemplatePath: '/Templates/nextjs2/Tests/ActionTest.mustache'
+// };
 
-const addReducerParams: INextjs2Helper.IAddReducerParams = {
-    addActionConstIndexParams,
-    reducerIndexTemplatePath: '/Templates/nextjs2/Reducers/index.mustache',
-    reducerStoreTemplatePath: '/Templates/nextjs2/Reducers/Store.mustache',
-    reducerTemplatePath: '/Templates/nextjs2/Reducers/Reducer.mustache',
-    reducerTestTemplatePath: '/Templates/nextjs2/Tests/ReducerTest.mustache'
-};
+// const addReducerParams: INextjs2Helper.IAddReducerParams = {
+//     addActionConstIndexParams,
+//     reducerIndexTemplatePath: '/Templates/nextjs2/Reducers/index.mustache',
+//     reducerStoreTemplatePath: '/Templates/nextjs2/Reducers/Store.mustache',
+//     reducerTemplatePath: '/Templates/nextjs2/Reducers/Reducer.mustache',
+//     reducerTestTemplatePath: '/Templates/nextjs2/Tests/ReducerTest.mustache'
+// };
 
 describe('Helpers tests', () => {
     describe('Test addRoute method', () => {
@@ -98,7 +98,7 @@ describe('Helpers tests', () => {
 			`
             );
 
-            await Helpers.createInterface(answers);
+            Helpers.createInterface(answers);
 
             const reduxStoreContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Interfaces/ReduxStore.mustache',
@@ -207,11 +207,11 @@ describe('Helpers tests', () => {
                 lowerFileName: 'style'
             };
 
-            const createStyleParams = {
-                compDirPath: '/src/Components',
-                pageDirPath: '/pages',
-                templatePath: '/Templates/nextjs2/Styles.mustache'
-            };
+            // const createStyleParams = {
+            //     compDirPath: '/src/Components',
+            //     pageDirPath: '/pages',
+            //     templatePath: '/Templates/nextjs2/Styles.mustache'
+            // };
 
             Helpers.createStyle(answers);
 
@@ -242,13 +242,13 @@ describe('Helpers tests', () => {
     });
 
     describe('createClassComponent', () => {
-        const params: INextjs2Helper.ICreateClassComponentParams = {
-            templatePath: '/Templates/nextjs2/Components/Class.mustache',
-            indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
-            createInterfaceParams,
-            addReducerParams,
-            addActionParams
-        };
+        // const params: INextjs2Helper.ICreateClassComponentParams = {
+        //     templatePath: '/Templates/nextjs2/Components/Class.mustache',
+        //     indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
+        //     createInterfaceParams,
+        //     addReducerParams,
+        //     addActionParams
+        // };
 
         describe('Class Component', () => {
             const answers = {
@@ -357,13 +357,13 @@ describe('Helpers tests', () => {
             interfaceName: 'IFunctest'
         };
 
-        const createFunctionalComponentParams = {
-            indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
-            templatePath: '/Templates/nextjs2/Components/Functional.mustache',
-            componentsDir: '/src/Components',
-            createInterfaceParams,
-            componentTestTemplatePath: '/Templates/nextjs2/Tests/ComponentTest.mustache'
-        };
+        // const createFunctionalComponentParams = {
+        //     indexTemplatePath: '/Templates/nextjs2/Components/index.mustache',
+        //     templatePath: '/Templates/nextjs2/Components/Functional.mustache',
+        //     componentsDir: '/src/Components',
+        //     createInterfaceParams,
+        //     componentTestTemplatePath: '/Templates/nextjs2/Tests/ComponentTest.mustache'
+        // };
 
         it('should create functional component dir and file', () => {
             Helpers.createFuncComponent(answers);

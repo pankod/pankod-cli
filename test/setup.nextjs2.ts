@@ -11,12 +11,6 @@ fs.mkdirSync('app2/src');
 fs.mkdirSync('app2/src/Templates');
 fs.mkdirSync('app2/src/Interfaces');
 
-/*
-fs.mkdirSync('app2/test');
-fs.mkdirSync('app2/test/Utils');
-fs.mkdirSync('app2/test/Unit');
-*/
-
 fs.mkdirSync('/Templates/nextjs2');
 fs.mkdirSync('/Templates/nextjs2/Interfaces');
 fs.mkdirSync('/Templates/nextjs2/Components');

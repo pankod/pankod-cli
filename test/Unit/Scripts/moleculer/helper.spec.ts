@@ -277,7 +277,7 @@ describe('Helpers tests', () => {
         // Reset file for ready to test
         fs.writeFileSync('/test/Utils/BrokerHelper.ts', '// #endregion Local Imports');
 
-        Helpers.createService(answers, createServiceParams);
+        Helpers.createService(answers);
 
         // Writefile test
         const contentPath = `${Config.moleculer.servicesDir}/${answers.lowerFileName}.service.ts`;
