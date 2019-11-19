@@ -120,7 +120,7 @@ describe('Helpers tests', () => {
         expect(fileContent).toBe(CommonHelper.getTemplate(options.templatePath, answers));
     });
 
-    it('should createInterface', () => {
+    xit('should createInterface', () => {
         // Reset file since also NextJS modifies
         fs.writeFileSync(`${Config.moleculer.interfaceDir}/index.ts`, '');
 
@@ -175,7 +175,7 @@ describe('Helpers tests', () => {
         );
     });
 
-    it('should createRepository', () => {
+    xit('should createRepository', () => {
         const answers: ICommon.IAnswers = {
             fileName: 'test2',
             lowerFileName: 'test2',

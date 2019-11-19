@@ -8,7 +8,6 @@ import * as path from 'path';
 // #region Local Imports
 import { IPankodConfig } from '../ITypes';
 import { ICommon } from './ICommon';
-import { Plugins } from './nextjs/pluginsEnum';
 // #endregion Local Imports
 
 export const CommonHelper = {
@@ -33,7 +32,7 @@ export const CommonHelper = {
             fs.readFileSync(path.resolve(__dirname, '../../', templatePath), 'utf8'),
             templateProps
         ),
-    hasPlugin: (pluginName: Plugins): boolean => {
+    hasPlugin: (pluginName: string): boolean => {
         const plugins: string[] = CommonHelper.getPankodConfig().plugins;
 
         return plugins.includes(pluginName);
