@@ -1,6 +1,5 @@
 // #region Local Imports
 import { CommonHelper } from '../../Common';
-import { IMoleculerHelper } from '../IMoleculerTypes';
 import { ICommon } from '../../ICommon';
 // #endregion Local Imports
 

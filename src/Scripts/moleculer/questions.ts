@@ -1,10 +1,9 @@
 // #region Local Imports
 import * as questions from './Questions/';
+import { IMoleculerQuestions } from './IMoleculerTypes';
 // #endregion Local Imports
 
-export const getQuestionsByElementType = (type: string) => questionsMap[type];
-
-const questionsMap = {
+const questionsMap: IMoleculerQuestions = {
     entity: [
         questions.entityName
     ],
@@ -15,3 +14,5 @@ const questionsMap = {
         questions.hasDatabase
     ]
 };
+
+export const getQuestionsByElementType = (type: string) => questionsMap[type];

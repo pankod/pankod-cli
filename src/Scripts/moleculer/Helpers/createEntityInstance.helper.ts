@@ -3,7 +3,6 @@ import { CommonHelper } from '../../Common';
 import { IMoleculerHelper } from '../IMoleculerTypes';
 import { ICommon } from '../../ICommon';
 import { Config } from '../../../config';
-import * as Helpers from '.';
 // #endregion Local Imports
 
 export const createEntityInstance = (

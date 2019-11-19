@@ -1,7 +1,7 @@
 // #region Local Imports
 import { ICommon } from '../ICommon';
-import { Config } from '../../config';
 import * as Helpers from './Helpers';
+import { elementType } from './ISvelteTypes';
 // #endregion Local Imports
 
 const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
@@ -19,19 +19,23 @@ const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
     };
 };
 
-export const createElement = (elementType: string, answers: any) => {
+export const createElement = (elementType: elementType, answers: ICommon.IAnswers) => {
     const options = prepareOptions(answers);
 
     const factory = {
-        Component: async (answers: ICommon.IAnswers): Promise<void> => {
-            Helpers.createComponent({
-                ...options,
-                dirPath: `${Config.svelte.componentsDir}/${answers.fileName}/index.spec.js`,
-                successMessage: 'Added new component test.',
-                templatePath: Config.svelte.templates.componentTestTemplate
-            });
-        }
+        Component: async (): Promise<void> => {
+            Helpers.createComponent(options);
+        },
+
+        // Test: async (): Promise<void> => {
+        //     Helpers.createStyle({
+        //         ...options,
+        //         dirPath: `${Config.svelte.componentsDir}/${options.fileName}/index.spec.js`,
+        //         successMessage: 'Added new component test.',
+        //         templatePath: Config.svelte.templates.componentTestTemplate
+        //     });
+        // }
     };
 
-    factory[elementType](answers);
+    factory[elementType]();
 };

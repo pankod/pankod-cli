@@ -1,9 +1,10 @@
 // #region Local Imports
 import { CommonHelper } from '../../Common';
 import { createStyleParams } from '../svelte.config';
+import { ICommon } from '../../ICommon';
 // #endregion Local Imports
 
-export const createStyle = (options: any): void => {
+export const createStyle = (options: ICommon.IAnswers): void => {
     const { fileName } = options;
 
     const compDirPath = `${createStyleParams.compDirPath}/${fileName}/style.scss`;

@@ -12,12 +12,9 @@ import { createInterfaceParams } from '../nextjs2.config';
 export const createInterface = (options: ICommon.IAnswers) => {
     const {
         fileName,
-        lowerFileName,
         isPage,
         isConnectStore,
         isFuncComponent,
-        upperFileName,
-        isClass = !!options.classDir
     } = options;
 
     const {
@@ -31,6 +28,8 @@ export const createInterface = (options: ICommon.IAnswers) => {
         storeImportInterface,
         storeInterface
     } = createInterfaceParams;
+
+    options.isClass = !!options.classDir;
 
     const pageDirPath = `${pageInterfaceDir}/${fileName}.d.ts`;
     let compDirPath;

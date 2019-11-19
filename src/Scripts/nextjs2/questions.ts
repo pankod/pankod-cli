@@ -1,8 +1,6 @@
 import * as questions from './Questions/';
 import { INextjs2Questions } from './INextjs2Types';
 
-export const getQuestionsByElementType = (type: string) => questionsMap[type];
-
 const questionsMap: INextjs2Questions = {
     ClassComponent: [
         questions.enterComponentName,
@@ -29,3 +27,5 @@ const questionsMap: INextjs2Questions = {
         questions.addPlugin
     ]
 };
+
+export const getQuestionsByElementType = (type: string) => questionsMap[type];

@@ -5,7 +5,7 @@ import { createComponentParams } from '../svelte.config';
 import * as Helpers from '../Helpers';
 // #endregion Local Imports
 
-export const createComponent = (options: any): void => {
+export const createComponent = (options: ICommon.IAnswers): void => {
     const { fileName, hasStyle } = options;
 
     const { componentsDir, templatePath } = createComponentParams;

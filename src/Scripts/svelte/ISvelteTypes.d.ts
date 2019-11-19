@@ -1,9 +1,10 @@
-import { Question } from "inquirer";
-import { ICommon } from "../ICommon";
+import { Question } from 'inquirer';
+import { ICommon } from '../ICommon';
 
+export type elementType = 'Component';
 
 export interface ISvelteQuestions {
-   	Component: Question<ICommon.IAnswers>[];
+    Component: Question<ICommon.IAnswers>[];
     [key: string]: Question<ICommon.IAnswers> | Question<ICommon.IAnswers>[];
 }
 
@@ -13,14 +14,13 @@ export interface ISvelteActions {
 }
 
 export declare namespace ISvelteHelper {
+    export interface ICreateStyle {
+        templatePath: string;
+        compDirPath: string;
+    }
 
-	export interface ICreateStyle {
-		templatePath: string;
-		compDirPath: string;
-	}
-
-	export interface ICreateComponentParams {
-		templatePath: string;
-		componentsDir: string;
-	}
+    export interface ICreateComponentParams {
+        templatePath: string;
+        componentsDir: string;
+    }
 }

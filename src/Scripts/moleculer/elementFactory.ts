@@ -4,7 +4,7 @@ import { ICommon } from '../ICommon';
 import * as Helpers from './Helpers';
 // #endregion Local Imports
 
-const prepareOptions = (answers: ICommon.IAnswers, extra?: object) => {
+const prepareOptions = (answers: ICommon.IAnswers) => {
     const capitalizedName = answers.fileName.replace(/\b\w/g, foo => foo.toUpperCase());
     const uncapitalizedName = answers.fileName.replace(/\b\w/g, foo => foo.toLowerCase());
 
@@ -20,9 +20,9 @@ export const createElement = (elementType: string, answers: ICommon.IAnswers) =>
     const options = prepareOptions(answers);
 
     const factory: IMoleculerActions = {
-        entity: (options: ICommon.IAnswers) => Helpers.createRepository(options),
-        service: (options: ICommon.IAnswers) => Helpers.createService(answers)
+        entity: () => Helpers.createRepository(options),
+        service: () => Helpers.createService(options)
     };
 
-    factory[options.lowerFileName](options);
+    factory[elementType]();
 };

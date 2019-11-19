@@ -8,6 +8,7 @@ import { ICommon } from '../../ICommon';
 import { Config } from '../../../config';
 import { CommonHelper } from '../../Common';
 import { INextjsHelper } from '../INextjsTypes';
+import * as Helpers from '.';
 // #endregion Local Imports
 
 export const addReducer = (
@@ -60,6 +61,6 @@ export const addReducer = (
     }, 100);
 
     if (isConnectStore) {
-        Helper.addActionConstIndex(templateProps, addActionConstIndexParams);
+        Helpers.addActionConstIndex(templateProps, addActionConstIndexParams);
     }
 };
