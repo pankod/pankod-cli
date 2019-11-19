@@ -109,11 +109,7 @@
             "**/*.spec.(ts)"
         ],
         "setupFiles": [
-            "<rootDir>/test/setup.ts",
-            "<rootDir>/test/setup.nextjs.ts",
-            "<rootDir>/test/setup.nextjs2.ts",
-            "<rootDir>/test/setup.moleculer.ts",
-            "<rootDir>/test/setup.svelte.ts"
+            "<rootDir>/tests.setup.ts"
         ],
         "globals": {
             "ts-jest": {
