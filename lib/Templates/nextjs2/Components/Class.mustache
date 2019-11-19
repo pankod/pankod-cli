@@ -1,42 +1,49 @@
 // #region Global Imports
-import * as React from "react";
+import React from "react";
 import { NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
 // #endregion Global Imports
 
 // #region Local Imports
 import { withTranslation } from "@Server/i18n";
+import { IStore } from "@Redux/IStore";
+import { {{upperFileName}}Actions } from "@Actions";
 {{#isScss}}
-import './style.scss';
+import "./style.scss";
 {{/isScss}}
 {{#isStyled}}
 import { Container } from "@Styled/{{upperFileName}}";
 {{/isStyled}}
-import { IStore } from "@Redux/IStore";
-import { {{upperFileName}}Actions } from "@Actions";
 // #endregion Local Imports
 
 // #region Interface Imports
-import { ReduxNextPageContext, I{{upperFileName}} } from "@Interfaces";
+import { ReduxNextPageContext, {{interfaceName}} } from "@Interfaces";
 // #endregion Interface Imports
 
-const {{upperFileName}}: NextPage<I{{upperFileName}}.IProps, I{{upperFileName}}.InitialProps> = ({
+const {{upperFileName}}: NextPage<{{interfaceName}}.IProps, {{interfaceName}}.InitialProps> = ({
     t,
     i18n,
 }) => {
-    const {{fileName}} = useSelector((state: IStore) => state.{{lowerFileName}});
+    const {{lowerFileName}} = useSelector((state: IStore) => state.{{lowerFileName}});
     const dispatch = useDispatch();
 
     return (
+        {{#isStyled}}
         <Container>
-         {{upperFileName}} page
+            {{upperFileName}} Page
         </Container>
+        {{/isStyled}}
+        {{^isStyled}}
+        <section id="{{lowerFileName}}">
+            {{upperFileName}} Page
+        <section>
+        {{/isStyled}}
     );
 };
 
 {{upperFileName}}.getInitialProps = async (
     ctx: ReduxNextPageContext
-): Promise<I{{upperFileName}}.InitialProps> => {
+): Promise<{{interfaceName}}.InitialProps> => {
 
     return { namespacesRequired: ["common"] };
 };

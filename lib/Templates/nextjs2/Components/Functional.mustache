@@ -1,19 +1,31 @@
 // #region Global Imports
-import React from "react";
+import React, { FunctionComponent } from "react";
 // #endregion Global Imports
 
-{{#isScss}}
+{{#hasStyle}}
 // #region Local Imports
+{{#isScss}}
 import "./style.scss";
-// #endregion Local Imports
 {{/isScss}}
+{{#isStyled}}
+import { Container } from "./styled";
+{{/isStyled}}
+// #endregion Local Imports
+{{/hasStyle}}
 
 // #region Interface Imports
 import { {{interfaceName}} } from "./{{fileName}}";
 // #endregion Interface Imports
 
-export const {{fileName}}: React.FunctionComponent<I{{fileName}}.IProps> = (props): JSX.Element => (
+export const {{fileName}}: FunctionComponent<{{interfaceName}}.IProps> = (
+    props
+): JSX.Element => (
+    {{#isStyled}}
+    <Container>{{fileName}} Component</Container>
+    {{/isStyled}}
+    {{^isStyled}}
     <div className="{{lowerFileName}}">
-        <span>{{ fileName }}</span>
+        <span>{{fileName}} Component</span>
     </div>
+    {{/isStyled}}
 );
