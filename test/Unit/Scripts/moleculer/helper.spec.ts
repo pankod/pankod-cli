@@ -1,11 +1,11 @@
 import { fs } from 'memfs';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { ICommon } from '../../../../src/Scripts/ICommon';
-import { Helper } from '../../../../src/Scripts/moleculer/helper';
+import * as Helpers from '../../../../src/Scripts/moleculer/Helpers';
 import { Config } from '../../../../src/config';
 import { IMoleculerHelper } from './../../../../src/Scripts/moleculer/IMoleculerTypes.d';
 
-describe('Helper tests', () => {
+describe('Helpers tests', () => {
     it('should addBrokerHelper', () => {
         const brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams = {
             brokerHelperCreate: '/Templates/moleculer/Tests/BrokerHelperCreate.mustache',
@@ -23,7 +23,7 @@ describe('Helper tests', () => {
             { upperFileName: answers.upperFileName, lowerFileName: answers.lowerFileName }
         );
 
-        Helper.addBrokerHelper(answers, brokerHelperTemplatesParams);
+        Helpers.addBrokerHelper(answers, brokerHelperTemplatesParams);
 
         const addedBrokerHelper = fs.readFileSync('/test/Utils/BrokerHelper.ts');
 
@@ -42,7 +42,7 @@ describe('Helper tests', () => {
 
         const fileIndexContentPath = `${Config.moleculer.entityDir}/index.ts`;
 
-        Helper.createEntityInstance(answers, createEntityTemplatesParams);
+        Helpers.createEntityInstance(answers, createEntityTemplatesParams);
 
         const fileContentPath = `${Config.moleculer.entityDir}/${answers.fileName}.ts`;
         const fileContent = String(fs.readFileSync(fileContentPath));
@@ -75,15 +75,15 @@ describe('Helper tests', () => {
         };
         const options: ICommon.ICreateTest = {
             answers,
-            dirPath: `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`,
+            dirPath: `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helpers.spec.ts`,
             successMessage: 'Added new Microservice test.',
             templatePath: '/Templates/moleculer/Tests/ServiceHelper.mustache',
             templateProps
         };
 
-        Helper.createTest(options);
+        Helpers.createTest(options);
 
-        const fileContentPath = `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`;
+        const fileContentPath = `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helpers.spec.ts`;
         const fileContent = String(fs.readFileSync(fileContentPath));
 
         expect(fileContent).toBe(CommonHelper.getTemplate(options.templatePath, answers));
@@ -112,7 +112,7 @@ describe('Helper tests', () => {
             templateProps
         };
 
-        Helper.createTest(options);
+        Helpers.createTest(options);
 
         const fileContentPath = `${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`;
         const fileContent = String(fs.readFileSync(fileContentPath));
@@ -141,7 +141,7 @@ describe('Helper tests', () => {
             templatePath: `/Templates/moleculer/Interfaces`
         };
 
-        Helper.createInterface(answers, dirType, undefined, createInterfaceParams);
+        Helpers.createInterface(answers, dirType, undefined, createInterfaceParams);
 
         // CreateFile
         const interfaceDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
@@ -204,7 +204,7 @@ describe('Helper tests', () => {
         // Reset file for ready to test
         fs.writeFileSync(`${Config.moleculer.entityDir}/index.ts`, '');
 
-        Helper.createRepository(answers, createRepositoryParams);
+        Helpers.createRepository(answers);
 
         // WriteFile
         const repoFilePath = `${Config.moleculer.repositoriesDir}/${answers.upperFileName}.ts`;
@@ -265,7 +265,7 @@ describe('Helper tests', () => {
             },
             createServiceHelperParams: {
                 indexTemplate: '/Templates/moleculer/Services/HelperIndex.mustache',
-                templatePath: '/Templates/moleculer/Services/Helper.mustache',
+                templatePath: '/Templates/moleculer/Services/Helpers.mustache',
                 testTemplatePath: '/Templates/moleculer/Tests/ServiceHelper.mustache'
             },
             createInterfaceParams: {
@@ -277,7 +277,7 @@ describe('Helper tests', () => {
         // Reset file for ready to test
         fs.writeFileSync('/test/Utils/BrokerHelper.ts', '// #endregion Local Imports');
 
-        Helper.createService(answers, createServiceParams);
+        Helpers.createService(answers, createServiceParams);
 
         // Writefile test
         const contentPath = `${Config.moleculer.servicesDir}/${answers.lowerFileName}.service.ts`;
@@ -296,7 +296,7 @@ describe('Helper tests', () => {
         );
 
         // CreateServiceHelper
-        const serviceHelperFileContentPath = `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`;
+        const serviceHelperFileContentPath = `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helpers.ts`;
         const serviceHelperFileContent = String(fs.readFileSync(serviceHelperFileContentPath));
 
         expect(serviceHelperFileContent).toBe(
@@ -307,7 +307,7 @@ describe('Helper tests', () => {
         );
 
         // CreateTest
-        const testFileContentPath = `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helper.spec.ts`;
+        const testFileContentPath = `${Config.moleculer.serviceHelperTestDir}/${answers.upperFileName}Helpers.spec.ts`;
         const testFileContent = String(fs.readFileSync(testFileContentPath));
 
         expect(testFileContent).toBe(
@@ -344,13 +344,13 @@ describe('Helper tests', () => {
 
         const createServiceHelperParams: IMoleculerHelper.ICreateServiceHelperParams = {
             indexTemplate: '/Templates/moleculer/Services/HelperIndex.mustache',
-            templatePath: '/Templates/moleculer/Services/Helper.mustache',
+            templatePath: '/Templates/moleculer/Services/Helpers.mustache',
             testTemplatePath: '/Templates/moleculer/Tests/ServiceHelper.mustache'
         };
 
-        Helper.createServiceHelper(answers, createServiceHelperParams);
+        Helpers.createService(answers);
 
-        const fileContentPath = `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helper.ts`;
+        const fileContentPath = `${Config.moleculer.servicesHelperDir}/${answers.upperFileName}Helpers.ts`;
         const fileContent = String(fs.readFileSync(fileContentPath));
 
         expect(fileContent).toBe(

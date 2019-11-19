@@ -1,5 +1,5 @@
 import { fs } from 'memfs';
-import { Helper } from '../../../../src/Scripts/nextjs2/helper';
+import * as Helpers from '../../../../src/Scripts/nextjs2/Helpers';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Config } from '../../../../src/config';
 import { INextjs2Helper } from '../../../../src/Scripts/nextjs2/INextjs2Types';
@@ -36,7 +36,7 @@ const addReducerParams: INextjs2Helper.IAddReducerParams = {
     reducerTestTemplatePath: '/Templates/nextjs2/Tests/ReducerTest.mustache'
 };
 
-describe('Helper tests', () => {
+describe('Helpers tests', () => {
     describe('Test addRoute method', () => {
         it('Should add page route', () => {
             const addRouteParams = {
@@ -53,7 +53,7 @@ describe('Helper tests', () => {
                 answers
             );
 
-            Helper.addRoute(answers, addRouteParams);
+            Helpers.addRoute(answers, addRouteParams);
 
             const addedRoute = fs.readFileSync('/app2/routes.js');
 
@@ -72,7 +72,7 @@ describe('Helper tests', () => {
         };
 
         it('Should create component interface file', () => {
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers);
 
             const fileContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Interfaces/Component.mustache',
@@ -98,7 +98,7 @@ describe('Helper tests', () => {
 			`
             );
 
-            await Helper.createInterface(answers, true, createInterfaceParams);
+            await Helpers.createInterface(answers);
 
             const reduxStoreContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Interfaces/ReduxStore.mustache',
@@ -124,7 +124,7 @@ describe('Helper tests', () => {
 			`
             );
 
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers);
 
             const reduxImportContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Interfaces/ReduxImport.mustache',
@@ -153,7 +153,7 @@ describe('Helper tests', () => {
 			`
             );
 
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers);
 
             const fileIndexContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Interfaces/PageIndex.mustache',
@@ -182,7 +182,7 @@ describe('Helper tests', () => {
             );
 
             answers.isPage = true;
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers);
 
             const pageIndexContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Interfaces/PageIndex.mustache',
@@ -213,7 +213,7 @@ describe('Helper tests', () => {
                 templatePath: '/Templates/nextjs2/Styles.mustache'
             };
 
-            Helper.createStyle(answers, createStyleParams);
+            Helpers.createStyle(answers);
 
             const fileContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Styles.mustache',
@@ -261,7 +261,7 @@ describe('Helper tests', () => {
                 isClass: true
             };
 
-            Helper.createClassComponent(answers, params);
+            Helpers.createClassComponent(answers);
 
             it('should create class component file', () => {
                 const createdClassComponent = String(
@@ -334,7 +334,7 @@ describe('Helper tests', () => {
                 interfaceName: 'IPage'
             };
 
-            Helper.createClassComponent(answers, params);
+            Helpers.createClassComponent(answers);
 
             it('should create page/index.tsx', () => {
                 const createdPage = String(fs.readFileSync('/pages/page/index.tsx'));
@@ -366,7 +366,7 @@ describe('Helper tests', () => {
         };
 
         it('should create functional component dir and file', () => {
-            Helper.createFuncComponent(answers, createFunctionalComponentParams);
+            Helpers.createFuncComponent(answers);
 
             const fileContent = CommonHelper.getTemplate(
                 '/Templates/nextjs2/Components/Functional.mustache',

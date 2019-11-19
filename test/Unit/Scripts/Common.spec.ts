@@ -1,7 +1,6 @@
 import { fs } from 'memfs';
 import { CommonHelper } from '../../../src/Scripts/Common';
 import { ICommon } from '../../../src/Scripts/ICommon';
-import { Plugins } from '../../../src/Scripts/nextjs/pluginsEnum';
 
 describe('Common Helper', () => {
     describe('addToIndex', () => {
@@ -50,7 +49,7 @@ describe('Common Helper', () => {
     describe('hasPlugin', () => {
         describe('when plugin exist', () => {
             it('should return true', () => {
-                const hasPlugin = CommonHelper.hasPlugin(Plugins.styled);
+                const hasPlugin = CommonHelper.hasPlugin('styled');
 
                 expect(hasPlugin).toEqual(true);
             });
@@ -58,7 +57,7 @@ describe('Common Helper', () => {
 
         describe('when plugin doesnt exist', () => {
             it('should return false', () => {
-                const hasPlugin = CommonHelper.hasPlugin(Plugins.sass);
+                const hasPlugin = CommonHelper.hasPlugin('sass');
 
                 expect(hasPlugin).toEqual(false);
             });

@@ -1,5 +1,5 @@
 import { fs } from 'memfs';
-import { Helper } from '../../../../src/Scripts/nextjs/helper';
+import * as Helpers from '../../../../src/Scripts/nextjs/Helpers';
 import { CommonHelper } from '../../../../src/Scripts/Common';
 import { Config } from '../../../../src/config';
 import { INextjsHelper } from '../../../../src/Scripts/nextjs/INextjsTypes';
@@ -32,7 +32,7 @@ const addReducerParams: INextjsHelper.IAddReducerParams = {
     reducerTemplatePath: '/Templates/nextjs/Reducers/Reducer.mustache'
 };
 
-describe('Helper tests', () => {
+describe('Helpers tests', () => {
     describe('Test addRoute method', () => {
         it('Should add page route', () => {
             const addRouteParams = {
@@ -49,7 +49,7 @@ describe('Helper tests', () => {
                 answers
             );
 
-            Helper.addRoute(answers, addRouteParams);
+            Helpers.addRoute(answers, addRouteParams);
 
             const addedRoute = fs.readFileSync('/app/routes.js');
             expect(String(addedRoute)).toEqual(`${fileContent}`);
@@ -67,7 +67,7 @@ describe('Helper tests', () => {
         };
 
         it('Should create component interface file', () => {
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers, true, createInterfaceParams);
 
             const fileContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Interfaces/Component.mustache',
@@ -93,7 +93,7 @@ describe('Helper tests', () => {
 			`
             );
 
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers, true, createInterfaceParams);
             const reduxStoreContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Interfaces/ReduxStore.mustache',
                 answers
@@ -115,7 +115,7 @@ describe('Helper tests', () => {
 			`
             );
 
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers, true, createInterfaceParams);
             const reduxImportContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Interfaces/ReduxImport.mustache',
                 answers
@@ -129,7 +129,7 @@ describe('Helper tests', () => {
         });
 
         it('Should add component interface export', () => {
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers, true, createInterfaceParams);
 
             const fileIndexContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Interfaces/ComponentIndex.mustache',
@@ -142,7 +142,7 @@ describe('Helper tests', () => {
 
         it('Should add page interface export', () => {
             answers.isPage = true;
-            Helper.createInterface(answers, true, createInterfaceParams);
+            Helpers.createInterface(answers, true, createInterfaceParams);
 
             const pageIndexContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Interfaces/PageIndex.mustache',
@@ -168,7 +168,7 @@ describe('Helper tests', () => {
                 templatePath: '/Templates/nextjs/Styles.mustache'
             };
 
-            Helper.createStyle(answers, createStyleParams);
+            Helpers.createStyle(answers, createStyleParams);
 
             const fileContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Styles.mustache',
@@ -216,7 +216,7 @@ describe('Helper tests', () => {
                 isClass: true
             };
 
-            Helper.createClassComponent(answers, params);
+            Helpers.createClassComponent(answers);
 
             it('should create class component file', () => {
                 const createdClassComponent = String(
@@ -289,7 +289,7 @@ describe('Helper tests', () => {
                 interfaceName: 'IPage'
             };
 
-            Helper.createClassComponent(answers, params);
+            Helpers.createClassComponent(answers);
 
             it('should create page/index.tsx', () => {
                 const createdPage = String(fs.readFileSync('/pages/page/index.tsx'));
@@ -312,15 +312,8 @@ describe('Helper tests', () => {
             interfaceName: 'IFunctest'
         };
 
-        const createFunctionalComponentParams = {
-            indexTemplatePath: '/Templates/nextjs/Components/index.mustache',
-            templatePath: '/Templates/nextjs/Components/Functional.mustache',
-            componentsDir: '/src/Components',
-            createInterfaceParams
-        };
-
         it('should create functional component dir and file', () => {
-            Helper.createFuncComponent(answers, createFunctionalComponentParams);
+            Helpers.createFuncComponent(answers);
 
             const fileContent = CommonHelper.getTemplate(
                 '/Templates/nextjs/Components/Functional.mustache',
