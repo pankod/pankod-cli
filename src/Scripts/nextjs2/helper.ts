@@ -39,6 +39,7 @@ export const Helper = {
 
         CommonHelper.replaceContent(replaceContentParams);
     },
+    /* eslint-disable complexity */
     createInterface: (
         answers: ICommon.IAnswers,
         isClass: boolean,
@@ -130,6 +131,7 @@ export const Helper = {
             }, 100);
         }
     },
+    /* eslint-enable complexity*/
 
     createStyle: (
         answers: ICommon.IAnswers,

@@ -245,6 +245,7 @@ export const Helper = {
         const templatePath = `${createInterfaceParams.templatePath}/${prefix}Interface.mustache`;
         const templateProps = { upperFileName: answers.upperFileName, dirType };
 
+        // eslint-disable-next-line
         const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
         const interfaceDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
 
