@@ -2,7 +2,7 @@ import { ListQuestion } from 'inquirer';
 import { ICommon } from './Scripts/ICommon';
 
 export interface IPankodConfig {
-    projectType: string;
+    project: string;
     plugins: string[];
 }
 
