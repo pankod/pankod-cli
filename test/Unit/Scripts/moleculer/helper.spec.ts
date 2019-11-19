@@ -148,6 +148,7 @@ describe('Helpers tests', () => {
         expect(fs.existsSync(interfaceDirPath)).toEqual(true);
 
         // WriteFile
+        // eslint-disable-next-line
         const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
         const fileContent = String(fs.readFileSync(interfaceFilePath));
 
