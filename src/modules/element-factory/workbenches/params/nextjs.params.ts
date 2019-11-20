@@ -1,53 +1,53 @@
 // #region Local Imports
-import { Config } from '../../config';
-import { INextjsHelper } from './INextjsTypes';
+import * as paths from '../../../paths';
+import { INextjsHelper } from '../../../typings';
 // #endregion Local Imports
 
 export const createInterfaceParams = {
-    templatePath: Config.nextjs.templates.createInterfaceTempPath,
-    pageInterfaceIndex: Config.nextjs.templates.pageInterfaceIndex,
-    storeImportInterface: Config.nextjs.templates.storeImportInterface,
-    compInterfaceIndex: Config.nextjs.templates.compInterfaceIndex,
-    storeInterface: Config.nextjs.templates.storeInterface,
-    interfaceDir: Config.nextjs.interfaceDir,
-    reduxInterfaceDir: Config.nextjs.reduxInterfaceDir,
-    pageInterfaceDir: Config.nextjs.pageInterfaceDir,
-    compInterfaceDir: Config.nextjs.compInterfaceDir
+    templatePath: paths.nextjs.templates.createInterfaceTempPath,
+    pageInterfaceIndex: paths.nextjs.templates.pageInterfaceIndex,
+    storeImportInterface: paths.nextjs.templates.storeImportInterface,
+    compInterfaceIndex: paths.nextjs.templates.compInterfaceIndex,
+    storeInterface: paths.nextjs.templates.storeInterface,
+    interfaceDir: paths.nextjs.interfaceDir,
+    reduxInterfaceDir: paths.nextjs.reduxInterfaceDir,
+    pageInterfaceDir: paths.nextjs.pageInterfaceDir,
+    compInterfaceDir: paths.nextjs.compInterfaceDir
 };
 
 export const addActionConstIndexParams: INextjsHelper.IAddActionConstIndexParams = {
-    actionConstTemplatePath: Config.nextjs.templates.actionConstTemplatePath
+    actionConstTemplatePath: paths.nextjs.templates.actionConstTemplatePath
 };
 
 export const addActionParams: INextjsHelper.IAddActionParams = {
-    actionIndexTemplatePath: Config.nextjs.templates.actionIndexTemplatePath,
-    actionTemplatePath: Config.nextjs.templates.actionTemplatePath
+    actionIndexTemplatePath: paths.nextjs.templates.actionIndexTemplatePath,
+    actionTemplatePath: paths.nextjs.templates.actionTemplatePath
 };
 
 export const addReducerParams: INextjsHelper.IAddReducerParams = {
     addActionConstIndexParams,
-    reducerIndexTemplatePath: Config.nextjs.templates.reducerIndexTemplatePath,
-    reducerStoreTemplatePath: Config.nextjs.templates.reducerStoreTemplatePath,
-    reducerTemplatePath: Config.nextjs.templates.reducerTemplatePath
+    reducerIndexTemplatePath: paths.nextjs.templates.reducerIndexTemplatePath,
+    reducerStoreTemplatePath: paths.nextjs.templates.reducerStoreTemplatePath,
+    reducerTemplatePath: paths.nextjs.templates.reducerTemplatePath
 };
 
 export const createClassComponentParams: INextjsHelper.ICreateClassComponentParams = {
-    templatePath: Config.nextjs.templates.classComponentTemplatePath,
-    indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
+    templatePath: paths.nextjs.templates.classComponentTemplatePath,
+    indexTemplatePath: paths.nextjs.templates.componentIndexTemplatePath,
     createInterfaceParams,
     addReducerParams,
     addActionParams
 };
 
 export const createFuncComponentParams: INextjsHelper.ICreateFuncComponentParams = {
-    templatePath: Config.nextjs.templates.funcComponentTemplate,
-    indexTemplatePath: Config.nextjs.templates.componentIndexTemplatePath,
-    componentsDir: Config.nextjs.componentsDir,
+    templatePath: paths.nextjs.templates.funcComponentTemplate,
+    indexTemplatePath: paths.nextjs.templates.componentIndexTemplatePath,
+    componentsDir: paths.nextjs.componentsDir,
     createInterfaceParams
 };
 
 export const createStyleParams: INextjsHelper.ICreateStyle = {
-    compDirPath: Config.nextjs.componentsDir,
-    pageDirPath: Config.nextjs.pagesDir,
-    templatePath: Config.nextjs.templates.stylePageTemplate
+    compDirPath: paths.nextjs.componentsDir,
+    pageDirPath: paths.nextjs.pagesDir,
+    templatePath: paths.nextjs.templates.stylePageTemplate
 };

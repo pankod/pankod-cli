@@ -1,14 +1,14 @@
 // #region Local Imports
-import { ISvelteHelper } from './ISvelteTypes';
-import { Config } from '../../config';
+import { ISvelteHelper } from '../../../typings';
+import * as paths from '../../../paths';
 // #endregion Local Imports
 
 export const createComponentParams: ISvelteHelper.ICreateComponentParams = {
-    templatePath: Config.svelte.templates.componentTemplate,
-    componentsDir: Config.svelte.componentsDir
+    templatePath: paths.svelte.templates.componentTemplate,
+    componentsDir: paths.svelte.componentsDir
 };
 
 export const createStyleParams: ISvelteHelper.ICreateStyle = {
-    compDirPath: Config.svelte.componentsDir,
-    templatePath: Config.svelte.templates.stylePageTemplate
+    compDirPath: paths.svelte.componentsDir,
+    templatePath: paths.svelte.templates.stylePageTemplate
 };

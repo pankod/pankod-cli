@@ -1,39 +1,39 @@
 // #region Local Imports
-import { IMoleculerHelper } from './IMoleculerTypes';
-import { Config } from '../../config';
+import { IMoleculerHelper } from '../../../typings';
+import * as paths from '../../../paths';
 // #endregion Local Imports
 
 const createInterfaceParams = {
-    folderIndexTemplate: Config.moleculer.templates.createInterfaceFolderIndexTemplate,
-    indexInterfaceTemplate: Config.moleculer.templates.createInterfaceIndexInterfaceTemplate,
-    templatePath: Config.moleculer.templates.createInterfaceTemplatePath
+    folderIndexTemplate: paths.moleculer.templates.createInterfaceFolderIndexTemplate,
+    indexInterfaceTemplate: paths.moleculer.templates.createInterfaceIndexInterfaceTemplate,
+    templatePath: paths.moleculer.templates.createInterfaceTemplatePath
 };
 
 export const createServiceParams: IMoleculerHelper.ICreateServiceParams = {
-    indexTemplate: Config.moleculer.templates.createServiceIndexTemplate,
-    integrationTemplatePath: Config.moleculer.templates.createServiceIntegrationTestTemplate,
-    templatePath: Config.moleculer.templates.createServiceTemplatePath,
-    testTemplatePath: Config.moleculer.templates.createServiceTestTemplate,
+    indexTemplate: paths.moleculer.templates.createServiceIndexTemplate,
+    integrationTemplatePath: paths.moleculer.templates.createServiceIntegrationTestTemplate,
+    templatePath: paths.moleculer.templates.createServiceTemplatePath,
+    testTemplatePath: paths.moleculer.templates.createServiceTestTemplate,
     brokerHelperTemplatesParams: {
-        brokerHelperCreate: Config.moleculer.templates.brokerHelperCreate,
-        brokerHelperImport: Config.moleculer.templates.brokerHelperImport,
-        replaceFileDir: Config.moleculer.brokerHelper
+        brokerHelperCreate: paths.moleculer.templates.brokerHelperCreate,
+        brokerHelperImport: paths.moleculer.templates.brokerHelperImport,
+        replaceFileDir: paths.moleculer.brokerHelper
     },
     createServiceHelperParams: {
-        indexTemplate: Config.moleculer.templates.createServiceHelperIndexTemplate,
-        templatePath: Config.moleculer.templates.createServiceHelperTemplatePath,
-        testTemplatePath: Config.moleculer.templates.createServiceHelperTestTemplatePath
+        indexTemplate: paths.moleculer.templates.createServiceHelperIndexTemplate,
+        templatePath: paths.moleculer.templates.createServiceHelperTemplatePath,
+        testTemplatePath: paths.moleculer.templates.createServiceHelperTestTemplatePath
     },
     createInterfaceParams
 };
 
 export const createRepositoryParams: IMoleculerHelper.ICreateRepositoryParams = {
-    indexTemplate: Config.moleculer.templates.createRepositoryIndexTemplate,
-    templatePath: Config.moleculer.templates.createRepositoryTemplatePath,
-    testTemplatePath: Config.moleculer.templates.createRepositoryTestTemplatePath,
+    indexTemplate: paths.moleculer.templates.createRepositoryIndexTemplate,
+    templatePath: paths.moleculer.templates.createRepositoryTemplatePath,
+    testTemplatePath: paths.moleculer.templates.createRepositoryTestTemplatePath,
     createInterfaceParams,
     createEntityTemplatesParams: {
-        indexTemplate: Config.moleculer.templates.createEntityIndexTemplate,
-        templatePath: Config.moleculer.templates.createEntityTemplatePath
+        indexTemplate: paths.moleculer.templates.createEntityIndexTemplate,
+        templatePath: paths.moleculer.templates.createEntityTemplatePath
     }
 };
