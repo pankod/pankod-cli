@@ -12,6 +12,12 @@ export declare namespace ICommon {
         SvelteElement &
         MoleculerElement;
 
+    export interface IAddArgs  {
+        args: {
+            element: Element;
+        }
+    }
+
     export interface ITemplateProps {
         fileName?: string;
         upperFileName?: string;

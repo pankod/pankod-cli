@@ -7,7 +7,7 @@ import { ICommon } from ".";
 // #region Local Imports
 
 export interface IPankodConfig {
-    project: string;
+    project: ICommon.Project;
     plugins: string[];
 }
 

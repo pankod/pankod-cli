@@ -1,8 +1,20 @@
+// #region Global Imports
 import { Command } from '@oclif/command';
+import * as inquirer from 'inquirer';
+// #endregion Global Imports
 
-import { getQuestionByProject, choices } from '../../questions';
-import inquirer = require('inquirer');
-import { CommonHelper } from '../../Scripts/Common';
+// #region Local Imports
+import { ICommon } from '../../modules/typings';
+import { produce } from '../../modules/element-factory';
+import { getQuestionByProject } from '../../modules/henchman';
+import {
+    getPankodConfig,
+    validateCommand,
+    validateProject,
+    getAllElements,
+    getUsage
+} from '../../modules/utils';
+// #endregion Local Imports
 
 export default class Add extends Command {
     static description = 'Add services, components and more...';
@@ -10,43 +22,31 @@ export default class Add extends Command {
     static args = [
         {
             name: 'element',
-
-            // TODO: use helper to keep clean
-            options: Object.values(choices)
-                .join()
-                .split(',')
+            options: getAllElements()
         }
     ];
 
-    // TODO: use helper to keep clean
-    static usage = Object.values(choices)
-        .join()
-        .split(',')
-        .map(element => `add ${element}`);
+    static usage = getUsage();
 
     async run() {
-        
-        // TODO: Hurrah! to modules/helper
-        const { project } = CommonHelper.getPankodConfig();
-        
-        // TODO: Validate Properly
+        const { project } = getPankodConfig();
+
         // ? bind(this) or pass this.error
-        // validateProjectSupported(project);
+        validateProject(project);
 
         let {
             args: { element }
-        } = this.parse(Add);
+        }: ICommon.IAddArgs = this.parse(Add);
 
         if (element) {
-            // TODO: Validate Properly
             // ? bind(this) or pass this.error
-            // validateCommand(element, project);
+            validateCommand(element, project);
         } else {
             const whichElement = getQuestionByProject(project);
 
             element = await inquirer.prompt(whichElement);
         }
 
-        await elementFactory.produce(project, element);
+        await produce(project, element);
     }
 }
