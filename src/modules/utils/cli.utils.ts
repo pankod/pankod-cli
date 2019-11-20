@@ -1,7 +1,3 @@
-// #region Global Imports
-import { bold } from 'chalk';
-// #endregion Global Imports
-
 // #region Local Imports
 import * as suitcase from '../henchman/suitcase';
 import { ICommon } from '../typings';
