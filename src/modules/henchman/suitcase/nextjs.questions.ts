@@ -1,12 +1,11 @@
-// TODO: import interface
 import * as questions from './questions';
 
-const questionsMap: INextjs2Questions = {
+export const nextjs: INextjsQuestions = {
     ClassComponent: [
         questions.enterComponentName,
-        questions.addStyle,
         questions.connectStore,
-        questions.isHaveReducer
+        questions.isHaveReducer,
+        questions.addStyle
     ],
 
     FunctionalComponent: [
@@ -17,13 +16,12 @@ const questionsMap: INextjs2Questions = {
     Page: [
         questions.enterPageName,
         questions.customPath,
-        questions.enterRouteName,
+        questions.routeName,
         questions.connectStore,
         questions.isHaveReducer,
         questions.addStyle
     ],
-
     Plugin: [
-        questions.addPlugin
+        questions.plugin
     ]
 };
