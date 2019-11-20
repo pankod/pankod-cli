@@ -9,7 +9,7 @@ export const validate = (
     fileType: string
 ): string | boolean => {
     if (val.length) {
-        if (CommonHelper.isAlreadyExist(dirPath, val, isFile, fileType)) {
+        if (operations.isAlreadyExist(dirPath, val, isFile, fileType)) {
             return `This ${fileType} name already used before, enter new name.`;
         }
 

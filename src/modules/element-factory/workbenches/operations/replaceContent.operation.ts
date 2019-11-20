@@ -1,5 +1,6 @@
 // #region Local Imports
 import * as operations from '.';
+import { ICommon } from '../../../typings';
 // #endregion Local Imports
 
 export const replaceContent = (params: ICommon.IReplaceContent): void => {

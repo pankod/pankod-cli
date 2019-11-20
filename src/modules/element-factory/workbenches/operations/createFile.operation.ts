@@ -1,8 +1,8 @@
-// #region Local Imports
+// #region Global Imports
 import * as fs from 'fs';
 import * as path from 'path';
-// #endregion Local Imports
+// #endregion Global Imports
 
-export const = createFile: (dirPath: string): void => {
+export const createFile = (dirPath: string): void => {
     fs.mkdirSync(path.resolve('', dirPath));
 };

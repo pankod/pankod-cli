@@ -1,6 +1,11 @@
-// #region Local Imports
+// #region Global Imports
 import * as fs from 'fs';
 import * as path from 'path';
+import * as mustache from 'mustache';
+// #endregion Global Imports
+
+// #region Local Imports
+import { ICommon } from '../../../typings';
 // #endregion Local Imports
 
 export const getTemplate = (
