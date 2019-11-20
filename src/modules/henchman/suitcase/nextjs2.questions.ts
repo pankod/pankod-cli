@@ -1,5 +1,7 @@
-// TODO: import interface
+// #region Local Imports
 import * as questions from './questions';
+import { INextjs2Questions } from '../../typings';
+// #endregion Local Imports
 
 export const nextjs2: INextjs2Questions = {
     ClassComponent: [

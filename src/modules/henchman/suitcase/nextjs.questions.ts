@@ -1,4 +1,7 @@
+// #region Local Imports
 import * as questions from './questions';
+import { INextjsQuestions } from '../../typings';
+// #endregion Local Imports
 
 export const nextjs: INextjsQuestions = {
     ClassComponent: [

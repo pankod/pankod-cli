@@ -1,11 +1,12 @@
 // #region Global Imports
 import * as inquirer from 'inquirer';
-// #region Global Imports
+// #endregion Global Imports
 
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { Config } from '../../../config';
-import { ICommon } from '../../ICommon';
+// TODO: Reshape directory or use @Module
+import { Config } from '../../../../config';
+import { ICommon } from '../../../../typings';
+import { validate } from '../../../../element-factory/workbenches/operations';
 // #endregion Local Imports
 
 export const componentName: inquirer.InputQuestion<ICommon.IAnswers> = {
@@ -13,7 +14,7 @@ export const componentName: inquirer.InputQuestion<ICommon.IAnswers> = {
     name: 'fileName',
     type: 'input',
     validate(val: string): string | boolean {
-        return CommonHelper.validate(val, Config.svelte.componentsDir, false, 'component');
+        return validate(val, Config.svelte.componentsDir, false, 'component');
     }
 };
 

@@ -3,9 +3,10 @@ import * as inquirer from 'inquirer';
 // #endregion Global Imports
 
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { Config } from '../../../config';
-import { ICommon } from '../../ICommon';
+// TODO: Reshape directory or use @Module
+import { Config } from '../../../../config';
+import { ICommon } from '../../../../typings';
+import { validate } from '../../../../element-factory/workbenches/operations';
 // #endregion Local Imports
 
 export const entityName: inquirer.InputQuestion<ICommon.IAnswers> = {
@@ -13,6 +14,6 @@ export const entityName: inquirer.InputQuestion<ICommon.IAnswers> = {
     name: 'fileName',
     type: 'input',
     validate(val: string): string | boolean {
-        return CommonHelper.validate(val, Config.moleculer.repositoriesDir, true, 'entity');
+        return validate(val, Config.moleculer.repositoriesDir, true, 'entity');
     }
 };

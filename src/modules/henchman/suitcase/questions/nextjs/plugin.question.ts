@@ -1,5 +1,11 @@
+// #region Global Imports
 import * as inquirer from 'inquirer';
-import { ICommon } from '../../ICommon';
+// #endregion Global Imports
+
+// #region Local Imports
+// TODO: Reshape directory or use @Module
+import { ICommon } from '../../../../typings';
+// #endregion Local Imports
 
 export const plugin: inquirer.ListQuestion<ICommon.IAnswers> = {
     choices: [
