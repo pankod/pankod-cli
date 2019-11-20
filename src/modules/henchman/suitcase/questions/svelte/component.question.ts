@@ -4,7 +4,7 @@ import * as inquirer from 'inquirer';
 
 // #region Local Imports
 // TODO: Reshape directory or use @Module
-import * as paths from '../../../../../paths';
+import * as paths from '../../../../paths';
 import { ICommon } from '../../../../typings';
 import { validate } from '../../../../element-factory/workbenches/operations';
 // #endregion Local Imports
