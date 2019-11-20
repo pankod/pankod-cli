@@ -1,5 +1,12 @@
+// #region Global Imports
 import { Question } from "inquirer";
-import { ICommon } from "../ICommon";
+// #region Global Imports
+
+// #region Local Imports
+import { ICommon } from ".";
+// #region Local Imports
+
+export type MoleculerElement = 'service' | 'repository';
 
 export interface IMoleculerQuestions {
     entity: Question<ICommon.IAnswers>[];

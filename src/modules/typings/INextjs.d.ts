@@ -1,14 +1,21 @@
+// #region Global Imports
 import { InputQuestion, Question, ConfirmQuestion, ListQuestion } from 'inquirer';
-import { ICommon } from '../ICommon';
+// #region Global Imports
 
-export interface INextjs2CommonQuestions {
-    addStyle: ListQuestion<ICommon.IAnswers>;
+// #region Local Imports
+import { ICommon } from ".";
+// #region Local Imports
+
+export type NextElement = 'Page' | 'ClassComponent' | 'FunctionalComponent' | 'Plugin';
+
+export interface INextjsCommonQuestions {
+    addStyle: ConfirmQuestion<ICommon.IAnswers>;
     connectStore: ConfirmQuestion<ICommon.IAnswers>;
     enterComponentName: InputQuestion<ICommon.IAnswers>;
     isHaveReducer: ListQuestion<ICommon.IAnswers>;
 }
 
-export interface INextjs2Questions {
+export interface INextjsQuestions {
     Plugin: Question<ICommon.IAnswers>[];
     ClassComponent: Question<ICommon.IAnswers>[];
     FunctionalComponent: Question<ICommon.IAnswers>[];
@@ -16,7 +23,7 @@ export interface INextjs2Questions {
     [key: string]: Question<ICommon.IAnswers> | Question<ICommon.IAnswers>[];
 }
 
-export interface INextjs2Actions {
+export interface INextjsActions {
     ClassComponent: Function;
     FunctionalComponent: Function;
     Page: Function;
@@ -24,7 +31,7 @@ export interface INextjs2Actions {
     [key: string]: Function;
 }
 
-export declare namespace INextjs2Helper {
+export declare namespace INextjsHelper {
     export interface IAddRoutesReplaceParams {
         routesDir: string;
         routesTemplate: string;
@@ -40,15 +47,12 @@ export declare namespace INextjs2Helper {
         storeImportInterface: string;
         interfaceDir: string;
         reduxInterfaceDir: string;
-        componentsDir: string;
     }
 
     export interface ICreateStyle {
         templatePath: string;
-        pageDirPath?: string;
+        pageDirPath: string;
         compDirPath: string;
-        pageStyledDirPath?: string;
-        isStyledComponent?: boolean;
     }
 
     export interface ICreateClassComponentParams {
@@ -61,10 +65,6 @@ export declare namespace INextjs2Helper {
 
     export interface ICreateFuncComponentParams {
         createInterfaceParams: ICreateInterfaceParams;
-        templatePath: string;
-        indexTemplatePath: string;
-        componentsDir: string;
-        componentTestTemplatePath: string;
     }
 
     export interface IAddReducerParams {
@@ -72,17 +72,20 @@ export declare namespace INextjs2Helper {
         reducerTemplatePath: string;
         reducerStoreTemplatePath: string;
         addActionConstIndexParams: IAddActionConstIndexParams;
-        reducerTestTemplatePath: string;
     }
 
     export interface IAddActionConstIndexParams {
         actionConstTemplatePath: string;
-        actionConstsFileDir: string;
     }
 
     export interface IAddActionParams {
         actionTemplatePath: string;
         actionIndexTemplatePath: string;
-        actionTestTemplatePath: string;
+    }
+
+    export interface ICreateFuncComponentParams {
+        templatePath: string;
+        indexTemplatePath: string;
+        componentsDir: string;
     }
 }

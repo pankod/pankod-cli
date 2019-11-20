@@ -1,10 +1,17 @@
+// #region Local Imports
+import { Next2Element, NextElement, SvelteElement, MoleculerElement } from '.';
+// #region Local Imports
 
 // TODO: Seperate operations params' types
 // TODO: IAnswer and IElement should be kept in their own workbenches.
 
 export declare namespace ICommon {
-    export type ElementType = 'Page' | 'ClassComponent' | 'FunctionalComponent' | 'Plugin';
-    
+    export type Project = 'nextjs2' | 'nextjs' | 'svelte' | 'moleculer';
+    export type Element = Next2Element &
+        NextElement &
+        SvelteElement &
+        MoleculerElement;
+
     export interface ITemplateProps {
         fileName?: string;
         upperFileName?: string;

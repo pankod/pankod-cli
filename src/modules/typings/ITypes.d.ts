@@ -1,5 +1,10 @@
-import { ListQuestion } from 'inquirer';
-import { ICommon } from './Scripts/ICommon';
+// #region Global Imports
+import { ListQuestion } from "inquirer";
+// #region Global Imports
+
+// #region Local Imports
+import { ICommon } from ".";
+// #region Local Imports
 
 export interface IPankodConfig {
     project: string;
