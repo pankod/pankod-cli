@@ -2,7 +2,16 @@
     "name": "@pankod/pankod-cli",
     "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
     "version": "0.3.3",
-    "author": "Batuhan Ozgur Ozdemir @BatuhanW",
+    "author": {
+      "name": "Batuhan Ozgur Ozdemir @BatuhanW",
+      "email": "batuhan@pankod.com"
+    },
+    "contributors": [
+      {
+        "name": "Furkan Acar @futuredayv",
+        "email": "furkan@pankod.com"
+      }
+    ],
     "scripts": {
         "postpack": "rm -f oclif.manifest.json",
         "posttest": "npm run format",
@@ -70,7 +79,11 @@
         "oclif",
         "moleculer",
         "react",
-        "nextjs"
+        "nextjs",
+        "nextjs2",
+        "svelte",
+        "scaffold",
+        "generate"
     ],
     "license": "MIT",
     "main": "lib/index.js",
