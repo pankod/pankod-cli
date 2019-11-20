@@ -1,6 +1,6 @@
 // #region Local Imports
 // TODO: import helpers and types ...and you know
-// TODO import * as suitcase from './questions';
+import * as suitcase from './suitcase';
 // #endregion Local Imports
 
 export const getQuestionsByElementType = (element: string) => {
