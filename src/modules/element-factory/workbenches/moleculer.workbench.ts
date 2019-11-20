@@ -1,15 +1,15 @@
 // #region Local Imports
-// TODO: import helpers and types ...and you know
+import * as tasks from './tasks';
 // #endregion Local Imports
 
 export const moleculer = (element: string, options: ICommon.IAnswers) => {
     const workbench: IMoleculerActions = {
         entity: () => {
-            Helpers.createRepository(options);
+            tasks.createRepository(options);
         },
 
         service: () => {
-            Helpers.createService(options);
+            tasks.createService(options);
         }
     };
 

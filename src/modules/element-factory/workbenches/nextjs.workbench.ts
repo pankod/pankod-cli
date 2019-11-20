@@ -1,22 +1,23 @@
 // #region Local Imports
-// TODO: import helpers and types ...and you know
+import * as tasks from './tasks';
 // #endregion Local Imports
 
 export const nextjs = (element: ICommon.element, options: ICommon.Ioptions) => {
     const workbench: INextjsActions = {
         Page: () => {
-            Helpers.createClassComponent({ ...options, isPage: true });
+            tasks.createClassComponent({ ...options, isPage: true });
         },
 
         ClassComponent: () => {
-            Helpers.createClassComponent(options);
+            tasks.createClassComponent(options);
         },
 
         FunctionalComponent: () => {
-            Helpers.createFuncComponent({ ...options, isFuncComponent: true });
+            tasks.createFuncComponent({ ...options, isFuncComponent: true });
         },
 
         Plugin: () => {
+            // TODO: Refactor
             if (options.pluginType) PluginHelper[options.pluginType]();
         }
     };
