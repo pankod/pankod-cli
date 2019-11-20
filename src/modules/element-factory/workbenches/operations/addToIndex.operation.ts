@@ -2,7 +2,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import * as logSymbols from 'log-symbols';
-// TODO: install chalk
+import chalk from 'chalk';
 // #endregion Global Imports
 
 // #region Local Imports
@@ -12,5 +12,5 @@ import { ICommon } from '../../../typings';
 export const addToIndex = (params: ICommon.IAddIndex): void => {
     fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}`);
 
-    console.log(logSymbols.success, params.message);
+    console.log(chalk.green(logSymbols.success, params.message));
 };

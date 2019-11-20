@@ -6,7 +6,7 @@ import { Question } from "inquirer";
 import { ICommon } from ".";
 // #region Local Imports
 
-export type SvelteElement = 'component';
+export type SvelteElement = 'Component' | 'Test';
 
 export interface ISvelteQuestions {
     Component: Question<ICommon.IAnswers>[];

@@ -1,6 +1,6 @@
 // #region Local Imports
-import { IMoleculerHelper } from '../../../typings';
 import * as paths from '../../../paths';
+import { IMoleculerHelper } from '../../../typings';
 // #endregion Local Imports
 
 const createInterfaceParams = {

@@ -6,7 +6,7 @@ import { InputQuestion, Question, ConfirmQuestion, ListQuestion } from 'inquirer
 import { ICommon } from ".";
 // #region Local Imports
 
-export type NextElement = 'Page' | 'ClassComponent' | 'FunctionalComponent' | 'Plugin';
+export type NextElement = 'Page' | 'ClassComponent' | 'FunctionalComponent';
 
 export interface INextjsCommonQuestions {
     addStyle: ConfirmQuestion<ICommon.IAnswers>;
@@ -27,7 +27,7 @@ export interface INextjsActions {
     ClassComponent: Function;
     FunctionalComponent: Function;
     Page: Function;
-    Plugin: Function;
+    // Plugin: Function;
     [key: string]: Function;
 }
 
