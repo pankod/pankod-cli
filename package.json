@@ -16,7 +16,7 @@
         "postpack": "rm -f oclif.manifest.json",
         "posttest": "npm run format",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
-        "sync-templates": "cp -r src/Templates lib",
+        "sync-templates": "cp -r src/templates lib",
         "test": "jest --runInBand",
         "test:next2": "jest -- test/Unit/Scripts/nextjs2",
         "version": "oclif-dev readme && git add README.md",
