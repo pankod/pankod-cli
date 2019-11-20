@@ -1,17 +1,19 @@
+// #region Global Imports
+import * as inquirer from 'inquirer';
+// #endregion Global Imports
+
 // #region Local Imports
-// TODO: import helpers and types ...and you know
 import * as suitcase from './suitcase';
+import { ICommon } from '../typings';
 // #endregion Local Imports
 
-export const getQuestionsByElementType = (element: string) => {
+export const getQuestionsByElement = (element: ICommon.Element) => {
     return Object.values(suitcase).find(q => q[element]);
 };
 
 export const getQuestionByProject = (
-    project: string
-): Questions<ICommon.IAnswers> => ({
-
-    // TODO: use helper to get choices
+    project: ICommon.Project
+): inquirer.Questions<ICommon.IAnswers> => ({
     choices: Object.keys(suitcase[project]),
     message: 'What would you like to add?',
     name: 'element',

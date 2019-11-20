@@ -4,11 +4,17 @@ import * as inquirer from 'inquirer';
 
 // #region Local Imports
 import * as factory from './workbenches';
+import { ICommon } from '../typings';
+import { getQuestionsByElement } from '../henchman';
 // #endregion Local Imports
 
 const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
-    const capitalizedName = answers.fileName.replace(/\b\w/g, f => f.toUpperCase());
-    const unCapitalizedName = answers.fileName.replace(/\b\w/g, f => f.toLowerCase());
+    const capitalizedName = answers.fileName.replace(/\b\w/g, f =>
+        f.toUpperCase()
+    );
+    const unCapitalizedName = answers.fileName.replace(/\b\w/g, f =>
+        f.toLowerCase()
+    );
 
     return {
         ...answers,
@@ -21,8 +27,10 @@ const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
     };
 };
 
-// TODO: element = chain each & IProjectTypes.element
-export const produce = async (project, element): Promise<void> => {
+export const produce = async (
+    project: ICommon.Project,
+    element: ICommon.Element
+): Promise<void> => {
     const questions = getQuestionsByElement(element);
 
     const answers = await inquirer.prompt<ICommon.IAnswers>(questions);
