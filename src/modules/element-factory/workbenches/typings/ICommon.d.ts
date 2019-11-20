@@ -1,3 +1,7 @@
+
+// TODO: Seperate operations params' types
+// TODO: IAnswer and IElement should be kept in their own workbenches.
+
 export declare namespace ICommon {
     export type ElementType = 'Page' | 'ClassComponent' | 'FunctionalComponent' | 'Plugin';
     
