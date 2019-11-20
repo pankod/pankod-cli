@@ -6,7 +6,7 @@ import * as path from 'path';
 // #region Local Imports
 import { ICommon } from '../../ICommon';
 import { CommonHelper } from '../../Common';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import { INextjs2Helper } from '../INextjs2Types';
 import * as Helpers from '.';
 // #region Local Imports
@@ -25,13 +25,13 @@ export const addReducer = (
 
     const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
 
-    const reducerFolderDir = `${Config.nextjs2.reducerDir}/${lowerFileName}`;
+    const reducerFolderDir = `${paths.nextjs2.reducerDir}/${lowerFileName}`;
     const reducerFileDir = `${reducerFolderDir}/index.ts`;
     const templateProps = { fileName, lowerFileName, upperFileName };
     const replaceContentParams: ICommon.IReplaceContent = {
-        fileDir: `${Config.nextjs2.reducerDir}/index.ts`,
+        fileDir: `${paths.nextjs2.reducerDir}/index.ts`,
         filetoUpdate: fs.readFileSync(
-            path.resolve('', `${Config.nextjs2.reducerDir}/index.ts`),
+            path.resolve('', `${paths.nextjs2.reducerDir}/index.ts`),
             'utf8'
         ),
         getFileContent: () => CommonHelper.getTemplate(reducerIndexTemplatePath, templateProps),
@@ -59,9 +59,9 @@ export const addReducer = (
 
     setTimeout(() => {
         const replaceReducerContentParams: ICommon.IReplaceContent = {
-            fileDir: `${Config.nextjs2.reducerDir}/index.ts`,
+            fileDir: `${paths.nextjs2.reducerDir}/index.ts`,
             filetoUpdate: fs.readFileSync(
-                path.resolve('', `${Config.nextjs2.reducerDir}/index.ts`),
+                path.resolve('', `${paths.nextjs2.reducerDir}/index.ts`),
                 'utf8'
             ),
             getFileContent: () => CommonHelper.getTemplate(reducerStoreTemplatePath, templateProps),

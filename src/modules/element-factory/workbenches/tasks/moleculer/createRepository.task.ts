@@ -1,6 +1,6 @@
 // #region Local Imports
 import { CommonHelper } from '../../Common';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import { ICommon } from '../../ICommon';
 import * as Helpers from '.';
 import { createRepositoryParams } from '../moleculer.config';
@@ -16,26 +16,26 @@ export const createRepository = (answers: ICommon.IAnswers): void => {
     const indexTemplate = createRepositoryParams.indexTemplate;
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${Config.moleculer.repositoriesDir}/index.ts`,
+        dirPath: `${paths.moleculer.repositoriesDir}/index.ts`,
         getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
         message: 'Repository added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: `${Config.moleculer.repositoriesDir}/${answers.upperFileName}.ts`,
+        dirPath: `${paths.moleculer.repositoriesDir}/${answers.upperFileName}.ts`,
         getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
         message: 'Added new Repository.'
     };
 
     const repositoryTestParams = {
         answers,
-        dirPath: `${Config.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
+        dirPath: `${paths.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
         successMessage: 'Added new Repository test.',
         templatePath: createRepositoryParams.testTemplatePath,
         templateProps
     };
 
-    if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.upperFileName)) {
+    if (!CommonHelper.isAlreadyExist(paths.moleculer.interfaceDir, answers.upperFileName)) {
         Helpers.createInterface(
             answers,
             'Repositories',

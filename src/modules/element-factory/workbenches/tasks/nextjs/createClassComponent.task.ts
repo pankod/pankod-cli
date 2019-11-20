@@ -1,6 +1,6 @@
 // #region Local Imports
 import { ICommon } from '../../ICommon';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import { CommonHelper } from '../../Common';
 import { createClassComponentParams } from '../nextjs.config';
 import * as Helpers from './';
@@ -16,8 +16,8 @@ export const createClassComponent = (answers: ICommon.IAnswers): void => {
     } = createClassComponentParams;
 
     const { lowerFileName, isConnectStore = false, isPage = false } = answers;
-    const pagesDir = `${Config.nextjs.pagesDir}/${lowerFileName}`;
-    const classDir = isPage ? pagesDir : `${Config.nextjs.componentsDir}/${answers.fileName}`;
+    const pagesDir = `${paths.nextjs.pagesDir}/${lowerFileName}`;
+    const classDir = isPage ? pagesDir : `${paths.nextjs.componentsDir}/${answers.fileName}`;
     const templateProps = {
         fileName: answers.fileName,
         hasStyle: answers.hasStyle,
@@ -28,7 +28,7 @@ export const createClassComponent = (answers: ICommon.IAnswers): void => {
     };
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${Config.nextjs.componentsDir}/index.ts`,
+        dirPath: `${paths.nextjs.componentsDir}/index.ts`,
         getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, templateProps),
         message: 'Component added to index.ts'
     };

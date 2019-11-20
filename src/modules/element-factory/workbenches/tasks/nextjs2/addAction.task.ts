@@ -1,7 +1,7 @@
 // #region Local Imports
 import { ICommon } from '../../ICommon';
 import { CommonHelper } from '../../Common';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import { INextjs2Helper } from '../INextjs2Types';
 // #region Local Imports
 
@@ -11,7 +11,7 @@ export const addAction = (
 ): void => {
     const { actionIndexTemplatePath, actionTemplatePath, actionTestTemplatePath } = params;
     const { fileName, lowerFileName } = answers;
-    const actionFolderDir = `${Config.nextjs2.actionDir}/${fileName}Actions`;
+    const actionFolderDir = `${paths.nextjs2.actionDir}/${fileName}Actions`;
     const actionFileDir = `${actionFolderDir}/index.ts`;
     const testFileDir = `${actionFolderDir}/index.spec.ts`;
     const templateProps = { fileName, lowerFileName };
@@ -23,7 +23,7 @@ export const addAction = (
     };
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${Config.nextjs2.actionDir}/index.ts`,
+        dirPath: `${paths.nextjs2.actionDir}/index.ts`,
         getFileContent: () => CommonHelper.getTemplate(actionIndexTemplatePath, templateProps),
         message: 'Added action file to index.ts Actions/index.ts'
     };

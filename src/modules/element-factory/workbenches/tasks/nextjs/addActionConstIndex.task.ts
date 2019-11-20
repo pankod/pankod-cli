@@ -5,7 +5,7 @@ import * as path from 'path';
 
 // #region Local Imports
 import { ICommon } from '../../ICommon';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import { CommonHelper } from '../../Common';
 import { INextjsHelper } from '../INextjsTypes';
 // #endregion Local Imports
@@ -17,9 +17,9 @@ export const addActionConstIndex = (
     const { actionConstTemplatePath } = params;
 
     const replaceContentParams: ICommon.IReplaceContent = {
-        fileDir: `${Config.nextjs.definitionsDir}/ActionConsts.ts`,
+        fileDir: `${paths.nextjs.definitionsDir}/ActionConsts.ts`,
         filetoUpdate: fs.readFileSync(
-            path.resolve('', `${Config.nextjs.definitionsDir}/ActionConsts.ts`),
+            path.resolve('', `${paths.nextjs.definitionsDir}/ActionConsts.ts`),
             'utf8'
         ),
         getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),

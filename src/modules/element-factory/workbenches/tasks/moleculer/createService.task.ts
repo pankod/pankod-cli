@@ -1,7 +1,7 @@
 // #region Local Imports
 import { CommonHelper } from '../../Common';
 import { ICommon } from '../../ICommon';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import { createServiceParams } from '../moleculer.config';
 import * as Helpers from '.';
 // #endregion Local Imports
@@ -16,14 +16,14 @@ export const createService = (answers: ICommon.IAnswers): void => {
     };
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${Config.moleculer.servicesDir}/index.ts`,
+        dirPath: `${paths.moleculer.servicesDir}/index.ts`,
         getFileContent: () =>
             CommonHelper.getTemplate(createServiceParams.indexTemplate, templateProps),
         message: 'Service added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: `${Config.moleculer.servicesDir}/${answers.lowerFileName}.service.ts`,
+        dirPath: `${paths.moleculer.servicesDir}/${answers.lowerFileName}.service.ts`,
         getFileContent: () =>
             CommonHelper.getTemplate(createServiceParams.templatePath, templateProps),
         message: 'Added new Service.'
@@ -31,7 +31,7 @@ export const createService = (answers: ICommon.IAnswers): void => {
 
     const serviceTestParams = {
         answers,
-        dirPath: `${Config.moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
+        dirPath: `${paths.moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
         successMessage: 'Added new Microservice test.',
         templatePath: createServiceParams.testTemplatePath,
         templateProps
@@ -39,13 +39,13 @@ export const createService = (answers: ICommon.IAnswers): void => {
 
     const integrationTestParams = {
         answers,
-        dirPath: `${Config.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
+        dirPath: `${paths.moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
         successMessage: 'Added new Integration test.',
         templatePath: createServiceParams.integrationTemplatePath,
         templateProps
     };
 
-    if (!CommonHelper.isAlreadyExist(Config.moleculer.interfaceDir, answers.upperFileName, true)) {
+    if (!CommonHelper.isAlreadyExist(paths.moleculer.interfaceDir, answers.upperFileName, true)) {
         Helpers.createInterface(
             answers,
             'Services',

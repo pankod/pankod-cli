@@ -2,7 +2,7 @@
 import { ICommon } from '../../ICommon';
 import { CommonHelper } from '../../Common';
 import { createClassComponentParams } from '../nextjs2.config';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 import * as Helpers from '.';
 // #region Local Imports
 
@@ -22,19 +22,19 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
     // TODO: Modularize Preparation of Params
 
     if (isPage) {
-        options.classDir = `${Config.nextjs2.pagesDir}/${lowerFileName}`;
+        options.classDir = `${paths.nextjs2.pagesDir}/${lowerFileName}`;
 
         const addRouteParams = {
-            routesDir: Config.nextjs2.routesDir,
-            routesTemplate: Config.nextjs2.templates.addRouteTemplate
+            routesDir: paths.nextjs2.routesDir,
+            routesTemplate: paths.nextjs2.templates.addRouteTemplate
         };
 
         Helpers.addRoute(options, addRouteParams);
     } else {
-        options.classDir = `${Config.nextjs2.componentsDir}/${options.fileName}`;
+        options.classDir = `${paths.nextjs2.componentsDir}/${options.fileName}`;
 
         const addIndexParams: ICommon.IAddIndex = {
-            dirPath: `${Config.nextjs2.componentsDir}/index.ts`,
+            dirPath: `${paths.nextjs2.componentsDir}/index.ts`,
             getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
             message: 'Component added to index.ts'
         };

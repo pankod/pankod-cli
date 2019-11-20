@@ -2,7 +2,7 @@
 import { CommonHelper } from '../../Common';
 import { IMoleculerHelper } from '../IMoleculerTypes';
 import { ICommon } from '../../ICommon';
-import { Config } from '../../../config';
+import * as paths from '../../../../paths';
 // #endregion Local Imports
 
 export const createInterface = (
@@ -14,8 +14,8 @@ export const createInterface = (
     const templatePath = `${createInterfaceParams.templatePath}/${prefix}Interface.mustache`;
     const templateProps = { upperFileName: answers.upperFileName, dirType };
 
-    const interfaceFilePath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
-    const interfaceDirPath = `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
+    const interfaceFilePath = `${paths.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
+    const interfaceDirPath = `${paths.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: interfaceFilePath,
@@ -24,14 +24,14 @@ export const createInterface = (
     };
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${Config.moleculer.interfaceDir}/index.ts`,
+        dirPath: `${paths.moleculer.interfaceDir}/index.ts`,
         getFileContent: () =>
             CommonHelper.getTemplate(createInterfaceParams.indexInterfaceTemplate, templateProps),
         message: 'Interface added to index.ts.'
     };
 
     const addFolderIndex: ICommon.IAddIndex = {
-        dirPath: `${Config.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/index.ts`,
+        dirPath: `${paths.moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/index.ts`,
         getFileContent: () =>
             CommonHelper.getTemplate(createInterfaceParams.folderIndexTemplate, templateProps),
         message: 'Interface added to folder index.ts.'
