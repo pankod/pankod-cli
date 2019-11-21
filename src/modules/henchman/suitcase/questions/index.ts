@@ -1,4 +1,4 @@
-export * from './nextjs2';
+// export * from './nextjs2';
 
 // TODO: Resolve namings
 // ! nextjs and nextjs2 have identically named questions
@@ -10,6 +10,6 @@ export * from './nextjs2';
 // enterPageName
 // isHaveReducer
 
-export * from './nextjs';
-export * from './svelte';
-export * from './moleculer';
+// export * from './nextjs';
+// export * from './svelte';
+// export * from './moleculer';

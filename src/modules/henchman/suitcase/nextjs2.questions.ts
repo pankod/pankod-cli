@@ -1,5 +1,5 @@
 // #region Local Imports
-import * as questions from './questions';
+import * as questions from './questions/nextjs2';
 import { INextjs2Questions } from '../../typings';
 // #endregion Local Imports
 

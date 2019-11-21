@@ -1,5 +1,5 @@
 // #region Local Imports
-import * as questions from './questions';
+import * as questions from './questions/svelte';
 import { ISvelteQuestions } from '../../typings';
 // #endregion Local Imports
 

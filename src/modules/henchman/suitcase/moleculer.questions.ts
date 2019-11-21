@@ -1,5 +1,5 @@
 // #region Local Imports
-import * as questions from './questions';
+import * as questions from './questions/moleculer';
 import { IMoleculerQuestions } from '../../typings';
 // #endregion Local Imports
 
