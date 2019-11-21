@@ -1,8 +1,7 @@
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { IMoleculerHelper } from '../IMoleculerTypes';
-import { ICommon } from '../../ICommon';
-import * as Helpers from '.';
+import { replaceContent } from '../../operations';
+import { ICommon, IMoleculerHelper } from '../../../../typings';
+import { createParamsForAddBrokerHelper } from '.';
 // #endregion Local Imports
 
 export const addBrokerHelper = (
@@ -10,12 +9,20 @@ export const addBrokerHelper = (
     brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams
 ): void => {
     setTimeout(() => {
-        CommonHelper.replaceContent(
-            Helpers.createParamsForAddBrokerHelper('create', brokerHelperTemplatesParams, answers)
+        replaceContent(
+            createParamsForAddBrokerHelper(
+                'create',
+                brokerHelperTemplatesParams,
+                answers
+            )
         );
     }, 100);
 
-    CommonHelper.replaceContent(
-        Helpers.createParamsForAddBrokerHelper('import', brokerHelperTemplatesParams, answers)
+    replaceContent(
+        createParamsForAddBrokerHelper(
+            'import',
+            brokerHelperTemplatesParams,
+            answers
+        )
     );
 };

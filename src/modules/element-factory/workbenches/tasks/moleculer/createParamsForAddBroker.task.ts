@@ -4,9 +4,8 @@ import * as path from 'path';
 // #endregion Global Imports
 
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { IMoleculerHelper } from '../IMoleculerTypes';
-import { ICommon } from '../../ICommon';
+import { getTemplate } from '../../operations';
+import { ICommon, IMoleculerHelper } from '../../../../typings';
 // #endregion Local Imports
 
 export const createParamsForAddBrokerHelper = (
@@ -26,7 +25,7 @@ export const createParamsForAddBrokerHelper = (
             'utf8'
         ),
         getFileContent: () =>
-            CommonHelper.getTemplate(
+            getTemplate(
                 type === 'import'
                     ? brokerHelperTemplatesParams.brokerHelperImport
                     : brokerHelperTemplatesParams.brokerHelperCreate,
@@ -36,7 +35,10 @@ export const createParamsForAddBrokerHelper = (
             type === 'import'
                 ? 'Service added to BrokerHelper Import'
                 : 'Service added to BrokerHelper setupBroker.\n',
-        regexKey: type === 'import' ? /\/\/ #endregion Local Imports/g : /^\s*return broker;/gm
+        regexKey:
+            type === 'import'
+                ? /\/\/ #endregion Local Imports/g
+                : /^\s*return broker;/gm
     };
 
     return replaceBrokerParams;

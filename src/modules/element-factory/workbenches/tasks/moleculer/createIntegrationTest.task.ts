@@ -1,14 +1,15 @@
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { ICommon } from '../../ICommon';
+import { getTemplate, writeFile } from '../../operations';
+import { ICommon } from '../../../../typings';
 // #endregion Local Imports
 
 export const createIntegrationTest = (options: ICommon.ICreateTest): void => {
     const integrationProps: ICommon.IWriteFile = {
         dirPath: options.dirPath,
-        getFileContent: () => CommonHelper.getTemplate(options.templatePath, options.templateProps),
+        getFileContent: () =>
+            getTemplate(options.templatePath, options.templateProps),
         message: options.successMessage
     };
 
-    CommonHelper.writeFile(integrationProps);
+    writeFile(integrationProps);
 };

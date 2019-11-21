@@ -1,8 +1,7 @@
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { IMoleculerHelper } from '../IMoleculerTypes';
-import { ICommon } from '../../ICommon';
-import * as paths from '../../../../paths';
+import { getTemplate, writeFile, addToIndex } from '../../operations';
+import { ICommon, IMoleculerHelper } from '../../../../typings';
+import { moleculer } from '../../../../paths';
 // #endregion Local Imports
 
 export const createEntityInstance = (
@@ -12,19 +11,19 @@ export const createEntityInstance = (
     const templateProps = { fileName: answers.fileName };
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: `${paths.moleculer.entityDir}/${answers.fileName}.ts`,
+        dirPath: `${moleculer.entityDir}/${answers.fileName}.ts`,
         getFileContent: () =>
-            CommonHelper.getTemplate(createEntityHelperParams.templatePath, templateProps),
+            getTemplate(createEntityHelperParams.templatePath, templateProps),
         message: 'Added new Entity Instance.'
     };
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${paths.moleculer.entityDir}/index.ts`,
+        dirPath: `${moleculer.entityDir}/index.ts`,
         getFileContent: () =>
-            CommonHelper.getTemplate(createEntityHelperParams.indexTemplate, templateProps),
+            getTemplate(createEntityHelperParams.indexTemplate, templateProps),
         message: 'Entity added to index.ts.'
     };
 
-    CommonHelper.writeFile(writeFileProps);
-    CommonHelper.addToIndex(addIndexParams);
+    writeFile(writeFileProps);
+    addToIndex(addIndexParams);
 };

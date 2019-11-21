@@ -1,9 +1,14 @@
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import * as paths from '../../../../paths';
-import { ICommon } from '../../ICommon';
-import * as Helpers from '.';
-import { createRepositoryParams } from '../moleculer.config';
+import {
+    getTemplate,
+    isAlreadyExist,
+    writeFile,
+    addToIndex
+} from '../../operations';
+import { moleculer } from '../../../../paths';
+import { ICommon } from '../../../../typings';
+import { createRepositoryParams } from '../../params';
+import { createInterface, createEntityInstance, createTest } from '.';
 // #endregion Local Imports
 
 export const createRepository = (answers: ICommon.IAnswers): void => {
@@ -16,27 +21,27 @@ export const createRepository = (answers: ICommon.IAnswers): void => {
     const indexTemplate = createRepositoryParams.indexTemplate;
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${paths.moleculer.repositoriesDir}/index.ts`,
-        getFileContent: () => CommonHelper.getTemplate(indexTemplate, templateProps),
+        dirPath: `${moleculer.repositoriesDir}/index.ts`,
+        getFileContent: () => getTemplate(indexTemplate, templateProps),
         message: 'Repository added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: `${paths.moleculer.repositoriesDir}/${answers.upperFileName}.ts`,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+        dirPath: `${moleculer.repositoriesDir}/${answers.upperFileName}.ts`,
+        getFileContent: () => getTemplate(templatePath, templateProps),
         message: 'Added new Repository.'
     };
 
     const repositoryTestParams = {
         answers,
-        dirPath: `${paths.moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
+        dirPath: `${moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
         successMessage: 'Added new Repository test.',
         templatePath: createRepositoryParams.testTemplatePath,
         templateProps
     };
 
-    if (!CommonHelper.isAlreadyExist(paths.moleculer.interfaceDir, answers.upperFileName)) {
-        Helpers.createInterface(
+    if (!isAlreadyExist(moleculer.interfaceDir, answers.upperFileName)) {
+        createInterface(
             answers,
             'Repositories',
             '',
@@ -44,8 +49,11 @@ export const createRepository = (answers: ICommon.IAnswers): void => {
         );
     }
 
-    CommonHelper.writeFile(writeFileProps);
-    CommonHelper.addToIndex(addIndexParams);
-    Helpers.createEntityInstance(answers, createRepositoryParams.createEntityTemplatesParams);
-    Helpers.createTest(repositoryTestParams);
+    writeFile(writeFileProps);
+    addToIndex(addIndexParams);
+    createEntityInstance(
+        answers,
+        createRepositoryParams.createEntityTemplatesParams
+    );
+    createTest(repositoryTestParams);
 };
