@@ -7,15 +7,12 @@ import { Next2Element, NextElement, SvelteElement, MoleculerElement } from '.';
 
 export declare namespace ICommon {
     export type Project = 'nextjs2' | 'nextjs' | 'svelte' | 'moleculer';
-    export type Element = Next2Element &
-        NextElement &
-        SvelteElement &
-        MoleculerElement;
+    export type Element = Next2Element | SvelteElement | MoleculerElement;
 
-    export interface IAddArgs  {
+    export interface IAddArgs {
         args: {
             element: Element;
-        }
+        };
     }
 
     export interface ITemplateProps {
@@ -27,6 +24,7 @@ export declare namespace ICommon {
     }
 
     export interface IAnswers {
+        selection: Element;
         target?: string;
         isClass?: boolean;
         fileName: string;

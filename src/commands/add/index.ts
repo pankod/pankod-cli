@@ -32,7 +32,7 @@ export default class Add extends Command {
         const { project } = getPankodConfig();
 
         // ? bind(this) or pass this.error
-        validateProject(project);
+        validateProject.bind(this, project)();
 
         let {
             args: { element }
@@ -40,11 +40,13 @@ export default class Add extends Command {
 
         if (element) {
             // ? bind(this) or pass this.error
-            validateCommand(element, project);
+            validateCommand.bind(this, element, project)();
         } else {
             const whichElement = getQuestionByProject(project);
 
-            element = await inquirer.prompt(whichElement);
+            const { selection } = await inquirer.prompt(whichElement);
+
+            element = selection;
         }
 
         await produce(project, element);

@@ -5,16 +5,17 @@ import { renderMessage } from '.';
 // #endregion Local Imports
 
 // TODO: bind this or what ?
-export const validateProject = (project: string) => {
+export const validateProject = function(this: any, project: string) {
     if (!suitcase.hasOwnProperty(project)) {
         this.error(renderMessage.invalidProject(project));
     }
 };
 
-export const validateCommand = (
+export const validateCommand = function(
+    this: any,
     element: ICommon.Element,
     project: ICommon.Project
-) => {
+) {
     if (!suitcase[project].hasOwnProperty(element)) {
         this.error(renderMessage.invalidElement(project, element));
     }
