@@ -1,16 +1,22 @@
 // #region Local Imports
-import * as tasks from './tasks';
+import { createRepository, createService } from './tasks/moleculer';
 import { ICommon, MoleculerElement, IMoleculerActions } from '../../typings';
 // #endregion Local Imports
 
-export const moleculer = (element: MoleculerElement, options: ICommon.IAnswers) => {
+export const moleculer = (
+    // TODO: infer to MoleculerElement to supress can't assign to 'never'
+    // * passing as Element temporarily
+    // element: MoleculerElement,
+    element: ICommon.Element,
+    options: ICommon.IAnswers
+) => {
     const workbench: IMoleculerActions = {
         entity: () => {
-            tasks.createRepository(options);
+            createRepository(options);
         },
 
         service: () => {
-            tasks.createService(options);
+            createService(options);
         }
     };
 

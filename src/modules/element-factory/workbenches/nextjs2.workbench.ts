@@ -1,21 +1,27 @@
 // #region Local Imports
-import * as tasks from './tasks';
+import { createClassComponent, createFuncComponent } from './tasks/nextjs2';
 import { ICommon, Next2Element, INextjs2Actions } from '../../typings';
 // #endregion Local Imports
 
-export const nextjs2 = (element: Next2Element, options: ICommon.IAnswers): void => {
+export const nextjs2 = (
+    // TODO: infer to Next2Element to supress can't assign to 'never'
+    // * passing as Element temporarily
+    // element: Next2Element,
+    element: ICommon.Element,
+    options: ICommon.IAnswers
+): void => {
     const workbench: INextjs2Actions = {
         Page: () => {
-            tasks.createClassComponent({ ...options, isPage: true });
+            createClassComponent({ ...options, isPage: true });
         },
 
         ClassComponent: () => {
-            tasks.createClassComponent(options);
+            createClassComponent(options);
         },
 
         FunctionalComponent: () => {
-            tasks.createFuncComponent({ ...options, isFuncComponent: true });
-        },
+            createFuncComponent({ ...options, isFuncComponent: true });
+        }
 
         // Plugin: () => {
         //     if (options.pluginType) PluginHelper[answers.pluginType]();

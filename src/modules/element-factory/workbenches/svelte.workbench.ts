@@ -1,17 +1,23 @@
 // #region Local Imports
-import * as tasks from './tasks';
+import { createComponent, createStyle } from './tasks';
 import * as paths from '../../paths';
-import { ICommon, SvelteElement } from '../../typings';
+import { ICommon, SvelteElement, ISvelteActions } from '../../typings';
 // #endregion Local Imports
 
-export const svelte = (element: SvelteElement, options: ICommon.IAnswers) => {
-    const workbench = {
-        Component: async (): Promise<void> => {
-            tasks.createComponent(options);
+export const svelte = (
+    // TODO: infer to SvelteElement to supress can't assign to 'never'
+    // * passing as Element temporarily
+    // element: SvelteElement,
+    element: ICommon.Element,
+    options: ICommon.IAnswers
+) => {
+    const workbench: ISvelteActions = {
+        Component: () => {
+            createComponent(options);
         },
 
-        Test: async (): Promise<void> => {
-            tasks.createStyle({
+        Test: () => {
+            createStyle({
                 ...options,
                 dirPath: `${paths.svelte.componentsDir}/${options.fileName}/index.spec.js`,
                 successMessage: 'Added new component test.',
