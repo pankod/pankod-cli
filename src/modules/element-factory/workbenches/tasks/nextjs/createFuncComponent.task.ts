@@ -1,8 +1,13 @@
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import { createFuncComponentParams } from '../nextjs.config';
-import * as Helpers from '.';
+import { ICommon } from '../../../../typings';
+import {
+    getTemplate,
+    createFile,
+    writeFile,
+    addToIndex
+} from '../../operations';
+import { createFuncComponentParams } from '../../params';
+import { createInterface } from '.';
 // #endregion Local Imports
 
 export const createFuncComponent = (answers: ICommon.IAnswers): void => {
@@ -26,18 +31,18 @@ export const createFuncComponent = (answers: ICommon.IAnswers): void => {
 
     const addIndexParams: ICommon.IAddIndex = {
         dirPath: `${componentsDir}/index.ts`,
-        getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, templateProps),
+        getFileContent: () => getTemplate(indexTemplatePath, templateProps),
         message: 'Component added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${funcDir}/index.tsx`,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+        getFileContent: () => getTemplate(templatePath, templateProps),
         message: 'Add new functional component.'
     };
 
-    CommonHelper.createFile(funcDir);
-    CommonHelper.writeFile(writeFileProps);
-    CommonHelper.addToIndex(addIndexParams);
-    Helpers.createInterface(answers, false, createInterfaceParams);
+    createFile(funcDir);
+    writeFile(writeFileProps);
+    addToIndex(addIndexParams);
+    createInterface(answers, false, createInterfaceParams);
 };

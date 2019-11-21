@@ -1,9 +1,14 @@
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import * as paths from '../../../../paths';
-import { CommonHelper } from '../../Common';
-import { createClassComponentParams } from '../nextjs.config';
-import * as Helpers from './';
+import { ICommon } from '../../../../typings';
+import { nextjs } from '../../../../paths';
+import {
+    getTemplate,
+    createFile,
+    writeFile,
+    addToIndex
+} from '../../operations';
+import { createClassComponentParams } from '../../params';
+import { createInterface, addReducer, addAction } from '.';
 // #endregion Local Imports
 
 export const createClassComponent = (answers: ICommon.IAnswers): void => {
@@ -16,8 +21,13 @@ export const createClassComponent = (answers: ICommon.IAnswers): void => {
     } = createClassComponentParams;
 
     const { lowerFileName, isConnectStore = false, isPage = false } = answers;
-    const pagesDir = `${paths.nextjs.pagesDir}/${lowerFileName}`;
-    const classDir = isPage ? pagesDir : `${paths.nextjs.componentsDir}/${answers.fileName}`;
+
+    const pagesDir = `${nextjs.pagesDir}/${lowerFileName}`;
+
+    const classDir = isPage
+        ? pagesDir
+        : `${nextjs.componentsDir}/${answers.fileName}`;
+
     const templateProps = {
         fileName: answers.fileName,
         hasStyle: answers.hasStyle,
@@ -28,27 +38,27 @@ export const createClassComponent = (answers: ICommon.IAnswers): void => {
     };
 
     const addIndexParams: ICommon.IAddIndex = {
-        dirPath: `${paths.nextjs.componentsDir}/index.ts`,
-        getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, templateProps),
+        dirPath: `${nextjs.componentsDir}/index.ts`,
+        getFileContent: () => getTemplate(indexTemplatePath, templateProps),
         message: 'Component added to index.ts'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${classDir}/index.tsx`,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+        getFileContent: () => getTemplate(templatePath, templateProps),
         message: 'Added new class component'
     };
 
-    CommonHelper.createFile(classDir);
-    CommonHelper.writeFile(writeFileProps);
-    Helpers.createInterface(answers, true, createInterfaceParams);
+    createFile(classDir);
+    writeFile(writeFileProps);
+    createInterface(answers, true, createInterfaceParams);
 
     if (isConnectStore) {
-        Helpers.addReducer(templateProps, addReducerParams);
-        Helpers.addAction(templateProps, addActionParams);
+        addReducer(templateProps, addReducerParams);
+        addAction(templateProps, addActionParams);
     }
 
     if (!isPage) {
-        CommonHelper.addToIndex(addIndexParams);
+        addToIndex(addIndexParams);
     }
 };

@@ -4,10 +4,9 @@ import * as path from 'path';
 // #endregion Global Imports
 
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import * as paths from '../../../../paths';
-import { CommonHelper } from '../../Common';
-import { INextjsHelper } from '../INextjsTypes';
+import { ICommon, INextjsHelper } from '../../../../typings';
+import { getTemplate, replaceContent } from '../../operations';
+import { nextjs } from '../../../../paths';
 // #endregion Local Imports
 
 export const addActionConstIndex = (
@@ -17,15 +16,16 @@ export const addActionConstIndex = (
     const { actionConstTemplatePath } = params;
 
     const replaceContentParams: ICommon.IReplaceContent = {
-        fileDir: `${paths.nextjs.definitionsDir}/ActionConsts.ts`,
+        fileDir: `${nextjs.definitionsDir}/ActionConsts.ts`,
         filetoUpdate: fs.readFileSync(
-            path.resolve('', `${paths.nextjs.definitionsDir}/ActionConsts.ts`),
+            path.resolve('', `${nextjs.definitionsDir}/ActionConsts.ts`),
             'utf8'
         ),
-        getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),
+        getFileContent: () =>
+            getTemplate(actionConstTemplatePath, templateProps),
         message: 'Action constants added to Definitions/ActionConsts.ts',
         regexKey: /export const ActionConsts\s[=]\s[{]/g
     };
 
-    CommonHelper.replaceContent(replaceContentParams);
+    replaceContent(replaceContentParams);
 };
