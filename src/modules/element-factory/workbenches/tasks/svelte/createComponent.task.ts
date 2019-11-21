@@ -1,8 +1,8 @@
 // #region Local Imports
-import { CommonHelper } from '../../Common';
-import { ICommon } from '../../ICommon';
-import { createComponentParams } from '../svelte.config';
-import * as Helpers from '../Helpers';
+import { getTemplate, createFile, writeFile } from '../../operations';
+import { ICommon } from '../../../../typings';
+import { createComponentParams } from '../../params';
+import { createTest, createStyle } from '.';
 // #endregion Local Imports
 
 export const createComponent = (options: ICommon.IAnswers): void => {
@@ -14,16 +14,16 @@ export const createComponent = (options: ICommon.IAnswers): void => {
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${componentDir}/index.svelte`,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, options),
+        getFileContent: () => getTemplate(templatePath, options),
         message: 'Add new component.'
     };
 
-    Helpers.createTest(options);
+    createTest(options);
 
     if (hasStyle) {
-        Helpers.createStyle(options);
+        createStyle(options);
     }
 
-    CommonHelper.createFile(componentDir);
-    CommonHelper.writeFile(writeFileProps);
+    createFile(componentDir);
+    writeFile(writeFileProps);
 };

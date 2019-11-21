@@ -1,7 +1,7 @@
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import { createStyleParams } from '../svelte.config';
+import { ICommon } from '../../../../typings';
+import { getTemplate, writeFile } from '../../operations';
+import { createStyleParams } from '../../params';
 // #endregion Local Imports
 
 export const createTest = (options: any): void => {
@@ -10,9 +10,9 @@ export const createTest = (options: any): void => {
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: dirPath,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, templateProps),
+        getFileContent: () => getTemplate(templatePath, templateProps),
         message: successMessage
     };
 
-    CommonHelper.writeFile(writeFileProps);
+    writeFile(writeFileProps);
 };
