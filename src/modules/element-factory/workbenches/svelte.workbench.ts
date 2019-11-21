@@ -1,5 +1,5 @@
 // #region Local Imports
-import { createComponent, createStyle } from './tasks';
+import { createComponent, createStyle } from './tasks/svelte';
 import * as paths from '../../paths';
 import { ICommon, SvelteElement, ISvelteActions } from '../../typings';
 // #endregion Local Imports

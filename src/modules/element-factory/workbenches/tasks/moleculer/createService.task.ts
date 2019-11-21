@@ -7,7 +7,7 @@ import {
 } from '../../operations';
 import { ICommon } from '../../../../typings';
 import { moleculer } from '../../../../paths';
-import { createServiceParams } from '../../params';
+import { createServiceParams } from '../../params/moleculer.params';
 import {
     createInterface,
     createTest,

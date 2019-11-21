@@ -2,8 +2,8 @@ import * as chalk from 'chalk';
 import * as figlet from 'figlet';
 import { Hook } from '@oclif/config';
 
-import { IPankodConfig, IText } from '../../ITypes';
-import { CommonHelper } from '../../Scripts/Common';
+import { IPankodConfig, IText } from '../../modules/typings';
+import { getPankodConfig } from '../../modules/utils';
 
 const text: IText = {
     moleculer: 'Pankod Moleculer CLI',
@@ -14,14 +14,14 @@ const text: IText = {
 };
 
 const hook: Hook<'init'> = async function() {
-    const pankodConfig: IPankodConfig = CommonHelper.getPankodConfig();
+    const pankodConfig: IPankodConfig = getPankodConfig();
 
     if (!pankodConfig) {
         this.error('Please specify pankod.projectType in package.json');
         this.exit(1);
     }
 
-    const projectType: string = pankodConfig.projectType;
+    const projectType: string = pankodConfig.project;
 
     process.stdout.write(chalk.default(figlet.textSync(text[projectType])) + '\n');
 };

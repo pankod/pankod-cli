@@ -1,7 +1,7 @@
 // #region Local Imports
 import { ICommon } from '../../../../typings';
 import { getTemplate, writeFile } from '../../operations';
-import { createStyledComponentParams, createStyleParams } from '../../params';
+import { createStyledComponentParams, createStyleParams } from '../../params/nextjs2.params';
 // #region Local Imports
 
 export const createStyle = (options: ICommon.IAnswers): void => {

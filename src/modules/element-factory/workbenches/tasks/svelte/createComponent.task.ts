@@ -1,7 +1,7 @@
 // #region Local Imports
 import { getTemplate, createFile, writeFile } from '../../operations';
 import { ICommon } from '../../../../typings';
-import { createComponentParams } from '../../params';
+import { createComponentParams } from '../../params/svelte.params';
 import { createTest, createStyle } from '.';
 // #endregion Local Imports
 

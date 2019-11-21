@@ -7,7 +7,7 @@ import {
     writeFile,
     addToIndex
 } from '../../operations';
-import { createClassComponentParams } from '../../params';
+import { createClassComponentParams } from '../../params/nextjs.params';
 import { createInterface, addReducer, addAction } from '.';
 // #endregion Local Imports
 

@@ -1,7 +1,7 @@
 // #region Local Imports
 import { ICommon } from '../../../../typings';
 import { getTemplate, writeFile } from '../../operations';
-import { createStyleParams } from '../../params';
+import { createStyleParams } from '../../params/svelte.params';
 // #endregion Local Imports
 
 export const createTest = (options: any): void => {

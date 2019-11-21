@@ -7,7 +7,7 @@ import {
 } from '../../operations';
 import { moleculer } from '../../../../paths';
 import { ICommon } from '../../../../typings';
-import { createRepositoryParams } from '../../params';
+import { createRepositoryParams } from '../../params/moleculer.params';
 import { createInterface, createEntityInstance, createTest } from '.';
 // #endregion Local Imports
 

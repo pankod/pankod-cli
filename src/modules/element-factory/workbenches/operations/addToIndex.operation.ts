@@ -10,7 +10,10 @@ import { ICommon } from '../../../typings';
 // #endregion Local Imports
 
 export const addToIndex = (params: ICommon.IAddIndex): void => {
-    fs.appendFileSync(path.resolve('', params.dirPath), `${params.getFileContent()}`);
+    fs.appendFileSync(
+        path.resolve('', params.dirPath),
+        `${params.getFileContent()}`
+    );
 
     console.log(chalk.green(logSymbols.success, params.message));
 };

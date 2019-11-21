@@ -6,7 +6,7 @@ import {
     createFile,
     addToIndex
 } from '../../operations';
-import { createFuncComponentParams } from '../../params';
+import { createFuncComponentParams } from '../../params/nextjs2.params';
 import { createInterface, createStyle } from '.';
 // #region Local Imports
 

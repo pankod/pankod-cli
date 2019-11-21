@@ -6,7 +6,7 @@ import {
     createFile,
     writeFile
 } from '../../operations';
-import { createClassComponentParams } from '../../params';
+import { createClassComponentParams } from '../../params/nextjs2.params';
 import { nextjs2 } from '../../../../paths';
 import {
     addRoute,

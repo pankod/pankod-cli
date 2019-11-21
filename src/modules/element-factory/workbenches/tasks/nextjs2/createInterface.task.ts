@@ -6,7 +6,7 @@ import * as path from 'path';
 // #region Local Imports
 import { ICommon } from '../../../../typings';
 import { getTemplate, writeFile, replaceContent } from '../../operations';
-import { createInterfaceParams } from '../../params';
+import { createInterfaceParams } from '../../params/nextjs2.params';
 // #region Local Imports
 
 export const createInterface = (options: ICommon.IAnswers) => {
