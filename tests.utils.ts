@@ -23,12 +23,22 @@ const removeRecursively = (...target: string[]) => {
                 bgBlue(' TEST SETUP '),
                 red(`Removing ${bold(path.join('', ...target, content))}`)
             );
-            fs.unlinkSync(path.resolve(...target, content))
+
+            fs.unlinkSync(path.resolve(...target, content));
         }
     });
 
-    console.log(bgBlue(' TEST SETUP '), red(`Removing ${bold(path.join('', ...target))}`));
+    console.log(
+        bgBlue(' TEST SETUP '),
+        red(`Removing ${bold(path.join('', ...target))}`)
+    );
     fs.rmdirSync(path.resolve(...target));
 };
 
-removeRecursively('./__temp__');
+export const cleanUp = () => {
+    const testRootDir = './__temp__';
+    
+    if (fs.existsSync(path.resolve(testRootDir))) {
+        removeRecursively(testRootDir);
+    }
+}

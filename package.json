@@ -120,9 +120,8 @@
         "testMatch": [
             "**/*.spec.(ts)"
         ],
-        "setupFiles": [
-            "<rootDir>/tests.setup.ts"
-        ],
+        "globalSetup": "<rootDir>/tests.reset.ts",
+        "globalTeardown": "<rootDir>/tests.reset.ts",
         "globals": {
             "ts-jest": {
                 "tsConfig": "tsconfig.json"
