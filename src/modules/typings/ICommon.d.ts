@@ -24,7 +24,7 @@ export declare namespace ICommon {
     }
 
     export interface IAnswers {
-        selection: Element;
+        selection?: Element;
         dirPath?: string;
         successMessage?: string;
         templatePath?: string;

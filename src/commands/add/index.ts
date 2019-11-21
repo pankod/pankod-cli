@@ -48,7 +48,9 @@ export default class Add extends Command {
 
             const { selection } = await inquirer.prompt(whichElement);
 
-            element = selection;
+            // TODO: Create workbenches own interfaces for IAnswer
+            // * Just skipping type check
+            if (selection) element = selection;
         }
 
         await produce(project, element);
