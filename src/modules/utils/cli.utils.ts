@@ -20,9 +20,3 @@ export const validateCommand = function(
         this.error(renderMessage.invalidElement(project, element));
     }
 };
-
-export const getAllElements = () => {
-    return Object.keys(Object.assign({}, ...Object.values(suitcase)));
-};
-
-export const getUsage = () => getAllElements().map(e => `add ${e}`);

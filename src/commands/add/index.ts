@@ -6,13 +6,15 @@ import * as inquirer from 'inquirer';
 // #region Local Imports
 import { ICommon } from '../../modules/typings';
 import { produce } from '../../modules/element-factory';
-import { getQuestionByProject } from '../../modules/henchman';
+import {
+    getQuestionByProject,
+    getAllElements,
+    getUsage
+} from '../../modules/henchman';
 import {
     getPankodConfig,
     validateCommand,
-    validateProject,
-    getAllElements,
-    getUsage
+    validateProject
 } from '../../modules/utils';
 // #endregion Local Imports
 

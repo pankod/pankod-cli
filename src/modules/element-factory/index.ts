@@ -5,7 +5,7 @@ import * as inquirer from 'inquirer';
 // #region Local Imports
 import * as factory from './workbenches';
 import { ICommon } from '../typings';
-import { getQuestionsByElement } from '../henchman';
+import { getQuestionsOfProjectElement } from '../henchman';
 // #endregion Local Imports
 
 const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
@@ -31,7 +31,7 @@ export const produce = async (
     project: ICommon.Project,
     element: ICommon.Element
 ): Promise<void> => {
-    const questions = getQuestionsByElement(element);
+    const questions = getQuestionsOfProjectElement(project, element);
 
     const answers = await inquirer.prompt<ICommon.IAnswers>(questions);
 

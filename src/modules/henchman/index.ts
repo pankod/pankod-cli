@@ -7,8 +7,21 @@ import * as suitcase from './suitcase';
 import { ICommon } from '../typings';
 // #endregion Local Imports
 
-export const getQuestionsByElement = (element: ICommon.Element) => {
-    return Object.values(suitcase).find(q => q[element]);
+export const getAllQuestionsAsObject = () => {
+    return Object.assign({}, ...Object.values(suitcase));
+};
+
+export const getAllElements = () => {
+    return Object.keys(getAllQuestionsAsObject());
+};
+
+export const getUsage = () => getAllElements().map(e => `add ${e}`);
+
+export const getQuestionsOfProjectElement = (
+    project: ICommon.Project,
+    element: ICommon.Element
+) => {
+    return suitcase[project][element];
 };
 
 export const getQuestionByProject = (
