@@ -10,16 +10,20 @@ import { ICommon } from '../../../typings';
 // #endregion Local Imports
 
 export const addToIndex = (params: ICommon.IAddIndex): void => {
+    
+    // * <Failsafe>
     const folders = params.dirPath.split('/');
 
-    // * <Failsafe>
-    folders.reduce((acc, curr) => {
-        const target = path.join(...acc, curr);
+    folders.reduce(
+        (acc, curr) => {
+            const target = path.join(...acc);
 
-        if (!fs.existsSync(target)) fs.mkdirSync(target);
+            if (!fs.existsSync(target)) fs.mkdirSync(target);
 
-        return [...acc, curr];
-    }, ['.']);
+            return [...acc, curr];
+        },
+        ['.']
+    );
     // * </Failsafe>
 
     fs.appendFileSync(
