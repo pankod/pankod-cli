@@ -4,18 +4,13 @@ import * as path from 'path';
 // #endregion Global Imports
 
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import { createInterfaceParams } from '../nextjs2.config';
+import { ICommon } from '../../../../typings';
+import { getTemplate, writeFile, replaceContent } from '../../operations';
+import { createInterfaceParams } from '../../params';
 // #region Local Imports
 
 export const createInterface = (options: ICommon.IAnswers) => {
-    const {
-        fileName,
-        isPage,
-        isConnectStore,
-        isFuncComponent,
-    } = options;
+    const { fileName, isPage, isConnectStore, isFuncComponent } = options;
 
     const {
         interfaceDir,
@@ -42,30 +37,40 @@ export const createInterface = (options: ICommon.IAnswers) => {
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: isPage ? pageDirPath : compDirPath,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, options),
+        getFileContent: () => getTemplate(templatePath, options),
         message: 'Added new interface file'
     };
 
-    const commonReplaceParams = (contentFile: string, message: string, regexKey: RegExp) => ({
+    const commonReplaceParams = (
+        contentFile: string,
+        message: string,
+        regexKey: RegExp
+    ) => ({
         fileDir: reduxInterfaceDir,
-        filetoUpdate: fs.readFileSync(path.resolve('', reduxInterfaceDir), 'utf8'),
-        getFileContent: () => CommonHelper.getTemplate(contentFile, options),
+        filetoUpdate: fs.readFileSync(
+            path.resolve('', reduxInterfaceDir),
+            'utf8'
+        ),
+        getFileContent: () => getTemplate(contentFile, options),
         message,
         regexKey
     });
 
-    CommonHelper.writeFile(writeFileProps);
+    writeFile(writeFileProps);
 
     if (isPage) {
         const replaceContentParams: ICommon.IReplaceContent = {
             fileDir: interfaceDir,
-            filetoUpdate: fs.readFileSync(path.resolve('', interfaceDir), 'utf8'),
-            getFileContent: () => CommonHelper.getTemplate(pageInterfaceIndex, options),
+            filetoUpdate: fs.readFileSync(
+                path.resolve('', interfaceDir),
+                'utf8'
+            ),
+            getFileContent: () => getTemplate(pageInterfaceIndex, options),
             message: 'Interface file added to Interfaces/index.ts',
             regexKey: /\/\/ #region Page Interfaces/g
         };
 
-        CommonHelper.replaceContent(replaceContentParams);
+        replaceContent(replaceContentParams);
     }
 
     if (isConnectStore) {
@@ -75,7 +80,7 @@ export const createInterface = (options: ICommon.IAnswers) => {
             /export interface IStore\s[{]/g
         );
 
-        CommonHelper.replaceContent(replaceStoreParams);
+        replaceContent(replaceStoreParams);
 
         setTimeout(() => {
             const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
@@ -84,7 +89,7 @@ export const createInterface = (options: ICommon.IAnswers) => {
                 /\s[}] from "@Interfaces";/g
             );
 
-            CommonHelper.replaceContent(replaceStoreImportParams);
+            replaceContent(replaceStoreImportParams);
         }, 100);
     }
 };

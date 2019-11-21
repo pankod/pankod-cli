@@ -1,8 +1,13 @@
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import { createFuncComponentParams } from '../nextjs2.config';
-import * as Helpers from '.';
+import { ICommon } from '../../../../typings';
+import {
+    getTemplate,
+    writeFile,
+    createFile,
+    addToIndex
+} from '../../operations';
+import { createFuncComponentParams } from '../../params';
+import { createInterface, createStyle } from '.';
 // #region Local Imports
 
 export const createFuncComponent = (options: ICommon.IAnswers): void => {
@@ -20,30 +25,30 @@ export const createFuncComponent = (options: ICommon.IAnswers): void => {
 
     const funcComponentDir = `${componentsDir}/${fileName}`;
 
-    // TODO: # Modularize Preparation of CommonHelper Props
+    // TODO: # Modularize Preparation of Props
     const addIndexParams: ICommon.IAddIndex = {
         dirPath: `${componentsDir}/index.ts`,
-        getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
+        getFileContent: () => getTemplate(indexTemplatePath, options),
         message: 'Component added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${funcComponentDir}/index.tsx`,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, options),
+        getFileContent: () => getTemplate(templatePath, options),
         message: 'Added new functional component.'
     };
 
     const writeTestFileProps: ICommon.IWriteFile = {
         dirPath: `${funcComponentDir}/index.spec.tsx`,
-        getFileContent: () => CommonHelper.getTemplate(componentTestTemplatePath, options),
+        getFileContent: () => getTemplate(componentTestTemplatePath, options),
         message: 'Added unit test of component.'
     };
-    // TODO: / Modularize Preparation of CommonHelper Props
+    // TODO: / Modularize Preparation of Props
 
-    CommonHelper.createFile(funcComponentDir);
-    CommonHelper.writeFile(writeFileProps);
-    CommonHelper.writeFile(writeTestFileProps);
-    CommonHelper.addToIndex(addIndexParams);
-    Helpers.createInterface(options);
-    Helpers.createStyle(options);
+    createFile(funcComponentDir);
+    writeFile(writeFileProps);
+    writeFile(writeTestFileProps);
+    addToIndex(addIndexParams);
+    createInterface(options);
+    createStyle(options);
 };

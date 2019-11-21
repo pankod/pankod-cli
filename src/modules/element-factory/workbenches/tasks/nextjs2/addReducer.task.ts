@@ -4,11 +4,15 @@ import * as path from 'path';
 // #endregion Global Imports
 
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import * as paths from '../../../../paths';
-import { INextjs2Helper } from '../INextjs2Types';
-import * as Helpers from '.';
+import { ICommon, INextjs2Helper } from '../../../../typings';
+import {
+    getTemplate,
+    createFile,
+    writeFile,
+    replaceContent
+} from '../../operations';
+import { nextjs2 } from '../../../../paths';
+import { addActionConstIndex } from '.';
 // #region Local Imports
 
 export const addReducer = (
@@ -25,16 +29,17 @@ export const addReducer = (
 
     const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
 
-    const reducerFolderDir = `${paths.nextjs2.reducerDir}/${lowerFileName}`;
+    const reducerFolderDir = `${nextjs2.reducerDir}/${lowerFileName}`;
     const reducerFileDir = `${reducerFolderDir}/index.ts`;
     const templateProps = { fileName, lowerFileName, upperFileName };
     const replaceContentParams: ICommon.IReplaceContent = {
-        fileDir: `${paths.nextjs2.reducerDir}/index.ts`,
+        fileDir: `${nextjs2.reducerDir}/index.ts`,
         filetoUpdate: fs.readFileSync(
-            path.resolve('', `${paths.nextjs2.reducerDir}/index.ts`),
+            path.resolve('', `${nextjs2.reducerDir}/index.ts`),
             'utf8'
         ),
-        getFileContent: () => CommonHelper.getTemplate(reducerIndexTemplatePath, templateProps),
+        getFileContent: () =>
+            getTemplate(reducerIndexTemplatePath, templateProps),
         message: 'Reducer added to Redux/Reducers/index.ts',
         regexKey: /\/\/ #endregion Local Imports/g
     };
@@ -42,36 +47,39 @@ export const addReducer = (
     const testFileDir = `${reducerFolderDir}/index.spec.ts`;
     const addTestParams: ICommon.IAddTest = {
         dirPath: testFileDir,
-        getFileContent: () => CommonHelper.getTemplate(reducerTestTemplatePath, templateProps),
+        getFileContent: () =>
+            getTemplate(reducerTestTemplatePath, templateProps),
         message: 'Added reducer test'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: reducerFileDir,
-        getFileContent: () => CommonHelper.getTemplate(reducerTemplatePath, templateProps),
+        getFileContent: () => getTemplate(reducerTemplatePath, templateProps),
         message: 'Added new reducer file'
     };
 
-    CommonHelper.createFile(reducerFolderDir);
-    CommonHelper.writeFile(writeFileProps);
-    CommonHelper.replaceContent(replaceContentParams);
-    CommonHelper.writeFile(addTestParams);
+    createFile(reducerFolderDir);
+    writeFile(writeFileProps);
+    replaceContent(replaceContentParams);
+    writeFile(addTestParams);
 
     setTimeout(() => {
         const replaceReducerContentParams: ICommon.IReplaceContent = {
-            fileDir: `${paths.nextjs2.reducerDir}/index.ts`,
+            fileDir: `${nextjs2.reducerDir}/index.ts`,
             filetoUpdate: fs.readFileSync(
-                path.resolve('', `${paths.nextjs2.reducerDir}/index.ts`),
+                path.resolve('', `${nextjs2.reducerDir}/index.ts`),
                 'utf8'
             ),
-            getFileContent: () => CommonHelper.getTemplate(reducerStoreTemplatePath, templateProps),
-            message: 'Reducer file added combineReducers in Redux/Reducers/index.ts',
+            getFileContent: () =>
+                getTemplate(reducerStoreTemplatePath, templateProps),
+            message:
+                'Reducer file added combineReducers in Redux/Reducers/index.ts',
             regexKey: /export default combineReducers[(][{]/g
         };
-        CommonHelper.replaceContent(replaceReducerContentParams);
+        replaceContent(replaceReducerContentParams);
     }, 100);
 
     if (isConnectStore) {
-        Helpers.addActionConstIndex(templateProps, addActionConstIndexParams);
+        addActionConstIndex(templateProps, addActionConstIndexParams);
     }
 };

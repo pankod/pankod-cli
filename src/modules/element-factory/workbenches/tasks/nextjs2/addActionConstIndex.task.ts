@@ -4,9 +4,8 @@ import * as path from 'path';
 // #endregion Global Imports
 
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import { INextjs2Helper } from '../INextjs2Types';
+import { ICommon, INextjs2Helper } from '../../../../typings';
+import { getTemplate, replaceContent } from '../../operations';
 // #region Local Imports
 
 export const addActionConstIndex = (
@@ -17,11 +16,16 @@ export const addActionConstIndex = (
 
     const replaceContentParams: ICommon.IReplaceContent = {
         fileDir: actionConstsFileDir,
-        filetoUpdate: fs.readFileSync(path.resolve('', actionConstsFileDir), 'utf8'),
-        getFileContent: () => CommonHelper.getTemplate(actionConstTemplatePath, templateProps),
-        message: 'Action constants added to Definitions/ActionConsts/ActionConsts.ts',
+        filetoUpdate: fs.readFileSync(
+            path.resolve('', actionConstsFileDir),
+            'utf8'
+        ),
+        getFileContent: () =>
+            getTemplate(actionConstTemplatePath, templateProps),
+        message:
+            'Action constants added to Definitions/ActionConsts/ActionConsts.ts',
         regexKey: /export const ActionConsts\s[=]\s[{]/g
     };
 
-    CommonHelper.replaceContent(replaceContentParams);
+    replaceContent(replaceContentParams);
 };

@@ -4,9 +4,8 @@ import * as path from 'path';
 // #endregion Global Imports
 
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { INextjs2Helper } from '../INextjs2Types';
-import { CommonHelper } from '../../Common';
+import { ICommon, INextjs2Helper } from '../../../../typings';
+import { getTemplate, replaceContent } from '../../operations';
 // #region Local Imports
 
 export const addRoute = (
@@ -23,14 +22,17 @@ export const addRoute = (
 
     const replaceContentParams: ICommon.IReplaceContent = {
         fileDir: IAddRoutesReplaceParams.routesDir,
-        filetoUpdate: fs.readFileSync(path.resolve('', IAddRoutesReplaceParams.routesDir), 'utf8'),
+        filetoUpdate: fs.readFileSync(
+            path.resolve('', IAddRoutesReplaceParams.routesDir),
+            'utf8'
+        ),
         getFileContent: () =>
-            CommonHelper.getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
+            getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
         message: `Route added to routes.ts as ${
             hasPath ? `'/${routePath}'` : `'/${fileName}/index'`
         }`,
         regexKey: /^(?:[\t ]*(?:\r?\n|\r))+export default routes;/gm
     };
 
-    CommonHelper.replaceContent(replaceContentParams);
+    replaceContent(replaceContentParams);
 };

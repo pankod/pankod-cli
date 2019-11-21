@@ -1,9 +1,20 @@
 // #region Local Imports
-import { ICommon } from '../../ICommon';
-import { CommonHelper } from '../../Common';
-import { createClassComponentParams } from '../nextjs2.config';
-import * as paths from '../../../../paths';
-import * as Helpers from '.';
+import { ICommon } from '../../../../typings';
+import {
+    getTemplate,
+    addToIndex,
+    createFile,
+    writeFile
+} from '../../operations';
+import { createClassComponentParams } from '../../params';
+import { nextjs2 } from '../../../../paths';
+import {
+    addRoute,
+    createInterface,
+    createStyle,
+    addReducer,
+    addAction
+} from '.';
 // #region Local Imports
 
 export const createClassComponent = (options: ICommon.IAnswers): void => {
@@ -22,39 +33,39 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
     // TODO: Modularize Preparation of Params
 
     if (isPage) {
-        options.classDir = `${paths.nextjs2.pagesDir}/${lowerFileName}`;
+        options.classDir = `${nextjs2.pagesDir}/${lowerFileName}`;
 
         const addRouteParams = {
-            routesDir: paths.nextjs2.routesDir,
-            routesTemplate: paths.nextjs2.templates.addRouteTemplate
+            routesDir: nextjs2.routesDir,
+            routesTemplate: nextjs2.templates.addRouteTemplate
         };
 
-        Helpers.addRoute(options, addRouteParams);
+        addRoute(options, addRouteParams);
     } else {
-        options.classDir = `${paths.nextjs2.componentsDir}/${options.fileName}`;
+        options.classDir = `${nextjs2.componentsDir}/${options.fileName}`;
 
         const addIndexParams: ICommon.IAddIndex = {
-            dirPath: `${paths.nextjs2.componentsDir}/index.ts`,
-            getFileContent: () => CommonHelper.getTemplate(indexTemplatePath, options),
+            dirPath: `${nextjs2.componentsDir}/index.ts`,
+            getFileContent: () => getTemplate(indexTemplatePath, options),
             message: 'Component added to index.ts'
         };
 
-        CommonHelper.addToIndex(addIndexParams);
+        addToIndex(addIndexParams);
     }
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${options.classDir}/index.tsx`,
-        getFileContent: () => CommonHelper.getTemplate(templatePath, options),
+        getFileContent: () => getTemplate(templatePath, options),
         message: 'Added new class component'
     };
 
-    CommonHelper.createFile(options.classDir);
-    CommonHelper.writeFile(writeFileProps);
-    Helpers.createInterface(options);
-    Helpers.createStyle(options);
+    createFile(options.classDir);
+    writeFile(writeFileProps);
+    createInterface(options);
+    createStyle(options);
 
     if (isConnectStore) {
-        Helpers.addReducer(options, addReducerParams);
-        Helpers.addAction(options, addActionParams);
+        addReducer(options, addReducerParams);
+        addAction(options, addActionParams);
     }
 };
