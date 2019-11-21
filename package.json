@@ -14,11 +14,10 @@
     ],
     "scripts": {
         "postpack": "rm -f oclif.manifest.json",
-        "posttest": "npm run format",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
         "sync-templates": "cp -r src/templates lib",
         "test": "jest --runInBand",
-        "test:next2": "jest -- test/Unit/Scripts/nextjs2",
+        "test:ops": "npm t -- src/modules/element-factory/workbenches/operations",
         "version": "oclif-dev readme && git add README.md",
         "lint": "eslint . --ext .ts",
         "format": "eslint . --fix --ext .ts"
