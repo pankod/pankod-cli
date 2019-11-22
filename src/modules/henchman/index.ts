@@ -20,15 +20,17 @@ export const getUsage = () => getAllElements().map(e => `add ${e}`);
 export const getQuestionsOfProjectElement = (
     project: ICommon.Project,
     element: ICommon.Element
-) => {
+): inquirer.QuestionCollection<ICommon.IAnswers> => {
     return suitcase[project][element];
 };
 
 export const getQuestionByProject = (
     project: ICommon.Project
-): inquirer.Questions<ICommon.IAnswers> => ({
-    choices: Object.keys(suitcase[project]),
-    message: 'What would you like to add?',
-    name: 'selection',
-    type: 'list'
-});
+): inquirer.QuestionCollection<ICommon.IAnswers> => [
+    {
+        choices: Object.keys(suitcase[project]),
+        message: 'What would you like to add?',
+        name: 'selection',
+        type: 'list'
+    }
+];

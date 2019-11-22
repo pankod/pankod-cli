@@ -1,9 +1,15 @@
 // #region Global Imports
-import { InputQuestion, Question, ConfirmQuestion, ListQuestion } from 'inquirer';
+import {
+    QuestionCollection,
+    InputQuestion,
+    Question,
+    ConfirmQuestion,
+    ListQuestion
+} from 'inquirer';
 // #region Global Imports
 
 // #region Local Imports
-import { ICommon } from ".";
+import { ICommon } from '.';
 // #region Local Imports
 
 export type NextElement = 'Page' | 'ClassComponent' | 'FunctionalComponent';
@@ -16,11 +22,11 @@ export interface INextjsCommonQuestions {
 }
 
 export interface INextjsQuestions {
-    Plugin: Question<ICommon.IAnswers>[];
-    ClassComponent: Question<ICommon.IAnswers>[];
-    FunctionalComponent: Question<ICommon.IAnswers>[];
-    Page: Question<ICommon.IAnswers>[];
-    [key: string]: Question<ICommon.IAnswers> | Question<ICommon.IAnswers>[];
+    Plugin: QuestionCollection<ICommon.IAnswers>;
+    ClassComponent: QuestionCollection<ICommon.IAnswers>;
+    FunctionalComponent: QuestionCollection<ICommon.IAnswers>;
+    Page: QuestionCollection<ICommon.IAnswers>;
+    [key: string]: QuestionCollection<ICommon.IAnswers>;
 }
 
 export interface INextjsActions {
