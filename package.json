@@ -3,14 +3,14 @@
     "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
     "version": "0.3.3",
     "author": {
-      "name": "Batuhan Ozgur Ozdemir @BatuhanW",
-      "email": "batuhan@pankod.com"
+        "name": "Batuhan Ozgur Ozdemir @BatuhanW",
+        "email": "batuhan@pankod.com"
     },
     "contributors": [
-      {
-        "name": "Furkan Acar @futuredayv",
-        "email": "furkan@pankod.com"
-      }
+        {
+            "name": "Furkan Acar @futuredayv",
+            "email": "furkan@pankod.com"
+        }
     ],
     "scripts": {
         "postpack": "rm -f oclif.manifest.json",
@@ -129,6 +129,6 @@
         }
     },
     "pankod": {
-        "projectType": "pankodCli"
+        "project": "pankodCli"
     }
 }
