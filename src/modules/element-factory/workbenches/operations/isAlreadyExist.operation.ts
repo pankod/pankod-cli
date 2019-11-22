@@ -4,7 +4,7 @@ import * as path from 'path';
 // #endregion Global Imports
 
 export const isAlreadyExist = (
-    startPath: string,
+    startPath: string = '',
     val: string = '',
     isFile: boolean = false,
     fileType?: string

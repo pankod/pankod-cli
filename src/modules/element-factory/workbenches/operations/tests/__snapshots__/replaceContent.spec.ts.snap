@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`[44m[1m[operations][22m[49m -- [3mfs manipulations[23m replaceContent.operation should replace regexp matchings with passed contents. 1`] = `
+"// ! I was just sitting here in silence...
+Then piston dropped!"
+`;

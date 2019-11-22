@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`[44m[1m[operations][22m[49m -- [3mfs manipulations[23m addToIndex.operation should pass 1`] = `"export { default as Test } from '@Components/Test';"`;
+exports[`[44m[1m[operations][22m[49m -- [3mfs manipulations[23m addToIndex.operation should append index.ts and match snapshot. 1`] = `"export { default as Test } from '@Components/Test';"`;

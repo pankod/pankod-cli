@@ -7,24 +7,11 @@ import chalk from 'chalk';
 
 // #region Local Imports
 import { ICommon } from '../../../typings';
+import { failsafe } from '.';
 // #endregion Local Imports
 
 export const addToIndex = (params: ICommon.IAddIndex): void => {
-    
-    // * <Failsafe>
-    const folders = params.dirPath.split('/');
-
-    folders.reduce(
-        (acc, curr) => {
-            const target = path.join(...acc);
-
-            if (!fs.existsSync(target)) fs.mkdirSync(target);
-
-            return [...acc, curr];
-        },
-        ['.']
-    );
-    // * </Failsafe>
+    failsafe(params.dirPath);
 
     fs.appendFileSync(
         path.resolve('', params.dirPath),
