@@ -20,7 +20,7 @@ const removeRecursively = (...target: string[]) => {
             removeRecursively(...target, content);
         } else {
             console.log(
-                bgBlue(' TEST SETUP '),
+                bgBlue(' TEST CLEANUP '),
                 red(`Removing ${bold(path.join('', ...target, content))}`)
             );
 
@@ -29,7 +29,7 @@ const removeRecursively = (...target: string[]) => {
     });
 
     console.log(
-        bgBlue(' TEST SETUP '),
+        bgBlue(' TEST CLEANUP '),
         red(`Removing ${bold(path.join('', ...target))}`)
     );
 
