@@ -29,6 +29,6 @@ export const getQuestionByProject = (
 ): inquirer.Questions<ICommon.IAnswers> => ({
     choices: Object.keys(suitcase[project]),
     message: 'What would you like to add?',
-    name: 'element',
+    name: 'selection',
     type: 'list'
 });
