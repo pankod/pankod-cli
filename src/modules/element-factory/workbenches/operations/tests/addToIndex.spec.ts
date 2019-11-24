@@ -42,7 +42,9 @@ describe(operations, () => {
 
             const created = fs.readFileSync(params.dirPath, 'utf8');
 
-            expect(created).toMatchSnapshot();
+            expect(created).toMatchInlineSnapshot(
+                `"export { default as Test } from '@Components/Test';"`
+            );
         });
     });
 });

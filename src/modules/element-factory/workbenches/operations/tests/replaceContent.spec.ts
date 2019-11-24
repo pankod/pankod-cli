@@ -29,7 +29,11 @@ describe(operations, () => {
 
             replaceContent(params);
 
-            expect(fs.readFileSync(path.resolve(sample), 'utf8')).toMatchSnapshot();
+            expect(fs.readFileSync(path.resolve(sample), 'utf8'))
+                .toMatchInlineSnapshot(`
+                "// ! I was just sitting here in silence...
+                Then piston dropped!"
+            `);
         });
     });
 });

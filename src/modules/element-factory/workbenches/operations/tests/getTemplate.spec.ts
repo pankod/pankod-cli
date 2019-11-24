@@ -32,7 +32,7 @@ describe(operations, () => {
         };
 
         it('should template with passed model', () => {
-            expect(render(existent)).toMatchSnapshot();
+            expect(render(existent)).toMatchInlineSnapshot(`undefined`);
         });
 
         it('should log error if given path is non-existent', () => {
