@@ -12,7 +12,7 @@ import { operations } from '../../../../utils';
 describe(operations, () => {
     describe('replaceContent.operation', () => {
         it('should replace regexp matchings with passed contents.', () => {
-            const sample = '__temp__/replaceContent/target.ts';
+            const sample = './__temp__/replaceContent/target.ts';
 
             const sampleContent = '// ! I was just sitting here in silence...';
 

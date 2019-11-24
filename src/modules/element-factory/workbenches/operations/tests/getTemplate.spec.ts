@@ -7,13 +7,26 @@ import * as logSymbols from 'log-symbols';
 // #region Local Imports
 import { operations } from '../../../../utils';
 import { getTemplate } from '../getTemplate.operation';
+import { writeFile } from '../writeFile.operation';
+import { failsafe } from '../failsafe.operation';
 // #endregion Local Imports
 
-describe(operations, () => {
-    describe('getTemplate.operation', () => {
-        const existent = './lib/Templates/nextjs/Components/index.mustache';
-        const nonExistent = './non-existent/non-existent.mustache';
+const realFS = jest.requireActual('fs');
 
+describe(operations, () => {
+    const existent = './lib/Templates/nextjs/Components/index.mustache';
+    const nonExistent = './non-existent/non-existent.mustache';
+
+    beforeAll(() => {
+        failsafe(existent);
+        writeFile({
+            dirPath: existent,
+            getFileContent: () => realFS.readFileSync(existent, 'utf-8'),
+            message: 'Component index created into memory.'
+        });
+    });
+
+    describe('getTemplate.operation', () => {
         const render = (template: string) => {
             getTemplate(path.resolve(template), { fileName: 'Test' });
         };

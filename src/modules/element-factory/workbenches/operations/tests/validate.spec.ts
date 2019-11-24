@@ -26,7 +26,7 @@ describe(operations, () => {
             });
 
             describe('if filename is valid BUT already created', () => {
-                const elementPath = './__temp__/validateOperation/sample.ts';
+                const elementPath = './__temp__/validateOperation/Sample.ts';
 
                 failsafe(elementPath);
                 fs.writeFileSync(path.resolve(elementPath), '');

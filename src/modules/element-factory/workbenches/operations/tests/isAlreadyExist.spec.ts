@@ -11,13 +11,13 @@ import { failsafe } from '../failsafe.operation';
 
 describe(operations, () => {
     describe('isAlreadyExist.operation', () => {
-        const startPath = '__temp__/isAlreadyExist/agrees/';
+        const startPath = './__temp__/isAlreadyExist/agrees/';
 
         // * Creates directories and files for truthy samples
         beforeAll(() => {
-            const sampleFolders = ['sample/', 'default_isFileFalse/'];
+            const sampleFolders = ['sample/', 'Default_isFileFalse/'];
 
-            const sampleFiles = ['sample.service.ts', 'default_isFileTrue.ts'];
+            const sampleFiles = ['sample.service.ts', 'Default_isFileTrue.ts'];
 
             failsafe(startPath);
 

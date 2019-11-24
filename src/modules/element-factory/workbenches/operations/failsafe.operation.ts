@@ -4,22 +4,22 @@ import * as path from 'path';
 // #endregion Global Imports
 
 export const failsafe = (target: string) => {
-    const folders = target.split('/');
 
-    folders.reduce(
-        (acc: string[], curr: string) => {
-            // * NOTICE: Last portion of path will be created
-            // * only if target has a trailing slash
-            // * .../stairway/to/heaven  (no heaven)
-            // * .../stairway/to/heaven/ (now we have a heaven)
-            if (acc === ['']) acc = ['/'];
+    const folders = path
+        .resolve(target)
+        .split('/')
+        .splice(1);
 
-            const target = path.resolve(path.join(...acc));
+    // * If ends with trailing slash, last folder
+    // * will be created too.
+    target.match(/\/$/) && folders.push('');
 
-            if (!fs.existsSync(target)) fs.mkdirSync(target);
+    folders.reduce((acc: string[], curr: string) => {
 
-            return [...acc, curr];
-        },
-        []
-    );
+        const target = path.join(...acc);
+
+        if (!fs.existsSync(target)) fs.mkdirSync(target)
+
+        return [...acc, curr];
+    }, ['/']);
 };
