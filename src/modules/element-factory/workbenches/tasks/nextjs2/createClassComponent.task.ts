@@ -1,9 +1,3 @@
-// #region DEBUGGING
-import chalk from 'chalk';
-const { red, blue, bold } = chalk;
-// #endregion DEBUGGING
-
-
 import { ICommon } from '../../../../typings';
 import {
     getTemplate,
@@ -23,9 +17,6 @@ import {
 // #region Local Imports
 
 export const createClassComponent = (options: ICommon.IAnswers): void => {
-
-    console.log(blue(`I'm about to create a ${bold('ClassComponent')} for you.`));
-
     const {
         templatePath,
         indexTemplatePath,
@@ -41,8 +32,6 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
     // TODO: Modularize Preparation of Params
 
     if (isPage) {
-        console.log(blue(`I see you want it to be a ${bold('Page')}.`));
-
         options.classDir = `${nextjs2.pagesDir}/${lowerFileName}`;
 
         const addRouteParams = {
@@ -51,11 +40,7 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
         };
 
         addRoute(options, addRouteParams);
-
-        console.log(blue(`Added route.`));
     } else {
-        console.log(blue(`I see you want it to be a ${bold('just ClassComponent')}.`));
-
         options.classDir = `${nextjs2.componentsDir}/${options.fileName}`;
 
         const addIndexParams: ICommon.IAddIndex = {
@@ -63,10 +48,8 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
             getFileContent: () => getTemplate(indexTemplatePath, options),
             message: 'Component added to index.ts'
         };
-        
-        addToIndex(addIndexParams);
 
-        console.log(blue(`Added to component index.`));
+        addToIndex(addIndexParams);
     }
 
     const writeFileProps: ICommon.IWriteFile = {
@@ -76,24 +59,12 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
     };
 
     createFile(options.classDir);
-    console.log(blue(`Component directory created at ${bold(options.classDir)}`));
-
     writeFile(writeFileProps);
-    console.log(blue(`Component is written at ${bold(writeFileProps.dirPath)}`));
-
     createInterface(options);
-    console.log(blue(`Component interface created.`));
-
     createStyle(options);
-    console.log(blue(`Component style created as ${bold(options.isScss ? 'scss': 'styled')}.`));
 
     if (isConnectStore) {
         addReducer(options, addReducerParams);
-        console.log(blue(`Component's reducer created.`));
-
         addAction(options, addActionParams);
-        console.log(blue(`Component's actions created.`));
     }
-
-    console.log(blue(`ClassComponent has been created ${bold('successfully!')}`));
 };
