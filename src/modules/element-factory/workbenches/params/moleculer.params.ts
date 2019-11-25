@@ -27,6 +27,12 @@ export const createServiceParams: IMoleculerHelper.ICreateServiceParams = {
     createInterfaceParams
 };
 
+export const createServiceHelperParams = {
+    indexTemplate: paths.moleculer.templates.createServiceHelperIndexTemplate,
+    templatePath: paths.moleculer.templates.createServiceHelperTemplatePath,
+    testTemplatePath: paths.moleculer.templates.createServiceHelperTestTemplatePath
+};
+
 export const createRepositoryParams: IMoleculerHelper.ICreateRepositoryParams = {
     indexTemplate: paths.moleculer.templates.createRepositoryIndexTemplate,
     templatePath: paths.moleculer.templates.createRepositoryTemplatePath,

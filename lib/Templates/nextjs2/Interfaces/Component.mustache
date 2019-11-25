@@ -2,14 +2,16 @@
 // #region Global Imports
 import { WithTranslation } from "next-i18next";
 // #endregion Global Imports
-
 {{/isFuncComponent}}
-declare module {{interfaceName}} {
+
+export declare module {{interfaceName}} {
     export interface IProps {{^isFuncComponent}}extends WithTranslation{{/isFuncComponent}} { }
 
     {{#isClass}}
     export interface InitialProps {
+        {{#isPage}}
         namespacesRequired: string[];
+        {{/isPage}}
     }
     
     export interface IStateProps { }
@@ -23,5 +25,3 @@ declare module {{interfaceName}} {
     }
     {{/isConnectStore}}
 }
-
-export { {{interfaceName}} };

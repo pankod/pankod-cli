@@ -19,6 +19,7 @@ export const createParamsForAddBrokerHelper = (
     };
 
     const replaceBrokerParams: ICommon.IReplaceContent = {
+        // TODO: import does NOT work as expected
         fileDir: brokerHelperTemplatesParams.replaceFileDir,
         filetoUpdate: fs.readFileSync(
             path.resolve('', brokerHelperTemplatesParams.replaceFileDir),

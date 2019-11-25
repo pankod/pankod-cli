@@ -9,6 +9,7 @@ import { ICommon } from '../../../../typings';
 import { moleculer } from '../../../../paths';
 import { createServiceParams } from '../../params/moleculer.params';
 import {
+    createServiceHelper,
     createInterface,
     createTest,
     createIntegrationTest,
@@ -66,7 +67,7 @@ export const createService = (answers: ICommon.IAnswers): void => {
 
     writeFile(writeFileProps);
     addToIndex(addIndexParams);
-    createService(answers);
+    createServiceHelper(answers);
     createTest(serviceTestParams);
     createIntegrationTest(integrationTestParams);
     addBrokerHelper(answers, createServiceParams.brokerHelperTemplatesParams);

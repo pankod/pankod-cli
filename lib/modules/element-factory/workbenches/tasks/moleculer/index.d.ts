@@ -6,3 +6,4 @@ export * from './createService.task';
 export * from './createIntegrationTest.task';
 export * from './createInterface.task';
 export * from './createTest.task';
+export * from './createServiceHelper.task';
