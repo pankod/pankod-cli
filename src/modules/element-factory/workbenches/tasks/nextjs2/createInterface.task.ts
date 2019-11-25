@@ -10,7 +10,7 @@ import { createInterfaceParams } from '../../params/nextjs2.params';
 // #region Local Imports
 
 export const createInterface = (options: ICommon.IAnswers) => {
-    const { fileName, isPage, isConnectStore, isFuncComponent } = options;
+    const { fileName, isPage, isConnectStore } = options;
 
     const {
         interfaceDir,
@@ -27,13 +27,7 @@ export const createInterface = (options: ICommon.IAnswers) => {
     options.isClass = !!options.classDir;
 
     const pageDirPath = `${pageInterfaceDir}/${fileName}.d.ts`;
-    let compDirPath;
-
-    if (isFuncComponent) {
-        compDirPath = `${componentsDir}/${fileName}/${fileName}.d.ts`;
-    } else {
-        compDirPath = `${compInterfaceDir}/${fileName}.d.ts`;
-    }
+    const compDirPath = `${componentsDir}/${fileName}/${fileName}.d.ts`;
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: isPage ? pageDirPath : compDirPath,

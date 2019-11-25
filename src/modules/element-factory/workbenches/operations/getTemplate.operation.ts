@@ -15,8 +15,8 @@ export const getTemplate = (
     templatePath: string,
     templateProps: ICommon.ITemplateProps
 ): string => {
-    // * __dirname + ../../ path is root of the lib folder.
-    const pathToTemplate = path.resolve(__dirname, '../../', templatePath);
+    // * __dirname + ../../../../../ path is root of project.
+    const pathToTemplate = path.resolve(__dirname, '../../../../../', templatePath);
 
     if (!fs.existsSync(pathToTemplate)) {
         throw red(

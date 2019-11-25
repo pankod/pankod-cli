@@ -5,7 +5,9 @@ import { createStyledComponentParams, createStyleParams } from '../../params/nex
 // #region Local Imports
 
 export const createStyle = (options: ICommon.IAnswers): void => {
-    const { fileName, lowerFileName, isPage, isStyled } = options;
+    const { fileName, lowerFileName, isPage, isStyled, hasStyle } = options;
+
+    if (!hasStyle) return;
 
     const styleParams = isStyled
         ? createStyledComponentParams

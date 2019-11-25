@@ -12,7 +12,7 @@ export const addRoute = (
     answers: ICommon.IAnswers,
     IAddRoutesReplaceParams: INextjs2Helper.IAddRoutesReplaceParams
 ) => {
-    const { hasPath, routePath, fileName } = answers;
+    const { hasPath, routePath, fileName, lowerFileName } = answers;
 
     const templateProps = {
         fileName: fileName.replace(/\b\w/g, foo => foo.toLowerCase()),
@@ -29,9 +29,9 @@ export const addRoute = (
         getFileContent: () =>
             getTemplate(IAddRoutesReplaceParams.routesTemplate, templateProps),
         message: `Route added to routes.ts as ${
-            hasPath ? `'/${routePath}'` : `'/${fileName}/index'`
+            hasPath ? `'/${routePath}'` : `'/${lowerFileName}/index'`
         }`,
-        regexKey: /^(?:[\t ]*(?:\r?\n|\r))+export default routes;/gm
+        regexKey: /^(?:[\t ]*(?:\r?\n|\r))+export default routes;(?:\n*)/gm
     };
 
     replaceContent(replaceContentParams);
