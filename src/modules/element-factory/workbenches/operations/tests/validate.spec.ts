@@ -16,8 +16,8 @@ describe(operations, () => {
                 it('should return true', () => {
                     expect(
                         validate(
-                            'non-existent',
-                            './non-existent/',
+                            'nonExistent',
+                            './nonExistent/',
                             true,
                             'default'
                         )

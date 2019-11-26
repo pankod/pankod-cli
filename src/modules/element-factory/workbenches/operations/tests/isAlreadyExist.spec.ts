@@ -15,9 +15,9 @@ describe(operations, () => {
 
         // * Creates directories and files for truthy samples
         beforeAll(() => {
-            const sampleFolders = ['sample/', 'Default_isFileFalse/'];
+            const sampleFolders = ['sample/', 'DefaultIsFileFalse/'];
 
-            const sampleFiles = ['sample.service.ts', 'Default_isFileTrue.ts'];
+            const sampleFiles = ['sample.service.ts', 'DefaultIsFileTrue.ts'];
 
             failsafe(startPath);
 
@@ -45,13 +45,13 @@ describe(operations, () => {
             },
             {
                 startPath,
-                val: 'default_isFileTrue',
+                val: 'defaultIsFileTrue',
                 isFile: true,
                 fileType: 'default'
             },
             {
                 startPath,
-                val: 'default_isFileFalse',
+                val: 'defaultIsFileFalse',
                 isFile: false,
                 fileType: 'default'
             }
