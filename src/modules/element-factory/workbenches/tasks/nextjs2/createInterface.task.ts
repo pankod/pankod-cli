@@ -17,10 +17,10 @@ export const createInterface = (options: ICommon.IAnswers) => {
         pageInterfaceIndex,
         pageInterfaceDir,
         componentsDir,
-        compInterfaceDir,
         templatePath,
         reduxInterfaceDir,
         storeImportInterface,
+        storeImportInterfaceFormatted,
         storeInterface
     } = createInterfaceParams;
 
@@ -39,16 +39,29 @@ export const createInterface = (options: ICommon.IAnswers) => {
         contentFile: string,
         message: string,
         regexKey: RegExp
-    ) => ({
-        fileDir: reduxInterfaceDir,
-        filetoUpdate: fs.readFileSync(
-            path.resolve('', reduxInterfaceDir),
-            'utf8'
-        ),
-        getFileContent: () => getTemplate(contentFile, options),
-        message,
-        regexKey
-    });
+    ) => {
+        const formattedRegexKey = /\n} from "@Interfaces";/;
+
+        const params = {
+            fileDir: reduxInterfaceDir,
+            filetoUpdate: fs.readFileSync(
+                path.resolve('', reduxInterfaceDir),
+                'utf8'
+            ),
+            getFileContent: () => getTemplate(contentFile, options),
+            message,
+            regexKey
+        };
+
+        // * Change RegExp if file is formatted
+        if (params.filetoUpdate.match(formattedRegexKey)) {
+            params.regexKey = formattedRegexKey;
+            params.getFileContent = () =>
+                getTemplate(storeImportInterfaceFormatted, options);
+        }
+
+        return params;
+    };
 
     writeFile(writeFileProps);
 
@@ -76,14 +89,12 @@ export const createInterface = (options: ICommon.IAnswers) => {
 
         replaceContent(replaceStoreParams);
 
-        setTimeout(() => {
-            const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
-                storeImportInterface,
-                'Interface file added to import section in Redux/IStore.d.ts',
-                /\s[}] from "@Interfaces";/g
-            );
+        const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
+            storeImportInterface,
+            'Interface file added to import section in Redux/IStore.d.ts',
+            / } from "@Interfaces";/
+        );
 
-            replaceContent(replaceStoreImportParams);
-        }, 100);
+        replaceContent(replaceStoreImportParams);
     }
 };

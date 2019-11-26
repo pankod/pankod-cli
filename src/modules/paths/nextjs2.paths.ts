@@ -22,6 +22,7 @@ export const nextjs2 = {
         createInterfaceTempPath: './lib/Templates/nextjs2/Interfaces/Component.mustache',
         pageInterfaceIndex: './lib/Templates/nextjs2/Interfaces/PageIndex.mustache',
         storeImportInterface: './lib/Templates/nextjs2/Interfaces/ReduxImport.mustache',
+        storeImportInterfaceFormatted: './lib/Templates/nextjs2/Interfaces/ReduxImportFormatted.mustache',
         storeInterface: './lib/Templates/nextjs2/Interfaces/ReduxStore.mustache',
         classComponentTemplatePath: './lib/Templates/nextjs2/Components/Class.mustache',
         componentIndexTemplatePath: './lib/Templates/nextjs2/Components/index.mustache',

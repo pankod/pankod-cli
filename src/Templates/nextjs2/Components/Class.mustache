@@ -40,16 +40,20 @@ import { {{interfaceName}} } from "./{{upperFileName}}";
 
 export class {{upperFileName}} extends React.Component<
     {{interfaceName}}.IProps,
+{{#isPage}}
     {{interfaceName}}.InitialProps
+{{/isPage}}
+{{^isPage}}
+    {{interfaceName}}.IState
+{{/isPage}}
 > {
     constructor(props: {{interfaceName}}.IProps) {
         super(props);
-
         {{^isPage}}
+
         this.state = {};
         {{/isPage}}
     }
-
     {{#isPage}}
     async getInitialProps(ctx: ReduxNextPageContext): Promise<
         {{interfaceName}}.InitialProps
@@ -83,10 +87,11 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
 
 const connected = connect(mapStateToProps, mapDispatchToProps);
 {{/isConnectStore}}
-
 {{#isPage}}
+
 export default withTranslation("common")(connected({{upperFileName}}));
 {{/isPage}}
 {{^isPage}}
+
 export default connected;
 {{/isPage}}

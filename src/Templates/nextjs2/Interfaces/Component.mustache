@@ -1,24 +1,25 @@
-{{^isFuncComponent}}
+{{#isPage}}
 // #region Global Imports
 import { WithTranslation } from "next-i18next";
 // #endregion Global Imports
-{{/isFuncComponent}}
+{{/isPage}}
 
 export declare module {{interfaceName}} {
-    export interface IProps {{^isFuncComponent}}extends WithTranslation{{/isFuncComponent}} { }
+    export interface IProps{{#isPage}} extends WithTranslation{{/isPage}} { }
+    {{^isPage}}
 
-    {{#isClass}}
+    export interface IState { }
+    {{/isPage}}
+    {{#isPage}}
+
     export interface InitialProps {
-        {{#isPage}}
         namespacesRequired: string[];
-        {{/isPage}}
     }
-    
+    {{/isPage}}
+    {{#isConnectStore}}
+
     export interface IStateProps { }
 
-    {{/isClass}}
-
-    {{#isConnectStore}}
     module Actions {
         export interface IMapPayload { }
         export interface IMapResponse { }

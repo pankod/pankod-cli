@@ -13,7 +13,7 @@ import {
 } from '../../operations';
 import { nextjs2 } from '../../../../paths';
 import { addActionConstIndex } from '.';
-// #region Local Imports
+// #endregion Local Imports
 
 export const addReducer = (
     answers: ICommon.IAnswers,
@@ -27,11 +27,11 @@ export const addReducer = (
         reducerTestTemplatePath
     } = params;
 
-    const { fileName, lowerFileName, isConnectStore, upperFileName } = answers;
+    const { fileName, lowerFileName, isConnectStore, upperFileName, interfaceName } = answers;
 
     const reducerFolderDir = `${nextjs2.reducerDir}/${lowerFileName}`;
     const reducerFileDir = `${reducerFolderDir}/index.ts`;
-    const templateProps = { fileName, lowerFileName, upperFileName };
+    const templateProps = { fileName, lowerFileName, upperFileName, interfaceName };
     const replaceContentParams: ICommon.IReplaceContent = {
         fileDir: `${nextjs2.reducerDir}/index.ts`,
         filetoUpdate: fs.readFileSync(
@@ -63,21 +63,20 @@ export const addReducer = (
     replaceContent(replaceContentParams);
     writeFile(addTestParams);
 
-    setTimeout(() => {
-        const replaceReducerContentParams: ICommon.IReplaceContent = {
-            fileDir: `${nextjs2.reducerDir}/index.ts`,
-            filetoUpdate: fs.readFileSync(
-                path.resolve('', `${nextjs2.reducerDir}/index.ts`),
-                'utf8'
-            ),
-            getFileContent: () =>
-                getTemplate(reducerStoreTemplatePath, templateProps),
-            message:
-                'Reducer file added combineReducers in Redux/Reducers/index.ts',
-            regexKey: /export default combineReducers[(][{]/g
-        };
-        replaceContent(replaceReducerContentParams);
-    }, 100);
+    const replaceReducerContentParams: ICommon.IReplaceContent = {
+        fileDir: `${nextjs2.reducerDir}/index.ts`,
+        filetoUpdate: fs.readFileSync(
+            path.resolve('', `${nextjs2.reducerDir}/index.ts`),
+            'utf8'
+        ),
+        getFileContent: () =>
+            getTemplate(reducerStoreTemplatePath, templateProps),
+        message:
+            'Reducer file added combineReducers in Redux/Reducers/index.ts',
+        regexKey: /export default combineReducers[(][{]/g
+    };
+
+    replaceContent(replaceReducerContentParams);
 
     if (isConnectStore) {
         addActionConstIndex(templateProps, addActionConstIndexParams);
