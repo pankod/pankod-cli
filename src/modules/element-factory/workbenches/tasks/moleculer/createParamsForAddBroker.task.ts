@@ -5,41 +5,41 @@ import * as path from 'path';
 
 // #region Local Imports
 import { getTemplate } from '../../operations';
-import { ICommon, IMoleculerHelper } from '../../../../typings';
+import { ICommon } from '../../../../typings';
+import { createServiceParams } from '../../params/moleculer.params';
 // #endregion Local Imports
 
 export const createParamsForAddBrokerHelper = (
-    type: string,
-    brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams,
-    answers: ICommon.IAnswers
+    type: 'import' | 'create',
+    options: ICommon.IAnswers
 ): ICommon.IReplaceContent => {
-    const templateProps = {
-        lowerFileName: answers.lowerFileName,
-        upperFileName: answers.upperFileName
+    const {
+        replaceFileDir,
+        brokerHelperCreate,
+        brokerHelperImport
+    } = createServiceParams.brokerHelperTemplatesParams;
+
+    const interoperationPayloads = {
+        import: {
+            template: brokerHelperImport,
+            regexKey: /\/\/(?: |)#endregion Local Imports/g,
+            message: 'Service added to BrokerHelper Import'
+        },
+
+        create: {
+            template: brokerHelperCreate,
+            regexKey: /^\s*return broker;/gm,
+            message: 'Service added to BrokerHelper setupBroker.\n'
+        }
     };
 
     const replaceBrokerParams: ICommon.IReplaceContent = {
-        // TODO: import does NOT work as expected
-        fileDir: brokerHelperTemplatesParams.replaceFileDir,
-        filetoUpdate: fs.readFileSync(
-            path.resolve('', brokerHelperTemplatesParams.replaceFileDir),
-            'utf8'
-        ),
+        fileDir: replaceFileDir,
+        filetoUpdate: fs.readFileSync(path.resolve('', replaceFileDir), 'utf8'),
         getFileContent: () =>
-            getTemplate(
-                type === 'import'
-                    ? brokerHelperTemplatesParams.brokerHelperImport
-                    : brokerHelperTemplatesParams.brokerHelperCreate,
-                templateProps
-            ),
-        message:
-            type === 'import'
-                ? 'Service added to BrokerHelper Import'
-                : 'Service added to BrokerHelper setupBroker.\n',
-        regexKey:
-            type === 'import'
-                ? /\/\/ #endregion Local Imports/g
-                : /^\s*return broker;/gm
+            getTemplate(interoperationPayloads[type].template, options),
+        message: interoperationPayloads[type].message,
+        regexKey: interoperationPayloads[type].regexKey
     };
 
     return replaceBrokerParams;

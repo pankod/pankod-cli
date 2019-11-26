@@ -70,5 +70,5 @@ export const createService = (answers: ICommon.IAnswers): void => {
     createServiceHelper(answers);
     createTest(serviceTestParams);
     createIntegrationTest(integrationTestParams);
-    addBrokerHelper(answers, createServiceParams.brokerHelperTemplatesParams);
+    addBrokerHelper(answers);
 };

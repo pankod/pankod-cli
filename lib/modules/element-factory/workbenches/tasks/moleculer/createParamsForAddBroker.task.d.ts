@@ -1,2 +1,2 @@
-import { ICommon, IMoleculerHelper } from '../../../../typings';
-export declare const createParamsForAddBrokerHelper: (type: string, brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams, answers: ICommon.IAnswers) => ICommon.IReplaceContent;
+import { ICommon } from '../../../../typings';
+export declare const createParamsForAddBrokerHelper: (type: "import" | "create", options: ICommon.IAnswers) => ICommon.IReplaceContent;

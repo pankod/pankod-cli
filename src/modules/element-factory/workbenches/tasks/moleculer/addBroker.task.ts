@@ -1,28 +1,13 @@
 // #region Local Imports
+import { ICommon } from '../../../../typings';
 import { replaceContent } from '../../operations';
-import { ICommon, IMoleculerHelper } from '../../../../typings';
 import { createParamsForAddBrokerHelper } from '.';
 // #endregion Local Imports
 
-export const addBrokerHelper = (
-    answers: ICommon.IAnswers,
-    brokerHelperTemplatesParams: IMoleculerHelper.IBrokerHelperTemplatesParams
-): void => {
-    setTimeout(() => {
-        replaceContent(
-            createParamsForAddBrokerHelper(
-                'create',
-                brokerHelperTemplatesParams,
-                answers
-            )
-        );
-    }, 100);
+export const addBrokerHelper = (options: ICommon.IAnswers): void => {
+    const interoperations: ['import', 'create'] = ['import', 'create'];
 
-    replaceContent(
-        createParamsForAddBrokerHelper(
-            'import',
-            brokerHelperTemplatesParams,
-            answers
-        )
-    );
+    interoperations.forEach(operation => {
+        replaceContent(createParamsForAddBrokerHelper(operation, options));
+    });
 };
