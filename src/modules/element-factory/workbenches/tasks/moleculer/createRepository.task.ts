@@ -11,48 +11,42 @@ import { createRepositoryParams } from '../../params/moleculer.params';
 import { createInterface, createEntityInstance, createTest } from '.';
 // #endregion Local Imports
 
-export const createRepository = (answers: ICommon.IAnswers): void => {
+export const createRepository = (options: ICommon.IAnswers): void => {
     const templatePath = createRepositoryParams.templatePath;
-
-    const templateProps = {
-        upperFileName: answers.upperFileName
-    };
 
     const indexTemplate = createRepositoryParams.indexTemplate;
 
     const addIndexParams: ICommon.IAddIndex = {
         dirPath: `${moleculer.repositoriesDir}/index.ts`,
-        getFileContent: () => getTemplate(indexTemplate, templateProps),
+        getFileContent: () => getTemplate(indexTemplate, options),
         message: 'Repository added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: `${moleculer.repositoriesDir}/${answers.upperFileName}.ts`,
-        getFileContent: () => getTemplate(templatePath, templateProps),
+        dirPath: `${moleculer.repositoriesDir}/${options.upperFileName}.ts`,
+        getFileContent: () => getTemplate(templatePath, options),
         message: 'Added new Repository.'
     };
 
     const repositoryTestParams = {
-        answers,
-        dirPath: `${moleculer.repositoriesTestDir}/${answers.upperFileName}.spec.ts`,
+        ...options,
+        dirPath: `${moleculer.repositoriesTestDir}/${options.upperFileName}.spec.ts`,
         successMessage: 'Added new Repository test.',
         templatePath: createRepositoryParams.testTemplatePath,
-        templateProps
     };
 
-    if (!isAlreadyExist(moleculer.interfaceDir, answers.upperFileName)) {
+    if (!isAlreadyExist(moleculer.interfaceDir, options.upperFileName)) {
         createInterface(
-            answers,
+            options,
             'Repositories',
-            '',
-            createRepositoryParams.createInterfaceParams
+            ''
         );
     }
 
     writeFile(writeFileProps);
     addToIndex(addIndexParams);
     createEntityInstance(
-        answers,
+        options,
         createRepositoryParams.createEntityTemplatesParams
     );
     createTest(repositoryTestParams);

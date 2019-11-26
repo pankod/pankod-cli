@@ -5,21 +5,32 @@ import {
     writeFile,
     addToIndex
 } from '../../operations';
-import { ICommon, IMoleculerHelper } from '../../../../typings';
+import { ICommon } from '../../../../typings';
 import { moleculer } from '../../../../paths';
+import { createServiceParams } from '../../params/moleculer.params';
 // #endregion Local Imports
 
 export const createInterface = (
-    answers: ICommon.IAnswers,
+    options: ICommon.IAnswers,
     dirType: string,
-    prefix: string = '',
-    createInterfaceParams: IMoleculerHelper.ICreateInterfaceParams
+    prefix: string = ''
 ) => {
-    const templatePath = `${createInterfaceParams.templatePath}/${prefix}Interface.mustache`;
-    const templateProps = { upperFileName: answers.upperFileName, dirType };
+    const {
+        templatePath: templateFromParam,
+        indexInterfaceTemplate,
+        folderIndexTemplate
+    } = createServiceParams.createInterfaceParams;
 
-    const interfaceFilePath = `${moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/I${answers.upperFileName}.d.ts`;
-    const interfaceDirPath = `${moleculer.interfaceDir}/${dirType}/${answers.upperFileName}`;
+    const templatePath = `${templateFromParam}/${prefix}Interface.mustache`;
+
+    const templateProps = {
+        dirType,
+        interfaceName: options.interfaceName,
+        upperFileName: options.upperFileName,
+    };
+
+    const interfaceFilePath = `${moleculer.interfaceDir}/${dirType}/${options.upperFileName}/I${options.upperFileName}.d.ts`;
+    const interfaceDirPath = `${moleculer.interfaceDir}/${dirType}/${options.upperFileName}`;
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: interfaceFilePath,
@@ -30,20 +41,13 @@ export const createInterface = (
     const addIndexParams: ICommon.IAddIndex = {
         dirPath: `${moleculer.interfaceDir}/index.ts`,
         getFileContent: () =>
-            getTemplate(
-                createInterfaceParams.indexInterfaceTemplate,
-                templateProps
-            ),
+            getTemplate(indexInterfaceTemplate, templateProps),
         message: 'Interface added to index.ts.'
     };
 
     const addFolderIndex: ICommon.IAddIndex = {
-        dirPath: `${moleculer.interfaceDir}/${dirType}/${answers.upperFileName}/index.ts`,
-        getFileContent: () =>
-            getTemplate(
-                createInterfaceParams.folderIndexTemplate,
-                templateProps
-            ),
+        dirPath: `${moleculer.interfaceDir}/${dirType}/${options.upperFileName}/index.ts`,
+        getFileContent: () => getTemplate(folderIndexTemplate, templateProps),
         message: 'Interface added to folder index.ts.'
     };
 

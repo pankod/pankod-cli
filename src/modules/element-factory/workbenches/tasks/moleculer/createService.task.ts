@@ -17,58 +17,43 @@ import {
 } from '.';
 // #endregion Local Imports
 
-export const createService = (answers: ICommon.IAnswers): void => {
-    const templateProps = {
-        fileName: answers.fileName,
-        hasDatabase: answers.hasDatabase,
-        isPrivate: answers.isPrivate,
-        lowerFileName: answers.lowerFileName,
-        upperFileName: answers.upperFileName
-    };
-
+export const createService = (options: ICommon.IAnswers): void => {
     const addIndexParams: ICommon.IAddIndex = {
         dirPath: `${moleculer.servicesDir}/index.ts`,
         getFileContent: () =>
-            getTemplate(createServiceParams.indexTemplate, templateProps),
+            getTemplate(createServiceParams.indexTemplate, options),
         message: 'Service added to index.ts.'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: `${moleculer.servicesDir}/${answers.lowerFileName}.service.ts`,
+        dirPath: `${moleculer.servicesDir}/${options.lowerFileName}.service.ts`,
         getFileContent: () =>
-            getTemplate(createServiceParams.templatePath, templateProps),
+            getTemplate(createServiceParams.templatePath, options),
         message: 'Added new Service.'
     };
 
     const serviceTestParams = {
-        answers,
-        dirPath: `${moleculer.servicesTestDir}/${answers.lowerFileName}.spec.ts`,
+        ...options,
+        dirPath: `${moleculer.servicesTestDir}/${options.lowerFileName}.spec.ts`,
         successMessage: 'Added new Microservice test.',
         templatePath: createServiceParams.testTemplatePath,
-        templateProps
     };
 
     const integrationTestParams = {
-        answers,
-        dirPath: `${moleculer.integrationTestDir}/${answers.lowerFileName}.spec.ts`,
+        ...options,
+        dirPath: `${moleculer.integrationTestDir}/${options.lowerFileName}.spec.ts`,
         successMessage: 'Added new Integration test.',
         templatePath: createServiceParams.integrationTemplatePath,
-        templateProps
     };
 
-    if (!isAlreadyExist(moleculer.interfaceDir, answers.upperFileName, true)) {
-        createInterface(
-            answers,
-            'Services',
-            'Service',
-            createServiceParams.createInterfaceParams
-        );
+    if (!isAlreadyExist(moleculer.interfaceDir, options.upperFileName, true)) {
+        createInterface(options, 'Services', 'Service');
     }
 
     writeFile(writeFileProps);
     addToIndex(addIndexParams);
-    createServiceHelper(answers);
+    createServiceHelper(options);
     createTest(serviceTestParams);
     createIntegrationTest(integrationTestParams);
-    addBrokerHelper(answers);
+    addBrokerHelper(options);
 };

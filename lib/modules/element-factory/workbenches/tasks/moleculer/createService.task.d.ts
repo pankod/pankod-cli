@@ -1,2 +1,2 @@
 import { ICommon } from '../../../../typings';
-export declare const createService: (answers: ICommon.IAnswers) => void;
+export declare const createService: (options: ICommon.IAnswers) => void;

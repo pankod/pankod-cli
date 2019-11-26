@@ -7,7 +7,7 @@ export const createIntegrationTest = (options: ICommon.ICreateTest): void => {
     const integrationProps: ICommon.IWriteFile = {
         dirPath: options.dirPath,
         getFileContent: () =>
-            getTemplate(options.templatePath, options.templateProps),
+            getTemplate(options.templatePath, options),
         message: options.successMessage
     };
 

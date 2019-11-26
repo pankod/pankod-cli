@@ -7,7 +7,7 @@ export const createTest = (options: ICommon.ICreateTest): void => {
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: options.dirPath,
         getFileContent: () =>
-            getTemplate(options.templatePath, options.templateProps),
+            getTemplate(options.templatePath, options),
         message: options.successMessage
     };
 

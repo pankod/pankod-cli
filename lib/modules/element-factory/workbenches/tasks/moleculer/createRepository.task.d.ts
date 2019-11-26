@@ -1,2 +1,2 @@
 import { ICommon } from '../../../../typings';
-export declare const createRepository: (answers: ICommon.IAnswers) => void;
+export declare const createRepository: (options: ICommon.IAnswers) => void;

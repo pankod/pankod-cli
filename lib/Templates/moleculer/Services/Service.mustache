@@ -5,13 +5,15 @@ import { getConnection } from 'typeorm';
 // #endregion Global Imports
 
 // #region Local Imports
-import { } from '@ServiceHelpers';
+import { {{upperFileName}}Helper } from '@ServiceHelpers';
 import { } from '@Repositories';
-{{#hasDatabase}}import connectionInstance from "@Entities/Connection"{{/hasDatabase}}
+{{#hasDatabase}}
+import connectionInstance from "@Entities/Connection";
+{{/hasDatabase}}
 // #endregion Local Imports
 
 // #region Interface Imports
-import { } from '@Interfaces';
+import { {{interfaceName}} } from '@Interfaces';
 // #endregion Interface Imports
 
 export class {{upperFileName}}Service extends BaseSchema {
@@ -35,21 +37,24 @@ export class {{upperFileName}}Service extends BaseSchema {
 	*/
 {{/isPrivate}}
 	@Action({
-		params: {
-
-		}
+		params: {},
 	})
-	public async {{upperFileName}}(ctx: Context<>): Promise<> {
-		const response = await this.methodName();
+	public async {{upperFileName}}(
+        ctx: Context<{{interfaceName}}.methodNameInDto>,
+    ): Promise<{{interfaceName}}.methodNameOutDto> {
+		const response = await this.methodName(ctx);
 
 		return response;
 	}
 
 	@Method
-	public async {{upperFileName}}Method(): Promise<> {
+	public async {{upperFileName}}Method(
+        ctx: Context<{{interfaceName}}.methodNameInDto>,
+    ): Promise<{{interfaceName}}.methodNameOutDto> {
+        // ...
 	}
-
 {{#hasDatabase}}
+
 	public stopped: Function = async () => await getConnection().close();
 {{/hasDatabase}}
 }

@@ -67,13 +67,11 @@ export declare namespace ICommon {
         message: string;
     }
 
-    export interface ICreateTest {
+    export type ICreateTest = {
         templatePath: string;
-        templateProps: ITemplateProps;
-        answers: IAnswers;
         dirPath: string;
         successMessage: string;
-    }
+    } & IAnswers;
 
     export interface IReplaceContent {
         filetoUpdate: string;
