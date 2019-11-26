@@ -7,6 +7,7 @@ export const createInterfaceParams: INextjs2Helper.ICreateInterfaceParams = {
     templatePath: paths.nextjs2.templates.createInterfaceTempPath,
     pageInterfaceIndex: paths.nextjs2.templates.pageInterfaceIndex,
     storeImportInterface: paths.nextjs2.templates.storeImportInterface,
+    storeImportInterfaceFormatted: paths.nextjs2.templates.storeImportInterfaceFormatted,
     compInterfaceIndex: paths.nextjs2.templates.compInterfaceIndex,
     storeInterface: paths.nextjs2.templates.storeInterface,
     interfaceDir: paths.nextjs2.interfaceDir,
