@@ -13,6 +13,7 @@
         }
     ],
     "scripts": {
+        "start": "npm pack && npm link",
         "postpack": "rm -f oclif.manifest.json",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
         "sync-templates": "cp -r src/Templates lib/Templates",
