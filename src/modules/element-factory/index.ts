@@ -8,7 +8,7 @@ import { ICommon } from '../typings';
 import { getQuestionsOfProjectElement } from '../henchman';
 // #endregion Local Imports
 
-const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
+const prepareOptions = (answers: ICommon.IAnswers) => {
     const capitalizedName = answers.fileName.replace(/\b\w/g, f =>
         f.toUpperCase()
     );
@@ -22,8 +22,7 @@ const prepareOptions = (answers: ICommon.IAnswers, custom?: object) => {
         // TODO: Rename 'upperFileName' as 'capitalizedFileName'
         upperFileName: capitalizedName,
         lowerFileName: unCapitalizedName,
-        interfaceName: `I${capitalizedName}`,
-        ...custom
+        interfaceName: `I${capitalizedName}`
     };
 };
 

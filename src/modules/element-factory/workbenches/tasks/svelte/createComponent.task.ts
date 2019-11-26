@@ -18,12 +18,15 @@ export const createComponent = (options: ICommon.IAnswers): void => {
         message: 'Add new component.'
     };
 
-    createTest(options);
+    writeFile(writeFileProps);
+
+    createTest({
+        ...options,
+        dirPath: `${componentsDir}/${fileName}/index.spec.js`,
+        successMessage: 'Added new component test.'
+    });
 
     if (hasStyle) {
         createStyle(options);
     }
-
-    createFile(componentDir);
-    writeFile(writeFileProps);
 };

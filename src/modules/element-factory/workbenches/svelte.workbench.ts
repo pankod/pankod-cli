@@ -1,7 +1,6 @@
 // #region Local Imports
-import { createComponent, createStyle } from './tasks/svelte';
-import * as paths from '../../paths';
-import { ICommon, SvelteElement, ISvelteActions } from '../../typings';
+import { createComponent } from './tasks/svelte';
+import { ICommon, ISvelteActions } from '../../typings';
 // #endregion Local Imports
 
 export const svelte = (
@@ -14,15 +13,6 @@ export const svelte = (
     const workbench: ISvelteActions = {
         Component: () => {
             createComponent(options);
-        },
-
-        Test: () => {
-            createStyle({
-                ...options,
-                dirPath: `${paths.svelte.componentsDir}/${options.fileName}/index.spec.js`,
-                successMessage: 'Added new component test.',
-                templatePath: paths.svelte.templates.componentTestTemplate
-            });
         }
     };
 

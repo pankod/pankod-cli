@@ -1,16 +1,17 @@
 // #region Local Imports
 import { ICommon } from '../../../../typings';
 import { getTemplate, writeFile } from '../../operations';
-import { createStyleParams } from '../../params/svelte.params';
+import { createTestParams } from '../../params/svelte.params';
 // #endregion Local Imports
 
 export const createTest = (options: any): void => {
-    const { templatePath } = createStyleParams;
-    const { dirPath, templateProps, successMessage } = options;
+    const { templatePath } = createTestParams;
+
+    const { dirPath, successMessage } = options;
 
     const writeFileProps: ICommon.IWriteFile = {
-        dirPath: dirPath,
-        getFileContent: () => getTemplate(templatePath, templateProps),
+        dirPath,
+        getFileContent: () => getTemplate(templatePath, options),
         message: successMessage
     };
 
