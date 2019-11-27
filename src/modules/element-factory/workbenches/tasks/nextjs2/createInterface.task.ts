@@ -96,7 +96,7 @@ export const createInterface = (options: ICommon.IAnswers) => {
             storeImportInterface,
             'Interface file added to import section in Redux/IStore.d.ts',
             / } from "@Interfaces";/,
-            [storeImportInterfaceFormatted, /\n} from "@Interfaces";/]
+            [storeImportInterfaceFormatted, /(,|)\n} from "@Interfaces";/]
         );
 
         replaceContent(replaceStoreImportParams);

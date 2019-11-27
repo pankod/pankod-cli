@@ -51,6 +51,7 @@ export declare namespace INextjsHelper {
         compInterfaceIndex: string;
         storeInterface: string;
         storeImportInterface: string;
+        storeImportInterfaceFormatted: string;
         interfaceDir: string;
         reduxInterfaceDir: string;
     }

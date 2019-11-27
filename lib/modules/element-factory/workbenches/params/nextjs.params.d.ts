@@ -3,6 +3,7 @@ export declare const createInterfaceParams: {
     templatePath: string;
     pageInterfaceIndex: string;
     storeImportInterface: string;
+    storeImportInterfaceFormatted: string;
     compInterfaceIndex: string;
     storeInterface: string;
     interfaceDir: string;

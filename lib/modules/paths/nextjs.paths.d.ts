@@ -20,6 +20,7 @@ export declare const nextjs: {
         createInterfaceTempPath: string;
         pageInterfaceIndex: string;
         storeImportInterface: string;
+        storeImportInterfaceFormatted: string;
         storeInterface: string;
         classComponentTemplatePath: string;
         componentIndexTemplatePath: string;

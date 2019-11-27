@@ -60,38 +60,57 @@ export const createInterface = (
     const commonReplaceParams = (
         contentFile: string,
         message: string,
-        regexKey: RegExp
-    ) => ({
-        fileDir: createInterfaceParams.reduxInterfaceDir,
-        filetoUpdate: fs.readFileSync(
-            path.resolve('', createInterfaceParams.reduxInterfaceDir),
-            'utf8'
-        ),
-        getFileContent: () => getTemplate(contentFile, templateProps),
-        message,
-        regexKey
-    });
+        regexKey: RegExp,
+        formatted: Array<any> = []
+    ) => {
+        const params = {
+            fileDir: createInterfaceParams.reduxInterfaceDir,
+            filetoUpdate: fs.readFileSync(
+                path.resolve('', createInterfaceParams.reduxInterfaceDir),
+                'utf8'
+            ),
+            getFileContent: () => getTemplate(contentFile, templateProps),
+            message,
+            regexKey
+        };
 
-    const replaceStoreParams: ICommon.IReplaceContent = commonReplaceParams(
-        createInterfaceParams.storeInterface,
-        'Interface file added to Interfaces/Redux/Store.d.ts',
-        /export interface IStore\s[{]/g
-    );
+        // * Change RegExp if file is formatted
+        const [formattedTarget, formattedRegex] = formatted;
+
+        if (formattedRegex && params.filetoUpdate.match(formattedRegex)) {
+            return {
+                ...params,
+                regexKey: formattedRegex,
+                getFileContent: () =>
+                    getTemplate(formattedTarget, templateProps)
+            };
+        }
+
+        return params;
+    };
 
     writeFile(writeFileProps);
     replaceContent(replaceContentParams);
 
     if (isConnectStore) {
+        const replaceStoreParams: ICommon.IReplaceContent = commonReplaceParams(
+            createInterfaceParams.storeInterface,
+            'Interface file added to Interfaces/Redux/Store.d.ts',
+            /export interface IStore\s[{]/g
+        );
+
         replaceContent(replaceStoreParams);
 
-        setTimeout(() => {
-            const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
-                createInterfaceParams.storeImportInterface,
-                'Interface file added to import section in Interfaces/Redux/Store.d.ts',
-                /\s[}] from '@Interfaces';/g
-            );
+        const replaceStoreImportParams: ICommon.IReplaceContent = commonReplaceParams(
+            createInterfaceParams.storeImportInterface,
+            'Interface file added to import section in Interfaces/Redux/Store.d.ts',
+            /\s[}] from '@Interfaces';/g,
+            [
+                createInterfaceParams.storeImportInterfaceFormatted,
+                /(,|)\n} from '@Interfaces';/
+            ]
+        );
 
-            replaceContent(replaceStoreImportParams);
-        }, 100);
+        replaceContent(replaceStoreImportParams);
     }
 };

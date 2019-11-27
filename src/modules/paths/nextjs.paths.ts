@@ -20,6 +20,7 @@ export const nextjs = {
         createInterfaceTempPath: './lib/Templates/nextjs/Interfaces/Component.mustache',
         pageInterfaceIndex: './lib/Templates/nextjs/Interfaces/PageIndex.mustache',
         storeImportInterface: './lib/Templates/nextjs/Interfaces/ReduxImport.mustache',
+        storeImportInterfaceFormatted: './lib/Templates/nextjs/Interfaces/ReduxImportFormatted.mustache',
         storeInterface: './lib/Templates/nextjs/Interfaces/ReduxStore.mustache',
         classComponentTemplatePath: './lib/Templates/nextjs/Components/Class.mustache',
         componentIndexTemplatePath: './lib/Templates/nextjs/Components/index.mustache',

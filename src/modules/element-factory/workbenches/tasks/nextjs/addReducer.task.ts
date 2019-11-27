@@ -39,7 +39,7 @@ export const addReducer = (
         getFileContent: () =>
             getTemplate(reducerIndexTemplatePath, templateProps),
         message: 'Reducer added to Redux/Reducers/index.ts',
-        regexKey: /import { combineReducers } from 'redux';/g
+        regexKey: /import { combineReducers } from 'redux';\n\w*/
     };
 
     const writeFileProps: ICommon.IWriteFile = {
