@@ -89,9 +89,11 @@ const connected = connect(mapStateToProps, mapDispatchToProps);
 {{/isConnectStore}}
 {{#isPage}}
 
-export default withTranslation("common")(connected({{upperFileName}}));
+{{#isConnectStore}}export default withTranslation("common")(connected({{upperFileName}}));{{/isConnectStore}}{{^isConnectStore}}export default withTranslation("common")({{upperFileName}});{{/isConnectStore}}
 {{/isPage}}
 {{^isPage}}
+{{#isConnectStore}}
 
 export default connected;
+{{/isConnectStore}}
 {{/isPage}}

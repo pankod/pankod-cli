@@ -5,3 +5,4 @@ export * from './customPath.question';
 export * from './enterComponentName.question';
 export * from './enterPageName.question';
 export * from './isHaveReducer.question';
+export * from './implementation.question';

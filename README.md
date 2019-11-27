@@ -34,20 +34,20 @@ USAGE
 <!-- usagestop -->
 # Commands
 <!-- commands -->
-* [`pankod-cli add ClassComponent`](#pankod-cli-add-classcomponent)
+* [`pankod-cli add Page`](#pankod-cli-add-page)
 * [`pankod-cli help [COMMAND]`](#pankod-cli-help-command)
 
-## `pankod-cli add ClassComponent`
+## `pankod-cli add Page`
 
 Add services, components and more...
 
 ```
 USAGE
+  $ pankod-cli add Page
+  $ pankod-cli add Component
   $ pankod-cli add ClassComponent
   $ pankod-cli add FunctionalComponent
-  $ pankod-cli add Page
   $ pankod-cli add Plugin
-  $ pankod-cli add Component
   $ pankod-cli add entity
   $ pankod-cli add service
 ```
