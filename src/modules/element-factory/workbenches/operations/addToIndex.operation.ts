@@ -11,12 +11,17 @@ import { failsafe } from '.';
 // #endregion Local Imports
 
 export const addToIndex = (params: ICommon.IAddIndex): void => {
-    failsafe(params.dirPath);
+    const target = path.resolve('', params.dirPath);
 
-    fs.appendFileSync(
-        path.resolve('', params.dirPath),
-        `${params.getFileContent()}`
-    );
+    failsafe(target, true);
+
+    const content = fs.readFileSync(target, 'utf-8');
+
+    const clearToAppend = content.replace(/s$/, '');
+
+    fs.writeFileSync(target, clearToAppend);
+
+    fs.appendFileSync(target, `${params.getFileContent()}`);
 
     console.log(chalk.green(logSymbols.success, params.message));
 };

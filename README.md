@@ -48,8 +48,8 @@ USAGE
   $ pankod-cli add ClassComponent
   $ pankod-cli add FunctionalComponent
   $ pankod-cli add Plugin
-  $ pankod-cli add entity
-  $ pankod-cli add service
+  $ pankod-cli add Repository
+  $ pankod-cli add Service
 ```
 
 _See code: [src/commands/add/index.ts](https://github.com/Pankod/pankod-cli/blob/v0.3.3/src/commands/add/index.ts)_

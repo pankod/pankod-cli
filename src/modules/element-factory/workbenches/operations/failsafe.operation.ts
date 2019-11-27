@@ -3,10 +3,10 @@ import * as fs from 'fs';
 import * as path from 'path';
 // #endregion Global Imports
 
-export const failsafe = (target: string) => {
+export const failsafe = (target: string, isFile?: boolean) => {
+    const absoluteTarget = path.resolve(target);
 
-    const folders = path
-        .resolve(target)
+    const folders = absoluteTarget
         .split('/')
         .splice(1);
 
@@ -14,12 +14,18 @@ export const failsafe = (target: string) => {
     // * will be created too.
     target.match(/\/$/) && folders.push('');
 
-    folders.reduce((acc: string[], curr: string) => {
+    folders.reduce(
+        (acc: string[], curr: string) => {
+            const target = path.join(...acc);
 
-        const target = path.join(...acc);
+            if (!fs.existsSync(target)) fs.mkdirSync(target);
 
-        if (!fs.existsSync(target)) fs.mkdirSync(target)
+            return [...acc, curr];
+        },
+        ['/']
+    );
 
-        return [...acc, curr];
-    }, ['/']);
+    if (isFile && !fs.existsSync(absoluteTarget)) {
+        fs.writeFileSync(absoluteTarget, '');
+    }
 };
