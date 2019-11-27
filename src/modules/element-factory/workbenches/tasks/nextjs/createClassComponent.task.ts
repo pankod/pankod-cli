@@ -11,7 +11,7 @@ import { createClassComponentParams } from '../../params/nextjs.params';
 import { createInterface, addReducer, addAction } from '.';
 // #endregion Local Imports
 
-export const createClassComponent = (answers: ICommon.IAnswers): void => {
+export const createClassComponent = (options: ICommon.IAnswers): void => {
     const {
         templatePath,
         indexTemplatePath,
@@ -20,42 +20,33 @@ export const createClassComponent = (answers: ICommon.IAnswers): void => {
         addActionParams
     } = createClassComponentParams;
 
-    const { lowerFileName, isConnectStore = false, isPage = false } = answers;
+    const { lowerFileName, isConnectStore = false, isPage = false } = options;
 
     const pagesDir = `${nextjs.pagesDir}/${lowerFileName}`;
 
     const classDir = isPage
         ? pagesDir
-        : `${nextjs.componentsDir}/${answers.fileName}`;
-
-    const templateProps = {
-        fileName: answers.fileName,
-        hasStyle: answers.hasStyle,
-        interfaceName: `I${answers.fileName}`,
-        isConnectStore: answers.isConnectStore,
-        lowerFileName: answers.lowerFileName,
-        upperFileName: answers.upperFileName
-    };
+        : `${nextjs.componentsDir}/${options.fileName}`;
 
     const addIndexParams: ICommon.IAddIndex = {
         dirPath: `${nextjs.componentsDir}/index.ts`,
-        getFileContent: () => getTemplate(indexTemplatePath, templateProps),
+        getFileContent: () => getTemplate(indexTemplatePath, options),
         message: 'Component added to index.ts'
     };
 
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${classDir}/index.tsx`,
-        getFileContent: () => getTemplate(templatePath, templateProps),
+        getFileContent: () => getTemplate(templatePath, options),
         message: 'Added new class component'
     };
 
     createFile(classDir);
     writeFile(writeFileProps);
-    createInterface(answers, true, createInterfaceParams);
+    createInterface(options, true, createInterfaceParams);
 
     if (isConnectStore) {
-        addReducer(templateProps, addReducerParams);
-        addAction(templateProps, addActionParams);
+        addReducer(options, addReducerParams);
+        addAction(options, addActionParams);
     }
 
     if (!isPage) {

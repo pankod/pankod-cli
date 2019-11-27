@@ -39,9 +39,11 @@ export const addReducerParams: INextjs2Helper.IAddReducerParams = {
 export const createClassComponentParams: INextjs2Helper.ICreateClassComponentParams = {
     templatePath: paths.nextjs2.templates.classComponentTemplatePath,
     indexTemplatePath: paths.nextjs2.templates.componentIndexTemplatePath,
+    componentsDir: paths.nextjs2.componentsDir,
     createInterfaceParams,
     addReducerParams,
-    addActionParams
+    addActionParams,
+    componentTestTemplatePath: paths.nextjs2.templates.componentTestTemplatePath
 };
 
 export const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParams = {
@@ -49,6 +51,8 @@ export const createFuncComponentParams: INextjs2Helper.ICreateFuncComponentParam
     indexTemplatePath: paths.nextjs2.templates.componentIndexTemplatePath,
     componentsDir: paths.nextjs2.componentsDir,
     createInterfaceParams,
+    addReducerParams,
+    addActionParams,
     componentTestTemplatePath: paths.nextjs2.templates.componentTestTemplatePath
 };
 

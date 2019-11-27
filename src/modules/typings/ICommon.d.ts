@@ -24,16 +24,18 @@ export declare namespace ICommon {
     }
 
     export interface IAnswers {
+        funcComponentDir?: string;
+        classDir?: string;
+        isClass?: boolean;
+        implementation: 'functional' | 'object-oriented';
         selection?: Element;
         dirPath?: string;
         successMessage?: string;
         templatePath?: string;
         target?: string;
-        isClass?: boolean;
         fileName: string;
         fileType?: string;
         interfaceName?: string;
-        classDir?: string;
         upperFileName?: string;
         isPrivate?: boolean;
         hasDatabase?: boolean;

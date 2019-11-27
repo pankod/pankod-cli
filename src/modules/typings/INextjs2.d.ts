@@ -12,27 +12,18 @@ import {
 import { ICommon } from '.';
 // #region Local Imports
 
-export type Next2Element = 'Page' | 'ClassComponent' | 'FunctionalComponent';
-
-export interface INextjs2CommonQuestions {
-    addStyle: ListQuestion<ICommon.IAnswers>;
-    connectStore: ConfirmQuestion<ICommon.IAnswers>;
-    enterComponentName: InputQuestion<ICommon.IAnswers>;
-    isHaveReducer: ListQuestion<ICommon.IAnswers>;
-}
+export type Next2Element = 'Page' | 'Component';
 
 export interface INextjs2Questions {
-    Plugin: QuestionCollection<ICommon.IAnswers>;
-    ClassComponent: QuestionCollection<ICommon.IAnswers>;
-    FunctionalComponent: QuestionCollection<ICommon.IAnswers>;
     Page: QuestionCollection<ICommon.IAnswers>;
+    Component: QuestionCollection<ICommon.IAnswers>;
+    // Plugin: QuestionCollection<ICommon.IAnswers>;
     [key: string]: QuestionCollection<ICommon.IAnswers>;
 }
 
 export interface INextjs2Actions {
-    ClassComponent: Function;
-    FunctionalComponent: Function;
     Page: Function;
+    Component: Function;
     // Plugin: Function;
     [key: string]: Function;
 }
@@ -69,15 +60,19 @@ export declare namespace INextjs2Helper {
         templatePath: string;
         indexTemplatePath: string;
         createInterfaceParams: ICreateInterfaceParams;
+        componentsDir: string;
         addReducerParams: IAddReducerParams;
         addActionParams: IAddActionParams;
+        componentTestTemplatePath: string;
     }
 
     export interface ICreateFuncComponentParams {
-        createInterfaceParams: ICreateInterfaceParams;
         templatePath: string;
         indexTemplatePath: string;
+        createInterfaceParams: ICreateInterfaceParams;
         componentsDir: string;
+        addReducerParams: IAddReducerParams;
+        addActionParams: IAddActionParams;
         componentTestTemplatePath: string;
     }
 

@@ -12,15 +12,20 @@ export const nextjs2 = (
 ): void => {
     const workbench: INextjs2Actions = {
         Page: () => {
-            createClassComponent({ ...options, isPage: true });
+            // TODO: Refactor as ONE method.
+            if (options.implementation === 'functional') {
+                createFuncComponent({...options, isPage: true})
+            } else {
+                createClassComponent({ ...options, isPage: true });
+            }
         },
 
-        ClassComponent: () => {
-            createClassComponent(options);
-        },
-
-        FunctionalComponent: () => {
-            createFuncComponent({ ...options, isFuncComponent: true });
+        Component: () => {
+            if (options.implementation === 'functional') {
+                createFuncComponent(options);
+            } else {
+                createClassComponent(options);
+            }
         }
 
         // Plugin: () => {

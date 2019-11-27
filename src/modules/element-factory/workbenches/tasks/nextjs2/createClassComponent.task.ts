@@ -1,35 +1,35 @@
+// #region Local Imports
+import { nextjs2 } from '../../../../paths';
 import { ICommon } from '../../../../typings';
+import { createClassComponentParams } from '../../params/nextjs2.params';
 import {
     getTemplate,
     addToIndex,
     createFile,
     writeFile
 } from '../../operations';
-import { createClassComponentParams } from '../../params/nextjs2.params';
-import { nextjs2 } from '../../../../paths';
 import {
-    addRoute,
     createInterface,
     createStyle,
     addReducer,
-    addAction
+    addAction,
+    addRoute
 } from '.';
-// #region Local Imports
+// #endregion Local Imports
 
 export const createClassComponent = (options: ICommon.IAnswers): void => {
     const {
         templatePath,
         indexTemplatePath,
         addReducerParams,
-        addActionParams
+        addActionParams,
+        componentTestTemplatePath
     } = createClassComponentParams;
 
-    const { lowerFileName, isConnectStore, isPage } = options;
+    const { fileName, lowerFileName, isConnectStore, isPage } = options;
 
     options.isScss = options.hasStyle === 'scss';
     options.isStyled = options.hasStyle === 'styled';
-
-    // TODO: Modularize Preparation of Params
 
     if (isPage) {
         options.classDir = `${nextjs2.pagesDir}/${lowerFileName}`;
@@ -41,7 +41,7 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
 
         addRoute(options, addRouteParams);
     } else {
-        options.classDir = `${nextjs2.componentsDir}/${options.fileName}`;
+        options.classDir = `${nextjs2.componentsDir}/${fileName}`;
 
         const addIndexParams: ICommon.IAddIndex = {
             dirPath: `${nextjs2.componentsDir}/index.ts`,
@@ -55,11 +55,18 @@ export const createClassComponent = (options: ICommon.IAnswers): void => {
     const writeFileProps: ICommon.IWriteFile = {
         dirPath: `${options.classDir}/index.tsx`,
         getFileContent: () => getTemplate(templatePath, options),
-        message: 'Added new class component'
+        message: 'Added new class component.'
+    };
+
+    const writeTestFileProps: ICommon.IWriteFile = {
+        dirPath: `${options.classDir}/index.spec.tsx`,
+        getFileContent: () => getTemplate(componentTestTemplatePath, options),
+        message: 'Added unit test of component.'
     };
 
     createFile(options.classDir);
-    writeFile(writeFileProps);
+    writeFile(writeFileProps, /;(?:(\n|\r|\s))*$/);
+    !isPage && writeFile(writeTestFileProps);
     createInterface(options);
     createStyle(options);
 

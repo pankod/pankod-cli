@@ -8,12 +8,28 @@ import chalk from 'chalk';
 // #region Local Imports
 import { ICommon } from '../../../typings';
 import { failsafe } from '.';
+import { replaceContent } from './replaceContent.operation';
 // #endregion Local Imports
 
-export const writeFile = (params: ICommon.IWriteFile) => {
-    failsafe(params.dirPath);
+export const writeFile = (
+    params: ICommon.IWriteFile,
+    replaceTarget?: RegExp
+) => {
+    const { dirPath, getFileContent, message } = params;
 
-    fs.writeFileSync(path.resolve('', params.dirPath), params.getFileContent());
+    const target = path.resolve('', dirPath);
 
-    console.info(chalk.green(logSymbols.success, params.message));
+    if (fs.existsSync(target) && replaceTarget) {
+        const content = fs.readFileSync(target, 'utf8');
+
+        params.getFileContent = () => {
+            return content.replace(replaceTarget, getFileContent());
+        };
+    }
+
+    failsafe(target);
+
+    fs.writeFileSync(target, params.getFileContent());
+
+    console.info(chalk.green(logSymbols.success, message));
 };
