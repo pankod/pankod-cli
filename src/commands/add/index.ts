@@ -31,7 +31,9 @@ export default class Add extends Command {
     static usage = getUsage();
 
     async run() {
-        const { project } = getPankodConfig();
+        const { project: newKey, projectType: oldKey } = getPankodConfig();
+
+        const project = newKey || oldKey;
 
         // ? bind(this) or pass this.error
         validateProject.bind(this, project)();

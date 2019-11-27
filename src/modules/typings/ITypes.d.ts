@@ -8,6 +8,7 @@ import { ICommon } from ".";
 
 export interface IPankodConfig {
     project: ICommon.Project;
+    projectType?: ICommon.Project; // * Keep for backwards compatibility
     plugins: string[];
 }
 

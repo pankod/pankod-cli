@@ -17,13 +17,13 @@ const hook: Hook<'init'> = async function() {
     const pankodConfig: IPankodConfig = getPankodConfig();
 
     if (!pankodConfig) {
-        this.error('Please specify pankod.projectType in package.json');
+        this.error('Please specify pankod.project in package.json');
         this.exit(1);
     }
 
-    const projectType: string = pankodConfig.project;
+    const project: string = pankodConfig.project || pankodConfig.projectType;
 
-    process.stdout.write(chalk.default(figlet.textSync(text[projectType])) + '\n');
+    process.stdout.write(chalk.default(figlet.textSync(text[project])) + '\n');
 };
 
 export default hook;
