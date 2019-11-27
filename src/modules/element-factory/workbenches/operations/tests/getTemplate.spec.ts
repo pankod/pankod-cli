@@ -32,9 +32,10 @@ describe(operations, () => {
         };
 
         it('should template with passed model', () => {
-            expect(render(existent)).toMatchInlineSnapshot(
-                `"export { default as Test } from '@Components/Test';"`
-            );
+            expect(render(existent)).toMatchInlineSnapshot(`
+                "export { default as Test } from '@Components/Test';
+                "
+            `);
         });
 
         it('should log error if given path is non-existent', () => {
