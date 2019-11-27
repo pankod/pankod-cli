@@ -4,7 +4,6 @@ import { ICommon } from '../typings';
 import { renderMessage } from '.';
 // #endregion Local Imports
 
-// TODO: bind this or what ?
 export const validateProject = function(this: any, project: string) {
     if (!suitcase.hasOwnProperty(project)) {
         this.error(renderMessage.invalidProject(project));

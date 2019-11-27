@@ -22,9 +22,6 @@ export const createEntityInstance = (
         getFileContent: () =>
             getTemplate(createEntityHelperParams.indexTemplate, templateProps),
         message: 'Entity added to index.ts.'
-        // TODO: Pass regexp key to capture empty line
-        // * and also leave an empty line
-        // * for all index appendings
     };
 
     writeFile(writeFileProps);

@@ -11,11 +11,11 @@ export const moleculer = (
     options: ICommon.IAnswers
 ) => {
     const workbench: IMoleculerActions = {
-        entity: () => {
+        Repository: () => {
             createRepository(options);
         },
 
-        service: () => {
+        Service: () => {
             createService(options);
         }
     };

@@ -4,11 +4,11 @@ import { IMoleculerQuestions } from '../../typings';
 // #endregion Local Imports
 
 export const moleculer: IMoleculerQuestions = {
-    entity: [
+    Repository: [
         questions.entityName
     ],
 
-    service: [
+    Service: [
         questions.serviceName,
         questions.isPrivate,
         questions.hasDatabase

@@ -6,17 +6,17 @@ import { QuestionCollection, Question } from "inquirer";
 import { ICommon } from ".";
 // #region Local Imports
 
-export type MoleculerElement = 'service' | 'repository';
+export type MoleculerElement = 'Service' | 'Repository';
 
 export interface IMoleculerQuestions {
-    entity: QuestionCollection<ICommon.IAnswers>;
-    service: QuestionCollection<ICommon.IAnswers>;
+    Service: QuestionCollection<ICommon.IAnswers>;
+    Repository: QuestionCollection<ICommon.IAnswers>;
     [key: string]: QuestionCollection<ICommon.IAnswers>;
 }
 
 export interface IMoleculerActions {
-    entity: Function;
-    service: Function;
+    Service: Function;
+    Repository: Function;
     [key: string]: Function;
 }
 
