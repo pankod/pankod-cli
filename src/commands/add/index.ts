@@ -1,70 +1,60 @@
+// #region Global Imports
 import { Command } from '@oclif/command';
+import * as inquirer from 'inquirer';
+// #endregion Global Imports
 
-import questions from '../../questions';
-import { ICommon } from '../../Scripts/ICommon';
-import inquirer = require('inquirer');
-import { CommonHelper } from '../../Scripts/Common';
-import { IQuestionsHelper, ISupportedCommands } from '../../ITypes';
-
-interface IAddArgs {
-	args: {
-		entityType: string
-	}
-}
-
-const supportedProjects: string[] = ['nextjs', 'moleculer', 'svelte'];
-
-const supportedCommands: ISupportedCommands = {
-	moleculer: ['Entity', 'Service'],
-	nextjs: ['Page', 'FunctionalComponent', 'ClassComponent', 'Plugin'],
-	svelte: ['Component']
-};
+// #region Local Imports
+import { ICommon } from '../../modules/typings';
+import { produce } from '../../modules/element-factory';
+import {
+    getQuestionByProject,
+    getAllElements,
+    getUsage
+} from '../../modules/henchman';
+import {
+    getPankodConfig,
+    validateCommand,
+    validateProject
+} from '../../modules/utils';
+// #endregion Local Imports
 
 export default class Add extends Command {
-	static description = 'Add services, components and more...';
+    static description = 'Add services, components and more...';
 
-	static args = [
-		{
-			name: 'entityType',
-			options: ['Entity', 'Service', 'Page', 'FunctionalComponent', 'ClassComponent', 'Plugin', 'Component']
-		}
-	];
+    static args = [
+        {
+            name: 'element',
+            options: getAllElements()
+        }
+    ];
 
-	static usage =
-		['add Entity', 'add Service', 'add Page', 'add FunctionalComponent', 'add ClassComponent', 'add Plugin'];
+    static usage = getUsage();
 
-	validateProjectSupported = (projectType: string) => {
-		if (!supportedProjects.includes(projectType)) {
-			this.error(`The project ${projectType} isn't supported.`);
-		}
-	};
+    async run() {
+        const { project: newKey, projectType: oldKey } = getPankodConfig();
 
-	validateCommand = (entityType: string, projectType: string) => {
-		if (entityType && !supportedCommands[projectType].includes(entityType)) {
-			this.error(`Command "${entityType}" isn't supported by ${projectType} project.`);
-		}
-	};
+        const project = newKey || oldKey;
 
-	async run() {
-		const { args: { entityType } }: IAddArgs = this.parse(Add);
+        // ? bind(this) or pass this.error
+        validateProject.bind(this, project)();
 
-		const { projectType } = CommonHelper.getPankodConfig();
+        let {
+            args: { element }
+        }: ICommon.IAddArgs = this.parse(Add);
 
-		this.validateProjectSupported(projectType);
-		this.validateCommand(entityType, projectType);
+        if (element) {
+            // ? bind(this) or pass this.error
+            validateCommand.bind(this, element, project)();
+        } else {
+            const whichElement = getQuestionByProject(project);
 
-		let answers: ICommon.IAnswers = { fileName: '', fileType: '' };
+            const { selection } = await inquirer.prompt(whichElement);
 
-		if (!entityType) {
-			answers = await inquirer.prompt(questions[projectType]);
-		}
+            // TODO: Create workbenches own interfaces for IAnswer
+            // * Just skipping type check
+            if (selection) element = selection;
+        }
 
-		const questionsHelper: IQuestionsHelper = require(`../../Scripts/${projectType}/index`) as IQuestionsHelper;
-
-		try {
-			await questionsHelper.default.showQuestions(answers.fileType || entityType);
-		} catch (error) {
-			this.error(error);
-		}
-	}
+        await produce(project, element);
+    }
 }

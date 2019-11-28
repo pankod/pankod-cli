@@ -4,12 +4,12 @@ root = true
 end_of_line = lf
 insert_final_newline = true
 charset = utf-8
-indent_style = tab
+indent_style = space
 indent_size = 4
 
 [package.json]
 indent_style = space
 indent_size = 2
 
-[src/Templates/**/*]
+[src/templates/**/*]
 insert_final_newline = false
