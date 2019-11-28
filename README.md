@@ -45,6 +45,9 @@ Add services, components and more...
   # moleculer  
   $ pankod-cli add Service
   $ pankod-cli add Repository
+
+  # svelte
+  $ pankod-cli add Component
 ```
 
 _See code: [src/commands/add](https://github.com/Pankod/pankod-cli/blob/v0.3.3/src/commands/add/index.ts)_
