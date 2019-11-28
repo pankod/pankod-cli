@@ -15,30 +15,56 @@ Save a lot of time by generating services, components, tests for Pankod Boilerpl
 [![License](https://img.shields.io/npm/l/@pankod/pankod-cli.svg)](https://github.com/Pankod/pankod-cli/blob/master/package.json)
 
 <!-- usage -->
-# :cake: Usage
-
-Install __globally__
-```sh
+```sh-session
 $ npm install -g @pankod/pankod-cli
-```
-
-Add __`pankod`__ object into your `package.json`
-```js
-{
-    // in package.json
-
-    "pankod": {
-        "project": "nextjs2" // | nextjs | moleculer | svelte
-    }
-}
-```
-
-Start generating elements
-```sh
-$ pankod-cli add <element>
+$ pankod-cli COMMAND
+running command...
+$ pankod-cli (-v|--version|version)
+@pankod/pankod-cli/1.0.0 darwin-x64 node-v10.16.3
+$ pankod-cli --help [COMMAND]
+USAGE
+  $ pankod-cli COMMAND
+...
 ```
 <!-- usagestop -->
 <!-- commands -->
+* [`pankod-cli add Page`](#pankod-cli-add-page)
+* [`pankod-cli help [COMMAND]`](#pankod-cli-help-command)
+
+## `pankod-cli add Page`
+
+Add services, components and more...
+
+```
+USAGE
+  $ pankod-cli add Page
+  $ pankod-cli add Component
+  $ pankod-cli add ClassComponent
+  $ pankod-cli add FunctionalComponent
+  $ pankod-cli add Plugin
+  $ pankod-cli add Repository
+  $ pankod-cli add Service
+```
+
+_See code: [src/commands/add/index.ts](https://github.com/Pankod/pankod-cli/blob/v1.0.0/src/commands/add/index.ts)_
+
+## `pankod-cli help [COMMAND]`
+
+display help for pankod-cli
+
+```
+USAGE
+  $ pankod-cli help [COMMAND]
+
+ARGUMENTS
+  COMMAND  command to show help for
+
+OPTIONS
+  --all  see all commands in CLI
+```
+
+_See code: [@oclif/plugin-help](https://github.com/oclif/plugin-help/blob/v2.2.1/src/commands/help.ts)_
+<!-- commandsstop -->
 # :package: Elements
 
 ### `pankod-cli add <element>`
