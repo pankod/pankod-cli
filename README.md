@@ -23,9 +23,9 @@ $ npm install -g @pankod/pankod-cli
 ```
 
 Add __`pankod`__ object into your `package.json`
-```json
+```js
 {
-    ...
+    // in package.json
 
     "pankod": {
         "project": "nextjs2" // | nextjs | moleculer | svelte
