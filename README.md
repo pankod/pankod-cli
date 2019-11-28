@@ -17,10 +17,23 @@ Save a lot of time by generating services, components, tests for Pankod Boilerpl
 <!-- usage -->
 # :cake: Usage
 
+Install __globally__
 ```sh
 $ npm install -g @pankod/pankod-cli
 ```
 
+Add __`pankod`__ object into your `package.json`
+```json
+{
+    ...
+
+    "pankod": {
+        "project": "nextjs2" // | nextjs | moleculer | svelte
+    }
+}
+```
+
+Start generating elements
 ```sh
 $ pankod-cli add <element>
 ```
