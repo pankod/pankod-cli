@@ -1,10 +1,13 @@
 // #region Global Imports
 import * as inquirer from 'inquirer';
+import chalk from 'chalk';
 // #endregion Global Imports
 
 // #region Local Imports
 import { ICommon } from '../../../../typings';
 // #endregion Local Imports
+
+const { italic } = chalk;
 
 export const implementation: inquirer.ListQuestion<ICommon.IAnswers> = {
     message: `What's your preferred implementation?`,
@@ -14,11 +17,13 @@ export const implementation: inquirer.ListQuestion<ICommon.IAnswers> = {
     choices: [
         new inquirer.Separator(),
         {
-            name: 'Functional',
+            name: `const Awesome = () => { ... } - ${italic.grey(
+                'Functional Component'
+            )}`,
             value: 'functional'
         },
         {
-            name: 'Object Oriented',
+            name: `class Awesome { ... } - ${italic.grey('Class Component')}`,
             value: 'object-oriented'
         }
     ]
