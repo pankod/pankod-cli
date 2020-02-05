@@ -8,16 +8,18 @@ import { isAlreadyExist } from '.';
 
 const { red, bold } = chalk;
 
-export const validate = (
+export const validate: (
     val: string,
     dirPath: string,
     isFile: boolean,
     fileType: string
-): string | boolean => {
+) => string | boolean = (...params): string | boolean => {
+    const [val, , , fileType] = params;
+
     if (val.length) {
-        if (!val.match(/^[^\W_]+$/gi)) {
+        if (val.match(/[\W_]/gi)) {
             return red('Special characters and spaces are NOT allowed!');
-        } else if (isAlreadyExist(dirPath, val, isFile, fileType)) {
+        } else if (isAlreadyExist(...params)) {
             return red(
                 `This ${bold(
                     fileType
