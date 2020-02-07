@@ -1,7 +1,7 @@
 {
     "name": "@pankod/pankod-cli",
     "description": "Save a lot of time by generating services, components, tests for Pankod Boilerplate projects",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "author": {
         "name": "Batuhan Ozgur Ozdemir @BatuhanW",
         "email": "batuhan@pankod.com"
