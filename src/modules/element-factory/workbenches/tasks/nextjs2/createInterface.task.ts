@@ -17,6 +17,7 @@ export const createInterface = (options: ICommon.IAnswers) => {
         pageInterfaceIndex,
         pageInterfaceDir,
         componentsDir,
+        compInterfaceIndex,
         templatePath,
         reduxInterfaceDir,
         storeImportInterface,
@@ -68,20 +69,25 @@ export const createInterface = (options: ICommon.IAnswers) => {
 
     writeFile(writeFileProps);
 
-    if (isPage) {
-        const replaceContentParams: ICommon.IReplaceContent = {
-            fileDir: interfaceDir,
-            filetoUpdate: fs.readFileSync(
-                path.resolve('', interfaceDir),
-                'utf8'
-            ),
-            getFileContent: () => getTemplate(pageInterfaceIndex, options),
-            message: 'Interface file added to Interfaces/index.ts',
-            regexKey: /\/\/(?: |)#endregion Page Interfaces/g
-        };
+    const replaceContentParams: ICommon.IReplaceContent = {
+        fileDir: interfaceDir,
+        filetoUpdate: fs.readFileSync(path.resolve('', interfaceDir), 'utf8'),
+        message: 'Interface file added to Interfaces/index.ts',
 
-        replaceContent(replaceContentParams);
-    }
+        ...(isPage
+            ? {
+                  getFileContent: () =>
+                      getTemplate(pageInterfaceIndex, options),
+                  regexKey: /\/\/(?: |)#endregion Page Interfaces/g
+              }
+            : {
+                  getFileContent: () =>
+                      getTemplate(compInterfaceIndex, options),
+                  regexKey: /\/\/(?: |)#endregion Component Interfaces/g
+              })
+    };
+
+    replaceContent(replaceContentParams);
 
     if (isConnectStore) {
         const replaceStoreParams: ICommon.IReplaceContent = commonReplaceParams(
