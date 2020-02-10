@@ -20,7 +20,7 @@ $ npm install -g @pankod/pankod-cli
 $ pankod-cli COMMAND
 running command...
 $ pankod-cli (-v|--version|version)
-@pankod/pankod-cli/1.0.1 darwin-x64 node-v10.9.0
+@pankod/pankod-cli/1.0.1 darwin-x64 node-v10.16.3
 $ pankod-cli --help [COMMAND]
 USAGE
   $ pankod-cli COMMAND
