@@ -20,8 +20,8 @@
     "bugs": "https://github.com/Pankod/pankod-cli/issues",
     "dependencies": {
         "@oclif/command": "^1.5.19",
-        "@oclif/config": "^1.13.3",
-        "@oclif/plugin-help": "^2.2.1",
+        "@oclif/config": "^1.14.0",
+        "@oclif/plugin-help": "^2.2.3",
         "@oclif/plugin-not-found": "^1.2.3",
         "@oclif/plugin-warn-if-update-available": "^1.7.0",
         "@types/mustache": "^0.8.32",
@@ -29,7 +29,7 @@
         "figlet": "^1.2.4",
         "inquirer": "^6.5.2",
         "log-symbols": "^3.0.0",
-        "mustache": "^3.1.0",
+        "mustache": "^3.2.1",
         "tslib": "^1.10.0"
     },
     "devDependencies": {
@@ -37,22 +37,22 @@
         "@types/chalk": "^2.2.0",
         "@types/figlet": "^1.2.0",
         "@types/inquirer": "^6.5.0",
-        "@types/jest": "^24.0.23",
-        "@types/node": "^10.17.5",
+        "@types/jest": "^24.9.1",
+        "@types/node": "^10.17.14",
         "@typescript-eslint/eslint-plugin": "^1.13.0",
         "@typescript-eslint/parser": "^1.13.0",
         "eslint": "^5.16.0",
-        "eslint-config-prettier": "^6.7.0",
+        "eslint-config-prettier": "^6.10.0",
         "eslint-plugin-oclif": "0.0.15",
-        "eslint-plugin-prettier": "^3.1.1",
-        "globby": "^10.0.1",
+        "eslint-plugin-prettier": "^3.1.2",
+        "globby": "^10.0.2",
         "jest": "^24.9.0",
         "jest-cli": "^24.9.0",
-        "memfs": "^2.16.1",
+        "memfs": "^2.17.1",
         "prettier": "^1.19.1",
-        "ts-jest": "^24.2.0",
-        "ts-node": "^8.5.2",
-        "typescript": "^3.7.2"
+        "ts-jest": "^24.3.0",
+        "ts-node": "^8.6.2",
+        "typescript": "^3.7.5"
     },
     "engines": {
         "node": ">=8.0.0"
