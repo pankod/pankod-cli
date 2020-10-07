@@ -8,7 +8,7 @@
         "postpack": "rm -f oclif.manifest.json",
         "prepack": "rm -rf lib && tsc -b && oclif-dev manifest && oclif-dev readme && npm run sync-templates",
         "sync-templates": "cp -r src/Templates lib/Templates",
-        "test": "jest --runInBand",
+        "test": "jest --runInBand --coverage",
         "test:ops": "npm t -- src/modules/element-factory/workbenches/operations",
         "version": "oclif-dev readme && git add README.md",
         "lint": "eslint . --ext .ts",
